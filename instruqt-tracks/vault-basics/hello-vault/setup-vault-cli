@@ -2,5 +2,5 @@
 # Enable logging for Vault server
 
 cat <<-EOF > /vault/config/vault.hcl
-log_level = "Trace"
+ui=true
 EOF
