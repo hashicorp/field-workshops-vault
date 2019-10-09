@@ -1,4 +1,5 @@
 slug: vault-basics
+id: likpqjspv5pp
 type: track
 title: Vault Basics
 teaser: Learn how to setup and run some basic Vault CLI commands.
@@ -21,6 +22,7 @@ private: true
 published: true
 challenges:
 - slug: hello-vault
+  id: 5ilfhojx2vup
   type: challenge
   title: Getting to Know Vault
   teaser: Learn Vault basics and command line syntax.
@@ -38,6 +40,8 @@ challenges:
     ```
     vault help
     ```
+
+    Try logging into the Vault UI with the token `root`.
   notes:
   - type: text
     contents: |-
@@ -61,5 +65,10 @@ challenges:
   - title: Vault CLI
     type: terminal
     hostname: vault-cli
+  - title: Vault UI
+    type: service
+    hostname: vault-cli
+    port: 8200
   difficulty: basic
-  timelimit: 300
+  timelimit: 3600
+checksum: "5462726005199278751"
