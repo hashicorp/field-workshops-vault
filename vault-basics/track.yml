@@ -1,0 +1,65 @@
+slug: vault-basics
+type: track
+title: Vault Basics
+teaser: Learn how to setup and run some basic Vault CLI commands.
+description: |-
+  Vault is a tool for securely accessing secrets. A secret is anything that you want to tightly control access to, such as API keys, passwords, or certificates. Vault provides a unified interface to any secret, while providing tight access control and recording a detailed audit log.
+
+  Vault tightly controls access to secrets by authenticating against trusted sources of identity such as Active Directory, LDAP, Kubernetes, CloudFoundry, and cloud platforms. Vault enables fine grained authorization of which users and applications are permitted access to secrets.
+
+  We invite you to join the ranks of the Vault community today!
+
+  This track will introduce you to Vault open source, starting with the Vault CLI.
+icon: https://storage.googleapis.com/instruqt-frontend/assets/hashicorp/tracks/vault.png
+tags:
+- vault
+- basics
+owner: hashicorp
+developers:
+- roger@hashicorp.com
+private: true
+published: true
+challenges:
+- slug: hello-vault
+  type: challenge
+  title: Getting to Know Vault
+  teaser: Learn Vault basics and command line syntax.
+  assignment: |-
+    Let's get started with some basic vault commands.
+
+    You can run the following commands in the terminal on the left.
+
+    Check the version of Vault running on your machine:
+    ```
+    vault version
+    ```
+
+    You can always get help if you're curious about command syntax:
+    ```
+    vault help
+    ```
+  notes:
+  - type: text
+    contents: |-
+      Vault open source is a command line application that you can download and run from your laptop or virtual workstation.
+
+      It is written in Go and runs on Mac OSX, Linux or Windows. You can always download the latest version of vault here:
+
+      https://www.vaultproject.io/downloads.html
+  - type: text
+    contents: |-
+      Installing Vault on your laptop or workstation is easy. You simply download the zip file, unpack it, and place it somewhere in your PATH.
+
+      Check out this tutorial for step-by-step instructions:
+
+      https://learn.hashicorp.com/vault/getting-started/install
+
+      We've pre-installed Vault in your Instruqt lab environment for you.
+
+      Additionally, we have run a Vault dev server.
+  tabs:
+  - title: Vault CLI
+    type: terminal
+    hostname: vault-cli
+  difficulty: basic
+  timelimit: 300
