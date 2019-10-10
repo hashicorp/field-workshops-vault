@@ -10,7 +10,7 @@ description: |-
 
   We invite you to join the ranks of the Vault community today!
 
-  This track will introduce you to Vault open source, starting with the Vault CLI.
+  This track will introduce you to Vault open source, starting with the Vault CLI and running a Vault dev server.
 icon: https://storage.googleapis.com/instruqt-frontend/assets/hashicorp/tracks/vault.png
 tags:
 - vault
@@ -29,7 +29,7 @@ challenges:
   assignment: |-
     Let's get started with some basic vault commands.
 
-    You can run the following commands in the terminal on the left.
+    You can run the following commands in the "Vault CLI" terminal on the left.
 
     Check the version of Vault running on your machine:
     ```
@@ -41,7 +41,23 @@ challenges:
     vault help
     ```
 
+    Now, try running a Vault dev server in the "Vault Dev Server" tab:
+    ```
+    vault server -dev -dev-listen-address=0.0.0.0:8200
+    ```
+    Note that we are instructing the Vault server to bind to all IP addresses so that we can access it with the Vault UI which is running in a different container.
+
     Try logging into the Vault UI with the token `root`.
+
+    Write a secret to KV v2 secrets engine that the Vault dev server automatically mounted for you in the "Vault CLI" tab:
+    ```
+    vault kv put secret/my-first-secret age=<age>
+    ```
+    where <age> is your age.
+
+    In the Vault UI, select the `secret` secrets engine, select the `my-first-secret` secret, and click the eye icon to see your age.
+
+    If you lied about your age, you can correct it in the Vault UI or repeat the `vault kv put` command with your real age. Don't worry, nobody else can see it!
   notes:
   - type: text
     contents: |-
@@ -58,11 +74,12 @@ challenges:
 
       https://learn.hashicorp.com/vault/getting-started/install
 
-      We've pre-installed Vault in your Instruqt lab environment for you.
-
-      Additionally, we have run a Vault dev server.
+      We've pre-installed Vault in your Instruqt lab environment for you so that you can run a Vault dev server.
   tabs:
   - title: Vault CLI
+    type: terminal
+    hostname: vault-cli
+  - title: Vault Dev Server
     type: terminal
     hostname: vault-cli
   - title: Vault UI
@@ -71,4 +88,4 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 3600
-checksum: "3371724016525004569"
+checksum: "10578150579592432691"
