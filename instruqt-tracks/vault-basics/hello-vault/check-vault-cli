@@ -1,3 +1,3 @@
 #!/bin/sh
-grep -q "vault version" /root/.bash_history || fail-message "You haven't run `vault version` yet. You can do it!"
-grep -q "vault help" /root/.bash_history || fail-message "You haven't run `vault help` yet. We believe in you!"
+grep -q "vault version" /root/.bash_history || fail-message "You haven't run 'vault version' yet. You can do it!"
+grep -q "vault help" /root/.bash_history || fail-message "You haven't run 'vault help' yet. We believe in you!"

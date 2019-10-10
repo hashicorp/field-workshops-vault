@@ -1,7 +1,8 @@
 version: "2"
 containers:
 - name: vault-cli
-  image: gcr.io/instruqt-hashicorp/vault:1.2.3
+  image: vault:1.2.3
+  cmd: server
   shell: /bin/sh
   ports:
   - 8200
