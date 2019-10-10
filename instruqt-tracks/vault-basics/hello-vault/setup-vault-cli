@@ -1,6 +1,3 @@
 #!/bin/sh
-# Enable logging for Vault server
 
-cat <<-EOF > /vault/config/vault.hcl
-ui=true
-EOF
+# Do some stuff later
