@@ -1,0 +1,5 @@
+#!/bin/sh
+echo -e "vault version\n" > /root/.bash_history
+echo -e "vault help\n" > /root/.bash_history
+echo -e "vault secret -h\n" > /root/.bash_history
+echo -e "vault read -h\n" > /root/.bash_history

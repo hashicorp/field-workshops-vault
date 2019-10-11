@@ -21,31 +21,76 @@ developers:
 private: true
 published: true
 challenges:
-- slug: hello-vault
-  id: 5ilfhojx2vup
+- slug: vault-cli
+  id: q5vaptbwlx9v
   type: challenge
-  title: Getting to Know Vault
-  teaser: Learn Vault basics and command line syntax.
+  title: The Vault CLI
+  teaser: Run the Vault Command Line Interface (CLI).
   assignment: |-
-    Let's get started with some basic vault commands.
+    The Vault Command Line Interface (CLI) allows you to interact with Vault servers.
 
-    You can run the following commands in the "Vault CLI" terminal on the left.
+    Let's start with some basic vault commands, running them in the "Vault CLI" terminal on the left.
 
     Check the version of Vault running on your machine:
     ```
     vault version
     ```
 
-    You can always get help if you're curious about command syntax:
+    See the list of Vault CLI commands:
     ```
     vault help
     ```
 
-    Now, try running a Vault dev server in the "Vault Dev Server" tab:
+    Get help for the `vault secrets` command:
+    ```
+    vault secrets -h
+    ```
+    Note that you can also use the `-help` and `--help` flags instead of `-h`.
+
+    Get help for the `vault read` command:
+    ```
+    vault read -h
+    ```
+    Scroll back up to get a feeling for how you would read secrets from Vault.
+  notes:
+  - type: text
+    contents: |-
+      Vault open source is a command line application that you can download and run from your laptop or virtual workstation.
+
+      It is written in Go and runs on macOS, Windows, Linux and other operating systems. You can always download the latest version of vault here:
+
+      https://www.vaultproject.io/downloads.html
+  - type: text
+    contents: |-
+      Installing Vault on your laptop or workstation is easy. You simply download the zip file, unpack it, and place it somewhere in your PATH.
+
+      Check out this tutorial for step-by-step instructions:
+      https://learn.hashicorp.com/vault/getting-started/install
+
+      We've pre-installed Vault in your Instruqt lab environment so that you can run a Vault server.
+  tabs:
+  - title: Vault CLI
+    type: terminal
+    hostname: vault-cli
+  difficulty: basic
+  timelimit: 300
+- slug: your-first-secret
+  id: yh9gwncelmb5
+  type: challenge
+  title: Your First Secret
+  teaser: Write your first secret to Vault.
+  assignment: |-
+    Vault servers can be run in "dev" and "production" modes. You can see this by getting help for the `vault server` CLI command:
+    ```
+    vault server -h
+    ```
+    If you do run this, scroll back up to see information about the two modes.
+
+    Let's run a Vault dev server in the "Vault Dev Server" tab:
     ```
     vault server -dev -dev-listen-address=0.0.0.0:8200
     ```
-    Note that we are instructing the Vault server to bind to all IP addresses so that we can access it with the Vault UI which is running in a different container.
+    Note that we are instructing the Vault server to bind to all IP addresses so that we can access it with the Vault UI that is running in a different container.
 
     Log into the Vault UI with the token `root`.
 
@@ -59,24 +104,17 @@ challenges:
 
     In the Vault UI, select the "secret/" KV v2 secrets engine, select the `my-first-secret` secret, and click the eye icon to see your age.
 
-    If you lied about your age, you can correct it in the Vault UI or repeat the `vault kv put` command with your real age. Don't worry, nobody else can see it!
+    If you lied about your age, you can correct it in the Vault UI by clicking the `Create new version +` button, or with the Vault CLI by repeating the `vault kv put` command with your real age. Don't worry, nobody else can see it!
   notes:
   - type: text
     contents: |-
-      Vault open source is a command line application that you can download and run from your laptop or virtual workstation.
+      In this challenge, you will run your first Vault server in "dev" mode and write your first secret to Vault.
 
-      It is written in Go and runs on Mac OSX, Linux or Windows. You can always download the latest version of vault here:
+      See https://www.vaultproject.io/docs/concepts/dev-server.html for more on Vault's "dev" mode.
 
-      https://www.vaultproject.io/downloads.html
-  - type: text
-    contents: |-
-      Installing Vault on your laptop or workstation is easy. You simply download the zip file, unpack it, and place it somewhere in your PATH.
+      You will use the default KV v2 secrets engine that Vault automatically creates in "dev" mode. It is used to store multiple versions of static secrets.
 
-      Check out this tutorial for step-by-step instructions:
-
-      https://learn.hashicorp.com/vault/getting-started/install
-
-      We've pre-installed Vault in your Instruqt lab environment for you so that you can run a Vault dev server.
+      See https://www.vaultproject.io/docs/secrets/kv/kv-v2.html for more on the KV v2 secrets engine.
   tabs:
   - title: Vault CLI
     type: terminal
@@ -89,5 +127,5 @@ challenges:
     hostname: vault-cli
     port: 8200
   difficulty: basic
-  timelimit: 3600
-checksum: "203787886516481440"
+  timelimit: 300
+checksum: "12271176377690307125"
