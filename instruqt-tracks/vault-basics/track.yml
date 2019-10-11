@@ -47,15 +47,17 @@ challenges:
     ```
     Note that we are instructing the Vault server to bind to all IP addresses so that we can access it with the Vault UI which is running in a different container.
 
-    Try logging into the Vault UI with the token `root`.
+    Log into the Vault UI with the token `root`.
 
-    Write a secret to KV v2 secrets engine that the Vault dev server automatically mounted for you in the "Vault CLI" tab:
+    In the "Vault CLI" tab, write a secret to the KV v2 secrets engine that the Vault dev server automatically mounted for you:
     ```
     vault kv put secret/my-first-secret age=<age>
     ```
     where <age> is your age.
 
-    In the Vault UI, select the `secret` secrets engine, select the `my-first-secret` secret, and click the eye icon to see your age.
+    Alternatively, you could create this secret in the Vault UI by selecting the `secret/` KV v2 secrets engine on the `Secrets` tab, clicking the `Create secret +` button, specifying `my-first-secret` as the path, age as the secret's first key, and your age as the corresponding value, and then finally clicking the `Save` button. You do not need to click the `Add` button to add the first key and value.
+
+    In the Vault UI, select the "secret/" KV v2 secrets engine, select the `my-first-secret` secret, and click the eye icon to see your age.
 
     If you lied about your age, you can correct it in the Vault UI or repeat the `vault kv put` command with your real age. Don't worry, nobody else can see it!
   notes:
@@ -88,4 +90,4 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 3600
-checksum: "10578150579592432691"
+checksum: "203787886516481440"

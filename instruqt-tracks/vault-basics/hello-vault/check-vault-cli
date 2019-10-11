@@ -1,9 +1,7 @@
-#!/bin/sh
+#!/bin/sh -l
 grep -q "vault version" /root/.bash_history || fail-message "You haven't run 'vault version' yet. You can do it!"
 grep -q "vault help" /root/.bash_history || fail-message "You haven't run 'vault help' yet. We believe in you!"
-export VAULT_ADDR=http://localhost:8200
-export VAULT_TOKEN=root
-/bin/vault kv get secret/my-first-secret
+vault kv get secret/my-first-secret
 if [ $? -ne 0 ]; then
    fail-message "You did not yet write the 'my-first-secret' secret. You can do it!"
 fi
