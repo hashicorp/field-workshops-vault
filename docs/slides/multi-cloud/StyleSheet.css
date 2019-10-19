@@ -1,11 +1,3 @@
-.box{
-    float:left;
-    margin-right:20px;
-}
-.clear{
-    clear:both;
-}
-
 html,body{
   width: 100%;
   height: 100%;
