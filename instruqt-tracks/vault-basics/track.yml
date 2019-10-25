@@ -319,9 +319,7 @@ challenges:
 
     Click on the "kv" breadcrumb to go back to the previous screen.
 
-    Click the "Create secret +" button, enter `<user>/age` for the path, `age` for the key in the "Version data" section of the screen, and your age for the value associated with that key. Be sure to replace <user\> with the username of the logged in user. Then click the "Save" button. You should be allowed to do this.
-
-    Now, repeat the step for the previous paragraph while still logged in as the first user, but specify the username of the other user in the path.  You should not be allowed to do this. (You won't see an error, but nothing will happen.)
+    Click the "Create secret +" button, enter <user\>/age for the path, "age" for the key in the "Version data" section of the screen, and your age for the value associated with that key. Be sure to replace <user\> with the username of the logged in user. Then click the "Save" button. You should be allowed to do this.
 
     Logout and log back in as the second user. Try to access the first user's secret.  You should not be able to.
 
@@ -356,4 +354,4 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 600
-checksum: "684139071312217507"
+checksum: "11034009627785501330"
