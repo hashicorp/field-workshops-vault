@@ -29,28 +29,20 @@ challenges:
   assignment: |-
     The Vault Command Line Interface (CLI) allows you to interact with Vault servers.
 
-    Let's start with some basic vault commands, running them in the "Vault CLI" terminal on the left.
+    Let's start with some basic vault commands, running them in the "Vault CLI" tab on the left.
 
-    Check the version of Vault running on your machine:
-    ```
-    vault version
-    ```
+    Check the version of Vault running on your machine:<br>
+    `vault version`
 
-    See the list of Vault CLI commands:
-    ```
-    vault
-    ```
+    See the list of Vault CLI commands:<br>
+    `vault`
 
-    Get help for the `vault secrets` command:
-    ```
-    vault secrets -h
-    ```
-    Note that you can also use the `-help` and `--help` flags instead of `-h`.
+    Get help for the "vault secrets" command:<br>
+    `vault secrets -h`<br>
+    Note that you can also use the "-help" and "--help" flags instead of "-h".
 
-    Get help for the `vault read` command:
-    ```
-    vault read -h
-    ```
+    Get help for the "vault read" command:<br>
+    `vault read -h`<br>
     Scroll back up to get a feeling for how you would read secrets from Vault.
   notes:
   - type: text
@@ -98,7 +90,7 @@ challenges:
     ```
     vault kv put secret/my-first-secret age=<age>
     ```
-    where `<age>` is your age. Don't include the angle brackets.
+    where <age\> is your age. Don't include the angle brackets.
 
     Alternatively, you could create this secret in the Vault UI by selecting the `secret/` KV v2 secrets engine on the `Secrets` tab, clicking the `Create secret +` button, specifying `my-first-secret` as the path, age as the secret's first key, and your age as the corresponding value, and then finally clicking the `Save` button. You do not need to click the `Add` button to add the first key and value.
 
@@ -136,7 +128,7 @@ challenges:
   assignment: |-
     Let's run a production Vault sever.
 
-    We first need to do some configuration.  Open the vault-config.hcl configuration file on the "Vault Configuration" tab. Since we don't yet want to bother with TLS certificates yet, change the line `tls_disable = 0` to `tls_disable = 1` and save the file with `<ctrl>-S` on Windows or `<command>-S` on a Mac. You can also click on the Save icon next to the name of the file.
+    We first need to do some configuration.  Open the vault-config.hcl configuration file on the "Vault Configuration" tab. Since we don't yet want to bother with TLS certificates yet, change the line `tls_disable = 0` to `tls_disable = 1` and save the file with <ctrl>-S` on Windows or <command>-S` on a Mac. You can also click on the Save icon next to the name of the file.
 
     On the "Vault Server" tab, run a Vault server that uses the configuration file:
     ```
@@ -213,7 +205,7 @@ challenges:
     ```
     export VAULT_TOKEN=<root_token>
     ```
-    Alternatively, you can use your `<up_arrow>` key to scroll back through your command history until you see your previous export of VAULT_TOKEN.
+    Alternatively, you can use your <up_arrow\> key to scroll back through your command history until you see your previous export of VAULT_TOKEN.
 
     Now, you can mount an instance of the KV v2 secrets engine on the default path, `kv`:
     ```
@@ -266,7 +258,7 @@ challenges:
     ```
     export VAULT_TOKEN=<root_token>
     ```
-    Alternatively, you can use your `<up_arrow>` key to scroll back through your command history until you see your previous export of VAULT_TOKEN.
+    Alternatively, you can use your <up_arrow\> key to scroll back through your command history until you see your previous export of VAULT_TOKEN.
 
     Now, enable the Userpass auth method:
     ```
@@ -277,7 +269,7 @@ challenges:
     ```
     vault write auth/userpass/users/<name> password=<pwd>
     ```
-    Be sure to specify an actual username for `<name>` and a password for `<pwd>` without the angle brackets.
+    Be sure to specify an actual username for <name\> and a password for <pwd\> without the angle brackets.
 
     Now, you can sign into the Vault UI by selecting the Username method and providing your username and password.
 
@@ -294,7 +286,7 @@ challenges:
     ```
     vault token lookup
     ```
-    You will see that the display_name of the current token is `userpass-<name>` where `<name>` is your username and that the only policy listed for the token is the "default" policy.
+    You will see that the display_name of the current token is `userpass-<name\> where <name\> is your username and that the only policy listed for the token is the "default" policy.
 
     Try to read the secret you wrote to the KV v2 secrets engine in the last challenge:
     ```
@@ -344,21 +336,21 @@ challenges:
     vault write auth/userpass/users/<name> password=<pwd>
     ```
 
-    Next, edit the two policies on the "Vault Policies" tab, user-1-policy.hcl and user-2-policy.hcl. In user-1-policy.hcl, set all occurences of `<user>` to your own username. In user-2-policy.hcl, set all occurences of `<user>` to the username of the user you just added. Save both files.
+    Next, edit the two policies on the "Vault Policies" tab, user-1-policy.hcl and user-2-policy.hcl. In user-1-policy.hcl, set all occurences of <user\> to your own username. In user-2-policy.hcl, set all occurences of <user\> to the username of the user you just added. Save both files.
 
     Next, you are going to add the policies to the Vault server:
     ```
     vault policy write <user_1>-policy /vault/policies/user-1-policy.hcl
     vault policy write <user_2>-policy /vault/policies/user-2-policy.hcl
     ```
-    replacing `<user_1>` and `<user_2>` with the usernames you are using.
+    replacing <user_1\> and <user_2\> with the usernames you are using.
 
     Now, you can assign the new policies to the users by updating the policies assigned to the users:
     ```
     vault write auth/userpass/users/<user_1>/policies policies=<user_1>-policy
     vault write auth/userpass/users/<user_2>/policies policies=<user_2>-policy
     ```
-    again replacing `<user_1>` and `<user_2>` with the usernames you are using.
+    again replacing <user_1\> and <user_2\> with the usernames you are using.
 
     Now, let's see what happens when you log into the Vault UI as the two different users.
 
@@ -368,22 +360,22 @@ challenges:
 
     Click on the "kv" breadcrumb to go back to the previous screen.
 
-    Click the "Create secret +" button, enter `<user>/age` for the path, "age" for the key in the "Version data" section of the screen, and your age for the value associated with that key. Be sure to replace `<user>` with the username of the logged in user. Then click the "Save" button. You should
+    Click the "Create secret +" button, enter <user>/age` for the path, "age" for the key in the "Version data" section of the screen, and your age for the value associated with that key. Be sure to replace <user\> with the username of the logged in user. Then click the "Save" button. You should
     be allowed to do this.
 
     Now, repeat the step for the previous paragraph while still logged in as the first user, but specify the username of the other user in the path.  You should not be allowed to do this. (You won't see an error, but nothing will happen.)
 
     Logout and log back in as the second user. Try to access the first user's secret.  You should not be able to.
 
-    Now, while still logged in as the second user, repeat the above steps to create a secret, specifying the second user's name for `<user>` in the path.  You should be allowed to do this.
+    Now, while still logged in as the second user, repeat the above steps to create a secret, specifying the second user's name for <user\> in the path.  You should be allowed to do this.
 
-    If you would like to see what happens when using the Vault CLI, you can run `unset VAULT_TOKEN`, login as each user with `vault login -method=userpass username=<user> password=<pwd>`, and then try commands like the following:
+    If you would like to see what happens when using the Vault CLI, you can run `unset VAULT_TOKEN`, login as each user with `vault login -method=userpass username=<user> password=<pwd\>, and then try commands like the following:
     ```
     vault kv get kv/<user>/age
     vault kv put kv/<user>/weight weight=150
     ```
 
-    These will succeed when `<user>` matches the username of the logged in user and fail when it does not.
+    These will succeed when <user\> matches the username of the logged in user and fail when it does not.
 
     The bottom line for this challenge is that Vault protects each secrets users from other users. Congratulations on finishing the entire track!
   notes:
@@ -406,4 +398,4 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 600
-checksum: "12272866811368017268"
+checksum: "18348528774123853705"
