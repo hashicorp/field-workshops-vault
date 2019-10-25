@@ -10,6 +10,4 @@ grep -q "export VAULT_TOKEN" /root/.bash_history || fail-message "You haven't ex
 
 grep -q "vault operator unseal" /root/.bash_history || fail-message "You haven't unsealed your server with 'vault operator unseal' yet."
 
-grep -q "vault status" /root/.bash_history || fail-message "You haven't checked the status of your server with 'vault status' yet."
-
 exit 0
