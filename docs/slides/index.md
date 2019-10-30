@@ -23,6 +23,13 @@ You can change the background to whatever you like but the corporate template is
 You make a slide a title slide by including `class: title`.
 
 ---
+layout: true
+
+.footer[
+- Copyright © 2019 HashiCorp
+- ![:scale 100%](https://hashicorp.github.io/field-workshops-assets/assets/logos/HashiCorp_Icon_Black.svg)
+]
+---
 name: vault-workshops-slides
 # Vault Workshop Slides
 ### This directory contains slides for Vault workshops.

@@ -23,6 +23,13 @@ You can change the background to whatever you like but the corporate template is
 You make a slide a title slide by including `class: title`.
 
 ---
+layout: true
+
+.footer[
+- Copyright © 2019 HashiCorp
+- ![:scale 100%](https://hashicorp.github.io/field-workshops-assets/assets/logos/HashiCorp_Icon_Black.svg)
+]
+---
 name: vault-workshops
 # Vault Workshops
 ### This repository contains Vault workshops.
@@ -49,6 +56,7 @@ name:workshop-slides
 # Viewing Workshop Slides
 #### You can view workshop slides with URLs like this:
 * https://hashicorp.github.io/field-workshops-vault/slides/multi-cloud/vault-oss/index.html
+* https://hashicorp.github.io/field-workshops-vault/slides/multi-cloud/vault-enterprise/index.html
 
 
 ???

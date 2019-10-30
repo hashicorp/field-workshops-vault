@@ -14,6 +14,14 @@ This workshop introduces students to the Enterprise version of Vault.
 It is cloud agnostic.
 
 ---
+layout: true
+
+.footer[
+- Copyright © 2019 HashiCorp
+- ![:scale 100%](https://hashicorp.github.io/field-workshops-assets/assets/logos/HashiCorp_Icon_Black.svg)
+]
+
+---
 name: vault-slides-link
 # The Slide Show
 ## You can follow along on your own computer at this link:
