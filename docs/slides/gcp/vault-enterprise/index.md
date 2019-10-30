@@ -25,7 +25,7 @@ layout: true
 name: vault-slides-link
 # The Slide Show
 ## You can follow along on your own computer at this link:
-### https://hashicorp.github.io/field-workshops-vault/slides/multi-cloud/vault-enterprise/index.html
+### https://hashicorp.github.io/field-workshops-vault/slides/gcp/vault-enterprise/index.html
 
 ???
 Give students a link to use the slides on their own computer.
