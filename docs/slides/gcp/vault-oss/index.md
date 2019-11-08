@@ -11,7 +11,7 @@ count: false
 ???
 This workshop introduces students to the open-source version of Vault.
 
-It is cloud agnostic.
+It is focused on GCP.
 
 ---
 layout: true

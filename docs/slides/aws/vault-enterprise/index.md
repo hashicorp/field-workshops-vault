@@ -11,7 +11,7 @@ count: false
 ???
 This workshop introduces students to the Enterprise version of Vault.
 
-It is cloud agnostic.
+It is focused on AWS.
 
 ---
 layout: true
