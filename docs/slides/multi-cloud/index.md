@@ -4,7 +4,7 @@ background-image: url(https://hashicorp.github.io/field-workshops-assets/assets/
 count: false
 
 
-# Vault Multi-Cloud Field Workshop Slides
+# Vault Multi-Cloud Field Workshop
 ## Slides for Vault multi-cloud field workshops
 
 ![:scale 15%](https://hashicorp.github.io/field-workshops-assets/assets/logos/logo_vault.png)
