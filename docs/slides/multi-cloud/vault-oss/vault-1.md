@@ -52,11 +52,11 @@ name: Table-of-Contents
 # Table of Contents
 
 1. HashiCorp Vault Overview
-1. Vault Lab Environment
-1. Interacting with Vault (CLI, GUI, API)
+1. Interacting with Vault
+1. Running a Production Server
+1. Vault Secrets Engines
 1. Authorization (authn): Policies
 1. Authentication (authz): Auth Methods
-1. Vault Secrets Engines
 1. Dynamic Secrets
 1. Encryption as a Service
 1. Vault Enterprise
