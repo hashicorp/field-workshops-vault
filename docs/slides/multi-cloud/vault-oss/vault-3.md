@@ -3,11 +3,11 @@ class: title, shelf, no-footer, fullbleed
 background-image: url(https://hashicorp.github.io/field-workshops-assets/assets/bkgs/HashiCorp-Title-bkg.jpeg)
 count: false
 # Chapter 3      
-## Running Production Vault Servers
+## Running a Production Vault Server
 
 ???
 
-Chapter 3 focuses on running production Vault servers
+Chapter 3 focuses on running a production Vault server
 
 ---
 layout: true
