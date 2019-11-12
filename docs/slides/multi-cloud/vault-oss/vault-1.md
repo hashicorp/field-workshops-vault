@@ -1,71 +1,4 @@
-name: vault-title-slide
-class: title, shelf, no-footer, fullbleed
-background-image: url(https://hashicorp.github.io/field-workshops-assets/assets/bkgs/HashiCorp-Title-bkg.jpeg)
-count: false
-
-# Vault OSS Multi-Cloud Workshop
-## Modern Security with Vault for any Cloud
-
-![:scale 15%](https://hashicorp.github.io/field-workshops-assets/assets/logos/logo_vault.png)
-
-???
-This workshop introduces students to the open-source version of Vault.
-
-It is cloud agnostic.
-
----
-layout: true
-
-.footer[
-- Copyright © 2019 HashiCorp
-- ![:scale 100%](https://hashicorp.github.io/field-workshops-assets/assets/logos/HashiCorp_Icon_Black.svg)
-]
-
----
-name: Link-to-Slide-Deck
-# The Slide Deck
-<br><br>
-### Follow along on your own computer at this link:
-
-https://hashicorp.github.io/field-workshops-vault/slides/multi-cloud/vault-oss/index.html
-
-???
-
-The link to this slide deck
-
----
-name: Introductions
-# Introductions
-
-* Your Name
-* Job Title
-* Secrets Management Experience
-* Favorite Text Editor
-
-???
-* Use this slide to introduce yourself, give a little bit of your background story, then go around the room and have all your participants introduce themselves.
-
-* The favorite text editor question is a good ice breaker, but perhaps more importantly it gives you an immediate gauge of how technical your users are.  
-
----
-name: Table-of-Contents
-# Table of Contents
-
-1. HashiCorp Vault Overview
-1. Interacting with Vault
-1. Running a Production Server
-1. Vault Secrets Engines
-1. Authorization (authn): Policies
-1. Authentication (authz): Auth Methods
-1. Dynamic Secrets
-1. Encryption as a Service
-1. Vault Enterprise
-
-???
-The table of contents for the workshop
-
----
-name: name: Chapter-1
+name: chapter-1
 class: title, shelf, no-footer, fullbleed
 background-image: url(https://hashicorp.github.io/field-workshops-assets/assets/bkgs/HashiCorp-Title-bkg.jpeg)
 count: false
@@ -73,11 +6,13 @@ count: false
 # Chapter 1  
 ## HashiCorp Vault Overview
 
+![:scale 15%](https://hashicorp.github.io/field-workshops-assets/assets/logos/logo_vault.png)
+
 ???
-Chapter 1 title slide
+Chapter 1 introduces Vault
 
 ---
-name: HashiCorp-Vault-Overview
+name: hashiCorp-vault-overview
 # HashiCorp Vault Overview
 ![:scale 10%](https://hashicorp.github.io/field-workshops-assets/assets/logos/logo_vault.png)
 
@@ -92,7 +27,7 @@ This is meant as a high level overview.  For detailed descriptions or instructio
 * https://learn.hashicorp.com/vault/
 
 ---
-name: The-Old-Way
+name: the-old-way
 layout: false
 # The Traditional Security Model
 .center[![:scale 70%](images/bodiam_castle.jpg)]
@@ -100,6 +35,7 @@ layout: false
 
 ???
 * This picture shows the traditional castle and moat security model.
+
 ---
 layout: true
 
@@ -130,7 +66,7 @@ name: problems-with-traditional-security-models
 ???
 * This slide describes some of the problems with the traditional security model.
 ---
-name: The-New-Way
+name: the-new-way
 layout: false
 # Modern Secrets Management
 .center[![:scale 65%](images/nomadic_houses.jpg)]
@@ -142,7 +78,7 @@ layout: false
 * And if you don't think the Nomadic way can be an effective security posture, think about this for a moment. The Mongol military tactics and organization enabled the Genghis Khan to conquer nearly all of continental Asia, the Middle East and parts of eastern Europe. Mongol warriors would typically bring three or four horses with them, so they could rotate through the horses and go farther. Mongol army units could move up to 100 miles a day, which was unheard of in the 13th century. They were faster, more adaptable, and more resilient than all their enemies.
 
 ---
-name: Identity-Based-Security-1
+name: identity-based-security-1
 #Identity Based Security
 .center[![:scale 75%](images/identity-triangle.png)]
 .center[[Identity Based Security and Low Trust Networks](https://www.hashicorp.com/identity-based-security-and-low-trust-networks)
@@ -164,7 +100,7 @@ layout: true
 ]
 
 ---
-name: Identity-Based-Security-2
+name: identity-based-security-2
 # Identity Based Security
 
 Vault was designed to address the security needs of modern applications.  It differs from the traditional approach by using:
@@ -178,7 +114,7 @@ Vault was designed to address the security needs of modern applications.  It dif
 * This slide discusses how Vault is designed for modern applications.
 
 ---
-name: Secrets-Engines
+name: secrets-engines
 layout: false
 # Vault Secrets Engines
 .center[![:scale 60%](images/vault-engines.png)]
@@ -190,7 +126,7 @@ layout: false
 * Click on the link to learn more about Vault secrets engines.
 
 ---
-name: Vault-Reference-Architecture-1
+name: vault-reference-architecture-1
 # Vault Architecture Internals
 .center[![:scale 75%](images/vault_arch.png)]
 .center[[HashiCorp Vault Internals Architecture](https://www.vaultproject.io/docs/internals/architecture.html)
@@ -200,9 +136,8 @@ name: Vault-Reference-Architecture-1
 * Click the link to learn more about the internal's of Vault's architecture.
 
 ---
-name: Vault-Reference-Architecture-2
-Vault Architecture - High Availability
--------------------------
+name: vault-reference-architecture-2
+# Vault Architecture - High Availability
 .center[![:scale 60%](images/vault-ref-arch-lb.png)]
 .center[[Vault High Availability](https://www.vaultproject.io/docs/concepts/ha.html)
 ]
@@ -212,7 +147,7 @@ Vault Architecture - High Availability
 * Click on the link to learn more about Vault's high availability in a single cluster.
 
 ---
-name: Vault-Reference-Architecture-3
+name: vault-reference-architecture-3
 # Vault Architecture - Multi-Region
 .center[![:scale 70%](images/vault-ref-arch-replication.png)]
 .center[[Vault Enterprise Replication](https://www.vaultproject.io/docs/enterprise/replication/index.html)
@@ -233,23 +168,23 @@ layout: true
 ]
 
 ---
-name: chapter-1-review
+name: chapter-1-review-question
 # 📝 Chapter 1 Review
 
-What is HashiCorp Vault?
+* What is HashiCorp Vault?
 
 ???
-Can you summarize what HashiCorp Vault is?
+* Let's review what we learned in this chapter.
 ---
-name: chapter-1-review
+name: chapter-1-review-answer
 # 📝 Chapter 1 Review
-What is HashiCorp Vault?
-* Vault is a Secrets Management System.
-* It is API-driven and cloud agnostic.
-* It can be used in untrusted networks.
-* It can authenticate users and applications against many systems.
-* It supports dynamic generation of short-lived secrets.
-* It runs in highly available clusters that can be replicated across regions.
+* What is HashiCorp Vault?
+  * Vault is a Secrets Management System.
+  * It is API-driven and cloud agnostic.
+  * It can be used in untrusted networks.
+  * It can authenticate users and applications against many systems.
+  * It supports dynamic generation of short-lived secrets.
+  * It runs in highly available clusters that can be replicated across regions.
 
 ???
-This slide summarizes what we learned in chapter 1
+* Here are the answers to the review questions.

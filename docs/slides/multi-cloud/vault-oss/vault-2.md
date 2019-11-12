@@ -2,11 +2,15 @@ name: Chapter-2
 class: title, shelf, no-footer, fullbleed
 background-image: url(https://hashicorp.github.io/field-workshops-assets/assets/bkgs/HashiCorp-Title-bkg.jpeg)
 count: false
+
+
+
 # Chapter 2      
 ## Interacting With Vault
 
-???
+![:scale 15%](https://hashicorp.github.io/field-workshops-assets/assets/logos/logo_vault.png)
 
+???
 Chapter 2 focuses on interacting with Vault
 
 ---
@@ -23,16 +27,12 @@ name: Interacting-With-Vault
 
 Vault provides several mechanisms for interacting with it:
 * The Vault [CLI](https://www.vaultproject.io/docs/commands/index.html)
-* The Vault [API](https://www.vaultproject.io/api/overview)
 * The Vault [UI](https://learn.hashicorp.com/vault/getting-started/ui)
-
-In this chapter, we explore the CLI and the UI.<br>
-We will explore the API later.
+* The Vault [API](https://www.vaultproject.io/api/overview)
 
 ???
 
 * Chapter 2 focuses on interacting with Vault
-* We will explore the Vault CLI and UI in this chapter
 
 ---
 name: Vault-CLI
@@ -178,3 +178,93 @@ name: welcome-to-vault
 * Explain the "Welcome to Vault" tour.
 * Explain how to get rid of it.
 * Point out that they can restart the tour with the "Restart guide" menu under their user icon in the upper right corner of the UI.
+
+---
+name: vault-api-1
+# The Vault API
+
+* Vault has an HTTP API that you can use to configure Vault and manage your secrets.
+* Let's use the API to check Vault's sys/health endpoint with a simple `curl` command and use `jq` to format the JSON output.
+
+Command:
+```bash
+curl http://localhost:8200/v1/sys/health | jq
+```
+???
+* Let's talk about the Vault HTTP API
+
+---
+name: vault-api-2
+# The Vault API
+
+```json
+{
+  "initialized": true,
+  "sealed": false,
+  "standby": false,
+  "performance_standby": false,
+  "replication_performance_mode": "disabled",
+  "replication_dr_mode": "disabled",
+  "server_time_utc": 1557180149,
+  "version": "1.1.1",
+  "cluster_name": "vault-cluster-db6f271d",
+  "cluster_id": "33e85d7c-63bb-7523-0165-9d1aee722d70"
+}
+```
+
+???
+Here is the output from the sys/health endpoint
+
+---
+name: vault-api-3
+# The Vault API
+
+* The sys/health endpoint didn't require any authentication, but most of your API calls will be authenticated. Let's read that secret we created earlier using our root token. Be sure to copy and paste both lines together.
+
+Command:
+```bash
+curl --header "X-Vault-Token: root" \
+http://localhost:8200/v1/kv/data/department/team/mysecret | jq .data
+```
+
+Output:
+```json
+{
+  "data": {
+    "rootpass": "supersecret"
+  },
+  "metadata": {
+    "created_time": "2019-05-06T21:42:39.022036021Z",
+    "deletion_time": "",
+    "destroyed": false,
+    "version": 1
+  }
+}
+```
+
+
+---
+name: chapter-2-review-questions
+# 📝 Chapter 2 Review
+
+* How can you interact with Vault?
+* What options can you use to get help for Vault commands?
+* What are the two Vault server modes?
+
+???
+* Let's review what we learned in this chapter.
+
+---
+name: chapter-2-review-answers
+# 📝 Chapter 2 Review
+* How can you interact with Vault?
+  * The Vault CLI
+  * The Vault UI
+  * The Vault API
+* What options can you use to get help for Vault commands?
+  * `-h`, `-help`, and `--help`
+* What are the two Vault server modes?
+  * Dev and Prod
+
+???
+* Here are the answers to the review questions.

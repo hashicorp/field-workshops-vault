@@ -1,5 +1,11 @@
 #!/bin/sh -l
 
+# Install curl
+apk add curl
+
+# Install jq
+apk add jq
+
 # Write vault-config.hcl
 cat <<-EOF > /vault/config/vault-config.hcl
 listener "tcp" {
