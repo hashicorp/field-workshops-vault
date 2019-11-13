@@ -172,7 +172,7 @@ name: signing-into-the-vault-ui
 name: welcome-to-vault
 # The "Welcome to Vault" Tour
 .center[![:scale 60%](images/take_a_tour.png)]
-* When you first login to Vault, you'll see an invitation to take a tour.
+* When you first login to Vault, you can take a tour.
 
 ???
 * Explain the "Welcome to Vault" tour.
@@ -184,7 +184,7 @@ name: vault-api-1
 # The Vault API
 
 * Vault has an HTTP API that you can use to configure Vault and manage your secrets.
-* Let's use the API to check Vault's sys/health endpoint with a simple `curl` command and use `jq` to format the JSON output.
+* You can check Vault's health with a simple `curl` command followed by `jq` to format the JSON output.
 
 Command:
 ```bash
@@ -213,35 +213,33 @@ name: vault-api-2
 ```
 
 ???
-Here is the output from the sys/health endpoint
+Here is the output from Vault's sys/health endpoint
 
 ---
 name: vault-api-3
-# The Vault API
+# Authenticating Against the Vault API
 
-* The sys/health endpoint didn't require any authentication, but most of your API calls will be authenticated. Let's read that secret we created earlier using our root token. Be sure to copy and paste both lines together.
+* The sys/health endpoint didn't require any authentication.
+* But most Vault API calls do require authentication.
+* This is done with a Vault token that is provided with the `X-Vault-Token` header.
 
-Command:
-```bash
-curl --header "X-Vault-Token: root" \
-http://localhost:8200/v1/kv/data/department/team/mysecret | jq .data
-```
+???
+* Talk about how most Vault HTTP API calls will require authentication with a Vault token.
 
-Output:
-```json
-{
-  "data": {
-    "rootpass": "supersecret"
-  },
-  "metadata": {
-    "created_time": "2019-05-06T21:42:39.022036021Z",
-    "deletion_time": "",
-    "destroyed": false,
-    "version": 1
-  }
-}
-```
+---
+name: lab-vault-basics-challenge-3
+# 👩‍💻 Lab Challenge 2.3: Use the Vault HTTP API
+* In this lab, you'll use the Vault HTTP API.
+* You'll first check the health of your Vault server.
+* You'll then read your `my-first-secret` secret from Vault.
+* Instructions:
+  * Click the challenge called "The Vault API" in the "Vault Basics" track.
+  * Then click the green "Start" button.
+  * Follow the challenge's instructions.
+  * Click the green "Check" button when finished.
 
+???
+* Instruct the students to do the challenge, "The Vault API", in the "Vault Basics" track.
 
 ---
 name: chapter-2-review-questions
