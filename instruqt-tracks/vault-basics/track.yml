@@ -125,9 +125,9 @@ challenges:
     On the "Vault CLI" tab, retrive the health of the Vault server by running this command:<br>
     `curl http://localhost:8200/v1/sys/health | jq`
 
-    That should bring back a nicely formatted JSON document indicating that your server is initialized an unsealed.
+    That should bring back a nicely formatted JSON document indicating that your server is initialized and unsealed.
 
-    Now, retrieve your "my-first-secret" secret with this command:<br>
+    Now, retrieve your "my-first-secret" secret with this command (on a single line):<br>
     `curl --header "X-Vault-Token: root" http://localhost:8200/v1/secret/data/my-first-secret | jq`
 
     This should bring back a JSON document showing your age and metadata about the secret including its version.
@@ -385,4 +385,4 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 600
-checksum: "15653776568760630506"
+checksum: "4987532578159155596"
