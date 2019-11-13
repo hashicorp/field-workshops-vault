@@ -78,7 +78,7 @@ instead of<br>
 
 ---
 name: vault-kv-engine
-# Vault KV Secrets Engine
+# Vault's KV Secrets Engine
 * Vault's KV secrets engine actually has 2 versions:
   * KV v1 (without versioning)
   * KV v2 (with versioning)
@@ -109,7 +109,7 @@ name: vault-kv-commands
 
 ---
 name: lab-vault-basics-challenge-5
-# 👩‍💻 Lab Challenge 4.1: Enable and Use KV v2
+# 👩‍💻 Lab Challenge 4.1: KV v2 Secrets Engine
 * In this lab, you'll enable and use the KV v2 secrets engine.
 * Note that the path will be `kv` instead of `secret`.
 * Instructions:
