@@ -211,7 +211,7 @@ challenges:
 - slug: use-kv-secrets-engine
   id: g4qxrhyynkfx
   type: challenge
-  title: Enable and Use the KV V2 Secrets Engine
+  title: Use the KV V2 Secrets Engine
   teaser: Enable and use an instance of the KV v2 Secrets engine.
   assignment: |-
     Now that you have a Vault production server running (in the background), you can mount a secrets engine and write secrets to it.
@@ -258,7 +258,7 @@ challenges:
 - slug: use-userpass-auth
   id: ylrxvu4vedmd
   type: challenge
-  title: Enable and Use the Userpass Auth Method
+  title: Use the Userpass Auth Method
   teaser: Enable and use the userpass authentication method.
   assignment: |-
     Now that you have a running production Vault server with a KV v2 secrets engine mounted, it's time to learn how to authenticate users.
@@ -317,7 +317,7 @@ challenges:
 - slug: vault-policies
   id: bsekwhvoe31y
   type: challenge
-  title: Use Vault Policies to Grant Users Access to Secrets
+  title: Use Vault Policies
   teaser: Use Vault policies to grant different users access to different secrets.
   assignment: |-
     Now that you have the Userpass authentication method configured, you can add policies to give different users access to different secrets.
@@ -385,4 +385,4 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 600
-checksum: "4987532578159155596"
+checksum: "8882252681991057499"

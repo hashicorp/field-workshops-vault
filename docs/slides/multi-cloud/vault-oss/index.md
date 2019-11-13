@@ -1,17 +1,17 @@
-name: Chapter-4
+name: chapter-5
 class: title, shelf, no-footer, fullbleed
 background-image: url(https://hashicorp.github.io/field-workshops-assets/assets/bkgs/HashiCorp-Title-bkg.jpeg)
 count: false
 
-# Chapter 4      
-## Vault Secrets Engines
+# Chapter 5      
+## Vault Authentication Methods
 
 ![:scale 15%](https://hashicorp.github.io/field-workshops-assets/assets/logos/logo_vault.png)
 
 ???
 
-* Chapter 4 introduces Vault secrets engines
-* It focuses on the KV v2 engine.
+* Chapter 5 introduces Vault authentication methods
+* It focuses on the Userpass method.
 
 ---
 layout: true
@@ -19,177 +19,6 @@ layout: true
 .footer[
 - Copyright © 2019 HashiCorp
 - ![:scale 100%](https://hashicorp.github.io/field-workshops-assets/assets/logos/HashiCorp_Icon_Black.svg)
-]
-
----
-name: Vault-KV-Command
-Vault KV
--------------------------
-The `vault kv` command allows you to interact with Key/Value engines like the one you created in the previous lab. Try running `vault kv list` on the KV secrets engine you mounted to see what's inside:
-
-Commands:
-```bash
-vault kv list kv
-vault kv list kv/department
-vault kv list kv/department/team
-```
-
-Output:
-```tex
-Keys
-----
-mysecret
-```
-
----
-name: chapter-3b-lab
-.center[.lab-header[👩‍🔬 Lab Exercise 3b: Retreive a Secret]]
-<br><br><br>
-Retreive the secret you stored in the first lab with the `vault kv get` command. Try and figure this one out on your own before looking at the answer.
-
-Hint: You'll need the full path to your secret on the server.
-
----
-name: chapter-3b-lab-answer
-.center[.lab-header[👩‍🔬 Lab Exercise 3b: Answer]]
-<br><br>
-Reading secrets via the command line is easy. You can get the latest version of your secret with this command:
-
-Command:
-```bash
-vault kv get kv/department/team/mysecret
-```
-
-Output:
-```tex
-====== Metadata ======
-Key              Value
----              -----
-created_time     2019-05-07T13:52:50.929656328Z
-deletion_time    n/a
-destroyed        false
-version          1
-
-====== Data ======
-Key         Value
----         -----
-*rootpass    supersecret
-```
-
----
-name: Getting-Connected-API-1
-The Vault API
--------------------------
-Vault has a full RESTful API which you can use to configure Vault and manage your secrets. Let's test the API with a simple cURL command. Here we are checking the sys/health endpoint and using jq to format the JSON output.
-
-Command:
-```bash
-curl http://localhost:8200/v1/sys/health | jq
-```
-
-Output:
-```json
-{
-  "initialized": true,
-  "sealed": false,
-  "standby": false,
-  "performance_standby": false,
-  "replication_performance_mode": "disabled",
-  "replication_dr_mode": "disabled",
-  "server_time_utc": 1557180149,
-  "version": "1.1.1",
-  "cluster_name": "vault-cluster-db6f271d",
-  "cluster_id": "33e85d7c-63bb-7523-0165-9d1aee722d70"
-}
-```
-
----
-name: Getting-Connected-API-2
-The Vault API
--------------------------
-The sys/health endpoint didn't require any authentication, but most of your API calls will be authenticated. Let's read that secret we created earlier using our root token. Be sure to copy and paste both lines together.
-
-Command:
-```bash
-curl --header "X-Vault-Token: root" \
-http://localhost:8200/v1/kv/data/department/team/mysecret | jq .data
-```
-
-Output:
-```json
-{
-  "data": {
-    "rootpass": "supersecret"
-  },
-  "metadata": {
-    "created_time": "2019-05-06T21:42:39.022036021Z",
-    "deletion_time": "",
-    "destroyed": false,
-    "version": 1
-  }
-}
-```
-
----
-name: chapter-3c-lab
-.center[.lab-header[👩‍🔬 Lab Exercise 3c: API Calls]]
-<br><br><br><br>
-In this lab we'll look up information about your current token. Create a curl command like the one we used previously to query the `v1/auth/token/lookup-self` endpoint.
-
----
-name: chapter-3c-lab-answer
-.center[.lab-header[👩‍🔬 Lab Exercise 3c: Answer]]
-<br><br>
-Command:
-```bash
-curl --header "X-Vault-Token: root" \
-http://localhost:8200/v1/auth/token/lookup-self | jq
-```
-
-Output:
-```json
-{
-  "accessor": "bPNHDP8WDW4YgejBLvJm10I2",
-  "creation_time": 1557168937,
-  "creation_ttl": 0,
-  "display_name": "token",
-  "entity_id": "",
-  "expire_time": null,
-  "explicit_max_ttl": 0,
-  "id": "root",
-  "issue_time": "2019-05-06T18:55:37.270794189Z",
-  "meta": null,
-  "num_uses": 0,
-  "orphan": true,
-  "path": "auth/token/create",
-}
-...
-```
-
----
-name: chapter-3-review
-📝 Chapter 3 Review
--------------------------
-<br>
-.contents[
-Interacting with Vault
-* 3 ways to interact with Vault - GUI, CLI, API
-* Everything maps back to an API call
-* A valid token is required for most requests
-* Authenticated users and apps can get tokens
-* The root token is special, not for everyday use
-* Access level is based on *policy*
-]
-
-???
-So far we've been doing everything as the root or superuser. In the next chapter we'll learn how to create policies that can limit what your users and applications can do with Vault.
-
----
-name: Chapter-4
-class: center,middle
-.section[
-Chapter 4
-Authorization in Vault: Policies
 ]
 
 ---
@@ -415,32 +244,6 @@ Vault Authentication Methods
 * Policies prevent unauthorized access
 * The default policy in vault is *deny*
 ]
-
----
-name: Chapter-6
-class: center,middle
-.section[
-Chapter 6      
-Vault Secrets Engines
-]
-
----
-name: Vault-Secrets-Engines
-Vault Secrets Engines
--------------------------
-.center[![:scale 85%](images/vault-secrets-engines.png)]
-HashiCorp Vault ships with many different secrets engines. Some are for storing secrets, others can dynamically manage credentials or even provide encryption as a service.
-
-???
-Spend some time pointing out what some of these do:
-* KV - we've already got some experience with this one. Supports versioning, which we don't cover in this workshop.
-* PKI - If you ever have to manage SSL certificates this one is for you.
-* SSH - Take all the pain and drudgery out of securing your SSH infrastructure. Vault can provide key signing services that make securing SSH a snap.
-* Transit - Imagine if you had an API that could handle all your encryption and decryption needs, based on policy, without ever having to manage a complicated key infrastructure. Vault Transit - Encryption as a Service
-* TOTP - Vault is like a swiss army knife with many tools. The TOTP tool allows Vault to either act as a code-generating device for MFA logins (useful for automated logins to MFA-enabled systems), or it can also provide TOTP server capabilities for MFA infrastructure.
-* Active Directory - we can rotate passwords and will soon be able to generate dynamic credentials.
-* All the cloud IAM engines. Provide dynamic cloud creds for jobs, humans, etc.
-* Databases - We'll cover this in the workshop. Generate dynamic database credentials that have a lease and an expiration date.
 
 ---
 name: Chapter-7
