@@ -54,12 +54,9 @@ name: Table-of-Contents
 1. HashiCorp Vault Overview
 1. Interacting with Vault
 1. Running a Production Server
-1. Secrets Engines
-1. Authentication Methods
+1. Vault Secrets Engines
+1. Vault Authentication Methods
 1. Vault Policies
-1. Dynamic Secrets
-1. Encryption as a Service
-1. Vault Enterprise
 
 ???
 The table of contents for the workshop
