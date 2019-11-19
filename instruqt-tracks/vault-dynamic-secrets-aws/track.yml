@@ -1,0 +1,240 @@
+slug: vault-aws-dynamic-secrets
+id: avjxhl9qqgau
+type: track
+title: AWS Dynamic Secrets with Vault
+teaser: Generate AWS credentials dynamically based on IAM policies.
+description: |-
+  This generally makes working with AWS IAM easier, since it does
+  not involve clicking in the web UI. Additionally, the process is codified and
+  mapped to internal auth methods (such as LDAP).
+
+  The AWS IAM credentials are time-based and are automatically revoked when the Vault lease expires.
+icon: https://storage.googleapis.com/instruqt-frontend/assets/hashicorp/tracks/vault.png
+tags:
+- vault
+- aws
+- dynamic-secrets
+owner: hashicorp
+developers:
+- neil@hashicorp.com
+private: true
+published: true
+challenges:
+- slug: enable-aws-secrets-engine
+  id: h1entlh9levm
+  type: challenge
+  title: Enable the AWS Secrets Engine
+  teaser: Prepare Vault to generate dynamic credentials for AWS.
+  assignment: |-
+    The AWS secrets engine generates AWS access credentials dynamically based on
+    IAM policies. This generally makes working with AWS IAM easier, since it does
+    not involve clicking in the web UI. Additionally, the process is codified and
+    mapped to internal auth methods (such as LDAP).
+
+    The AWS IAM credentials are time-based and are automatically revoked when the
+    Vault lease expires.
+
+    Most secrets engines must be configured in advance before they can perform their
+    functions, so you need to enable the AWS secrets engine:
+
+    ```
+    vault secrets enable aws
+    ```
+  notes:
+  - type: text
+    contents: |-
+      Dynamic secrets are generated when they are accessed. Dynamic secrets do not
+      exist until they are read, so there is no risk of someone stealing them or
+      another client using the same secrets. Because Vault has built-in revocation
+      mechanisms, dynamic secrets can be revoked immediately after use, minimizing
+      the amount of time the secret existed.
+  tabs:
+  - title: Enable the AWS Secrets Engine
+    type: terminal
+    hostname: vault-server
+  difficulty: basic
+  timelimit: 300
+- slug: configure-aws-secrets-engine
+  id: ayjpxpa6pzza
+  type: challenge
+  title: Configure the AWS Secrets Engine
+  teaser: Prepare Vault to generate dynamic AWS credentials.
+  assignment: |-
+    After enabling the AWS secrets engine, you must configure it to authenticate and
+    communicate with AWS. You have been provided AWS credentials, so no need to use
+    your own.
+
+    Since you enabled the AWS secrets engine on the default path, we can configure
+    AWS by writing to the `aws/config/root` with a command that looks like the following:
+
+    ```
+    vault write aws/config/root \
+      access_key=$AWS_ACCESS_KEY_ID \
+      secret_key=$AWS_SECRET_ACCESS_KEY \
+      region=us-west-1
+    ```
+
+    Feel free to take a look at the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`
+    environment variables using `echo` before running that command.
+
+    The next step is to configure a role. A role in Vault is a human-friendly
+    identifier to an action. Think of it as a symlink.
+
+    Vault knows how to create an IAM user via the AWS API, but it does not know what
+    permissions, groups, and policies you want to attach to that user. This is where
+    roles come in - roles map your configuration options to those API calls.
+
+    In the example command below is an IAM policy that enables all actions on EC2.
+    When Vault generates an access key, it will automatically attach this policy.
+    The generated access key will have full access to EC2 (as dictated by this
+    policy), but not IAM or other AWS services. If you are not familiar with AWS'
+    IAM policies, that is okay - just use this one for now.
+
+    We need to map this policy document to a named role. To do that, write to
+    `aws/roles/my-role`.
+
+    ```
+    vault write aws/roles/my-role \
+            credential_type=iam_user \
+            policy_document=-<<EOF
+    {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "Stmt1426528957000",
+          "Effect": "Allow",
+          "Action": [
+            "ec2:*"
+          ],
+          "Resource": [
+            "*"
+          ]
+        }
+      ]
+    }
+    EOF
+    ```
+  notes:
+  - type: text
+    contents: |-
+      Most secrets engines must be configured in advance before they can perform their
+      functions. Vault supports three different types of credentials to retrieve from AWS.
+      We will focus on the [`iam_user`](https://www.vaultproject.io/docs/secrets/aws/index.html#iam_user)
+      method, however, you can read more about the
+      [other options](https://www.vaultproject.io/docs/secrets/aws/index.html).
+  tabs:
+  - title: Configure the AWS Secrets Engine
+    type: terminal
+    hostname: vault-server
+  difficulty: basic
+  timelimit: 300
+- slug: generate-aws-credentials
+  id: j3kai2fi9v2y
+  type: challenge
+  title: Generate AWS Credentials
+  teaser: Generate AWS access key pairs on the fly.
+  assignment: |-
+    In the last challenge we told Vault: When I ask for a credential for `my-role`,
+    create it and attach the IAM policy `{ "Version": "2012..." }`.
+
+    Now that the AWS secrets engine is enabled and configured with your role,
+    we can ask Vault to generate an access key pair for that role by reading from
+    `aws/creds/my-role`.
+
+    ```
+    vault read aws/creds/my-role
+    ```
+
+    Once you read that role, you will have generated new credentials and an
+    associated lease. Be sure to keep that `lease_id` from your output around,
+    you'll need it for the next step.
+
+
+    Next, click on the link above to the AWS management portal. You will be
+    presented with a login screen. You will be prompted for an Account ID,
+    Username and Password. You can retrieve those from this environment, with
+    these commands:
+
+    ```
+    echo $AWS_ACCOUNT_ID
+    echo $AWS_ACCOUNT_USERNAME
+    echo $AWS_ACCOUNT_PASSWORD
+    ```
+
+    Navigate to the [IAM management page](https://console.aws.amazon.com/iam/home?#/users),
+    and see that we have generated a new IAM user with a role that looks
+    like `vault-root-my-role-*`.
+
+    You can also see all of the active leases for
+    this role using:
+
+    ```
+    vault list sys/leases/lookup/aws/creds/my-role
+    ```
+  tabs:
+  - title: Generate AWS Credentials
+    type: terminal
+    hostname: vault-server
+  - title: AWS Management Portal
+    type: external
+    hostname: vault-server
+    url: https://us-west-2.console.aws.amazon.com/console/home
+  difficulty: basic
+  timelimit: 300
+- slug: revoke-aws-credentials
+  id: jnub5y273l3o
+  type: challenge
+  title: Revoke AWS Credentials
+  teaser: Revoke the dynamically generated AWS access key pairs.
+  assignment: |-
+    Vault will automatically revoke this credential after 768 hours (see
+    `lease_duration` in the output), but perhaps we want to revoke it early.
+    Once the secret is revoked, the access keys are no longer valid.
+
+    List all of the active leases for our role using:
+    ```
+    vault list sys/leases/lookup/aws/creds/my-role
+    ```
+
+    You'll want to take each value from that output and create a lease identifier
+    that looks like the following, where LEASE_IDENTIFIER_HASH is replaced with a
+    that value:
+
+    ```
+    aws/creds/my-role/LEASE_IDENTIFIER_HASH
+    ```
+
+    With your lease id prepared, run the `vault lease revoke` command:
+
+    ```
+    vault lease revoke aws/creds/my-role/LEASE_IDENTIFIER_HASH
+    ```
+
+    You should receive a message about your revocation being successfully
+    queued. If you look back at the IAM management page, you will no longer
+    see the user associated with that lease. If you try to use the access
+    keys that were generated, you will find that they no longer work.
+
+    You can also verify that the lease has been revoked by listing all of
+    the active leases again. Be sure to revoke all leases before trying to
+    complete the exercise:
+
+    ```
+    vault list sys/leases/lookup/aws/creds/my-role
+    ```
+
+
+    With such easy dynamic creation and revocation, you can hopefully begin
+    to see how easy it is to work with dynamic secrets and ensure they only
+    exist for the duration that they are needed.
+  tabs:
+  - title: Revoke AWS Credentials
+    type: terminal
+    hostname: vault-server
+  - title: AWS Management Portal
+    type: external
+    hostname: vault-server
+    url: https://us-west-2.console.aws.amazon.com/console/home
+  difficulty: basic
+  timelimit: 300
+checksum: "4432505461577449793"

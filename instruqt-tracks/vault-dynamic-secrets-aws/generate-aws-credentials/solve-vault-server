@@ -1,0 +1,13 @@
+#!/bin/sh -l
+
+set -e
+
+generated_creds=$(vault read -format=json aws/creds/my-role)
+num_leases=$(vault list -format=json sys/leases/lookup/aws/creds/my-role  | jq ". |  length")
+
+if [ ! $num_leases -eq 1 ]; then
+    fail-message "You did not generate any credentials. Try reading from aws/creds/my-role."
+fi
+
+
+exit 0

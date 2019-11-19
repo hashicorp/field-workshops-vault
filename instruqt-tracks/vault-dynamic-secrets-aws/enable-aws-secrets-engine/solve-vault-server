@@ -1,0 +1,7 @@
+#!/bin/sh -l
+
+# Enable the AWS secrets engine
+echo -e "vault secrets enable aws" >> /root/.bash_history
+vault secrets enable aws
+
+exit 0
