@@ -1,0 +1,20 @@
+#!/bin/sh -l
+
+# Configure Vault to communicate with the AWS account
+vault write auth/aws/config/client \
+    access_key=$AWS_ACCESS_KEY_ID \
+    secret_key=$AWS_SECRET_ACCESS_KEY
+
+# Register a role in the method
+vault write auth/aws/role/my-role-iam \
+    auth_type=iam \
+    bound_iam_principal_arn=arn:aws:iam::$AWS_ACCOUNT_ID:* \
+    policies=developer \
+    token_ttl=30m \
+    token_max_ttl=30m
+
+# Set the IAM Server ID Expected Header Value
+vault write auth/aws/config/client \
+    iam_server_id_header_value=instruqt.vault.example.com
+
+exit 0

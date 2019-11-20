@@ -1,0 +1,6 @@
+#!/bin/sh -l
+
+# Enable the AWS auth method
+vault auth enable aws
+
+exit 0

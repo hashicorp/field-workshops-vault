@@ -1,0 +1,34 @@
+#!/bin/sh -l
+
+set -e
+
+vault read -format=json auth/aws/role/my-role-iam || fail-message "You have not yet properly configured the AWS auth method."
+configured_role_output=$(vault read -format=json auth/aws/role/my-role-iam)
+
+expected_auth_type="iam"
+auth_type=$(echo $configured_role_output | jq -r .data.auth_type)
+
+if [ ! "$expected_auth_type" = "$auth_type" ]; then
+    fail-message "You have not yet properly configured the AWS auth method."
+fi
+
+expected_token_ttl="1800"
+token_ttl=$(echo $configured_role_output | jq -r .data.token_ttl)
+
+if [ ! "$expected_token_ttl" = "$token_ttl" ]; then
+    fail-message "You have not yet properly configured the AWS auth method - fix the token_ttl."
+fi
+
+expected_max_token_ttl="1800"
+token_max_ttl=$(echo $configured_role_output | jq -r .data.token_max_ttl)
+
+if [ ! "$expected_max_token_ttl" = "$token_max_ttl" ]; then
+    fail-message "You have not yet properly configured the AWS auth method - fix the token_max_ttl."
+fi
+
+iam_server_id=$(vault read -format=json auth/aws/config/client | jq -r ".data.iam_server_id_header_value")
+expected_iam_server_id="instruqt.vault.example.com"
+
+if [ ! "$iam_server_id" = "$expected_iam_server_id" ]; then
+    fail-message "You have not yet properly configured the AWS auth method - fix the iam_server_id_header_value."
+fi
