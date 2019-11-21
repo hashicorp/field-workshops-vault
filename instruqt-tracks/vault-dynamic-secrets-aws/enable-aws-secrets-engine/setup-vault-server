@@ -6,6 +6,12 @@ apk add curl
 # Install jq
 apk add jq
 
+# Install pip
+apk add py-pip
+
+# Install the AWS ClI
+pip install awscli
+
 # Write vault-config.hcl
 cat <<-EOF > /vault/config/vault-config.hcl
 listener "tcp" {
@@ -24,7 +30,7 @@ EOF
 vault server -config=/vault/config/vault-config.hcl -log-level=debug > /vault/logs/vault.log 2>&1 &
 
 # Sleep 5 seconds
-sleep 5
+sleep 15
 
 # Initialize Vault server
 vault operator init -key-shares=1 -key-threshold=1 > init.log
@@ -39,8 +45,6 @@ echo $token > /root/token
 # Write unseal key to /root/unseal_key
 echo $unseal_key > /root/unseal_key
 
-# Export VAULT_TOKEN
-export VAULT_TOKEN=$token
 
 # Unseal Vault server
 vault operator unseal $unseal_key
@@ -54,5 +58,8 @@ export AWS_ACCOUNT_NAME=$INSTRUQT_AWS_ACCOUNT_VAULT_DYNAMIC_SECRETS_AWS_ACCOUNT_
 export AWS_ACCOUNT_ID=$INSTRUQT_AWS_ACCOUNT_VAULT_DYNAMIC_SECRETS_AWS_ACCOUNT_ID
 export AWS_ACCOUNT_USERNAME=$INSTRUQT_AWS_ACCOUNT_VAULT_DYNAMIC_SECRETS_AWS_USERNAME
 export AWS_ACCOUNT_PASSWORD=$INSTRUQT_AWS_ACCOUNT_VAULT_DYNAMIC_SECRETS_AWS_PASSWORD
+
+# Export VAULT_TOKEN
+export VAULT_TOKEN=$(cat /root/token)
 
 exit 0
