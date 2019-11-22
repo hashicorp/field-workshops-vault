@@ -1,0 +1,28 @@
+version: "2"
+containers:
+- name: vault-server
+  image: vault:1.2.3
+  cmd: version
+  shell: /bin/sh
+  ports:
+  - 8200
+  environment:
+    SKIP_SETCAP: "true"
+    VAULT_ADDR: http://localhost:8200
+  memory: 128
+aws_accounts:
+- name: vault-dynamic-secrets-aws
+  iam_policy: |
+    {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [ "iam:*", "ec2:*" ],
+          "Resource": "*"
+        }
+      ]
+    }
+  managed_policies:
+  - arn:aws:iam::aws:policy/IAMFullAccess
+  - arn:aws:iam::aws:policy/AmazonEC2ReadOnlyAccess

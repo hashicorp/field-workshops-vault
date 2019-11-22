@@ -1,0 +1,12 @@
+#!/bin/sh -l
+
+set -e
+
+num_leases=$(vault list -format=json sys/leases/lookup/aws/creds/my-role  | jq ". |  length")
+
+if [ ! $num_leases -eq 0 ]; then
+    fail-message "Found $num_leases leases for aws/creds/my-role, should be 0."
+fi
+
+
+exit 0

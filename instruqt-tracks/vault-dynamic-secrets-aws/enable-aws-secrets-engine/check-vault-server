@@ -1,0 +1,24 @@
+#!/bin/sh -l
+
+set -e
+
+expected_type_at_aws_path="aws"
+type_at_aws_path=$(vault secrets list -format=json | jq -r '.["aws/"]["type"]')
+
+if [ ! "$expected_type_at_aws_path" = "$type_at_aws_path" ]; then
+    fail-message "You haven't enabled the AWS secret engine at the default path yet."
+fi
+
+lease_duration=$(vault read -format=json aws/config/lease | jq -r .data.lease)
+expected_lease_duration="30m0s"
+if [ ! "$expected_lease_duration" = "$lease_duration" ]; then
+    fail-message "You haven't configured the lease duration to be 30 minutes."
+fi
+
+max_lease_duration=$(vault read -format=json aws/config/lease | jq -r .data.lease_max)
+expected_max_lease_duration="30m0s"
+if [ ! "$expected_max_lease_duration" = "$max_lease_duration" ]; then
+    fail-message "You haven't configured the max lease duration to be 30 minutes."
+fi
+
+exit 0

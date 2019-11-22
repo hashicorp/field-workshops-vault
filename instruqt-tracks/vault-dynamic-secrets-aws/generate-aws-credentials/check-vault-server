@@ -1,0 +1,12 @@
+#!/bin/sh -l
+
+set -e
+
+num_leases=$(vault list -format=json sys/leases/lookup/aws/creds/my-role  | jq ". |  length")
+
+if [ $num_leases -le 1 ]; then
+    fail-message "Found $num_leases leases for aws/creds/my-role, there should be at least 2, one from CLI generation and one from UI generation."
+fi
+
+
+exit 0

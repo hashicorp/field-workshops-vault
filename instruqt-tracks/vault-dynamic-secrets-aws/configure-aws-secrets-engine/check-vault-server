@@ -1,0 +1,22 @@
+#!/bin/sh -l
+
+set -e
+
+expected_role_name="my-role"
+created_role_name=$(vault list -format=json aws/roles | jq -r ".[0]") || fail-message "You haven't configured the role \"my-role\" yet."
+
+if [ ! "$created_role_name" = "$expected_role_name" ]; then
+    fail-message "You haven't configured the role \"my-role\" yet."
+fi
+
+generated_creds=$(vault read -format=json aws/creds/my-role)
+read_exit_status=$?
+
+lease_id=$(echo $generated_creds | jq -r .lease_id)
+if [ ! $read_exit_status -eq 0 ]; then
+    fail-message "You have not yet properly configured the AWS secrets engine."
+fi
+
+vault lease revoke $lease_id
+
+exit 0
