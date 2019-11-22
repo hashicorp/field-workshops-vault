@@ -18,10 +18,11 @@ aws_accounts:
       "Statement": [
         {
           "Effect": "Allow",
-          "Action": "iam:*",
+          "Action": [ "iam:*", "ec2:*" ],
           "Resource": "*"
         }
       ]
     }
   managed_policies:
   - arn:aws:iam::aws:policy/IAMFullAccess
+  - arn:aws:iam::aws:policy/AmazonEC2ReadOnlyAccess

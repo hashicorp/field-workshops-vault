@@ -6,8 +6,12 @@ apk add curl
 # Install jq
 apk add jq
 
+# Install groff
+apk add groff
+
 # Install pip
 apk add py-pip
+
 
 # Install the AWS ClI
 pip install awscli
