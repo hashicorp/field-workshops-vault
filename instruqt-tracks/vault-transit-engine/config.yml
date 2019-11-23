@@ -1,0 +1,6 @@
+version: "2"
+virtualmachines:
+- name: vault-mysql-server
+  image: instruqt-hashicorp/vault-with-mysql-and-python-web-app
+  shell: /bin/bash
+  machine_type: n1-standard-1

@@ -1,0 +1,83 @@
+slug: vault-transit-engine
+id: ykk2vp8iivzq
+version: 0.0.1
+type: track
+title: Vault Transit Engine
+teaser: Illustrate the use of Vault's Transit secrets engine to encrypt and decrypt
+  data.
+description: The Vault Transit secrets engine allows Vault to function as an encryption-as-a-service,
+  encrypting and decrypting data stored outside of Vault. In this track, you will
+  use the Transit secrets engine with a Python web app and a MySQL database.
+icon: https://storage.googleapis.com/instruqt-frontend/assets/hashicorp/tracks/vault.png
+tags:
+- vault
+- secrets
+- encryption-as-a-service
+owner: hashicorp
+developers:
+- roger@hashicorp.com
+private: true
+published: true
+challenges:
+- slug: enable-transit-engine
+  id: rtt1nujqyebg
+  type: challenge
+  title: Enable the Transit secrets engine
+  teaser: Enable the Transit secrets engine on the Vault server.
+  assignment: |-
+    The Transit secrets engine allows Vault to function as an encryption-as-a-service.
+
+    In this track, you will use the Transit secrets engine with a Python web app that talks to a MySQL server.  Both of these run on the same VM as the Vault server, which is run in "dev" mode with root token set to `root`.
+
+    The web app can be viewed on the "Web App" tab. You'll want to click the icon in the upper right corner of the tabs area to hide the assignment side bar so that you can see the entire UI of the web app. Click it again to see the assignment side bar.
+
+    All secrets engines must be enabled before they can be used. Check which secrets engines are currently enabled.
+    ```
+    vault secrets list
+    ```
+
+    Note that the Transit secrets engine is not enabled. Please enable it at the path "lob_a/workshop/transit".
+
+    ```
+    vault secrets enable -path=lob_a/workshop/transit transit
+    ```
+
+    The PID of the Python web app can be found by running `ps -ef | grep "app.py"`. It can be stopped by running `kill -9 <PID>`.
+
+    It can be restarted in the background with the following commands:
+    ```
+    cd /home/vault/transit-app-example/backend
+    python3 app.py &
+    ```
+    After running those commands, press your `<enter>` or `<return>` key to get your prompt back.
+  notes:
+  - type: text
+    contents: |-
+      Secrets engines are Vault plugins that store, generate, or encrypt data. Secrets engines are incredibly flexible, so it is easiest to think about them in terms of their function.
+
+      Vault's Transit secrets engine functions as Vault's encryption-as-a-service, encrypting and decrypting data stored outside of Vault.
+
+      To learn more, see https://www.vaultproject.io/docs/secrets/transit/index.html.
+  tabs:
+  - title: Scripts
+    type: code
+    hostname: vault-mysql-server
+    path: /home/vault/scripts
+  - title: config.ini
+    type: code
+    hostname: vault-mysql-server
+    path: /home/vault/transit-app-example/backend/config.ini
+  - title: Vault CLI
+    type: terminal
+    hostname: vault-mysql-server
+  - title: Vault UI
+    type: service
+    hostname: vault-mysql-server
+    port: 8200
+  - title: Web App
+    type: service
+    hostname: vault-mysql-server
+    port: 5000
+  difficulty: basic
+  timelimit: 600
+checksum: "2139494378264135690"
