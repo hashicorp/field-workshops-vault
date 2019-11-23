@@ -1,0 +1,64 @@
+slug: vault-dynamic-database-credentials
+id: hbtxgbf9n1nt
+version: 0.0.1
+type: track
+title: Vault Dynamic Database Credentials
+teaser: Generate dynamic credentials for a MySQL database from Vault.
+description: The Vault Database secrets engine lets you generate dynamic, time-bound
+  credentials for many different databases. In this track, you will do this for a
+  MySQL database that is running on the same server as the Vault server itself.
+icon: https://storage.googleapis.com/instruqt-frontend/assets/hashicorp/tracks/vault.png
+tags:
+- vault
+- database
+- dynamic-secrets
+owner: hashicorp
+developers:
+- roger@hashicorp.com
+private: true
+published: false
+challenges:
+- slug: enable-database-secrets-engine
+  id: z6ovrqxwopus
+  type: challenge
+  title: Enable the Database secrets engine
+  teaser: Enable the Database secrets engine on the Vault server.
+  assignment: |-
+    The Database secrets engine generates credentials dynamically for various databases.  In this track, we are using an instance of MySQL that is running on the same VM as the Vault server itself.
+
+    The Database credentials are time-bound and are automatically revoked when the Vault lease expires. The credentials can also be revoked at any time.
+
+    All secrets engines must be enabled before they can be used. Take a look at what secrets engines are currently enabled.
+
+    ```
+    vault secrets list
+    ```
+
+    Note that the Database secrets engine is not enabled. You should enable it.
+
+    ```
+    vault secrets enable database
+    ```
+  notes:
+  - type: text
+    contents: |-
+      Secrets engines are components which store, generate, or encrypt data. Secrets engines are incredibly flexible, so it is easiest to think about them in terms of their function.
+
+      Secrets engines are provided some set of data, they take some action on that data, and they return a result.
+
+      Vault's Database secrets engine dynamically generates credentials for many databases.
+  tabs:
+  - title: Vault CLI
+    type: terminal
+    hostname: vault-mysql-server
+  - title: Vault UI
+    type: service
+    hostname: vault-mysql-server
+    port: 8200
+  - title: Web App
+    type: service
+    hostname: vault-mysql-server
+    port: 5000
+  difficulty: basic
+  timelimit: 600
+checksum: "17791789473690460299"
