@@ -1,0 +1,14 @@
+#!/bin/bash
+
+echo "export VAULT_ADDR=http://localhost:8200" >> $HOME/.bashrc
+echo "export VAULT_TOKEN=root" >> $HOME/.bashrc
+echo "export MYSQL_HOST=localhost" >> $HOME/.bashrc
+echo "export MYSQL_PORT=3306" >> $HOME/.bashrc
+echo "export MYSQL_ENDPOINT=localhost:3306" >> $HOME/.bashrc
+echo "export MYSQL_PASSWORD=sJ2w*8NX" >> $HOME/.bashrc
+
+cd /home/vault/transit-app-example/backend
+python3 app.py &>/dev/null &
+cd /root
+
+exit 0
