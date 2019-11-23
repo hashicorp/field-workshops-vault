@@ -1,0 +1,7 @@
+#!/bin/bash -l
+
+# Enable the Transit secrets engine
+echo -e "vault secrets enable -path=lob_a/workshop/transit transit" >> /root/.bash_history
+vault secrets enable -path=lob_a/workshop/transit transit
+
+exit 0

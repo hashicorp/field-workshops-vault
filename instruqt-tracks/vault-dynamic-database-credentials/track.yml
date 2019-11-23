@@ -16,7 +16,7 @@ owner: hashicorp
 developers:
 - roger@hashicorp.com
 private: true
-published: false
+published: true
 challenges:
 - slug: enable-database-secrets-engine
   id: z6ovrqxwopus
@@ -28,26 +28,32 @@ challenges:
 
     The Database credentials are time-bound and are automatically revoked when the Vault lease expires. The credentials can also be revoked at any time.
 
-    All secrets engines must be enabled before they can be used. Take a look at what secrets engines are currently enabled.
+    All secrets engines must be enabled before they can be used. Check which secrets engines are currently enabled.
 
     ```
     vault secrets list
     ```
 
-    Note that the Database secrets engine is not enabled. You should enable it.
+    Note that the Database secrets engine is not enabled. Please enable it at the path "lob_a/workshop/database".
 
     ```
-    vault secrets enable database
+    vault secrets enable -path=lob_a/workshop/database database
     ```
   notes:
   - type: text
     contents: |-
-      Secrets engines are components which store, generate, or encrypt data. Secrets engines are incredibly flexible, so it is easiest to think about them in terms of their function.
-
-      Secrets engines are provided some set of data, they take some action on that data, and they return a result.
+      Secrets engines are Vault plugins that store, generate, or encrypt data. Secrets engines are incredibly flexible, so it is easiest to think about them in terms of their function.
 
       Vault's Database secrets engine dynamically generates credentials for many databases.
+
+      To learn more, see these links:
+      https://www.vaultproject.io/docs/secrets/databases/index.html
+      https://www.vaultproject.io/docs/secrets/databases/mysql-maria.html
   tabs:
+  - title: Scripts
+    type: code
+    hostname: vault-mysql-server
+    path: /home/vault/scripts
   - title: Vault CLI
     type: terminal
     hostname: vault-mysql-server
@@ -55,10 +61,6 @@ challenges:
     type: service
     hostname: vault-mysql-server
     port: 8200
-  - title: Web App
-    type: service
-    hostname: vault-mysql-server
-    port: 5000
   difficulty: basic
   timelimit: 600
-checksum: "17791789473690460299"
+checksum: "12623351252262211934"
