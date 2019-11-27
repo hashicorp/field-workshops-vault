@@ -2,12 +2,10 @@
 
 set -e
 
-generated_creds=$(vault read -format=json aws/creds/my-role)
-num_leases=$(vault list -format=json sys/leases/lookup/aws/creds/my-role  | jq ". |  length")
-
-if [ ! $num_leases -eq 1 ]; then
-    fail-message "You did not generate any credentials. Try reading from aws/creds/my-role."
-fi
-
+# Generate AWS Credentials Twice (to match check script)
+echo -e "vault read aws/creds/my-role" >> /root/.bash_history
+vault read aws/creds/my-role
+echo -e "vault read aws/creds/my-role" >> /root/.bash_history
+vault read aws/creds/my-role
 
 exit 0

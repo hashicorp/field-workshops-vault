@@ -12,8 +12,7 @@ tags:
 - aws
 - dynamic-secrets
 owner: hashicorp
-developers:
-- neil@hashicorp.com
+developers: []
 private: true
 published: true
 challenges:
@@ -305,4 +304,4 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 900
-checksum: "14916196542180805850"
+checksum: "1693138005318152251"
