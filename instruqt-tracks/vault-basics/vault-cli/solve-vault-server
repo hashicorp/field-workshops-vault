@@ -3,7 +3,7 @@
 vault version
 echo -e "vault version\n" >> /root/.bash_history
 vault secret -h
-echo -e "vault secret -h\n" >> /root/.bash_history
+echo -e "vault secrets -h\n" >> /root/.bash_history
 vault read -h
 echo -e "vault read -h\n" >> /root/.bash_history
 
