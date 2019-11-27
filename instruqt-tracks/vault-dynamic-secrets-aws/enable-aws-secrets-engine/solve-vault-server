@@ -4,4 +4,8 @@
 echo -e "vault secrets enable aws" >> /root/.bash_history
 vault secrets enable aws
 
+# Set lease and lease_max
+echo -e "vault write aws/config/lease lease=30m lease_max=30m" >> /root/.bash_history
+vault write aws/config/lease lease=30m lease_max=30m
+
 exit 0

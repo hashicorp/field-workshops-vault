@@ -2,6 +2,15 @@
 
 set -e
 
-# Nothing to do
+# Retrieve Leases
+leases=$(vault list -format=json sys/leases/lookup/aws/creds/my-role | jq -r '.[]')
+
+# Revoke Leases
+for lease in $leases
+do
+  vault lease revoke aws/creds/my-role/${lease}
+done
+
+sleep 5
 
 exit 0
