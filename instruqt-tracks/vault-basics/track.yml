@@ -66,7 +66,7 @@ challenges:
     type: terminal
     hostname: vault-server
   difficulty: basic
-  timelimit: 300
+  timelimit: 1200
 - slug: your-first-secret
   id: yh9gwncelmb5
   type: challenge
@@ -113,7 +113,7 @@ challenges:
     hostname: vault-server
     port: 8200
   difficulty: basic
-  timelimit: 300
+  timelimit: 1200
 - slug: vault-api
   id: m50qgkia5ksb
   type: challenge
@@ -144,7 +144,7 @@ challenges:
     type: terminal
     hostname: vault-server
   difficulty: basic
-  timelimit: 300
+  timelimit: 1200
 - slug: run-a-vault-server
   id: 0xgofynrfbql
   type: challenge
@@ -207,7 +207,7 @@ challenges:
     hostname: vault-server
     port: 8200
   difficulty: basic
-  timelimit: 600
+  timelimit: 1200
 - slug: use-kv-secrets-engine
   id: g4qxrhyynkfx
   type: challenge
@@ -254,7 +254,7 @@ challenges:
     hostname: vault-server
     port: 8200
   difficulty: basic
-  timelimit: 600
+  timelimit: 1200
 - slug: use-userpass-auth
   id: ylrxvu4vedmd
   type: challenge
@@ -313,7 +313,7 @@ challenges:
     hostname: vault-server
     port: 8200
   difficulty: basic
-  timelimit: 600
+  timelimit: 1200
 - slug: vault-policies
   id: bsekwhvoe31y
   type: challenge
@@ -384,5 +384,5 @@ challenges:
     hostname: vault-server
     port: 8200
   difficulty: basic
-  timelimit: 600
-checksum: "8882252681991057499"
+  timelimit: 1200
+checksum: "12645768146850836652"
