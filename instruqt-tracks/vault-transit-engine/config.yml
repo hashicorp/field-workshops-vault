@@ -2,5 +2,12 @@ version: "2"
 virtualmachines:
 - name: vault-mysql-server
   image: instruqt-hashicorp/vault-with-mysql-and-python-web-app
-  shell: /bin/bash
+  shell: /bin/bash -l
+  environment:
+    MYSQL_ENDPOINT: localhost:3306
+    MYSQL_HOST: localhost
+    MYSQL_PASSWORD: sJ2w*8NX
+    MYSQL_PORT: "3306"
+    VAULT_ADDR: http://localhost:8200
+    VAULT_TOKEN: root
   machine_type: n1-standard-1
