@@ -1,0 +1,29 @@
+#!/bin/bash -l
+
+# Configure a connection for the database secrets engine
+echo -e "vault write lob_a/workshop/database/config/wsmysqldatabase   plugin_name=mysql-database-plugin   connection_url=\"{{username}}:{{password}}@tcp(localhost:3306)/\"   allowed_roles=\"workshop-app\",\"workshop-app-long\"   username=\"hashicorp\"   password=\"Password123\"" >> /root/.bash_history
+vault write lob_a/workshop/database/config/wsmysqldatabase \
+  plugin_name=mysql-database-plugin \
+  connection_url="{{username}}:{{password}}@tcp(localhost:3306)/" \
+  allowed_roles="workshop-app","workshop-app-long" \
+  username="hashicorp" \
+  password="Password123"
+
+# Configure a role for the database secrets engine
+echo -e "vault write lob_a/workshop/database/roles/workshop-app-long   db_name=wsmysqldatabase   creation_statements=\"CREATE USER '{{name}}'@'%' IDENTIFIED BY '{{password}}';GRANT ALL ON my_app.* TO '{{name}}'@'%';\" default_ttl=\"1h\"   max_ttl=\"24h\"" >> /root/.bash_history
+vault write lob_a/workshop/database/roles/workshop-app-long \
+  db_name=wsmysqldatabase \
+  creation_statements="CREATE USER '{{name}}'@'%' IDENTIFIED BY '{{password}}';GRANT ALL ON my_app.* TO '{{name}}'@'%';" \
+  default_ttl="1h" \
+  max_ttl="24h"
+
+# Configure a role for the database secrets engine
+echo -e "vault write lob_a/workshop/database/roles/workshop-app   db_name=wsmysqldatabase   creation_statements=\"CREATE USER '{{name}}'@'%' IDENTIFIED BY '{{password}}';GRANT ALL ON my_app.* TO '{{name}}'@'%';\"   default_ttl=\"3m\"   max_ttl=\"6m\"" >> /root/.bash_history
+vault write lob_a/workshop/database/roles/workshop-app \
+  db_name=wsmysqldatabase \
+  creation_statements="CREATE USER '{{name}}'@'%' IDENTIFIED BY '{{password}}';GRANT ALL ON my_app.* TO '{{name}}'@'%';" \
+  default_ttl="3m" \
+  max_ttl="6m"
+
+
+exit 0
