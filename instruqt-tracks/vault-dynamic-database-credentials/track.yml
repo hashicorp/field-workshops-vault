@@ -15,7 +15,7 @@ tags:
 owner: hashicorp
 developers:
 - roger@hashicorp.com
-private: true
+private: false
 published: true
 challenges:
 - slug: enable-database-secrets-engine
@@ -60,7 +60,7 @@ challenges:
     hostname: vault-mysql-server
     port: 8200
   difficulty: basic
-  timelimit: 1800
+  timelimit: 300
 - slug: configure-database-secrets-engine
   id: dmxb78fcbthu
   type: challenge
@@ -134,7 +134,7 @@ challenges:
     hostname: vault-mysql-server
     port: 8200
   difficulty: basic
-  timelimit: 1800
+  timelimit: 600
 - slug: generate-database-creds
   id: zhbyasjsfozu
   type: challenge
@@ -270,7 +270,7 @@ challenges:
     hostname: vault-mysql-server
     port: 8200
   difficulty: basic
-  timelimit: 1800
+  timelimit: 600
 - slug: renew-revoke-database-creds
   id: 3pq7sccufa8e
   type: challenge
@@ -365,5 +365,5 @@ challenges:
     hostname: vault-mysql-server
     port: 8200
   difficulty: basic
-  timelimit: 1800
-checksum: "15833253986877436790"
+  timelimit: 600
+checksum: "3553496113712606888"
