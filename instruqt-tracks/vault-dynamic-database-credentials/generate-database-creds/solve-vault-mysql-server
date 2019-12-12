@@ -1,0 +1,22 @@
+#!/bin/bash -l
+
+# Generate creds for the workshop-app-long role using the Vault API
+echo -e "curl --header \"X-Vault-Token: root\" \"http://localhost:8200/v1/lob_a/workshop/database/creds/workshop-app-long\" | jq" >> /root/.bash_history
+curl --header "X-Vault-Token: root" "http://localhost:8200/v1/lob_a/workshop/database/creds/workshop-app-long" | jq
+
+# Generate creds for the workshop-app-long role using the Vault CLI
+echo -e "vault read lob_a/workshop/database/creds/workshop-app-long" >> /root/.bash_history
+vault read lob_a/workshop/database/creds/workshop-app-long
+
+# Generate creds for the workshop-app role using the Vault CLI
+echo -e "vault read lob_a/workshop/database/creds/workshop-app" >> /root/.bash_history
+{ read USER; read PASSWORD; } < <(vault read -format=json lob_a/workshop/database/creds/workshop-app | jq -r '.data | .username,.password')
+
+# Login to the MySQL database with the mysql utility
+echo -e "mysql -u ${USER} -p" >> /root/.bash_history
+mysql -u ${USER} -p${PASSWORD} -e "show databases"
+if [ $? -ne 0 ]; then
+    fail-message "mysql was unable to connect to the MySQL server."
+fi
+
+exit 0
