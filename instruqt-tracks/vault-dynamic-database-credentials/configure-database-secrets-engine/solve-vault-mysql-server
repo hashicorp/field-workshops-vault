@@ -9,6 +9,10 @@ vault write lob_a/workshop/database/config/wsmysqldatabase \
   username="hashicorp" \
   password="Password123"
 
+# Rotate the root credentials
+echo -e "vault write -force lob_a/workshop/database/rotate-root/wsmysqldatabase" >> /root/.bash_history
+vault write -force lob_a/workshop/database/rotate-root/wsmysqldatabase
+
 # Configure a role for the database secrets engine
 echo -e "vault write lob_a/workshop/database/roles/workshop-app-long   db_name=wsmysqldatabase   creation_statements=\"CREATE USER '{{name}}'@'%' IDENTIFIED BY '{{password}}';GRANT ALL ON my_app.* TO '{{name}}'@'%';\" default_ttl=\"1h\"   max_ttl=\"24h\"" >> /root/.bash_history
 vault write lob_a/workshop/database/roles/workshop-app-long \
@@ -24,6 +28,5 @@ vault write lob_a/workshop/database/roles/workshop-app \
   creation_statements="CREATE USER '{{name}}'@'%' IDENTIFIED BY '{{password}}';GRANT ALL ON my_app.* TO '{{name}}'@'%';" \
   default_ttl="3m" \
   max_ttl="6m"
-
 
 exit 0

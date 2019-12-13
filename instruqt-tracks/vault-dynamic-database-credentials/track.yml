@@ -81,11 +81,21 @@ challenges:
     ```
     This will not return anything if successful.
 
-    Note that the username and password are templated in the "connection_url" string, getting their values from the "username" and "password" fields.  We do this so that reading the path "lob_a/workshop/database/config/wsmysqldatabase" will not show them.  To test this, try running this command:
+    Note that the username and password are templated in the "connection_url" string, getting their values from the "username" and "password" fields.  We do this so that reading the path "lob_a/workshop/database/config/wsmysqldatabase" will not show them.
+
+    To test this, try running this command:
     ```
     vault read lob_a/workshop/database/config/wsmysqldatabase
     ```
     You will not see the username and password.
+
+    But we can make the configuration of the database secrets engine even more secure by rotating the root credentials (actually just the password) that we passed into the configuration.  We do this by running this command:
+    ```
+    vault write -force lob_a/workshop/database/rotate-root/wsmysqldatabase
+    ```
+    This should return "Success! Data written to: lob_a/workshop/database/rotate-root/wsmysqldatabase".
+
+    Note: You should **not** use the actual `root` user of the MySQL database (despite the reference to "root credentials"); instead, create a separate user with sufficient privileges to create users and to change its own password.
 
     Now, you should create the first of the two roles we will be using, "workshop-app-long", which generates credentials with an initial lease of 1 hour that can be renewed for up to 24 hours.
     ```
@@ -366,4 +376,4 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 600
-checksum: "3553496113712606888"
+checksum: "7813330963961767673"

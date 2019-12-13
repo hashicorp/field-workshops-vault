@@ -57,6 +57,18 @@ name: Table-of-Contents
 1. Vault Secrets Engines
 1. Vault Authentication Methods
 1. Vault Policies
+1. Dynamic Database Secrets
+1. Encryption-as-a-Service
 
 ???
 The table of contents for the workshop
+
+---
+name: instruqt-tracks
+# Lab Environment Used
+* This workshop uses [Instruqt](https://instruqt.com) for hands-on labs.
+* Instruqt labs are run in "tracks" that are divided into "challenges".
+* This workshop uses the following tracks:
+    1. https://instruqt.com/hashicorp/tracks/vault-basics
+    1. https://instruqt.com/hashicorp/tracks/vault-dynamic-database-credentials
+    1. https://instruqt.com/hashicorp/tracks/vault-encryption-as-a-service
