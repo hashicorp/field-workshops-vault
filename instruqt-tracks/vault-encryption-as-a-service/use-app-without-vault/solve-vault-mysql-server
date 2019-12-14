@@ -1,0 +1,6 @@
+#!/bin/bash -l
+
+# Add a customer record
+mysql -u root -psJ2w*8NX -e "insert into my_app.customers (birth_date, first_name, last_name, create_date, social_security_number, address, salary) values('11/01/1963', 'Elaine', 'Berlind', '12/14/2019', '111-33-4444', '1 Main Street', '100000');"
+
+exit 0

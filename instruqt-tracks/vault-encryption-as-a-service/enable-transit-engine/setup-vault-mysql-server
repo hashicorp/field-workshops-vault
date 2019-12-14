@@ -1,5 +1,27 @@
 #!/bin/bash -l
 
+# Enable the database secrets engine
+vault secrets enable -path=lob_a/workshop/database database
+
+# Create connection for Database secrets engine
+vault write lob_a/workshop/database/config/wsmysqldatabase \
+  plugin_name=mysql-database-plugin \
+  connection_url="{{username}}:{{password}}@tcp(localhost:3306)/" \
+  allowed_roles="workshop-app","workshop-app-long" \
+  username="hashicorp" \
+  password="Password123"
+
+# Rotate the root credentials
+vault write -force lob_a/workshop/database/rotate-root/wsmysqldatabase
+
+# Configure a role for the database secrets engine
+vault write lob_a/workshop/database/roles/workshop-app-long \
+  db_name=wsmysqldatabase \
+  creation_statements="CREATE USER '{{name}}'@'%' IDENTIFIED BY '{{password}}';GRANT ALL ON my_app.* TO '{{name}}'@'%';" \
+  default_ttl="1h" \
+  max_ttl="24h"
+
+# Start the python web app
 cd /home/vault/transit-app-example/backend
 python3 app.py &>/dev/null &
 cd /root
