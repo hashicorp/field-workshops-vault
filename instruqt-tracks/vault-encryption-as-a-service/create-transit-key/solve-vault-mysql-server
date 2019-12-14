@@ -1,0 +1,7 @@
+#!/bin/bash -l
+
+# Create the 'customer-key' key
+echo -e "vault write -f lob_a/workshop/transit/keys/customer-key" >> /root/.bash_history
+vault write -f lob_a/workshop/transit/keys/customer-key
+
+exit 0

@@ -1,0 +1,21 @@
+#!/bin/bash -l
+
+# Determine the PID of the web app
+echo -e "ps -ef | grep app.py" >> /root/.bash_history
+app_pid=$(ps -ef | grep app.py | sed -n 1p | awk '{print $2}')
+
+# Kill the app
+echo -e "kill -9 ${app_pid}" >> /root/.bash_history
+kill -9 ${app_pid}
+
+# Edit config.ini
+sed -i 's/Enabled = False/Enabled = True/g' /home/vault/transit-app-example/backend/config.ini
+sed -i 's/DynamicDBCreds = False/DynamicDBCreds = True/g' /home/vault/transit-app-example/backend/config.ini
+
+# Run the app again with Vault enabled
+echo -e "cd /home/vault/transit-app-example/backend" >> /root/.bash_history
+cd /home/vault/transit-app-example/backend
+echo -e "python3 app.py &" >> /root/.bash_history
+python3 app.py > app.log 2>&1 &
+
+exit 0

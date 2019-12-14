@@ -1,0 +1,8 @@
+#!/bin/bash -l
+
+set -e
+
+# Get current record count at beginning of the challenge
+mysql -u root -psJ2w*8NX -e "select count(*) from my_app.customers;" | sed -n 2p > initial_count.txt
+
+exit 0

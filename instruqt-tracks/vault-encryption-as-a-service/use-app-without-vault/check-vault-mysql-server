@@ -1,0 +1,17 @@
+#!/bin/bash -l
+
+set -e
+
+# Get the initial count recorded by setup script
+initial_count=$(cat initial_count.txt)
+
+# Get current customer count
+new_count=$(mysql -u root -psJ2w*8NX -e "select count(*) from my_app.customers;" | sed -n 2p)
+
+# Check that new_count greater than initial count
+# which shows user added a record
+if [ ! ${new_count} -gt ${initial_count} ]; then
+    fail-message "You have not added a record yet."
+fi
+
+exit 0

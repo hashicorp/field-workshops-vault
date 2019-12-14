@@ -1,0 +1,7 @@
+#!/bin/bash -l
+
+set -e
+
+grep -q "vault write -f lob_a/workshop/transit/keys/customer-key" /root/.bash_history || fail-message "You haven't created the 'customer-key' in the Transit engine yet."
+
+exit 0
