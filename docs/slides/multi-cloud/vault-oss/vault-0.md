@@ -58,7 +58,7 @@ name: Table-of-Contents
 1. Vault Authentication Methods
 1. Vault Policies
 1. Dynamic Database Secrets
-1. Encryption-as-a-Service
+1. Encryption as a Service
 
 ???
 The table of contents for the workshop
