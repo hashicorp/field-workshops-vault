@@ -13,7 +13,7 @@ tags:
 - dynamic-secrets
 owner: hashicorp
 developers: []
-private: true
+private: false
 published: true
 challenges:
 - slug: enable-aws-secrets-engine
@@ -304,4 +304,4 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 900
-checksum: "1693138005318152251"
+checksum: "4131391399133340178"

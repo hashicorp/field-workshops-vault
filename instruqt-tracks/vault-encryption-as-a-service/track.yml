@@ -68,7 +68,7 @@ challenges:
     hostname: vault-mysql-server
     port: 5000
   difficulty: basic
-  timelimit: 300
+  timelimit: 600
 - slug: create-transit-key
   id: gyvjytscs9ko
   type: challenge
@@ -104,7 +104,7 @@ challenges:
     hostname: vault-mysql-server
     port: 5000
   difficulty: basic
-  timelimit: 300
+  timelimit: 600
 - slug: use-app-without-vault
   id: pcxjw5h70qx9
   type: challenge
@@ -143,7 +143,7 @@ challenges:
     hostname: vault-mysql-server
     port: 5000
   difficulty: basic
-  timelimit: 600
+  timelimit: 1200
 - slug: use-app-with-vault
   id: x1laz8ef2yky
   type: challenge
@@ -214,5 +214,5 @@ challenges:
     hostname: vault-mysql-server
     path: /home/vault/transit-app-example/backend/config.ini
   difficulty: basic
-  timelimit: 600
-checksum: "5372046106375980994"
+  timelimit: 1200
+checksum: "12707258104662727283"
