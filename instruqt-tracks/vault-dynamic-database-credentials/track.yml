@@ -60,7 +60,7 @@ challenges:
     hostname: vault-mysql-server
     port: 8200
   difficulty: basic
-  timelimit: 300
+  timelimit: 600
 - slug: configure-database-secrets-engine
   id: dmxb78fcbthu
   type: challenge
@@ -144,7 +144,7 @@ challenges:
     hostname: vault-mysql-server
     port: 8200
   difficulty: basic
-  timelimit: 600
+  timelimit: 1200
 - slug: generate-database-creds
   id: zhbyasjsfozu
   type: challenge
@@ -280,7 +280,7 @@ challenges:
     hostname: vault-mysql-server
     port: 8200
   difficulty: basic
-  timelimit: 600
+  timelimit: 1200
 - slug: renew-revoke-database-creds
   id: 3pq7sccufa8e
   type: challenge
@@ -375,5 +375,5 @@ challenges:
     hostname: vault-mysql-server
     port: 8200
   difficulty: basic
-  timelimit: 600
-checksum: "6407644612869686513"
+  timelimit: 1200
+checksum: "8153307089821440912"

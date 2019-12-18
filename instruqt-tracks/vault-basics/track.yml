@@ -2,15 +2,13 @@ slug: vault-basics
 id: likpqjspv5pp
 type: track
 title: Vault Basics
-teaser: Learn how to setup and run some basic Vault CLI commands.
+teaser: Learn how to setup and run a Vault server and manage its secrets.
 description: |-
   Vault is a tool for securely accessing secrets. A secret is anything that you want to tightly control access to, such as API keys, passwords, or certificates. Vault provides a unified interface to any secret, while providing tight access control and recording a detailed audit log.
 
   Vault tightly controls access to secrets by authenticating against trusted sources of identity such as Active Directory, LDAP, Kubernetes, CloudFoundry, and cloud platforms. Vault enables fine grained authorization of which users and applications are permitted access to secrets.
 
-  We invite you to join the ranks of the Vault community today!
-
-  This track will introduce you to Vault open source, starting with the Vault CLI and running a Vault dev server.
+  This track will introduce you to the open source version of Vault, starting with the Vault CLI and running a Vault dev server and moving on to running a Vault production server, enabling the KV secrets engine and Userpass auth method, and using Vault policies to restrict which secrets different users can access.
 icon: https://storage.googleapis.com/instruqt-frontend/assets/hashicorp/tracks/vault.png
 tags:
 - vault
@@ -18,7 +16,7 @@ tags:
 owner: hashicorp
 developers:
 - roger@hashicorp.com
-private: true
+private: false
 published: true
 challenges:
 - slug: vault-cli
@@ -385,4 +383,4 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 1200
-checksum: "1358549072876158227"
+checksum: "12000820413371956031"
