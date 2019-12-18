@@ -21,7 +21,7 @@ developers:
 - neil@hashicorp.com
 private: true
 published: true
-maintenance: true
+maintenance: false
 challenges:
 - slug: enable-aws-auth-method
   id: ygi2fqclejkf
