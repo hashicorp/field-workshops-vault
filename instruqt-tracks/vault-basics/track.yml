@@ -16,7 +16,7 @@ tags:
 owner: hashicorp
 developers:
 - roger@hashicorp.com
-private: true
+private: false
 published: true
 challenges:
 - slug: vault-cli
@@ -383,4 +383,4 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 1200
-checksum: "2387041406697757736"
+checksum: "12000820413371956031"

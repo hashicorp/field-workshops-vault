@@ -18,7 +18,7 @@ tags:
 owner: hashicorp
 developers:
 - roger@hashicorp.com
-private: true
+private: false
 published: true
 challenges:
 - slug: enable-transit-engine
@@ -215,4 +215,4 @@ challenges:
     path: /home/vault/transit-app-example/backend/config.ini
   difficulty: basic
   timelimit: 600
-checksum: "16944084965162543489"
+checksum: "5372046106375980994"
