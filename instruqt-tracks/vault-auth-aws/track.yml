@@ -31,34 +31,33 @@ challenges:
     You have been automatically logged into Vault using the
     [root token](https://www.vaultproject.io/docs/concepts/tokens.html#root-tokens).
 
-    All auth methods must be enabled before they can be used. Take a look at what
-    auth methods are currently enabled.
-    ```
-    vault auth list
-    ```
-
-    Note that there is only one auth method enabled, `token`. You should enable
-    the `aws` auth method.
-
-    ```
-    vault auth enable aws
-    ```
-
-    At any time during this track, you can view your root token.
+    At any time during this track, you can view your root token at `/root/token`.
 
     ```
     cat /root/token
     ```
 
-    This token will be valid for the duration of the track. Typically, you'll set
-    that token value as your `VAULT_TOKEN` environment variable.
-
-    ```
-    export VAULT_TOKEN=$(cat /root/token)
-    ```
-
     If you open up the Vault UI tab and use this token, you can log into the UI and
     take a look around.
+
+    ---
+
+    All auth methods in Vault must be enabled before they can be used. Take a
+    look at what auth methods are currently enabled.
+
+    ```
+    vault auth list
+    ```
+
+    Note that there is only one auth method enabled (`token`). Enable the `aws`
+    auth method.
+
+    ```
+    vault auth enable aws
+    ```
+
+    If you list the auth methods again, you should now be able to see both `aws`
+    and `token`.
   notes:
   - type: text
     contents: |-
@@ -91,7 +90,7 @@ challenges:
   assignment: |-
     After enabling the AWS auth method, you must configure it to authenticate and
     communicate with AWS. You have been provided an AWS account and credentials with the
-    [recommended policies](https://www.vaultproject.io/docs/auth/aws.html#recommended-vault-iam-policy)
+    [HashiCorp recommended IAM policy](https://www.vaultproject.io/docs/auth/aws.html#recommended-vault-iam-policy)
     attached, so no need to use your own.
 
     The provided credentials can be found in the `AWS_ACCESS_KEY_ID` and
@@ -111,9 +110,9 @@ challenges:
       secret_key=$AWS_SECRET_ACCESS_KEY
     ```
 
-    The `iam` auth method allows you to specify bound IAM principal ARNs.
+    The `iam` auth method allows you to specify a list of "bound IAM principal ARNs".
     Clients authenticating to Vault must have an ARN that matches one of the
-    ARNs bound to the role they are attempting to login to. The bound ARN
+    ARNs bound to the IAM role they are attempting to login to. The bound ARN
     allows specifying a wildcard at the end of the bound ARN.
 
     For example, if the bound ARN were `arn:aws:iam::123456789012:*` it would allow
@@ -123,14 +122,12 @@ challenges:
     give Vault `iam:GetUser` and `iam:GetRole` permissions to properly resolve the
     full user path.
 
-    For the sake of simplicity, you should configure the `bound_iam_pricipal_arn`
-    to be a wildcard for all principals in this AWS account.
 
-    You're ready to communicate with your AWS account. Now you need to
-    configure the role that you'll log in with later. Be sure to name it
-    `my-role-iam`.
-
-    TODO: ADD A POLICY?
+    Now you're ready to configure Vault to communicate with your account, and you
+    do that by configuring the role that you'll eventually log in with later.
+    Be sure to name the role `my-role-iam`, and for the sake of simplicity, you
+    should configure the `bound_iam_pricipal_arn` to be a wildcard for all principals
+    in your provided AWS account.
 
     ```
     vault write auth/aws/role/my-role-iam \
@@ -149,7 +146,7 @@ challenges:
       iam_server_id_header_value=instruqt.vault.example.com
     ```
 
-    You have now successfully configured Vault for AWS IAM authentication.
+    Vault is now successfully configured for AWS IAM authentication.
   notes:
   - type: text
     contents: |-
@@ -229,8 +226,8 @@ challenges:
     vault auth list
     ```
 
-    Now that you are no longer using the `root` token, you cannot list all the auth
-    methods in Vault.
+    Now that you are no longer using the root token, you cannot list the auth
+    methods in Vault, as you no longer have the right permissions.
   notes:
   - type: text
     contents: |-
@@ -309,4 +306,4 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 300
-checksum: "18112090966675137514"
+checksum: "1724500314825683119"
