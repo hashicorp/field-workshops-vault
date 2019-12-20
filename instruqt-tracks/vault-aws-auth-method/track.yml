@@ -18,8 +18,8 @@ tags:
 - auth-method
 owner: hashicorp
 developers:
-- neil@hashicorp.com
-private: true
+- null
+private: false
 published: true
 challenges:
 - slug: enable-aws-auth-method
@@ -319,4 +319,4 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 300
-checksum: "584904532234416884"
+checksum: "14044483412731688359"
