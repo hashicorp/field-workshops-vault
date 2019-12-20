@@ -210,7 +210,7 @@ challenges:
     explicitly pass any credentials to the login command.
 
     That is because the Vault client will look for credentials in environment
-    variables then in `~/.aws/credentials`, IAM instance profile, or ECS task role,
+    variables, then in `~/.aws/credentials`, IAM instance profile, or ECS task role,
     in that order. In this case, you didn't have to enter anything because
     `$AWS_ACCESS_KEY_ID` and `$AWS_SECRET_ACCESS_KEY` are already set in the
     environment.
