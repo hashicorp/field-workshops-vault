@@ -1,0 +1,322 @@
+slug: vault-aws-auth-method
+id: fe9wq4sopgrc
+type: track
+title: AWS Auth Method for Vault
+teaser: Authenticate to Vault using the AWS Auth Method for IAM.
+description: |-
+  The `aws` auth method provides an automated mechanism to retrieve a Vault token
+  for IAM principals and AWS EC2 instances. Securely provide your AWS-based
+  applications password-less access to secrets stored in HashiCorp Vault.
+
+  In this track you'll use the built in AWS IAM infrastructure to provide
+  access to the Vault API. This makes it easy to provide secure secrets
+  management to your AWS resources with minimal setup and hassle.
+icon: https://storage.googleapis.com/instruqt-frontend/assets/hashicorp/tracks/vault.png
+tags:
+- vault
+- aws
+- auth-method
+owner: hashicorp
+developers:
+- null
+private: false
+published: true
+challenges:
+- slug: enable-aws-auth-method
+  id: ygi2fqclejkf
+  type: challenge
+  title: Enable the AWS Auth Method
+  teaser: Prepare Vault to accept AWS IAM for authentication.
+  assignment: |-
+    You have been automatically logged into Vault using the
+    [root token](https://www.vaultproject.io/docs/concepts/tokens.html#root-tokens).
+
+    At any time during this track, you can view your root token at `/root/token`.
+
+    ```
+    cat /root/token
+    ```
+
+    If you open up the Vault UI tab and use this token, you can log into the UI and
+    take a look around.
+
+    This token will be valid for the duration of the track. Typically, you'll
+    `export` that token value as your `VAULT_TOKEN` environment variable, however,
+    you should not do that for this track.
+
+    ---
+
+    All auth methods in Vault must be enabled before they can be used. Take a
+    look at what auth methods are currently enabled.
+
+    ```
+    vault auth list
+    ```
+
+    Note that there is only one auth method enabled (`token`). Enable the `aws`
+    auth method.
+
+    ```
+    vault auth enable aws
+    ```
+
+    If you list the auth methods again, you should now be able to see both `aws`
+    and `token`.
+  notes:
+  - type: text
+    contents: |-
+      Auth methods are the components in Vault that perform authentication
+      and are responsible for assigning identity and a set of policies to a user.
+
+      There are two authentication methods present for the
+      [`aws` auth method](https://www.vaultproject.io/docs/auth/aws.html) in Vault:
+      `iam` and `ec2`.
+
+      This challenge will focus on the `iam` authentication type. With the `iam` method,
+      a special AWS request signed with AWS IAM credentials is used for authentication
+      to Vault.
+  tabs:
+  - title: Enable the AWS Auth Method
+    type: terminal
+    hostname: vault-server
+  - title: Vault UI
+    type: service
+    hostname: vault-server
+    port: 8200
+  difficulty: basic
+  timelimit: 300
+- slug: configure-aws-auth-method
+  id: 4fnz9dgdhnfd
+  type: challenge
+  title: Configure the AWS IAM Auth Method
+  teaser: Configures the credentials required to perform successful API calls to AWS
+    from Vault.
+  assignment: |-
+    After enabling the AWS auth method, you must configure it to authenticate and
+    communicate with AWS. You have been provided an AWS account and credentials with the
+    [HashiCorp recommended IAM policy](https://www.vaultproject.io/docs/auth/aws.html#recommended-vault-iam-policy)
+    attached, so no need to use your own.
+
+    The provided credentials can be found in the `AWS_ACCESS_KEY_ID` and
+    `AWS_SECRET_ACCESS_KEY` environment variables. Feel free to take a peek at them.
+
+    ```
+    echo $AWS_ACCESS_KEY_ID
+    echo $AWS_SECRET_ACCESS_KEY
+    ```
+
+    Configure the AWS auth method to use the credentials that have been
+    provided to you.
+
+    ```
+    vault write auth/aws/config/client \
+      access_key=$AWS_ACCESS_KEY_ID \
+      secret_key=$AWS_SECRET_ACCESS_KEY
+    ```
+
+    The `iam` auth method allows you to specify a list of "bound IAM principal ARNs".
+    Clients authenticating to Vault must have an ARN that matches one of the
+    ARNs bound to the IAM role they are attempting to login to. The bound ARN
+    allows specifying a wildcard at the end of the bound ARN.
+
+    For example, if the bound ARN were `arn:aws:iam::123456789012:*` it would allow
+    any principal in the AWS account `123456789012` to login to it. Similarly,
+    if it were `arn:aws:iam::123456789012:role/*` it would allow any IAM role
+    in the AWS account to login to it. If you wish to specify a wildcard, you must
+    give Vault `iam:GetUser` and `iam:GetRole` permissions to properly resolve the
+    full user path.
+
+
+    Now you're ready to configure Vault to communicate with your account, and you
+    do that by configuring the role that you'll eventually log in with later.
+    Be sure to name the role `my-role-iam`, and for the sake of simplicity, you
+    should configure the `bound_iam_pricipal_arn` to be a wildcard for all principals
+    in your provided AWS account.
+
+    ```
+    vault write auth/aws/role/my-role-iam \
+      auth_type=iam \
+      bound_iam_principal_arn=arn:aws:iam::$AWS_ACCOUNT_ID:* \
+      policies=developer \
+      token_ttl=30m \
+      token_max_ttl=30m
+    ```
+
+    You should also configure the `iam_server_id_header_value`, to help prevent
+    replay attacks.
+
+    ```
+    vault write auth/aws/config/client \
+      iam_server_id_header_value=instruqt.vault.example.com
+    ```
+
+    Vault is now successfully configured for AWS IAM authentication.
+  notes:
+  - type: text
+    contents: |-
+      When enabled, auth methods are similar to secrets engines. They are
+      mounted within the Vault mount table and can be accessed and configured
+      using the standard read/write API. All auth methods are mounted underneath
+      the `auth/` prefix.
+  - type: text
+    contents: |-
+      The [AWS STS API](https://docs.aws.amazon.com/STS/latest/APIReference/Welcome.html)
+      includes a method, [`sts:GetCallerIdentity`](https://docs.aws.amazon.com/STS/latest/APIReference/API_GetCallerIdentity.html),
+      which allows you to validate the identity of a client. The client signs a
+      `GetCallerIdentity` query using the AWS Signature v4 algorithm and submits
+      4 pieces of information to the Vault server to recreate a valid signed
+      request (the request URL, the request body, the request headers, and the
+      request method). The AWS signature is computed over those fields. The Vault
+      server then reconstructs the query and forwards it on to the AWS STS service
+      and validates the result back.
+  - type: text
+    contents: |-
+      Each signed AWS request includes the current timestamp to mitigate the risk
+      of replay attacks. In addition, Vault allows you to require an additional
+      header, `X-Vault-AWS-IAM-Server-ID`, to be present to mitigate against
+      different types of replay attacks (such as a signed `GetCallerIdentity`
+      request stolen from a dev Vault instance and used to authenticate to a prod
+      Vault instance).
+
+      Vault further requires that this header be one of the headers included in
+      the AWS signature and relies upon AWS to authenticate that signature.
+  tabs:
+  - title: Configure the AWS Auth Method
+    type: terminal
+    hostname: vault-server
+  - title: Vault UI
+    type: service
+    hostname: vault-server
+    port: 8200
+  difficulty: basic
+  timelimit: 300
+- slug: login-aws-auth-method
+  id: cgaexaj1xjpe
+  type: challenge
+  title: Log In Using the AWS IAM Auth Method
+  teaser: Generate a signed AWS API request that will validate against AWS and log
+    you into Vault.
+  assignment: |-
+    You are ready to perform the login operation.
+
+    ```
+    vault login \
+      -method=aws \
+      header_value=instruqt.vault.example.com \
+      role=my-role-iam
+    ```
+
+    Note that above we specify `header_value` and `role`, but we did not
+    explicitly pass any credentials to the login command.
+
+    That is because the Vault client will look for credentials in environment
+    variables then `~/.aws/credentials`, IAM instance profile, or ECS task role,
+    in that order. In this case, you didn't have to enter anything because
+    `$AWS_ACCESS_KEY_ID` and `$AWS_SECRET_ACCESS_KEY` are already set in the
+    environment.
+
+    You can always specify the credentials `aws_access_key_id`,
+    `aws_secret_access_key` and `aws_security_token` as arguments of the `login`
+    command, but this is not recommended.
+
+    Take the `token` value that you received in the response from Vault and
+    paste it into the text field in the Vault UI tab, using the Token method. You
+    should be able to log into the Vault UI.
+
+    Move back to the CLI, and confirm that you are no longer logged in with the root
+    token by running the following command.
+
+    ```
+    vault auth list
+    ```
+
+    Now that you are no longer using the root token, you cannot list the auth
+    methods in Vault, as you no longer have the right permissions.
+  notes:
+  - type: text
+    contents: |-
+      The `iam` auth method authenticates AWS IAM principals. This can include IAM
+      users, IAM roles assumed from other accounts, AWS Lambdas that are
+      launched in an IAM role, or even EC2 instances that are launched in an
+      IAM instance profile.
+
+      The `iam` auth method authenticates by having clients provide a specially
+      signed AWS API request which the method then passes on to AWS to validate
+      the signature and tell Vault who created it. Upon successful authentication,
+      a Vault token will be returned to you.
+  - type: text
+    contents: |-
+      The actual secret (i.e., the AWS secret access key) is never transmitted
+      over the wire, and the AWS signature algorithm automatically expires
+      requests after 15 minutes, providing simple and robust protection against
+      replay attacks.
+  tabs:
+  - title: Log In Using the AWS Auth Method
+    type: terminal
+    hostname: vault-server
+  - title: Vault UI
+    type: service
+    hostname: vault-server
+    port: 8200
+  difficulty: basic
+  timelimit: 300
+- slug: logout-aws-auth-method
+  id: 6xmfvpxd2gmd
+  type: challenge
+  title: Log Out of Vault
+  teaser: Remove your cached token and demonstrate loss of access to Vault.
+  assignment: |-
+    Now you are ready to perform the logout operation, by removing your
+    cached Vault token.
+
+    ```
+    rm ~/.vault-token
+    ```
+
+    With your cached Vault token removed, you will no longer be authenticated to Vault.
+    Confirm this by trying to list all the auth methods one more time.
+
+    ```
+    vault auth list
+    ```
+
+    You should see a missing client token error.
+
+    *You are done!*
+
+    If you would like to log back into Vault and keep playing around, re-export
+    the root token.
+
+    ```
+    export VAULT_TOKEN=$(cat /root/token)
+
+    vault auth list
+    ```
+
+    The auth methods Vault provides let you choose the most appropriate authentication
+    mechanism for your organization. In this track, you learned about the AWS
+    authentication method. For more options and details, visit the
+    [AWS auth method docs](https://www.vaultproject.io/docs/auth/aws.html).
+  notes:
+  - type: text
+    contents: |-
+      The `vault` CLI also uses a "token helper" to cache the token after
+      authentication.
+
+      This is conceptually similar to how a website securely stores your session
+      information as a cookie in the browser. Token helpers are customizable,
+      and you can even build your own.
+
+      The default token helper stores the token in `~/.vault-token`. You can
+      delete this file at any time to "logout" of Vault.
+  tabs:
+  - title: Log In Using the AWS Auth Method
+    type: terminal
+    hostname: vault-server
+  - title: Vault UI
+    type: service
+    hostname: vault-server
+    port: 8200
+  difficulty: basic
+  timelimit: 300
+checksum: "14044483412731688359"

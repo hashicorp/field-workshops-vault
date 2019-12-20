@@ -1,0 +1,69 @@
+#!/bin/sh -l
+
+# Install curl
+apk add curl
+
+# Install jq
+apk add jq
+
+# Install groff
+apk add groff
+
+# Install pip
+apk add py-pip
+
+
+# Install the AWS ClI
+pip install awscli
+
+# Write vault-config.hcl
+cat <<-EOF > /vault/config/vault-config.hcl
+listener "tcp" {
+ address = "0.0.0.0:8200"
+ tls_disable = 1
+}
+storage "file" {
+  path = "/vault/file"
+}
+disable_mlock = true
+api_addr = "http://localhost:8200"
+ui=true
+EOF
+
+# Run Vault server
+vault server -config=/vault/config/vault-config.hcl -log-level=debug > /vault/logs/vault.log 2>&1 &
+
+# Sleep 5 seconds
+sleep 5
+
+# Initialize Vault server
+vault operator init -key-shares=1 -key-threshold=1 > init.log
+
+# Extract root token and unseal key from init.log
+token=$(sed -n 3p init.log | cut -d':' -f2 | cut -d' ' -f2)
+unseal_key=$(sed -n 1p init.log | cut -d':' -f2 | cut -d' ' -f2)
+
+# Write token to /root/token
+echo $token > /root/token
+
+# Write unseal key to /root/unseal_key
+echo $unseal_key > /root/unseal_key
+
+
+# Unseal Vault server
+vault operator unseal $unseal_key
+
+vault login $token
+
+# echo $INSTRUQT_AWS_ACCOUNTS
+export AWS_ACCESS_KEY_ID=$INSTRUQT_AWS_ACCOUNT_VAULT_DYNAMIC_SECRETS_AWS_AWS_ACCESS_KEY_ID
+export AWS_SECRET_ACCESS_KEY=$INSTRUQT_AWS_ACCOUNT_VAULT_DYNAMIC_SECRETS_AWS_AWS_SECRET_ACCESS_KEY
+export AWS_ACCOUNT_NAME=$INSTRUQT_AWS_ACCOUNT_VAULT_DYNAMIC_SECRETS_AWS_ACCOUNT_NAME
+export AWS_ACCOUNT_ID=$INSTRUQT_AWS_ACCOUNT_VAULT_DYNAMIC_SECRETS_AWS_ACCOUNT_ID
+export AWS_ACCOUNT_USERNAME=$INSTRUQT_AWS_ACCOUNT_VAULT_DYNAMIC_SECRETS_AWS_USERNAME
+export AWS_ACCOUNT_PASSWORD=$INSTRUQT_AWS_ACCOUNT_VAULT_DYNAMIC_SECRETS_AWS_PASSWORD
+
+# Export VAULT_TOKEN
+export VAULT_TOKEN=$(cat /root/token)
+
+exit 0

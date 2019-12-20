@@ -1,0 +1,10 @@
+#!/bin/sh -l
+
+set -e
+
+expected_type_at_aws_path="aws"
+type_at_aws_path=$(vault auth list -format=json | jq -r '.["aws/"]["type"]')
+
+if [ ! "$expected_type_at_aws_path" = "$type_at_aws_path" ]; then
+    fail-message "You haven't enabled the AWS auth method yet."
+fi

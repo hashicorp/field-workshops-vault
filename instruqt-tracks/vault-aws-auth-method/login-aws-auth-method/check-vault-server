@@ -1,0 +1,17 @@
+#!/bin/sh -l
+
+CACHED_TOKEN=$(cat ~/.vault-token)
+ROOT_TOKEN=$(cat /root/token)
+
+# This will override the cached token
+vault login $ROOT_TOKEN
+
+num_aws_login_leases=$(vault list -format=json sys/leases/lookup/auth/aws/login | jq ". |  length")
+
+if [ $num_aws_login_leases -lt 1 ]; then
+    fail-message "You have logged in with the AWS method $num_aws_login_leases times. You need to log in at least 1 time."
+    exit 1
+fi
+
+# Log back in with the cached token so it goes back into the cache
+vault login $CACHED_TOKEN

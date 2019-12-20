@@ -1,0 +1,14 @@
+#!/bin/sh -l
+
+ROOT_TOKEN=$(cat /root/token)
+CACHED_TOKEN=$(cat ~/.vault-token)
+CACHED_TOKEN_PATH=~/.vault-token
+vault login $CACHED_TOKEN
+
+if [ "$ROOT_TOKEN" = "$CACHED_TOKEN" ]; then
+    fail-message "Your cached token is still the root token. Log in with the AWS auth method to override this token."
+fi
+
+if [ -f "$CACHED_TOKEN_PATH" ]; then
+    fail-message "You did not remove the cached Vault token. Remove the token in order to proceed."
+fi

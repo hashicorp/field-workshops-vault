@@ -1,0 +1,6 @@
+#!/bin/sh -l
+
+# Remove the cached token from the Vault CLI
+rm ~/.vault-token
+
+exit 0
