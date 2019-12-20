@@ -18,7 +18,7 @@ tags:
 - auth-method
 owner: hashicorp
 developers:
-- null
+- neil@hashicorp.com
 private: false
 published: true
 challenges:
@@ -319,4 +319,4 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 300
-checksum: "14044483412731688359"
+checksum: "11442580927530019854"
