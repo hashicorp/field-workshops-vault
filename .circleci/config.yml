@@ -109,7 +109,7 @@ jobs:
             echo "Running instruqt track test..."
             cd /root/project/instruqt-tracks/vault-dynamic-secrets-aws
             instruqt track test --skip-fail-check
-  instruqt-test-vault-auth-aws:
+  instruqt-test-vault-aws-auth-method:
     docker:
       - image: ubuntu:latest
     steps:
@@ -134,7 +134,7 @@ jobs:
               echo "Instruqt Version $VERSION is installed."
             fi
             echo "Running instruqt track test..."
-            cd /root/project/instruqt-tracks/vault-auth-aws
+            cd /root/project/instruqt-tracks/vault-aws-auth-method
             instruqt track test --skip-fail-check
   instruqt-test-vault-encryption-as-a-service:
     docker:
@@ -177,7 +177,7 @@ workflows:
       - instruqt-test-vault-dynamic-secrets-aws:
           requires:
             - instruqt-validate
-      - instruqt-test-vault-auth-aws:
+      - instruqt-test-vault-aws-auth-method:
           requires:
             - instruqt-validate
       - instruqt-test-vault-encryption-as-a-service:
