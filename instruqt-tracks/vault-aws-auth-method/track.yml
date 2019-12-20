@@ -69,7 +69,7 @@ challenges:
       and are responsible for assigning identity and a set of policies to a user.
 
       There are two authentication methods present for the
-      [`aws` auth method](https://www.vaultproject.io/docs/auth/aws.html) in Vault:
+      [AWS auth method](https://www.vaultproject.io/docs/auth/aws.html) in Vault:
       `iam` and `ec2`.
 
       This challenge will focus on the `iam` authentication type. With the `iam` method,
@@ -210,7 +210,7 @@ challenges:
     explicitly pass any credentials to the login command.
 
     That is because the Vault client will look for credentials in environment
-    variables then `~/.aws/credentials`, IAM instance profile, or ECS task role,
+    variables then in `~/.aws/credentials`, IAM instance profile, or ECS task role,
     in that order. In this case, you didn't have to enter anything because
     `$AWS_ACCESS_KEY_ID` and `$AWS_SECRET_ACCESS_KEY` are already set in the
     environment.
