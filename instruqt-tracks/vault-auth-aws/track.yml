@@ -40,6 +40,10 @@ challenges:
     If you open up the Vault UI tab and use this token, you can log into the UI and
     take a look around.
 
+    This token will be valid for the duration of the track. Typically, you'll
+    `export` that token value as your `VAULT_TOKEN` environment variable, however,
+    you should not do that for this track.
+
     ---
 
     All auth methods in Vault must be enabled before they can be used. Take a
@@ -205,7 +209,7 @@ challenges:
     Note that above we specify `header_value` and `role`, but we did not
     explicitly pass any credentials to the login command.
 
-    That is because the Vault client will look for credentials environment
+    That is because the Vault client will look for credentials in environment
     variables then `~/.aws/credentials`, IAM instance profile, or ECS task role,
     in that order. In this case, you didn't have to enter anything because
     `$AWS_ACCESS_KEY_ID` and `$AWS_SECRET_ACCESS_KEY` are already set in the
@@ -279,6 +283,15 @@ challenges:
     You should see a missing client token error.
 
     *You are done!*
+
+    If you would like to log back into Vault and keep playing around, re-export
+    the root token.
+
+    ```
+    export VAULT_TOKEN=$(cat /root/token)
+
+    vault auth list
+    ```
 
     The auth methods Vault provides let you choose the most appropriate authentication
     mechanism for your organization. In this track, you learned about the AWS
