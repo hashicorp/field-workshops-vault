@@ -78,7 +78,7 @@ name: getting-started-with-instruqt
 * [Instruqt](https://instruqt.com/) is the platform used for HashiCorp workshops.
 * Instruqt labs are run in "tracks" that are divided into "challenges".
 * If you've never used Instruqt before, start with this [tutorial](https://instruqt.com/demo-org/tracks/getting-started-with-instruqt).
-* Otherise, you can skip to the next slide.
+* Otherwise, you can skip to the next slide.
 
 ???
 * We'll be using the Instruqt platform for labs in this workshop.
