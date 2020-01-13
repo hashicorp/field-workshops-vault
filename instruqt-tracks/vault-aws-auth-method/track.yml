@@ -126,7 +126,6 @@ challenges:
     give Vault `iam:GetUser` and `iam:GetRole` permissions to properly resolve the
     full user path.
 
-
     Now you're ready to configure Vault to communicate with your account, and you
     do that by configuring the role that you'll eventually log in with later.
     Be sure to name the role `my-role-iam`, and for the sake of simplicity, you
