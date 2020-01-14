@@ -4,7 +4,7 @@ background-image: url(https://hashicorp.github.io/field-workshops-assets/assets/
 count: false
 
 # Vault OSS AWS Workshop
-## Modern Security with Vault for any Cloud
+## Modern Security with Vault for AWS
 
 ![:scale 15%](https://hashicorp.github.io/field-workshops-assets/assets/logos/logo_vault.png)
 
@@ -17,15 +17,17 @@ It is focused on AWS.
 layout: true
 
 .footer[
-- Copyright © 2019 HashiCorp
+- Copyright © 2020 HashiCorp
 - ![:scale 100%](https://hashicorp.github.io/field-workshops-assets/assets/logos/HashiCorp_Icon_Black.svg)
 ]
 
 ---
-name: vault-slides-link
-# The Slide Show
-## You can follow along on your own computer at this link:
+name: vault-aws-slide-deck
+# The Slide Deck
+<br>
+### Follow along on your own computer at this link:
+
 ### https://hashicorp.github.io/field-workshops-vault/slides/aws/vault-oss/index.html
 
 ???
-Give students a link to use the slides on their own computer.
+* You can follow the slides with a browser yourself.

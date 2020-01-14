@@ -1,137 +1,111 @@
----
-name: vault-aws-basics-first
+name: vault-title-slide
+class: title, shelf, no-footer, fullbleed
+background-image: url(https://hashicorp.github.io/field-workshops-assets/assets/bkgs/HashiCorp-Title-bkg.jpeg)
+count: false
 
-# Before You Begin
+# Vault's AWS Auth Method
 
-<br>
-<br>
-If you have not completed the [Vault OSS Basics Workshop](https://hashicorp.github.io/field-workshops-vault/slides/multi-cloud/vault-oss/#1) yet, please begin there and come back here when you are done.
+![:scale 15%](https://hashicorp.github.io/field-workshops-assets/assets/logos/logo_vault.png)
 
-This workshop is specific to AWS and will not cover the basics that are covered in that workshop.
-
----
-name: vault-aws-table-of-contents
-
-# Table of Contents
-
-- Authenticating to Vault using AWS to Confirm Identity
-    - 🔬 Lab - AWS Auth Method for Vault
-
-https://hashicorp.github.io/field-workshops-vault/slides/aws/vault-oss/aws-auth-method.html
+???
+* Let's learn about Vault's AWS Auth Method
 
 ---
-name: vault-aws-instruqt-tracks
-# Lab Environment Used
-* This workshop uses [Instruqt](https://instruqt.com) for hands-on labs.
-* Instruqt labs are run in "tracks" that are divided into "challenges".
-* This workshop uses the following tracks:
-    1. https://instruqt.com/hashicorp/tracks/vault-basics
-    1. https://instruqt.com/hashicorp/tracks/vault-aws-auth-method
+layout: true
+
+.footer[
+- Copyright © 2020 HashiCorp
+- ![:scale 100%](https://hashicorp.github.io/field-workshops-assets/assets/logos/HashiCorp_Icon_Black.svg)
+]
 
 ---
 name: vault-aws-auth-method-1
-# Authenticating to Vault using AWS to Confirm Identity
+# Authenticating to Vault using AWS
+* Auth methods are the components in Vault that perform authentication.
+* They are responsible for assigning identity and policies to users, programs, or machines.
+* Vault's [AWS Auth Method](https://www.vaultproject.io/docs/auth/aws.html) provides an automated mechanism to retrieve a Vault token for IAM principals and AWS EC2 instances.
+* This method securely provides your AWS-based
+applications access to secrets stored in HashiCorp Vault without passwords.
+* It includes two methods: `iam` and `ec2`.
 
-Auth methods are the components in Vault that perform authentication
-and are responsible for assigning identity and a set of policies to a user.
-
-The `aws` auth method provides an automated mechanism to retrieve a Vault token
-for IAM principals and AWS EC2 instances. Securely provide your AWS-based
-applications password-less access to secrets stored in HashiCorp Vault.
-
----
-name: vault-aws-auth-method-2
-# Authenticating to Vault using AWS to Confirm Identity
-
-<br>
-<br>
-There are two authentication methods present for the
-[`aws` auth method](https://www.vaultproject.io/docs/auth/aws.html) in Vault:
-`iam` and `ec2`.
+???
+* What are Vault auth methods?
+* What the AWS auth method does
 
 ---
 name: vault-aws-auth-methods-iam-1
-# Vault AWS Auth Method, IAM
+# The IAM Method (1)
 
-<br>
-With the `iam` method, a special AWS request signed with AWS IAM credentials is
-used for authentication. The IAM credentials are automatically supplied to AWS
-instances in IAM instance profiles, Lambda functions, and others, and it is
-this information already provided by AWS which Vault can use to authenticate
-clients.
+* With the `iam` method, a special AWS request signed with AWS IAM credentials is used for authentication.
+* The IAM credentials are automatically supplied to AWS
+instances in IAM instance profiles, Lambda functions, and others.
+* Vault can use this information provided by AWS to authenticate clients.
+* The `iam` auth method authenticates AWS IAM principals including IAM users, roles assumed from other accounts, Lambdas, and EC2 instances launched in an IAM profile.
 
-The `iam` auth method authenticates AWS IAM principals (including IAM users /
-roles assumed from other accounts, Lambdas, or EC2 instances launched in an IAM
-profile.
+???
+* Let's explore the `iam` method.
 
 ---
 name: vault-aws-auth-methods-iam-2
-# Vault AWS Auth Method, IAM
+# The IAM Method (2)
+* The `iam` auth method authenticates by having clients provide a specially signed AWS API request.
+* The method then passes that to AWS to validate the signature and tell Vault who created it.
+* The actual AWS secret access key is never transmitted over the wire.
+* The AWS signature algorithm automatically expires requests after 15 minutes, providing simple and robust protection against replay attacks.
 
-<br>
-The `iam` auth method authenticates by having clients provide a specially signed
-AWS API request which the method then passes on to AWS to validate the signature
-and tell Vault who created it.
-
-The actual secret (i.e., the AWS secret access key) is never transmitted over the wire,
-and the AWS signature algorithm automatically expires requests after 15 minutes,
-providing simple and robust protection against replay attacks.
+???
+* How does the `iam` method work?
 
 ---
 name: vault-aws-auth-methods-ec2-1
-# Vault AWS Auth Method, EC2
+# The EC2 Method (1)
+* With the `ec2` method, AWS is treated as a Trusted Third Party.
+* Cryptographically signed dynamic metadata information that uniquely represents each EC2 instance is used for authentication
+* This metadata information is automatically supplied by AWS to all EC2 instances.
 
-<br>
-With the `ec2` method, AWS is treated as a Trusted Third Party and cryptographically
-signed dynamic metadata information that uniquely represents each EC2 instance
-is used for authentication. This metadata information is automatically supplied
-by AWS to all EC2 instances.
+#### .center[ The `ec2` auth method only authenticates AWS EC2 instances.]
 
-The `ec2` auth method authenticates only AWS EC2 instances and is specialized to handle
-EC2 instances.
-
-.center[_Authentication flow reference diagram on next slide._]
-
+???
+* Let's explore the `ec2` auth method.
 ---
 name: vault-aws-auth-methods-ec2-2
-# Vault AWS Auth Method, EC2
+# The EC2 Method (2)
 
-<br>
 .center[![Vault AWS EC2 Auth Flow](images/vault-aws-ec2-auth-flow.png)]
-.center[_Legend on next slide._]
+.center[Explanations of steps on next slide]
+
+???
+* This slide illustrates the workflow of the `ec2` method.
 
 ---
 name: vault-aws-auth-methods-ec2-3
 # Vault AWS Auth Method, EC2
 
-- 1) EC2 instance fetches Identity Document from EC2 Metadata Service. AWS also
-provides the PKCS#7 signature of the data, and the public keys for signature
-verification.
-- 2) The AWS EC2 instance makes a request to Vault with the PKCS#7 signature
-(contains the identity document).
-- 3) Vault verifies the signature on the PKCS#7 document, certifying against AWS.
-- 4) If successful, Vault returns the initial Vault token to the EC2 instance.
-This token is mapped to any configured policies for the associated role.
+- **Step 1:** EC2 instance fetches Identity Document from EC2 Metadata Service. AWS also provides the PKCS#7 signature of the data and the public keys for signature verification.
+- **Step 2:** The AWS EC2 instance makes a request to Vault with the PKCS#7 signature that contains the identity document.
+- **Step 3:** Vault verifies the signature on the document against AWS.
+- **Step 4:** If successful, Vault returns the initial Vault token to the EC2 instance. The token is assigned Vault policies for the associated role.
+
+???
+* These are the 4 steps shown on the preceeding slide.
 
 ---
 name: comparing-aws-auth-methods-summary
-# Authenticating to Vault using AWS to Confirm Identity (Summary)
-
-Based on how you attempt to authenticate, Vault will determine if you are
-attempting to use the `iam` or `ec2` type. As you learned, each has a different
-authentication workflow, and each can solve different use cases.
-
-*Note:* _The `ec2` method was implemented before the primitives to implement the
-iam method were supported by AWS. The `iam` method is the recommended approach
-as it is more flexible and aligns with best practices to perform access
-control and authentication. _
+class: compact
+# AWS Auth Method Summary
+* Based on how you attempt to authenticate, Vault will determine if you are attempting to use the `iam` or `ec2` type.
+* As you learned, each has a different
+authentication workflow and each can solve different use cases.
+* Please note the following points:
+  * The `ec2` method was implemented before the primitives to implement the iam method were supported by AWS.
+  * *The `iam` method is the recommended approach since it is more flexible and uses best practices to perform access control and authentication.*
 
 ---
 name: lab-aws-auth-method-for-vault
-# 🔬 Lab - AWS Auth Method for Vault
-### [Instruqt - AWS Auth Method for Vault](https://instruqt.com/hashicorp/tracks/vault-aws-auth-method)
+# 🔬 Lab: AWS Auth Method for Vault
+https://instruqt.com/hashicorp/tracks/vault-aws-auth-method
 
-#### Lab Summary
+#### Lab Summary:
 - Enable the AWS Auth Method
 - Configure the AWS IAM Auth Method
 - Log In Using the AWS IAM Auth Method
