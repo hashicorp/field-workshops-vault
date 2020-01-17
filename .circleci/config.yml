@@ -16,13 +16,13 @@ jobs:
             unzip instruqt.zip
             cp instruqt /usr/local/bin/instruqt
             chmod +x /usr/local/bin/instruqt
-            instruqt version | grep $VERSION
+            echo "yes" | instruqt version
             RETVAL=$?
             if [[ $RETVAL -ne 0 ]]; then
-              echo "Version $VERSION is not installed correctly."
+              echo "Instruqt is not installed correctly."
               exit 1
             else
-              echo "Instruqt Version $VERSION is installed."
+              echo "Instruqt is installed and updated to most recent version."
             fi
             echo "Running instruqt track validate..."
             for dir in $(ls -d /root/project/instruqt-tracks/*); do
@@ -44,17 +44,19 @@ jobs:
             unzip instruqt.zip
             cp instruqt /usr/local/bin/instruqt
             chmod +x /usr/local/bin/instruqt
-            instruqt version | grep $VERSION
+            echo "yes" | instruqt version
             RETVAL=$?
             if [[ $RETVAL -ne 0 ]]; then
-              echo "Version $VERSION is not installed correctly."
+              echo "Instruqt is not installed correctly."
               exit 1
             else
-              echo "Instruqt Version $VERSION is installed."
+              echo "Instruqt is installed and updated to most recent version."
             fi
             echo "Running instruqt track test..."
             cd /root/project/instruqt-tracks/vault-basics
             instruqt track test --skip-fail-check
+            echo "Running instruqt track push..."
+            instruqt track push --force
   instruqt-test-vault-dynamic-database-credentials:
     docker:
       - image: ubuntu:latest
@@ -71,17 +73,19 @@ jobs:
             unzip instruqt.zip
             cp instruqt /usr/local/bin/instruqt
             chmod +x /usr/local/bin/instruqt
-            instruqt version | grep $VERSION
+            echo "yes" | instruqt version
             RETVAL=$?
             if [[ $RETVAL -ne 0 ]]; then
-              echo "Version $VERSION is not installed correctly."
+              echo "Instruqt is not installed correctly."
               exit 1
             else
-              echo "Instruqt Version $VERSION is installed."
+              echo "Instruqt is installed and updated to most recent version."
             fi
             echo "Running instruqt track test..."
             cd /root/project/instruqt-tracks/vault-dynamic-database-credentials
             instruqt track test --skip-fail-check
+            echo "Running instruqt track push..."
+            instruqt track push --force
   instruqt-test-vault-dynamic-secrets-aws:
     docker:
       - image: ubuntu:latest
@@ -98,17 +102,19 @@ jobs:
             unzip instruqt.zip
             cp instruqt /usr/local/bin/instruqt
             chmod +x /usr/local/bin/instruqt
-            instruqt version | grep $VERSION
+            echo "yes" | instruqt version
             RETVAL=$?
             if [[ $RETVAL -ne 0 ]]; then
-              echo "Version $VERSION is not installed correctly."
+              echo "Instruqt is not installed correctly."
               exit 1
             else
-              echo "Instruqt Version $VERSION is installed."
+              echo "Instruqt is installed and updated to most recent version."
             fi
             echo "Running instruqt track test..."
             cd /root/project/instruqt-tracks/vault-dynamic-secrets-aws
             instruqt track test --skip-fail-check
+            echo "Running instruqt track push..."
+            instruqt track push --force
   instruqt-test-vault-aws-auth-method:
     docker:
       - image: ubuntu:latest
@@ -125,17 +131,19 @@ jobs:
             unzip instruqt.zip
             cp instruqt /usr/local/bin/instruqt
             chmod +x /usr/local/bin/instruqt
-            instruqt version | grep $VERSION
+            echo "yes" | instruqt version
             RETVAL=$?
             if [[ $RETVAL -ne 0 ]]; then
-              echo "Version $VERSION is not installed correctly."
+              echo "Instruqt is not installed correctly."
               exit 1
             else
-              echo "Instruqt Version $VERSION is installed."
+              echo "Instruqt is installed and updated to most recent version."
             fi
             echo "Running instruqt track test..."
             cd /root/project/instruqt-tracks/vault-aws-auth-method
             instruqt track test --skip-fail-check
+            echo "Running instruqt track push..."
+            instruqt track push --force
   instruqt-test-vault-encryption-as-a-service:
     docker:
       - image: ubuntu:latest
@@ -152,17 +160,19 @@ jobs:
             unzip instruqt.zip
             cp instruqt /usr/local/bin/instruqt
             chmod +x /usr/local/bin/instruqt
-            instruqt version | grep $VERSION
+            echo "yes" | instruqt version
             RETVAL=$?
             if [[ $RETVAL -ne 0 ]]; then
-              echo "Version $VERSION is not installed correctly."
+              echo "Instruqt is not installed correctly."
               exit 1
             else
-              echo "Instruqt Version $VERSION is installed."
+              echo "Instruqt is installed and updated to most recent version."
             fi
             echo "Running instruqt track test..."
             cd /root/project/instruqt-tracks/vault-encryption-as-a-service
             instruqt track test --skip-fail-check
+            echo "Running instruqt track push..."
+            instruqt track push --force
 workflows:
   version: 2
   build-and-deploy:
