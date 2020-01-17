@@ -55,6 +55,8 @@ jobs:
             echo "Running instruqt track test..."
             cd /root/project/instruqt-tracks/vault-basics
             instruqt track test --skip-fail-check
+            echo "Running instruqt track push..."
+            instruqt track push --force
   instruqt-test-vault-dynamic-database-credentials:
     docker:
       - image: ubuntu:latest
@@ -82,6 +84,8 @@ jobs:
             echo "Running instruqt track test..."
             cd /root/project/instruqt-tracks/vault-dynamic-database-credentials
             instruqt track test --skip-fail-check
+            echo "Running instruqt track push..."
+            instruqt track push --force
   instruqt-test-vault-dynamic-secrets-aws:
     docker:
       - image: ubuntu:latest
@@ -109,6 +113,8 @@ jobs:
             echo "Running instruqt track test..."
             cd /root/project/instruqt-tracks/vault-dynamic-secrets-aws
             instruqt track test --skip-fail-check
+            echo "Running instruqt track push..."
+            instruqt track push --force
   instruqt-test-vault-aws-auth-method:
     docker:
       - image: ubuntu:latest
@@ -136,6 +142,8 @@ jobs:
             echo "Running instruqt track test..."
             cd /root/project/instruqt-tracks/vault-aws-auth-method
             instruqt track test --skip-fail-check
+            echo "Running instruqt track push..."
+            instruqt track push --force
   instruqt-test-vault-encryption-as-a-service:
     docker:
       - image: ubuntu:latest
@@ -163,6 +171,8 @@ jobs:
             echo "Running instruqt track test..."
             cd /root/project/instruqt-tracks/vault-encryption-as-a-service
             instruqt track test --skip-fail-check
+            echo "Running instruqt track push..."
+            instruqt track push --force
 workflows:
   version: 2
   build-and-deploy:
