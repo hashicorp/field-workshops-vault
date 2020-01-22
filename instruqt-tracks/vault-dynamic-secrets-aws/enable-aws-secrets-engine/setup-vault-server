@@ -34,7 +34,7 @@ EOF
 vault server -config=/vault/config/vault-config.hcl -log-level=debug > /vault/logs/vault.log 2>&1 &
 
 # Sleep 5 seconds
-sleep 15
+sleep 5
 
 # Initialize Vault server
 vault operator init -key-shares=1 -key-threshold=1 > init.log

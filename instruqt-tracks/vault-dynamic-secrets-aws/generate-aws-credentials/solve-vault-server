@@ -3,9 +3,7 @@
 set -e
 
 # Generate AWS Credentials Twice (to match check script)
-echo -e "vault read aws/creds/my-role" >> /root/.bash_history
 vault read aws/creds/my-role
-echo -e "vault read aws/creds/my-role" >> /root/.bash_history
 vault read aws/creds/my-role
 
 exit 0

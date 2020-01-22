@@ -85,7 +85,7 @@ challenges:
     hostname: vault-server
     port: 8200
   difficulty: basic
-  timelimit: 900
+  timelimit: 300
 - slug: configure-aws-secrets-engine
   id: ayjpxpa6pzza
   type: challenge
@@ -171,7 +171,7 @@ challenges:
     hostname: vault-server
     port: 8200
   difficulty: basic
-  timelimit: 900
+  timelimit: 300
 - slug: generate-aws-credentials
   id: j3kai2fi9v2y
   type: challenge
@@ -236,7 +236,7 @@ challenges:
     hostname: vault-server
     port: 8200
   difficulty: basic
-  timelimit: 900
+  timelimit: 300
 - slug: revoke-aws-credentials
   id: jnub5y273l3o
   type: challenge
@@ -304,5 +304,5 @@ challenges:
     hostname: vault-server
     port: 8200
   difficulty: basic
-  timelimit: 900
+  timelimit: 300
 checksum: "3307168415804934971"
