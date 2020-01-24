@@ -56,7 +56,7 @@ name: database-engine-plugins
 name: database-engine-workflow
 # Database Secrets Engine Workflow
 1. Enable an instance of the database secrets engine.
-1. Configue it with the correct plugin and connection URL, using a service account created for Vault.
+1. Configure it with the correct plugin and connection URL, using a service account created for Vault.
 1. Create one or more roles with TTLs and SQL statements that specify required permissions.
 1. Applications and users can request credentials from Vault that are valid for the default TTL of the role, but can be renewed up to the max TTL.
 1. Vault automatically deletes expired credentials.
