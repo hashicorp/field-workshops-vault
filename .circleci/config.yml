@@ -1,6 +1,9 @@
 version: 2
 jobs:
   instruqt-validate:
+    filters:
+      branches:
+        only: master
     docker:
       - image: ubuntu:latest
     steps:
@@ -29,6 +32,9 @@ jobs:
               cd $dir && instruqt track validate
             done
   instruqt-test-vault-basics:
+    filters:
+      branches:
+        only: master
     docker:
       - image: ubuntu:latest
     steps:
@@ -58,6 +64,9 @@ jobs:
             echo "Running instruqt track push..."
             instruqt track push --force
   instruqt-test-vault-dynamic-database-credentials:
+    filters:
+      branches:
+        only: master
     docker:
       - image: ubuntu:latest
     steps:
@@ -87,6 +96,9 @@ jobs:
             echo "Running instruqt track push..."
             instruqt track push --force
   instruqt-test-vault-dynamic-secrets-aws:
+    filters:
+      branches:
+        only: master
     docker:
       - image: ubuntu:latest
     steps:
@@ -116,6 +128,9 @@ jobs:
             echo "Running instruqt track push..."
             instruqt track push --force
   instruqt-test-vault-aws-auth-method:
+    filters:
+      branches:
+        only: master
     docker:
       - image: ubuntu:latest
     steps:
@@ -145,6 +160,9 @@ jobs:
             echo "Running instruqt track push..."
             instruqt track push --force
   instruqt-test-vault-encryption-as-a-service:
+    filters:
+      branches:
+        only: master
     docker:
       - image: ubuntu:latest
     steps:
