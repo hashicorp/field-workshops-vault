@@ -52,11 +52,22 @@ jobs:
             else
               echo "Instruqt is installed and updated to most recent version."
             fi
-            echo "Running instruqt track test..."
             cd /root/project/instruqt-tracks/vault-basics
-            instruqt track test --skip-fail-check
             echo "Running instruqt track push..."
             instruqt track push --force
+            echo "Running instruqt track test..."
+            # Retry instruqt track test up to 3 times
+            n=0
+            until [ $n -ge 3 ]
+            do
+              instruqt track test --skip-fail-check && break
+              n=$[$n+1]
+              sleep 60
+            done
+            if [ $n -ge 3 ]; then
+              echo "Instruqt track test failed three times."
+              exit 1
+            fi
   instruqt-test-vault-dynamic-database-credentials:
     docker:
       - image: ubuntu:latest
@@ -81,11 +92,22 @@ jobs:
             else
               echo "Instruqt is installed and updated to most recent version."
             fi
-            echo "Running instruqt track test..."
             cd /root/project/instruqt-tracks/vault-dynamic-database-credentials
-            instruqt track test --skip-fail-check
             echo "Running instruqt track push..."
             instruqt track push --force
+            echo "Running instruqt track test..."
+            # Retry instruqt track test up to 3 times
+            n=0
+            until [ $n -ge 3 ]
+            do
+              instruqt track test --skip-fail-check && break
+              n=$[$n+1]
+              sleep 60
+            done
+            if [ $n -ge 3 ]; then
+              echo "Instruqt track test failed three times."
+              exit 1
+            fi
   instruqt-test-vault-dynamic-secrets-aws:
     docker:
       - image: ubuntu:latest
@@ -110,11 +132,22 @@ jobs:
             else
               echo "Instruqt is installed and updated to most recent version."
             fi
-            echo "Running instruqt track test..."
             cd /root/project/instruqt-tracks/vault-dynamic-secrets-aws
-            instruqt track test --skip-fail-check
             echo "Running instruqt track push..."
             instruqt track push --force
+            echo "Running instruqt track test..."
+            # Retry instruqt track test up to 3 times
+            n=0
+            until [ $n -ge 3 ]
+            do
+              instruqt track test --skip-fail-check && break
+              n=$[$n+1]
+              sleep 60
+            done
+            if [ $n -ge 3 ]; then
+              echo "Instruqt track test failed three times."
+              exit 1
+            fi
   instruqt-test-vault-aws-auth-method:
     docker:
       - image: ubuntu:latest
@@ -139,11 +172,22 @@ jobs:
             else
               echo "Instruqt is installed and updated to most recent version."
             fi
-            echo "Running instruqt track test..."
             cd /root/project/instruqt-tracks/vault-aws-auth-method
-            instruqt track test --skip-fail-check
             echo "Running instruqt track push..."
             instruqt track push --force
+            echo "Running instruqt track test..."
+            # Retry instruqt track test up to 3 times
+            n=0
+            until [ $n -ge 3 ]
+            do
+              instruqt track test --skip-fail-check && break
+              n=$[$n+1]
+              sleep 60
+            done
+            if [ $n -ge 3 ]; then
+              echo "Instruqt track test failed three times."
+              exit 1
+            fi
   instruqt-test-vault-encryption-as-a-service:
     docker:
       - image: ubuntu:latest
@@ -168,11 +212,22 @@ jobs:
             else
               echo "Instruqt is installed and updated to most recent version."
             fi
-            echo "Running instruqt track test..."
             cd /root/project/instruqt-tracks/vault-encryption-as-a-service
-            instruqt track test --skip-fail-check
             echo "Running instruqt track push..."
             instruqt track push --force
+            echo "Running instruqt track test..."
+            # Retry instruqt track test up to 3 times
+            n=0
+            until [ $n -ge 3 ]
+            do
+              instruqt track test --skip-fail-check && break
+              n=$[$n+1]
+              sleep 60
+            done
+            if [ $n -ge 3 ]; then
+              echo "Instruqt track test failed three times."
+              exit 1
+            fi
 workflows:
   version: 2
   build-and-deploy:
