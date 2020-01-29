@@ -1,9 +1,6 @@
 version: 2
 jobs:
   instruqt-validate:
-    filters:
-      branches:
-        only: master
     docker:
       - image: ubuntu:latest
     steps:
@@ -32,9 +29,6 @@ jobs:
               cd $dir && instruqt track validate
             done
   instruqt-test-vault-basics:
-    filters:
-      branches:
-        only: master
     docker:
       - image: ubuntu:latest
     steps:
@@ -64,9 +58,6 @@ jobs:
             echo "Running instruqt track push..."
             instruqt track push --force
   instruqt-test-vault-dynamic-database-credentials:
-    filters:
-      branches:
-        only: master
     docker:
       - image: ubuntu:latest
     steps:
@@ -96,9 +87,6 @@ jobs:
             echo "Running instruqt track push..."
             instruqt track push --force
   instruqt-test-vault-dynamic-secrets-aws:
-    filters:
-      branches:
-        only: master
     docker:
       - image: ubuntu:latest
     steps:
@@ -128,9 +116,6 @@ jobs:
             echo "Running instruqt track push..."
             instruqt track push --force
   instruqt-test-vault-aws-auth-method:
-    filters:
-      branches:
-        only: master
     docker:
       - image: ubuntu:latest
     steps:
@@ -160,9 +145,6 @@ jobs:
             echo "Running instruqt track push..."
             instruqt track push --force
   instruqt-test-vault-encryption-as-a-service:
-    filters:
-      branches:
-        only: master
     docker:
       - image: ubuntu:latest
     steps:
@@ -195,22 +177,40 @@ workflows:
   version: 2
   build-and-deploy:
     jobs:
-      - instruqt-validate
+      - instruqt-validate:
+          filters:
+            branches:
+              only: master
       - instruqt-test-vault-basics:
           requires:
             - instruqt-validate
+          filters:
+            branches:
+              only: master
       - instruqt-test-vault-dynamic-database-credentials:
           requires:
             - instruqt-validate
+          filters:
+            branches:
+              only: master
       - instruqt-test-vault-dynamic-secrets-aws:
           requires:
             - instruqt-validate
+          filters:
+            branches:
+              only: master
       - instruqt-test-vault-aws-auth-method:
           requires:
             - instruqt-validate
+          filters:
+            branches:
+              only: master
       - instruqt-test-vault-encryption-as-a-service:
           requires:
             - instruqt-validate
+          filters:
+            branches:
+              only: master
   nightly-build:
     triggers:
       - schedule:
