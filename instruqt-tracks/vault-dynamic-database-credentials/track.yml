@@ -3,10 +3,12 @@ id: hbtxgbf9n1nt
 version: 0.0.1
 type: track
 title: Vault Dynamic Database Credentials
-teaser: Generate dynamic credentials for a MySQL database from Vault.
-description: The Vault Database secrets engine lets you generate dynamic, time-bound
-  credentials for many different databases. In this track, you will do this for a
-  MySQL database that is running on the same server as the Vault server itself.
+teaser: |
+  Generate dynamic credentials for a MySQL database from Vault.
+description: |-
+  The Vault Database secrets engine lets you generate dynamic, time-bound credentials for many different databases.
+
+  In this track, you will do this for a MySQL database that is running on the same server as the Vault server itself.
 icon: https://storage.googleapis.com/instruqt-frontend/assets/hashicorp/tracks/vault.png
 tags:
 - vault
@@ -22,7 +24,8 @@ challenges:
   id: z6ovrqxwopus
   type: challenge
   title: Enable the Database Secrets Engine
-  teaser: Enable the Database secrets engine on the Vault server.
+  teaser: |
+    Enable the Database secrets engine on the Vault server.
   assignment: |-
     The Database secrets engine generates credentials dynamically for various databases.  In this track, we are using an instance of MySQL that is running on the same VM as the Vault server itself.
 
@@ -65,7 +68,8 @@ challenges:
   id: dmxb78fcbthu
   type: challenge
   title: Configure the Database Secrets Engine
-  teaser: Configure the Database secrets engine on the Vault server.
+  teaser: |
+    Configure the Database secrets engine on the Vault server.
   assignment: |-
     All secrets engines must be configured before they can be used.
 
@@ -162,7 +166,8 @@ challenges:
   id: zhbyasjsfozu
   type: challenge
   title: Generate and Use Dynamic Database Credentials
-  teaser: Generate and use dynamic database credentials for the MySQL database.
+  teaser: |
+    Generate and use dynamic database credentials for the MySQL database.
   assignment: |-
     Now that you have configured the database secrets engine with a connection and two roles for the MySQL database, you can dynamically generate short-lived credentials against the roles and use them to connect to the database.
 
@@ -290,7 +295,8 @@ challenges:
   id: 3pq7sccufa8e
   type: challenge
   title: Renew and Revoke Database Credentials
-  teaser: Renew and revoke database credentials for the MySQL database.
+  teaser: |
+    Renew and revoke database credentials for the MySQL database.
   assignment: |-
     In addition to using Vault's database secrets engine to generate credentials for databases, you can also use it to extend their lifetime or revoke them.
 
@@ -381,4 +387,4 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 1200
-checksum: "11455725219560909607"
+checksum: "100757855696202256"
