@@ -3,13 +3,12 @@ id: ykk2vp8iivzq
 version: 0.0.1
 type: track
 title: Vault Encryption as a Service
-teaser: Show how Vault's Transit secrets engine provides encryption as a service.
-description: The Vault Transit secrets engine allows Vault to function as an encryption-as-a-service,
-  encrypting and decrypting data stored outside of Vault. In this track, you will
-  use the Transit secrets engine with a Python web app and a MySQL database. The latter
-  is the same database used in the track, [Vault Dynamic Database Credentials](https://instruqt.com/hashicorp/tracks/vault-dynamic-database-credentials),
-  but this track can be used independently of that one since its setup script configures
-  Vault's Database secrets engine against the database.
+teaser: |
+  Show how Vault's Transit secrets engine provides encryption as a service.
+description: |-
+  The Vault Transit secrets engine allows Vault to function as an encryption-as-a-service, encrypting and decrypting data stored outside of Vault.
+
+  In this track, you will use the Transit secrets engine with a Python web app and a MySQL database. The latter is the same database used in the track, [Vault Dynamic Database Credentials](https://instruqt.com/hashicorp/tracks/vault-dynamic-database-credentials), but this track can be used independently of that one since its setup script configures Vault's Database secrets engine against the database.
 icon: https://storage.googleapis.com/instruqt-frontend/assets/hashicorp/tracks/vault.png
 tags:
 - vault
@@ -25,8 +24,8 @@ challenges:
   id: rtt1nujqyebg
   type: challenge
   title: Enable the Transit Secrets Engine
-  teaser: Enable the Transit secrets engine on the Vault server to enable Vault's
-    Encryption-as-a-Service.
+  teaser: |
+    Enable the Transit secrets engine on the Vault server to enable Vault's Encryption-as-a-Service.
   assignment: |-
     The Transit secrets engine allows Vault to function as an encryption-as-a-service.
 
@@ -40,10 +39,10 @@ challenges:
     ```
 
     Note that the Transit secrets engine is not enabled. Please enable an instance of it at the path "lob_a/workshop/transit" so that the members of Line of Business A can use it.
-
     ```
     vault secrets enable -path=lob_a/workshop/transit transit
     ```
+
     Other lines of busines could create their own instances of the Transit engine.
   notes:
   - type: text
@@ -73,8 +72,8 @@ challenges:
   id: gyvjytscs9ko
   type: challenge
   title: Create a Key for the Transit Secrets Engine
-  teaser: Create an encryption key for the Transit secrets engine on the Vault server
-    so that it can encrypt and decrypt data stored outside of Vault.
+  teaser: |
+    Create an encryption key for the Transit secrets engine on the Vault server so that it can encrypt and decrypt data stored outside of Vault.
   assignment: |-
     In order to use the Transit secrets engine, you need to create at least one encryption key to use with it.
 
@@ -109,12 +108,13 @@ challenges:
   id: pcxjw5h70qx9
   type: challenge
   title: Use the Web App Without Vault
-  teaser: Use the python web application without Vault. This will allow users to see
-    sensitive data when looking at database rows.
+  teaser: |
+    Use the python web application without Vault. This will allow users to see sensitive data when looking at database rows.
   assignment: |-
     The web app can be viewed on the "Web App" tab. You'll want to click the icon in the upper right corner of the tabs area to hide the assignment window so that you can see the entire UI of the web app. Click it again to display the assignment window.
 
     The web app has two sections:
+
     1. Records View: This displays what a real user would see after any encrypted data has been decrypted.
     1. Database View: This displays raw records from the database. If any items are encrypted in the database, they will not be decrypted.
 
@@ -124,12 +124,15 @@ challenges:
 
     Click the "Add Record" button and add a new record with some fake data. Then check that the new record is not encrypted in the Database View.
 
+    Without Vault, the web app gets a username and password for talking to the MySQL database from a file "config.ini" in the directory /home/vault/transit-app-example/backend. Specifically, the "User" field specifies "root" as the database user while the "Password" field gives the original password for the root user, "sJ2w*8NX". In the next challenge, the web app will retrieve a username and password dynamically generated from Vault's Database secrets engine.
+
     In the next challenge, you'll enable Vault for the application and see the Transit engine in action.
   notes:
   - type: text
-    contents: In this challenge, you will use the Python web application without Vault
-      enabled. You will add a record to the database and see that the data is not
-      encrypted.
+    contents: |-
+      In this challenge, you will use the Python web application without Vault enabled.
+
+      You will add a record to the database and see that the data is not encrypted. The database user and password are hard-coded in a configuration file.
   tabs:
   - title: Vault CLI
     type: terminal
@@ -148,12 +151,12 @@ challenges:
   id: x1laz8ef2yky
   type: challenge
   title: Use the Web App With Vault
-  teaser: Use the python web application with Vault. This will prevent users from
-    seeing sensitive data when looking at new database rows.
+  teaser: |
+    Use the python web application with Vault. This will prevent users from seeing sensitive data when looking at new database rows.
   assignment: |-
     In this challenge, you will stop the Python web app, edit its configuration file to use Vault, and see how new records are encrypted by Vault's Transit engine.
 
-    As a bonus, you'll see that the web app is now logging into the MySQL database that stores its data with short-lived credentials retrieved from Vault's Database secrets engine. These credentials are dynamically generated on the fly when the app is started.
+    As a bonus, you'll see that the web app is now logging into the MySQL database that stores its data with short-lived credentials retrieved from Vault's Database secrets engine. These credentials are dynamically generated on the fly when the app is started. Instead of using insecure, long-lived database credentials, the app will now get a new set of credentials every time it is started.
 
     You first need to determine the process ID (PID) of the running web app and stop it. The PID of the web app can be found by running this command:
     ```
@@ -215,4 +218,4 @@ challenges:
     path: /home/vault/transit-app-example/backend/config.ini
   difficulty: basic
   timelimit: 1200
-checksum: "12707258104662727283"
+checksum: "1455505946033605366"
