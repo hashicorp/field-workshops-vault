@@ -89,11 +89,24 @@ challenges:
     ```
     You will not see the username and password.
 
-    But we can make the configuration of the database secrets engine even more secure by rotating the root credentials (actually just the password) that we passed into the configuration.  We do this by running this command:
+    We used the initial MySQL username "hashicorp" and password "Password123" above. Validate that you can login to the MySQL server with this command:
+    ```
+    mysql -u hashicorp -pPassword123
+    ```
+    You should be given a `mysql>` prompt.
+
+    Logout of the MySQL server by typing `\q` at the `mysql>` prompt. This should return you to the `root@vault-mysql-server:~#` prompt.
+
+    We can make the configuration of the database secrets engine even more secure by rotating the root credentials (actually just the password) that we passed into the configuration.  We do this by running this command:
     ```
     vault write -force lob_a/workshop/database/rotate-root/wsmysqldatabase
     ```
     This should return "Success! Data written to: lob_a/workshop/database/rotate-root/wsmysqldatabase".
+
+    Now, if you try to login to the MySQL server with the same command given above, it should fail and give you the message "ERROR 1045 (28000): Access denied for user 'hashicorp'@'localhost' (using password: YES)". Please verify that:
+    ```
+    mysql -u hashicorp -pPassword123
+    ```
 
     Note: You should **not** use the actual `root` user of the MySQL database (despite the reference to "root credentials"); instead, create a separate user with sufficient privileges to create users and to change its own password.
 
@@ -209,22 +222,14 @@ challenges:
     `mysql -u <username> -p`<br>
     Replace `<user_name>` with the one generated from the previous command and provide the generated password when prompted. Then press the '<enter>' or `<return>` key on your keyboard.
 
-    You should then text like that below and be given a `mysql>` prompt:<br>
-    ```
+    You should then see text like that below and be given a `mysql>` prompt:<br>
+    `
     Welcome to the MySQL monitor.  Commands end with ; or \g.
     Your MySQL connection id is 7
     Server version: 5.7.28 MySQL Community Server (GPL)
 
-    Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.
-
-    Oracle is a registered trademark of Oracle Corporation and/or its
-    affiliates. Other names may be trademarks of their respective
-    owners.
-
-    Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
-
     mysql>
-    ```
+    `<br>
 
     Verify that you can see two of the databases on the MySQL server by running this command:
     ```
@@ -376,4 +381,4 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 1200
-checksum: "8153307089821440912"
+checksum: "11455725219560909607"
