@@ -2,7 +2,7 @@
 
 set -e
 
-grep -q "vault write lob_a/workshop/database/config/wsmysqldatabase.*plugin_name=mysql-database-plugin.*connection_url=\"{{username}}:{{password}}@tcp(localhost:3306)/\".*allowed_roles=\"workshop-app\",\"workshop-app-long\".*username=\"hashicorp\".*password=\"Password123\"" /root/.bash_history || fail-message "You haven't configured the wsmysqldatabase connection yet."
+grep -q 'vault write lob_a/workshop/database/config/wsmysqldatabase.*plugin_name=mysql-database-plugin.*connection_url="{{username}}:{{password}}@tcp(localhost:3306)/".*allowed_roles="workshop-app","workshop-app-long".*username="hashicorp".*password="Password123"' /root/.bash_history || fail-message "You haven't configured the wsmysqldatabase connection yet."
 
 grep -q "mysql -u hashicorp -pPassword123" /root/.bash_history || fail-message "You haven't logged into the MySQL server with the 'hashicorp' username yet."
 
