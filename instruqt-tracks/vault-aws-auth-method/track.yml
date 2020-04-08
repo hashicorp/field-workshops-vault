@@ -18,7 +18,7 @@ tags:
 - auth-method
 owner: hashicorp
 developers:
-- neil@hashicorp.com
+- null
 private: false
 published: true
 challenges:
@@ -29,7 +29,7 @@ challenges:
   teaser: Prepare Vault to accept AWS IAM for authentication.
   assignment: |-
     You have been automatically logged into Vault using the
-    [root token](https://www.vaultproject.io/docs/concepts/tokens.html#root-tokens).
+    [root token](https://www.vaultproject.io/docs/concepts/tokens/#root-tokens).
 
     At any time during this track, you can view your root token at `/root/token`.
 
@@ -69,7 +69,7 @@ challenges:
       and are responsible for assigning identity and a set of policies to a user.
 
       There are two authentication methods present for the
-      [AWS auth method](https://www.vaultproject.io/docs/auth/aws.html) in Vault:
+      [AWS auth method](https://www.vaultproject.io/docs/auth/aws/) in Vault:
       `iam` and `ec2`.
 
       This challenge will focus on the `iam` authentication type. With the `iam` method,
@@ -94,7 +94,7 @@ challenges:
   assignment: |-
     After enabling the AWS auth method, you must configure it to authenticate and
     communicate with AWS. You have been provided an AWS account and credentials with the
-    [HashiCorp recommended IAM policy](https://www.vaultproject.io/docs/auth/aws.html#recommended-vault-iam-policy)
+    [HashiCorp recommended IAM policy](https://www.vaultproject.io/docs/auth/aws#recommended-vault-iam-policy)
     attached, so no need to use your own.
 
     The provided credentials can be found in the `AWS_ACCESS_KEY_ID` and
@@ -295,7 +295,7 @@ challenges:
     The auth methods Vault provides let you choose the most appropriate authentication
     mechanism for your organization. In this track, you learned about the AWS
     authentication method. For more options and details, visit the
-    [AWS auth method docs](https://www.vaultproject.io/docs/auth/aws.html).
+    [AWS auth method docs](https://www.vaultproject.io/docs/auth/aws/).
   notes:
   - type: text
     contents: |-
@@ -318,4 +318,4 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 300
-checksum: "11442580927530019854"
+checksum: "11295441106244509107"

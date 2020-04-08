@@ -13,7 +13,7 @@ tags:
 - dynamic-secrets
 owner: hashicorp
 developers:
-- neil@hashicorp.com
+- null
 private: false
 published: true
 challenges:
@@ -53,7 +53,7 @@ challenges:
     ```
 
     At any time during this track, you can view your
-    [root token](https://www.vaultproject.io/docs/concepts/tokens.html#root-tokens)
+    [root token](https://www.vaultproject.io/docs/concepts/tokens/#root-tokens)
     by running:
 
     ```
@@ -159,9 +159,9 @@ challenges:
       Most secrets engines must be configured in advance before they can perform their
       functions. Vault supports three different types of credentials to retrieve from AWS.
 
-      This track focuses on the [`iam_user`](https://www.vaultproject.io/docs/secrets/aws/index.html#iam_user)
+      This track focuses on the [`iam_user`](https://www.vaultproject.io/docs/secrets/aws/#iam_user)
       method, however, you can read more about the
-      [other options](https://www.vaultproject.io/docs/secrets/aws/index.html).
+      [other options](https://www.vaultproject.io/docs/secrets/aws/).
   tabs:
   - title: Configure the AWS Secrets Engine
     type: terminal
@@ -305,4 +305,4 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 300
-checksum: "3307168415804934971"
+checksum: "16027906074654382868"

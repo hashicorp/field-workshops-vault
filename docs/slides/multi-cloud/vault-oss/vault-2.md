@@ -28,7 +28,7 @@ name: Interacting-With-Vault
 Vault provides several mechanisms for interacting with it:
 * The Vault [CLI](https://www.vaultproject.io/docs/commands/index.html)
 * The Vault [UI](https://learn.hashicorp.com/vault/getting-started/ui)
-* The Vault [API](https://www.vaultproject.io/api/overview)
+* The Vault [API](https://www.vaultproject.io/api-docs/index/)
 
 ???
 
@@ -39,7 +39,7 @@ name: Vault-CLI
 # The Vault CLI
 * The Vault CLI is a Go application.
 * It runs on macOS, Windows, Linux, and other operating systems.
-* You can download the latest version [here](https://www.vaultproject.io/downloads.html).
+* You can download the latest version [here](https://www.vaultproject.io/downloads/).
 
 ???
 * The Vault CLI is distributed as a Go binary.
