@@ -223,8 +223,8 @@ name: conclusion
 .center[![:scale 40%](images/vault_logo.png)]
 
 ### For more information please refer to the following links:
-* https://www.vaultproject.io/docs
-* https://www.vaultproject.io/api
+* https://www.vaultproject.io/docs/
+* https://www.vaultproject.io/api/
 * https://learn.hashicorp.com/vault
 
 ???

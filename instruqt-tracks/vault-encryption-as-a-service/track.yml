@@ -53,7 +53,7 @@ challenges:
 
       In this track, you'll see how the Transit engine can encrypt and decrypt data stored in a MySQL database.
 
-      To learn more, see https://www.vaultproject.io/docs/secrets/transit/index.html.
+      To learn more, see https://www.vaultproject.io/docs/secrets/transit/.
   tabs:
   - title: Vault CLI
     type: terminal
@@ -89,7 +89,7 @@ challenges:
       In this challenge, you will create an encryption key that the Transit engine you created in the previous challenge will use to encrypt and decrypt sensitive data in the MySQL database running on the Vault server.
 
       To learn more about the types of encryption keys that the Transit engine supports, see:
-      https://www.vaultproject.io/docs/secrets/transit/index.html#key-types
+      https://www.vaultproject.io/docs/secrets/transit/#key-types
   tabs:
   - title: Vault CLI
     type: terminal
@@ -218,4 +218,4 @@ challenges:
     path: /home/vault/transit-app-example/backend/config.ini
   difficulty: basic
   timelimit: 1200
-checksum: "1455505946033605366"
+checksum: "11569375247925430240"

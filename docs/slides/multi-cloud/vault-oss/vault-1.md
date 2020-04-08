@@ -118,7 +118,7 @@ name: secrets-engines
 layout: false
 # Vault Secrets Engines
 .center[![:scale 60%](images/vault-engines.png)]
-.center[[Vault Secrets Engines](https://www.vaultproject.io/docs/secrets/index.html)]
+.center[[Vault Secrets Engines](https://www.vaultproject.io/docs/secrets/)]
 
 ???
 * Vault provides many out-of-the-box secrets engines.
@@ -129,7 +129,7 @@ layout: false
 name: vault-reference-architecture-1
 # Vault Architecture Internals
 .center[![:scale 75%](images/vault_arch.png)]
-.center[[HashiCorp Vault Internals Architecture](https://www.vaultproject.io/docs/internals/architecture.html)
+.center[[HashiCorp Vault Internals Architecture](https://www.vaultproject.io/docs/internals/architecture/)
 ]
 
 ???
@@ -139,7 +139,7 @@ name: vault-reference-architecture-1
 name: vault-reference-architecture-2
 # Vault Architecture - High Availability
 .center[![:scale 60%](images/vault-ref-arch-lb.png)]
-.center[[Vault High Availability](https://www.vaultproject.io/docs/concepts/ha.html)
+.center[[Vault High Availability](https://www.vaultproject.io/docs/concepts/ha/)
 ]
 
 ???
@@ -150,7 +150,7 @@ name: vault-reference-architecture-2
 name: vault-reference-architecture-3
 # Vault Architecture - Multi-Region
 .center[![:scale 70%](images/vault-ref-arch-replication.png)]
-.center[[Vault Enterprise Replication](https://www.vaultproject.io/docs/enterprise/replication/index.html)
+.center[[Vault Enterprise Replication](https://www.vaultproject.io/docs/enterprise/replication/)
 ]
 
 ???

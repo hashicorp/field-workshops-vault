@@ -52,8 +52,8 @@ challenges:
       Vault's Database secrets engine dynamically generates credentials for many databases.
 
       To learn more, see these links:
-      https://www.vaultproject.io/docs/secrets/databases/index.html
-      https://www.vaultproject.io/docs/secrets/databases/mysql-maria.html
+      https://www.vaultproject.io/docs/secrets/databases/
+      https://www.vaultproject.io/docs/secrets/databases/mysql-maria/
   tabs:
   - title: Vault CLI
     type: terminal
@@ -148,10 +148,10 @@ challenges:
       The first role, "workshop-app-long", will generate credentials initially valid for 1 hour with a maximum lifetime of 24 hours. The second role, "workshop-app", will generate credentials initially valid for 3 minutes with a maximum lifetime of 6 minutes.
 
       To learn more, see these links:
-      https://www.vaultproject.io/docs/secrets/databases/index.html
-      https://www.vaultproject.io/docs/secrets/databases/mysql-maria.html
-      https://www.vaultproject.io/api/secret/databases/index.html
-      https://www.vaultproject.io/api/secret/databases/mysql-maria.html
+      https://www.vaultproject.io/docs/secrets/databases/
+      https://www.vaultproject.io/docs/secrets/databases/mysql-maria/
+      https://www.vaultproject.io/api/secret/databases/
+      https://www.vaultproject.io/api/secret/databases/mysql-maria/
   tabs:
   - title: Vault CLI
     type: terminal
@@ -278,9 +278,9 @@ challenges:
       You will then connect to the MySQL server with the credentials generated against the shorter duration role, "workshop-app". You will also validate that Vault deletes the credentials from the MySQL server after 3 minutes.
 
       To learn more, see these links:
-      https://www.vaultproject.io/docs/secrets/databases/mysql-maria.html
-      https://www.vaultproject.io/docs/secrets/databases/index.html#usage
-      https://www.vaultproject.io/api/secret/databases/index.html#generate-credentials
+      https://www.vaultproject.io/docs/secrets/databases/mysql-maria/
+      https://www.vaultproject.io/docs/secrets/databases/#usage
+      https://www.vaultproject.io/api/secret/databases/#generate-credentials
   tabs:
   - title: Vault CLI
     type: terminal
@@ -375,8 +375,8 @@ challenges:
       You will see that it is possible to extend the lifetime of generated credentials when they have not yet expired by renewing them. You will also see that they cannot be renewed beyond the `max_ttl` of the role against which the credentials were generated.
 
       To learn more, see these links:
-      https://www.vaultproject.io/api/system/leases.html#renew-lease
-      https://www.vaultproject.io/api/system/leases.html#revoke-lease
+      https://www.vaultproject.io/api/system/leases/#renew-lease
+      https://www.vaultproject.io/api/system/leases/#revoke-lease
   tabs:
   - title: Vault CLI
     type: terminal
@@ -387,4 +387,4 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 1200
-checksum: "10160173668365095175"
+checksum: "241593531422489146"

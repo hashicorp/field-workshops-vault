@@ -50,7 +50,7 @@ challenges:
       It is written in Go and runs on macOS, Windows, Linux and other operating systems.
 
       You can always download the latest version of vault here:
-      https://www.vaultproject.io/downloads.html
+      https://www.vaultproject.io/downloads/
   - type: text
     contents: |-
       Installing Vault on your laptop or workstation is easy. You simply download the zip file, unpack it, and place it somewhere in your PATH.
@@ -94,11 +94,11 @@ challenges:
     contents: |-
       In this challenge, you will run your first Vault server in "dev" mode and write your first secret to Vault.
 
-      See https://www.vaultproject.io/docs/concepts/dev-server.html for more on Vault's "dev" mode.
+      See https://www.vaultproject.io/docs/concepts/dev-server/ for more on Vault's "dev" mode.
 
       You will use the default KV v2 secrets engine that Vault automatically creates in "dev" mode. It is used to store multiple versions of static secrets.
 
-      See https://www.vaultproject.io/docs/secrets/kv/kv-v2.html for more on the KV v2 secrets engine.
+      See https://www.vaultproject.io/docs/secrets/kv/kv-v2/ for more on the KV v2 secrets engine.
   tabs:
   - title: Vault CLI
     type: terminal
@@ -136,7 +136,7 @@ challenges:
 
       You will also use the Vault HTTP API to read your age from your "my-first-secret" secret.
 
-      See https://www.vaultproject.io/api/overview for more on the Vault HTTP API.
+      See https://www.vaultproject.io/api-docs/index/ for more on the Vault HTTP API.
   tabs:
   - title: Vault CLI
     type: terminal
@@ -180,14 +180,16 @@ challenges:
     contents: |-
       In this challenge, you will run a Vault server in "production" mode, initialize it, and unseal it. The server will get its configuration from a file that you will edit before starting it.
 
-      See https://www.vaultproject.io/docs/configuration/index.html for information on configuring a Vault server.
+      See https://www.vaultproject.io/docs/configuration/ for information on configuring a Vault server.
 
-      See https://www.vaultproject.io/docs/commands/operator/init.html for information on initializing a Vault server.
+      See https://www.vaultproject.io/docs/commands/operator/init/ for information on initializing a Vault server.
 
-      See https://www.vaultproject.io/docs/concepts/seal.html for information on the sealing and unsealing of Vault servers.
+      See https://www.vaultproject.io/docs/concepts/seal/ for information on the sealing and unsealing of Vault servers.
   - type: text
-    contents: This lab will guide you through initializing and unsealing your Vault
-      server with the Vault CLI. But, it is also possible to do both of these in the
+    contents: |-
+      This lab will guide you through initializing and unsealing your Vault server with the Vault CLI.
+
+      But, it is also possible to do both of these in the
       Vault UI.
   tabs:
   - title: Vault Configuration
@@ -238,11 +240,11 @@ challenges:
       You will also write a secret, change its value in the Vault UI, and then see that you can still inspect its original value since the KV v2 secrets engine maintains multiple versions of secrets.
   - type: text
     contents: |-
-      See https://www.vaultproject.io/docs/secrets/index.html to learn about Vault secrets engines.
+      See https://www.vaultproject.io/docs/secrets/ to learn about Vault secrets engines.
 
-      See https://www.vaultproject.io/docs/secrets/kv/index.html to learn about Vault's KV secrets engine. You will use version 2 of this engine which can retain multiple versions of any secret.
+      See https://www.vaultproject.io/docs/secrets/kv/ to learn about Vault's KV secrets engine. You will use version 2 of this engine which can retain multiple versions of any secret.
 
-      See https://www.vaultproject.io/docs/commands/secrets/enable.html for information about the `vault secrets enable` command.
+      See https://www.vaultproject.io/docs/commands/secrets/enable/ for information about the `vault secrets enable` command.
   tabs:
   - title: Vault CLI
     type: terminal
@@ -299,9 +301,9 @@ challenges:
       You'll also start to learn about Vault policies that restrict which secrets different users and applications can read and write. Note that Vault policies are "deny by default"; this means a token can only read or write secrets if explicitly given permission to do so by one of the policies attached to it.
   - type: text
     contents: |-
-      See https://www.vaultproject.io/docs/auth/index.html to learn about Vault auth methods.
+      See https://www.vaultproject.io/docs/auth/ to learn about Vault auth methods.
 
-      See https://www.vaultproject.io/docs/auth/userpass.html to learn about Vault's Userpass auth method.
+      See https://www.vaultproject.io/docs/auth/userpass/ to learn about Vault's Userpass auth method.
   tabs:
   - title: Vault CLI
     type: terminal
@@ -368,7 +370,7 @@ challenges:
     contents: |-
       In this challenge, you'll define Vault policies to give two different users access to different secrets within Vault.
 
-      See https://www.vaultproject.io/docs/concepts/policies.html to learn about Vault policies.
+      See https://www.vaultproject.io/docs/concepts/policies/ to learn about Vault policies.
   tabs:
   - title: Vault Policies
     type: code
@@ -383,4 +385,4 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 1200
-checksum: "12000820413371956031"
+checksum: "2248930275288165673"
