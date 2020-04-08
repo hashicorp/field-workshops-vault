@@ -23,7 +23,7 @@ name: vault-aws-auth-method-1
 # Authenticating to Vault using AWS
 * Auth methods are the components in Vault that perform authentication.
 * They are responsible for assigning identity and policies to users, programs, or machines.
-* Vault's [AWS Auth Method](https://www.vaultproject.io/docs/auth/aws.html) provides an automated mechanism to retrieve a Vault token for IAM principals and AWS EC2 instances.
+* Vault's [AWS Auth Method](https://www.vaultproject.io/docs/auth/aws/) provides an automated mechanism to retrieve a Vault token for IAM principals and AWS EC2 instances.
 * This method securely provides your AWS-based
 applications access to secrets stored in HashiCorp Vault without passwords.
 * It includes two methods: `iam` and `ec2`.
