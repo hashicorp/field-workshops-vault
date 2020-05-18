@@ -69,6 +69,6 @@ name: instruqt-tracks
 * This workshop uses [Instruqt](https://instruqt.com) for hands-on labs.
 * Instruqt labs are run in "tracks" that are divided into "challenges".
 * This workshop uses the following tracks:
-    1. https://instruqt.com/hashicorp/tracks/vault-basics
-    1. https://instruqt.com/hashicorp/tracks/vault-dynamic-database-credentials
-    1. https://instruqt.com/hashicorp/tracks/vault-encryption-as-a-service
+    1. https://play.instruqt.com/hashicorp/invite/qfwncq62zsxu
+    1. https://play.instruqt.com/hashicorp/invite/sryhqfdm6sgx
+    1. https://play.instruqt.com/hashicorp/invite/qleasfx1dszc
