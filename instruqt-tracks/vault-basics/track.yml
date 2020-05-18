@@ -71,22 +71,27 @@ challenges:
   title: Your First Secret
   teaser: Run a Vault dev server and write your first secret.
   assignment: |-
+    There are three tabs to use in this challenge: Vault CLI, Vault Dev Server, and Vault UI.<br>
     Vault servers can be run in "dev" and "production" modes. You can see this by getting help for the "vault server" CLI command:<br>
+    Select the "Vault CLI" tab and run the following:<br>
     `vault server -h`<br>
-    If you do run this, scroll back up to see information about the two modes.
+    Scroll back up to see information about the two modes.
 
-    Let's run a Vault dev server on the "Vault Dev Server" tab. The simpest command to do this would be "vault server -dev", but we want to set the initial root token to "root" and make the Vault server bind to all IP addresses. So, please run this instead:<br>
+    Select the "Vault Dev Server" tab<br>
+    Let's run Vault in Dev Server mode. The simpest command to do this would be "vault server -dev", but we want to set the initial root token to "root" and make the Vault server bind to all IP addresses. So, please run this instead:<br>
     `vault server -dev -dev-listen-address=0.0.0.0:8200 -dev-root-token-id=root`
 
-    Log into the Vault UI with the token "root".
+    Select the "Vault UI" tab<br>
+    Log into the Vault UI with Method: Token, Token: root.
 
-    On the "Vault CLI" tab, write a secret to the KV v2 secrets engine that the Vault dev server automatically mounted:<br>
+    Select the "Vault CLI" tab.<br>
+    Write a secret to the KV v2 secrets engine that the Vault dev server automatically mounted:<br>
     `vault kv put secret/my-first-secret age=<age>`<br>
     where <age\> is your age.
 
     Alternatively, you could create this secret in the Vault UI by selecting the "secret/" KV v2 secrets engine on the "Secrets" tab, clicking the "Create secret +" button, specifying "my-first-secret" as the path, "age" as the secret's first key, and your age as the corresponding value, and then finally clicking the "Save" button.
 
-    In the Vault UI, select the "secret/" KV v2 secrets engine, select the "my-first-secret" secret, and click the eye icon to see your age.
+    In the Vault UI tab, select the "secret/" KV v2 secrets engine, select the "my-first-secret" secret, and click the eye icon to see your age.
 
     If you lied about your age, you can correct it in the Vault UI by clicking the "Create new version +" button, or with the Vault CLI by repeating the "vault kv put" command with your real age. Don't worry, nobody else can see it!
   notes:
