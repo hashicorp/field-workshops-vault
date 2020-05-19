@@ -103,7 +103,7 @@ authentication workflow and each can solve different use cases.
 ---
 name: lab-aws-auth-method-for-vault
 # 🔬 Lab: AWS Auth Method for Vault
-https://instruqt.com/hashicorp/tracks/vault-aws-auth-method
+https://play.instruqt.com/hashicorp/invite/bict3hvtfqx1
 
 #### Lab Summary:
 - Enable the AWS Auth Method

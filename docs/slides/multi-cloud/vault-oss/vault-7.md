@@ -202,7 +202,7 @@ vault write sys/leases/lookup lease_id="<lease_id>"
 name: lab-database-challenge-1
 # 👩‍💻 Lab Challenge 7.1: Enable the Engine
 * In this lab challenge, you'll enable the database engine for MySQL and rotate its root credentials.
-* You'll do this in the [Vault Dynamic Database Credentials](https://instruqt.com/hashicorp/tracks/vault-dynamic-database-credentials) Instruqt track.
+* You'll do this in the [Vault Dynamic Database Credentials](https://play.instruqt.com/hashicorp/invite/sryhqfdm6sgx) Instruqt track.
 * Instructions:
   * Click the "Enable the Database Secrets Engine" challenge of the "Vault Dynamic Database Credentials" track.
   * Then click the green "Start" button.
