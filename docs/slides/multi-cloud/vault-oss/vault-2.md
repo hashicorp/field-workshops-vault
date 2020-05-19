@@ -87,8 +87,7 @@ name: getting-started-with-instruqt
 name: lab-vault-basics-challenge-1
 # 👩‍💻 Lab Challenge 2.1: The Vault CLI
 * In this lab, you'll run some of the Vault CLI commands.
-* You'll do this in the first challenge, "The Vault CLI", of the "Vault Basics" Instruqt track using the URL:
-https://play.instruqt.com/hashicorp/invite/qfwncq62zsxu.
+* You'll do this in the first challenge, "The Vault CLI", of the [Vault Basics](https://play.instruqt.com/hashicorp/invite/qfwncq62zsxu) Instruqt track.
 * You'll continue to work through this Instruqt track in chapters 2-6.
 
 ???

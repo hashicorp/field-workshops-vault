@@ -47,8 +47,8 @@ name: vault-aws-instruqt-tracks
 * This workshop uses [Instruqt](https://instruqt.com) for hands-on labs.
 * Instruqt labs are run in "tracks" that are divided into "challenges".
 * This workshop uses the following tracks:
-    1. https://play.instruqt.com/hashicorp/invite/etextvhbaypp
-    1. https://play.instruqt.com/hashicorp/invite/bict3hvtfqx1
+    1. [AWS Dynamic Secrets with Vault](https://play.instruqt.com/hashicorp/invite/etextvhbaypp)
+    1. [AWS Auth Method for Vault](https://play.instruqt.com/hashicorp/invite/bict3hvtfqx1)
 
 ???
 * We will be using Instruqt for the labs.
@@ -118,7 +118,7 @@ name: vault-aws-dynamic-secrets-5
 ---
 name: lab-aws-dynamic-secrets-with-vault
 # 🔬 Lab: AWS Dynamic Secrets with Vault
-https://play.instruqt.com/hashicorp/invite/etextvhbaypp
+This lab uses the Instruqt track, [AWS Dynamic Secrets with Vault](https://play.instruqt.com/hashicorp/invite/etextvhbaypp)
 
 #### Lab Summary:
 - Enable the AWS Secrets Engine
