@@ -91,7 +91,7 @@ challenges:
     ```
     vault read lob_a/workshop/database/config/wsmysqldatabase
     ```
-    You will not see the username and password.
+    You will not see the password.
 
     We used the initial MySQL username "hashicorp" and password "Password123" above. Validate that you can login to the MySQL server with this command:
     ```
@@ -387,4 +387,4 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 1200
-checksum: "241593531422489146"
+checksum: "6249267649514863479"
