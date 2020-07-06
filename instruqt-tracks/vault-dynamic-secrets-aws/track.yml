@@ -13,7 +13,7 @@ tags:
 - dynamic-secrets
 owner: hashicorp
 developers:
-- null
+- neil@hashicorp.com
 private: false
 published: true
 challenges:
@@ -305,4 +305,4 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 300
-checksum: "16027906074654382868"
+checksum: "5291309439802120604"
