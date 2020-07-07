@@ -387,4 +387,5 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 1200
-checksum: "3859884732060993586"
+checksum: "10754707837274871451"
+show_timer: true
