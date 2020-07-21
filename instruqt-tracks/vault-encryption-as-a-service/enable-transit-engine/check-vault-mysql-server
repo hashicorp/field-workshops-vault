@@ -2,8 +2,8 @@
 
 set -e
 
-grep -q "vault secrets list" /root/.bash_history || fail-message "You haven't listed the Vault secrets engines yet."
+grep -q "vault.*secrets.*list" /root/.bash_history || fail-message "You haven't listed the Vault secrets engines yet."
 
-grep -q "vault secrets enable -path=lob_a/workshop/transit transit" /root/.bash_history || fail-message "You haven't enabled the Transit secrets engine yet on the path lob_a/workshop/transit."
+grep -q "vault.*secrets.*enable.*-path=lob_a/workshop/transit.*transit" /root/.bash_history || fail-message "You haven't enabled the Transit secrets engine yet on the path lob_a/workshop/transit."
 
 exit 0

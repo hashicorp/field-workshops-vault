@@ -29,18 +29,26 @@ challenges:
 
     Let's start with some basic vault commands, running them in the "Vault CLI" tab on the left.
 
-    Check the version of Vault running on your machine:<br>
-    `vault version`
+    Check the version of Vault running on your machine:
+    ```
+    vault version
+    ```
 
-    See the list of Vault CLI commands:<br>
-    `vault`
+    See the list of Vault CLI commands:
+    ```
+    vault
+    ```
 
-    Get help for the "vault secrets" command:<br>
-    `vault secrets -h`<br>
+    Get help for the "vault secrets" command:
+    ```
+    vault secrets -h
+    ```
     Note that you can also use the "-help" and "--help" flags instead of "-h".
 
-    Get help for the "vault read" command:<br>
-    `vault read -h`<br>
+    Get help for the "vault read" command:
+    ```
+    vault read -h
+    ```
     Scroll back up to get a feeling for how you would read secrets from Vault.
   notes:
   - type: text
@@ -71,20 +79,29 @@ challenges:
   title: Your First Secret
   teaser: Run a Vault dev server and write your first secret.
   assignment: |-
-    There are three tabs to use in this challenge: Vault CLI, Vault Dev Server, and Vault UI.<br>
-    Vault servers can be run in "dev" and "production" modes. You can see this by getting help for the "vault server" CLI command:<br>
-    Select the "Vault CLI" tab and run the following:<br>
-    `vault server -h`<br>
+    There are three tabs to use in this challenge: Vault CLI, Vault Dev Server, and Vault UI.
+
+    Vault servers can be run in "dev" and "production" modes. You can see this by getting help for the "vault server" CLI command:
+
+    Select the "Vault CLI" tab and run the following:
+    ```
+    vault server -h
+    ```
     Scroll back up to see information about the two modes.
 
-    Select the "Vault Dev Server" tab<br>
-    Let's run Vault in Dev Server mode. The simpest command to do this would be "vault server -dev", but we want to set the initial root token to "root" and make the Vault server bind to all IP addresses. So, please run this instead:<br>
-    `vault server -dev -dev-listen-address=0.0.0.0:8200 -dev-root-token-id=root`
+    Select the "Vault Dev Server" tab
 
-    Select the "Vault UI" tab<br>
-    Log into the Vault UI with Method: Token, Token: root.
+    Let's run Vault in Dev Server mode. The simpest command to do this would be "vault server -dev", but we want to set the initial root token to "root" and make the Vault server bind to all IP addresses. So, please run this instead:
+    ```
+    vault server -dev -dev-listen-address=0.0.0.0:8200 -dev-root-token-id=root
+    ```
 
-    Select the "Vault CLI" tab.<br>
+    Select the "Vault UI" tab.
+
+    Log into the Vault UI with `Method` set to `Token` and `Token` set to `root`.
+
+    Select the "Vault CLI" tab.
+
     Write a secret to the KV v2 secrets engine that the Vault dev server automatically mounted:<br>
     `vault kv put secret/my-first-secret age=<age>`<br>
     where <age\> is your age.
@@ -125,13 +142,17 @@ challenges:
   assignment: |-
     In this challenge, you will use the Vault HTTP API.
 
-    On the "Vault CLI" tab, retrive the health of the Vault server by running this command:<br>
-    `curl http://localhost:8200/v1/sys/health | jq`
+    On the "Vault CLI" tab, retrive the health of the Vault server by running this command:
+    ```
+    curl http://localhost:8200/v1/sys/health | jq
+    ```
 
     That should bring back a nicely formatted JSON document indicating that your server is initialized and unsealed.
 
-    Now, retrieve your "my-first-secret" secret with this command (on a single line):<br>
-    `curl --header "X-Vault-Token: root" http://localhost:8200/v1/secret/data/my-first-secret | jq`
+    Now, retrieve your "my-first-secret" secret with this command (on a single line):
+    ```
+    curl --header "X-Vault-Token: root" http://localhost:8200/v1/secret/data/my-first-secret | jq
+    ```
 
     This should bring back a JSON document showing your age and metadata about the secret including its version.
   notes:
@@ -158,24 +179,36 @@ challenges:
 
     A production Vault server gets its configuration from a configuration file.  Open the vault-config.hcl configuration file on the "Vault Configuration" tab to see what your server will use.
 
-    On the "Vault Server" tab, run a Vault server that uses the configuration file:<br>
-    `vault server -config=/vault/config/vault-config.hcl`
+    On the "Vault Server" tab, run a Vault server that uses the configuration file:
+    ```
+    vault server -config=/vault/config/vault-config.hcl
+    ```
 
     Since that tab is now running the Vault server, you'll run the rest of the CLI commands on the "Vault CLI" tab.
 
-    Initialize the new server, indicating that you want to use one unseal key:<br>
-    `vault operator init -key-shares=1 -key-threshold=1`<br>
+    Initialize the new server, indicating that you want to use one unseal key:
+    ```
+    vault operator init -key-shares=1 -key-threshold=1
+    ```
 
     This gives you back an unseal key and an initial root token. <strong>Please save these for further use within this track.</strong>
 
     In order to use most Vault commands, you need to set the "VAULT_TOKEN" environment variable, using the initial root token that the "init" command returned:<br>
-    `export VAULT_TOKEN=<root_token>`
+    `export VAULT_TOKEN=<root_token>`<br>
+    being sure to use your own root token instead of <root_token\>.
 
-    You next need to unseal your Vault server, providing the unseal key that the "init" command returned:<br>
-    `vault operator unseal`<br>
+    Please also add this to your ".bash_profile" file with this command:
+    ```
+    echo "export VAULT_TOKEN=$VAULT_TOKEN" >> /root/.bash_profile
+    ```
+
+    You next need to unseal your Vault server, providing the unseal key that the "init" command returned:
+    ```
+    vault operator unseal
+    ```
     This will return the status of the server which should show that "Initialized" is "true" and that "Sealed` is "false".
 
-    To check the status of your Vault server at any time, you can run the "vault status" command. If it shows that "Sealed" is "true", re-run the "vault operator unseal" command.
+    To check the status of your Vault server at any time, you can run the `vault status` command. If it shows that "Sealed" is "true", re-run the `vault operator unseal` command.
 
     Finally, log into the Vault UI with your root token. If you have problems, double-check that you ran all of the above commands.
 
@@ -221,15 +254,17 @@ challenges:
   assignment: |-
     Now that you have a Vault production server running (in the background), you can mount a secrets engine and write secrets to it.
 
-    First, you'll need to export your VAULT_TOKEN environment variable again, using the initial root token that the "init" command returned in the previous challenge:<br>
-    `export VAULT_TOKEN=<root_token>`<br>
-    Alternatively, you can use your <up_arrow\> key to scroll back through your command history until you see your previous export of VAULT_TOKEN.
+    The setup script for this challenge has exported your root token for you from your ".bash_profile" file.
 
-    Now, you can mount an instance of the KV v2 secrets engine on the default path, "kv":<br>
-    `vault secrets enable -version=2 kv`
+    First, you can mount an instance of the KV v2 secrets engine on the default path, "kv":
+    ```
+    vault secrets enable -version=2 kv
+    ```
 
-    Next, write a secret to your new secrets engine:<br>
-    `vault kv put kv/a-secret value=1234`<br>
+    Next, write a secret to your new secrets engine:
+    ```
+    vault kv put kv/a-secret value=1234
+    ```
     Feel free to specify your own secret number instead of 1234.
 
     Login to the Vault UI with your root token and verify that the secret "a-secret" under the "kv" secrets engine has the value you provided by clicking its eye icon.
@@ -268,12 +303,12 @@ challenges:
   assignment: |-
     Now that you have a running production Vault server with a KV v2 secrets engine mounted, it's time to learn how to authenticate users.
 
-    First, you'll need to export your VAULT_TOKEN environment variable again:<br>
-    `export VAULT_TOKEN=<root_token>`<br>
-    Alternatively, you can use your <up_arrow\> key to scroll back through your command history until you see your previous export of VAULT_TOKEN.
+    The setup script for this challenge has exported your root token for you from your ".bash_profile" file.
 
-    Now, enable the Userpass auth method:<br>
-    `vault auth enable userpass`
+    First, enable the Userpass auth method:
+    ```
+    vault auth enable userpass
+    ```
 
     Next, add yourself as a Vault user without any policies:<br>
     `vault write auth/userpass/users/<name> password=<pwd>`<br>
@@ -284,15 +319,21 @@ challenges:
     You can also login with the Vault CLI:<br>
     `vault login -method=userpass username=<name> password=<pwd>`
 
-    Both of these login methods give you a Vault token with Vault's default policy that grants some very limited capabilities. A yellow warning message tells us that we currently have the VAULT_TOKEN environment variable set and that we should either unset it or set it to the new token. Let's unset it:<br>
-    `unset VAULT_TOKEN`
+    Both of these login methods give you a Vault token with Vault's default policy that grants some very limited capabilities. A yellow warning message tells us that we currently have the VAULT_TOKEN environment variable set and that we should either unset it or set it to the new token. Let's unset it:
+    ```
+    unset VAULT_TOKEN
+    ```
 
-    To confirm that your new token is being used, run this command:<br>
-    `vault token lookup`<br>
+    To confirm that your new token is being used, run this command:
+    ```
+    vault token lookup
+    ```
     You will see that the display_name of the current token is "userpass-<name\>" where <name\> is your username and that the only policy listed for the token is the "default" policy.
 
-    Try to read the secret you wrote to the KV v2 secrets engine in the last challenge:<br>
-    `vault kv get kv/a-secret`<br>
+    Try to read the secret you wrote to the KV v2 secrets engine in the last challenge:
+    ```
+    vault kv get kv/a-secret
+    ```
     You will get an error message because your token is not authorized to read any secrets yet.  That is because Vault policies are "deny by default", meaning that a token can only read or write a secret if it is explicitly given permission to do so by one of its policies.
 
     In the next challenge, you'll add a policy to your username that will allow you to read and write some secrets.
@@ -327,15 +368,14 @@ challenges:
   assignment: |-
     Now that you have the Userpass authentication method configured, you can add policies to give different users access to different secrets.
 
-    First, you'll need to export your VAULT_TOKEN environment variable again either by typing the command or by scrolling back through your history:<br>
-    `export VAULT_TOKEN=<root_token>`
+    The setup script for this challenge has exported your root token for you from your ".bash_profile" file.
 
     You already created a username for yourself to use with the Userpass auth method. Now, create a second user with the same command you used before, selecting a different username and password:<br>
     `vault write auth/userpass/users/<name> password=<pwd>`
 
     Next, edit the two policies on the "Vault Policies" tab, user-1-policy.hcl and user-2-policy.hcl. In user-1-policy.hcl, set all occurences of <user\> to your own username. In user-2-policy.hcl, set all occurences of <user\> to the username of the user you just added.
 
-    Save both files.
+    Save both files by clicking the disk icon above the files. (Do that once for each file.)
 
     Next, you are going to add the policies to the Vault server:<br>
     `vault policy write <user_1> /vault/policies/user-1-policy.hcl`<br>
@@ -349,7 +389,7 @@ challenges:
 
     Now, let's see what happens when you log into the Vault UI as the two different users.
 
-    Log in as yourself (the first user you created). Remember to specify the login method as "Userpass".
+    Log in as yourself (the first user you created). Remember to specify the login method as "Username".
 
     Click on the kv secrets engine. You should see the secret you previously created called "a-secret".  But if you select it, you'll see a "Not Authorized" message.
 
@@ -390,5 +430,5 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 1200
-checksum: "17861175506067249088"
+checksum: "16421638773910955049"
 show_timer: true

@@ -1,0 +1,10 @@
+#!/bin/ash -l
+
+# Install bash
+apk update
+apk upgrade
+apk add bash
+
+sed -i '1 s;^.*$;root:x:0:0:root:/root:/bin/bash;' /etc/passwd
+
+exit 0

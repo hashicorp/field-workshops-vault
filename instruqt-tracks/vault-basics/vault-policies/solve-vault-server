@@ -1,10 +1,13 @@
-#!/bin/sh -l
+#!/bin/bash -l
+
+#Enable bash history
+HISTFILE=/root/.bash_history
+set -o history
 
 # Get the root token from /root/token
-export VAULT_TOKEN=$(cat /root/token)
+#export VAULT_TOKEN=$(cat /root/token)
 
 # Create a second user
-echo -e "vault write auth/userpass/users/mary password=marry" >> /root/.bash_history
 vault write auth/userpass/users/mary password=marry
 
 # Edit the policy files
@@ -12,21 +15,15 @@ sed -i 's/<user>/harry/g' /vault/policies/user-1-policy.hcl
 sed -i 's/<user>/mary/g' /vault/policies/user-2-policy.hcl
 
 # Add the policies to Vault
-echo -e "vault policy write harry /vault/policies/user-1-policy.hcl" >> /root/.bash_history
 vault policy write harry /vault/policies/user-1-policy.hcl
-echo -e "vault policy write mary /vault/policies/user-2-policy.hcl" >> /root/.bash_history
 vault policy write mary /vault/policies/user-2-policy.hcl
 
 # Update the policies of the users
-echo -e "vault write auth/userpass/users/harry/policies policies=harry" >> /root/.bash_history
 vault write auth/userpass/users/harry/policies policies=harry
-echo -e "vault write auth/userpass/users/mary/policies policies=mary" >> /root/.bash_history
 vault write auth/userpass/users/mary/policies policies=mary
 
 # Write secrets for both users
-echo -e "vault kv put kv/harry/age age=35" >> /root/.bash_history
 vault kv put kv/harry/age age=35
-echo -e "vault kv put kv/mary/age age=33" >> /root/.bash_history
 vault kv put kv/mary/age age=33
 
 exit 0

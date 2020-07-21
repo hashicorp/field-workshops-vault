@@ -32,13 +32,11 @@ challenges:
     The Database credentials are time-bound and are automatically revoked when the Vault lease expires. The credentials can also be revoked at any time.
 
     All secrets engines must be enabled before they can be used. Check which secrets engines are currently enabled.
-
     ```
     vault secrets list
     ```
 
     Note that the Database secrets engine is not enabled. Please enable it at the path "lob_a/workshop/database".
-
     ```
     vault secrets enable -path=lob_a/workshop/database database
     ```
@@ -74,7 +72,6 @@ challenges:
     All secrets engines must be configured before they can be used.
 
     We first need to configure the database secrets engine to use the MySQL database plugin and valid connection information. We are configuring a database connection called "wsmysqldatabase" that is allowed to use two roles that we will create below.
-
     ```
     vault write lob_a/workshop/database/config/wsmysqldatabase \
       plugin_name=mysql-database-plugin \
@@ -217,7 +214,7 @@ challenges:
     Key                Value
     ---                -----
     lease_id           lob_a/workshop/database/creds/workshop-app/t3i85CnEjMlenWbvmJux8SI6
-    lease_duration     1m
+    lease_duration     3m
     lease_renewable    true
     password           A1a-ksrpiyz4tRKmxsRI
     username           v-token-workshop-a-kVYT30h6l3e1y
@@ -387,5 +384,5 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 1200
-checksum: "10754707837274871451"
+checksum: "1654842727531567841"
 show_timer: true

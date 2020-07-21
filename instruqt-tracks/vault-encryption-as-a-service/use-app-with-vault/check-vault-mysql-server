@@ -2,16 +2,16 @@
 
 set -e
 
-grep -q "ps -ef | grep app.py" /root/.bash_history || fail-message "You haven't determined the PID of the web app yet."
+grep -q "ps.*-ef.*|.*grep.*app.py" /root/.bash_history || fail-message "You haven't determined the PID of the web app yet."
 
-grep -q "kill -9" /root/.bash_history || fail-message "You haven't killed the web app yet."
+grep -q "kill.*-9" /root/.bash_history || fail-message "You haven't killed the web app yet."
 
-grep -q "Enabled = True" /home/vault/transit-app-example/backend/config.ini || fail-message "You have not set 'Enabled = True' in the '[VAULT]' section of /home/vault/transit-app-example/backend/config.ini."
+grep -q "Enabled.*=.*True" /home/vault/transit-app-example/backend/config.ini || fail-message "You have not set 'Enabled = True' in the '[VAULT]' section of /home/vault/transit-app-example/backend/config.ini."
 
-grep -q "DynamicDBCreds = True" /home/vault/transit-app-example/backend/config.ini || fail-message "You have not set 'DynamicDBCreds = True' in the '[VAULT]' section of /home/vault/transit-app-example/backend/config.ini."
+grep -q "DynamicDBCreds.*=.*True" /home/vault/transit-app-example/backend/config.ini || fail-message "You have not set 'DynamicDBCreds = True' in the '[VAULT]' section of /home/vault/transit-app-example/backend/config.ini."
 
-grep -q "cd /home/vault/transit-app-example/backend" /root/.bash_history || fail-message "You haven't run 'cd /home/vault/transit-app-example/backend' yet."
+grep -q "cd.*/home/vault/transit-app-example/backend" /root/.bash_history || fail-message "You haven't run 'cd /home/vault/transit-app-example/backend' yet."
 
-grep -q "python3 app.py &" /root/.bash_history || fail-message "You haven't restarted the web app by running 'python3 app.py &' yet."
+grep -q "python3.*app.py.*&" /root/.bash_history || fail-message "You haven't restarted the web app by running 'python3 app.py &' yet."
 
 exit 0

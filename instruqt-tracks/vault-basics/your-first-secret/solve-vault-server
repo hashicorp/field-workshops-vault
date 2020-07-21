@@ -1,16 +1,16 @@
-#!/bin/sh -l
+#!/bin/bash -l
 
-set -e
+#Enable bash history
+HISTFILE=/root/.bash_history
+set -o history
 
 # Run a Vault server in dev mode
 vault server -dev -dev-listen-address=0.0.0.0:8200 -dev-root-token-id=root &
-echo -e "vault server -dev -dev-listen-address=0.0.0.0:8200 -dev-root-token-id=root" >> /root/.bash_history
 
 # Sleep 15 seconds
 sleep 15
 
 # Write a secret to Vault's KV v2 secrets engine
 vault kv put secret/my-first-secret age=25
-echo -e "vault kv put secret/my-first-secret age=25" >> /root/.bash_history
 
 exit 0
