@@ -10,6 +10,9 @@ All HashiCorp field workshops focused on Vault should be placed in this reposito
 Additionally, field workshops focused on more than one HashiCorp solution can be found in the [field-workshops-hashistack](https://github.com/hashicorp/field-workshops-hashistack) repository.
 
 ## Slides
+The only current workshop is Introduction to Vault with these slides:
+https://hashicorp.github.io/field-workshops-vault/slides/multi-cloud/vault-oss/#1
+
 The slides for these workshops should be created using [Remark](https://remarkjs.com) and should be placed under the [docs/slides](./docs/slides) directory. This directory is organized by cloud and then by workshop.  If a workshop targets a single cloud, its slides should be placed in a directory under that cloud's directory ([aws](./docs/slides/aws), [azure](./docs/slides/azure), or [gcp](./docs/slides/gcp)). If a workshop can be used with multiple clouds, its slides should be placed in a directory under the [multi-cloud](./docs/slides/multi-cloud) directory.
 
 Please do **NOT** place any slides or any other content directly inside the [docs](./docs) directory.
