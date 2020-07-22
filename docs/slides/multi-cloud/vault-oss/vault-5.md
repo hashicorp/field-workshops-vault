@@ -100,21 +100,6 @@ name: userpass-0
 * In the real world you'd probably have Vault use your Active Directory, LDAP, GitHub, or other system of record for authentication by users.
 
 ---
-name: lab-vault-basics-challenge-6
-# 👩‍💻 Lab Challenge 5.1: Userpass Auth Method
-* In this lab, you'll enable and use the Userpass auth method.
-* Instructions:
-  * Click the "Use the Userpass Auth Method" challenge of the "Vault Basics" track.
-  * Then click the green "Start" button.
-  * Follow the challenge's instructions.
-  * Click the green "Check" button when finished.
-
-???
-* Instruct the students to do the "Use the Userpass Auth Method" challenge of the "Vault Basics" track.
-* This challenge has them enable an instance of the Userpass auth method.
-* It also demonstrates that Vault is "deny by default" since the Userpass user that they create will not have any access to secrets yet.
-
----
 name: chapter-5-review-questions
 # 📝 Chapter 5 Review
 * What types of entities can Vault authenticate?

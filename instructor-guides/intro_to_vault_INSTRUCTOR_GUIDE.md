@@ -4,6 +4,8 @@ This guide will prepare you to deliver a half-day [Introduction to Vault Worksho
 
 The workshop alternates between lectures with accompanying slides and hands-on lab exercises. New concepts that are introduced in the slides are reinforced in the labs. Participants will learn both the theory and practice of Vault. As an instructor you should be well familiar with the slide deck and the Instruqt tracks used in the workshop. Go through the course and make sure you understand all of the major concepts and lab exercises.
 
+Note that since July 22, 2020, all of the "Vault Basics" track should be done together after chapter 6. This avoids excessive switching between the main Zoom session and breakout rooms in virtual workshops.
+
 When possible you should attend a live training session to observe and learn from another instructor. We will also have video recordings of this workshop available soon.
 
 ### Prerequisites
@@ -61,7 +63,7 @@ https://github.com/hashicorp/field-workshops-vault/issues
 ### Hands-on Labs
 At certain points in the slide deck there are links to the lab exercises. [Instruqt](https://instruqt.com/hashicorp) is our lab platform. While all of the Vault workshop tracks are actually public, the slides use links to permanent Instruqt invitations that require users to register with Instruqt. We do this so that HashiCorp Field Marketing can collect the emails of users who start tracks during public or private workshops or on their own after following the links from the slides.
 
-Participants can register with Instruqt [here](https://play.instruqt.com/signup?from=/public). Instruqt supports registering with an email and via Google, GitHub, and Twitter.
+Participants can register with Instruqt [here](https://play.instruqt.com/signup). Instruqt supports registering with an email and via Google, GitHub, and Twitter.
 
 Students may have questions during the labs. When presenting a workshop be sure to give enough time for all your participants to go through the labs. Remember that this is probably their first time using a tool like Vault.
 
@@ -92,25 +94,22 @@ https://play.instruqt.com/hashicorp/tracks/vault-aws-auth-method
 Go through this track start to finish and make sure you understand all the challenges. This track covers Vault's AWS auth method.
 
 ### Timing
-The following schedule assumes you have a group of participants who are brand new to Vault. You should budget about four hours for this workshop including a short break. This is meant as a guideline, you can adjust as needed. If you prefer to alternate the slides of the "Interacting with Vault" chapter with the first 3 challenges of the "Vault Basics" track, you can do that.
+The following schedule assumes you have a group of participants who are brand new to Vault. You should budget about four hours for this workshop including a short break. (But in virtual workshops, participants are expected to take breaks during the labs.)
+
+This is meant as a guideline, you can adjust as needed. If you prefer to alternate the slides of the "Interacting with Vault" chapter with the first 3 challenges of the "Vault Basics" track, you can do that.
 
 If you want to cover the optional AWS slides and Instruqt tracks, add 1 hour.
 
 0:00 - 0:10 - Wait for attendees, make introductions<br>
-0:10 - 0:25 - Vault Overview<br>
-0:25 - 0:40 - Interacting with Vault<br>
-0:40 - 1:00 - Lab: Vault Basics: Challenges 1-3<br>
-1:00 - 1:10 - Running a Production Vault Server<br>
-1:10 - 1:20 - Lab: Vault Basics: Challenge 4<br>
-1:20 - 1:30 - Vault Secrets Engines<br>
-1:30 - 1:40 - Lab: Vault Basics: Challenge 5<br>
-1:40 - 1:50 - Vault Authentication Methods<br>
-1:50 - 2:00 - Lab: Vault Basics: Challenge 6<br>
-2:00 - 2:10 - Break<br>
-2:10 - 2:20 - Vault Policies<br>
-2:20 - 2:35 - Lab: Vault Basics: Challenge 7<br>
-2:35 - 2:50 - Dynamic Database Secrets<br>
-2:50 - 3:20 - Lab: Vault Dynamic Database Credentials<br>
-3:20 - 3:35 - Encryption as a Service<br>
-3:35 - 4:05 - Lab: Vault Encryption as a Service<br>
-4:05 - 4:15 - Wrap-up<br>
+0:10 - 0:25 - Chapter 1: Vault Overview<br>
+0:25 - 0:40 - Chapter 2: Interacting with Vault<br>
+0:40 - 0:50 - Chapter 3: Running a Production Vault Server<br>
+0:50 - 1:00 - Chapter 4: Vault Secrets Engines<br>
+1:00 - 1:10 - Chapter 5: Vault Authentication Methods<br>
+1:10 - 1:20 - Chapter 6: Vault Policies<br>
+1:20 - 2:30 - Lab: Vault Basics (including break time)<br>
+2:30 - 2:45 - Chapter 7: Dynamic Database Secrets<br>
+2:45 - 3:15 - Lab: Vault Dynamic Database Credentials<br>
+3:15 - 3:30 - Chapter 8: Encryption as a Service<br>
+3:30 - 4:00 - Lab: Vault Encryption as a Service<br>
+4:00 - 4:15 - Q&A and Wrap-up<br>

@@ -78,21 +78,6 @@ name: unsealing-vault
 
 ???
 * Describe Vault's `unseal` command.
----
-name: lab-vault-basics-challenge-4
-# 👩‍💻 Lab Challenge 3.1: Run a Vault "Prod" Server
-* In this lab, you'll run your first Vault server in "Prod" mode.
-* You'll learn how to initialize and unseal a Vault server.
-* Instructions:
-  * Click the "Run a Production Server" challenge of the "Vault Basics" track.
-  * Then click the green "Start" button.
-  * Follow the challenge's instructions.
-  * Click the green "Check" button when finished.
-
-???
-* Instruct the students to do the "Run a Production Server" challenge of the "Vault Basics" track.
-* This challenge has them examine a Vault server configuration file, run a Prod server, initialize it, and unseal it.
-* Remind students to save their unseal key and root token.
 
 ---
 name: vault-status-command

@@ -87,21 +87,6 @@ name: vault-policy-commands
 Describe the most important Vault CLI commands for policies.
 
 ---
-name: lab-vault-basics-challenge-7
-# 👩‍💻 Lab Challenge 6.1: Vault Policies
-* In this lab, you'll use Vault policies to grant different users access to different secrets.
-* Instructions:
-  * Click the "Use Vault Policies" challenge of the "Vault Basics" track.
-  * Then click the green "Start" button.
-  * Follow the challenge's instructions.
-  * Click the green "Check" button when finished.
-
-???
-* Instruct the students to do the "Use Vault Policies" challenge of the "Vault Basics" track.
-* This challenge has them create a second user and create and associate policies with their 2 users.
-* It then has them valdiate that each user can only access their own secrets.
-
----
 name: chapter-6-review-questions
 # 📝 Chapter 6 Review
 * Does Vault grant access to secrets by default?

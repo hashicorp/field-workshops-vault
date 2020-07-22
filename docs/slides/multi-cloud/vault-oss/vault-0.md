@@ -72,3 +72,6 @@ name: instruqt-tracks
     1. [Vault Basics](https://play.instruqt.com/hashicorp/invite/qfwncq62zsxu)
     1. [Vault Dynamic Database Credentials](https://play.instruqt.com/hashicorp/invite/sryhqfdm6sgx)
     1. [Vault Encryption as a Service](https://play.instruqt.com/hashicorp/invite/qleasfx1dszc)
+* We'll cover chapters 1-6 and then do the first lab.
+* We'll then cover chapter 7 with the second lab.
+* We'll finish with chapter 8 and the third lab.

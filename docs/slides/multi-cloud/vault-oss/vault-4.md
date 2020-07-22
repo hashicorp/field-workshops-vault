@@ -108,22 +108,6 @@ name: vault-kv-commands
 * Describe the various `vault kv` subcommands.
 
 ---
-name: lab-vault-basics-challenge-5
-# 👩‍💻 Lab Challenge 4.1: KV v2 Secrets Engine
-* In this lab, you'll enable and use the KV v2 secrets engine.
-* Note that the path will be `kv` instead of `secret`.
-* Instructions:
-  * Click the "Use the KV V2 Secrets Engine" challenge of the "Vault Basics" track.
-  * Then click the green "Start" button.
-  * Follow the challenge's instructions.
-  * Click the green "Check" button when finished.
-
-???
-* Instruct the students to do the "Use the KV V2 Secrets Engine" challenge of the "Vault Basics" track.
-* This challenge has them enable an instance of the KV v2 secrets engine.
-* Emphasize that the path will be `kv` instead of `secret` as was the case for the challenges with the Dev mode server.
-
----
 name: chapter-4-review-questions
 # 📝 Chapter 4 Review
 

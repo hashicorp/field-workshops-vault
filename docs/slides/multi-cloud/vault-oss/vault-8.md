@@ -133,7 +133,7 @@ name: encryption-key-rotation
 
 ---
 name: lab-transit-challenge-1
-# 👩‍💻 Challenge 8.1: Enable the Transit Engine
+# 👩‍💻 Challenge 1: Enable the Transit Engine
 * In this lab challenge, you'll enable the Transit engine.
 * You'll do this in the [Vault Encryption as a Service](https://play.instruqt.com/hashicorp/invite/qleasfx1dszc) Instruqt track.
 * Instructions:
@@ -148,10 +148,10 @@ name: lab-transit-challenge-1
 
 ---
 name: lab-database-challenge-2
-# 👩‍💻 Challenge 8.2: Create an Encryption Key
+# 👩‍💻 Challenge 2: Create an Encryption Key
 * In this lab, you'll create an encryption key for use with the Transit engine you enabled in the previous challenge.
 * Instructions:
-  * Click the "Create a Key for the Transit Secrets Engine" challenge of the "Vault Encryption as a Service" track.
+  * If the track does not do it for you, click the "Create a Key for the Transit Secrets Engine" challenge of the "Vault Encryption as a Service" track.
   * Then click the green "Start" button.
   * Follow the challenge's instructions.
   * Click the green "Check" button when finished.
@@ -162,10 +162,10 @@ name: lab-database-challenge-2
 
 ---
 name: lab-database-challenge-3
-# 👩‍💻 Challenge 8.3: Use the Web App Without Vault
+# 👩‍💻 Challenge 3: Use the Web App Without Vault
 * In this lab, you'll use the web application without Vault.
 * Instructions:
-  * Click the "Use the Web App Without Vault" challenge of the "Vault Encryption as a Service" track.
+  * If the track does not do it for you, click the "Use the Web App Without Vault" challenge of the "Vault Encryption as a Service" track.
   * Then click the green "Start" button.
   * Follow the challenge's instructions.
   * Click the green "Check" button when finished.
@@ -177,11 +177,11 @@ name: lab-database-challenge-3
 
 ---
 name: lab-database-challenge-4
-# 👩‍💻 Challenge 8.4: Use the Web App With Vault
+# 👩‍💻 Challenge 4: Use the Web App With Vault
 * In this lab, you'll use the web application with Vault.
 * You'll also rotate the encryption key.
 * Instructions:
-  * Click the "Use the Web App With Vault" challenge of the "Vault Encryption as a Service" track.
+  * If the track does not do it for you, click the "Use the Web App With Vault" challenge of the "Vault Encryption as a Service" track.
   * Then click the green "Start" button.
   * Follow the challenge's instructions.
   * Click the green "Check" button when finished.
