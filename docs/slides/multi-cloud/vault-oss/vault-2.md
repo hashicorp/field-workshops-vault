@@ -73,43 +73,6 @@ The `-h`, `-help`, and `--help` flags can be added to get help for any Vault CLI
 Let's discuss some of the basic Vault CLI commands.
 
 ---
-name: getting-started-with-instruqt
-# Doing Labs with Instruqt
-* [Instruqt](https://instruqt.com/) is the platform used for HashiCorp workshops.
-* Instruqt labs are run in "tracks" that are divided into "challenges".
-* If you've never used Instruqt before, start with this [tutorial](https://play.instruqt.com/instruqt/tracks/getting-started-with-instruqt).
-* Otherwise, you can skip to the next slide.
-
-???
-* We'll be using the Instruqt platform for labs in this workshop.
-* Don't worry if you've never used it before: there is an easy tutorial that you can run through in 5-10 minutes.
----
-name: lab-vault-basics-challenge-1
-# 👩‍💻 Lab Challenge 2.1: The Vault CLI
-* In this lab, you'll run some of the Vault CLI commands.
-* You'll do this in the first challenge, "The Vault CLI", of the [Vault Basics](https://play.instruqt.com/hashicorp/invite/qfwncq62zsxu) Instruqt track.
-* You'll continue to work through this Instruqt track in chapters 2-6.
-
-???
-* Now, you can try running some Vault CLI commands yourself in the first challenge of our first Instruqt track in this workshop.
-* We'll be running the Instruqt track "Vault Basics" in the chapters 2-6.
-
----
-name:lab-vault-basics-challenge-1-instructions
-# 👩‍💻 Lab Challenge 2.1: Instructions
-* Start the "Vault Basics" track by clicking the purple "Start" button on the "Vault CLI" challenge of the track.
-* While the challenge is loading, read the displayed text.
-* Click the green "Start" button to start the "Vault CLI" challenge.
-* Follow the instructions on the right side of the challenge.
-* After completing all the steps, click the green "Check" button to see if you did everything right.
-* You can also click the "Check" button for reminders.
-
-???
-* Give the students some instructions for starting their first challenge.
-* This also includes instructions for checking that they did everything right.
-* Students can also click the green "Check" button to get reminderd of what they should do next.
-
----
 name: vault-server-modes
 # Vault Server Modes
 Vault servers can be run in two different modes:
@@ -132,21 +95,6 @@ name: vault-dev-server
 ???
 * Discuss limitations of Vault's "Dev" mode.
 * Warn students to never store real secrets on a Dev server.
-
----
-name: lab-vault-basics-challenge-2
-# 👩‍💻 Lab Challenge 2.2: Run a Vault "Dev" Server
-* In this lab, you'll run your first Vault server in "Dev" mode.
-* You'll also write your first secret to Vault and use the UI.
-* Instructions:
-  * Click the "Your First Secret" challenge of the "Vault Basics" track.
-  * Then click the green "Start" button.
-  * Follow the challenge's instructions.
-  * Click the green "Check" button when finished.
-
-???
-* Instruct the students to do the "Your First Secret" challenge of the "Vault Basics" track.
-* This challenge has them run a Dev server, write a secret to the KV v2 secrets engine that was automatically enabled, and use the Vault UI.
 
 ---
 name: Vault-UI
@@ -206,7 +154,7 @@ name: vault-api-2
   "replication_performance_mode": "disabled",
   "replication_dr_mode": "disabled",
   "server_time_utc": 1557180149,
-  "version": "1.1.1",
+  "version": "1.4.3",
   "cluster_name": "vault-cluster-db6f271d",
   "cluster_id": "33e85d7c-63bb-7523-0165-9d1aee722d70"
 }
@@ -225,21 +173,6 @@ name: vault-api-3
 
 ???
 * Talk about how most Vault HTTP API calls will require authentication with a Vault token.
-
----
-name: lab-vault-basics-challenge-3
-# 👩‍💻 Lab Challenge 2.3: Use the Vault HTTP API
-* In this lab, you'll use the Vault HTTP API.
-* You'll first check the health of your Vault server.
-* You'll then read your `my-first-secret` secret from Vault.
-* Instructions:
-  * Click the challenge called "The Vault API" in the "Vault Basics" track.
-  * Then click the green "Start" button.
-  * Follow the challenge's instructions.
-  * Click the green "Check" button when finished.
-
-???
-* Instruct the students to do the challenge, "The Vault API", in the "Vault Basics" track.
 
 ---
 name: chapter-2-review-questions

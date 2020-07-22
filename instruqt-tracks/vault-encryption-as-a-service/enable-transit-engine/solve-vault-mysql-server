@@ -1,11 +1,13 @@
 #!/bin/bash -l
 
+#Enable bash history
+HISTFILE=/root/.bash_history
+set -o history
+
 # List Vault Secrets
-echo -e "vault secrets list" >> /root/.bash_history
 vault secrets list
 
 # Enable the Transit secrets engine
-echo -e "vault secrets enable -path=lob_a/workshop/transit transit" >> /root/.bash_history
 vault secrets enable -path=lob_a/workshop/transit transit
 
 exit 0

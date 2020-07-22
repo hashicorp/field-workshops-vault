@@ -1,4 +1,6 @@
-#!/bin/sh -l
+#!/bin/bash -l
+
+set -e
 
 mkdir /vault/policies
 

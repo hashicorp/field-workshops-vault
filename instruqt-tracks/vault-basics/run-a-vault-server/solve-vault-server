@@ -1,14 +1,16 @@
-#!/bin/sh -l
+#!/bin/bash -l
+
+#Enable bash history
+HISTFILE=/root/.bash_history
+set -o history
 
 # Run Vault server
-echo -e "vault server -config=/vault/config/vault-config.hcl" >> /root/.bash_history
 vault server -config=/vault/config/vault-config.hcl -log-level=debug > /vault/logs/vault.log 2>&1 &
 
 # Sleep 15 seconds
 sleep 15
 
 # Initialize Vault server
-echo -e "vault operator init -key-shares=1 -key-threshold=1" >> /root/.bash_history
 vault operator init -key-shares=1 -key-threshold=1 > init.log
 
 # Extract root token and unseal key from init.log
@@ -22,11 +24,10 @@ echo $token > /root/token
 echo $unseal_key > /root/unseal_key
 
 # Export VAULT_TOKEN
-echo -e "export VAULT_TOKEN=$token" >> /root/.bash_history
 export VAULT_TOKEN=$token
+echo "export VAULT_TOKEN=$VAULT_TOKEN" >> /root/.bash_profile
 
 # Unseal Vault server
-echo -e "vault operator unseal $unseal_key" >> /root/.bash_history
 vault operator unseal $unseal_key
 
 exit 0

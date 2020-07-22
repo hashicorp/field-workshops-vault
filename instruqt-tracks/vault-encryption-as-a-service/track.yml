@@ -218,5 +218,5 @@ challenges:
     path: /home/vault/transit-app-example/backend/config.ini
   difficulty: basic
   timelimit: 1200
-checksum: "6003798456707042722"
+checksum: "8779911304556039151"
 show_timer: true

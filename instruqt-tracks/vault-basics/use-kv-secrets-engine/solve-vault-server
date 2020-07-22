@@ -1,7 +1,11 @@
-#!/bin/sh -l
+#!/bin/bash -l
+
+#Enable bash history
+HISTFILE=/root/.bash_history
+set -o history
 
 # Get the root token from /root/token
-export VAULT_TOKEN=$(cat /root/token)
+#export VAULT_TOKEN=$(cat /root/token)
 
 # Sleep
 sleep 10
@@ -12,11 +16,9 @@ sleep 10
 vault secrets list
 
 # Mount the KV v2 secrets engine
-echo -e "vault secrets enable -version=2 kv" >> /root/.bash_history
 vault secrets enable -version=2 kv
 
 # Write a secret
-echo -e "vault kv put kv/a-secret value=1234" >> /root/.bash_history
 vault kv put kv/a-secret value=1234
 
 exit 0
