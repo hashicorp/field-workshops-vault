@@ -3,7 +3,7 @@ containers:
 - name: vault-server
   image: vault:1.4.3
   cmd: version
-  shell: /bin/sh
+  shell: /bin/sh -l
   ports:
   - 8200
   environment:

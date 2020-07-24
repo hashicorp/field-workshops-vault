@@ -197,9 +197,9 @@ challenges:
     `export VAULT_TOKEN=<root_token>`<br>
     being sure to use your own root token instead of <root_token\>.
 
-    Please also add this to your ".bash_profile" file with this command:
+    Please also add this to your ".profile" file with this command:
     ```
-    echo "export VAULT_TOKEN=$VAULT_TOKEN" >> /root/.bash_profile
+    echo "export VAULT_TOKEN=$VAULT_TOKEN" >> /root/.profile
     ```
 
     You next need to unseal your Vault server, providing the unseal key that the "init" command returned:
@@ -254,7 +254,7 @@ challenges:
   assignment: |-
     Now that you have a Vault production server running (in the background), you can mount a secrets engine and write secrets to it.
 
-    The setup script for this challenge has exported your root token for you from your ".bash_profile" file.
+    The setup script for this challenge has exported your root token for you from your ".profile" file.
 
     First, you can mount an instance of the KV v2 secrets engine on the default path, "kv":
     ```
@@ -303,7 +303,7 @@ challenges:
   assignment: |-
     Now that you have a running production Vault server with a KV v2 secrets engine mounted, it's time to learn how to authenticate users.
 
-    The setup script for this challenge has exported your root token for you from your ".bash_profile" file.
+    The setup script for this challenge has exported your root token for you from your ".profile" file.
 
     First, enable the Userpass auth method:
     ```
@@ -368,7 +368,7 @@ challenges:
   assignment: |-
     Now that you have the Userpass authentication method configured, you can add policies to give different users access to different secrets.
 
-    The setup script for this challenge has exported your root token for you from your ".bash_profile" file.
+    The setup script for this challenge has exported your root token for you from your ".profile" file.
 
     You already created a username for yourself to use with the Userpass auth method. Now, create a second user with the same command you used before, selecting a different username and password:<br>
     `vault write auth/userpass/users/<name> password=<pwd>`
@@ -430,5 +430,5 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 900
-checksum: "8653050100545414891"
+checksum: "15048067012735933251"
 show_timer: true
