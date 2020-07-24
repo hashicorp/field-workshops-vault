@@ -25,7 +25,7 @@ echo $unseal_key > /root/unseal_key
 
 # Export VAULT_TOKEN
 export VAULT_TOKEN=$token
-echo "export VAULT_TOKEN=$VAULT_TOKEN" >> /root/.bash_profile
+echo "export VAULT_TOKEN=$VAULT_TOKEN" >> /root/.profile
 
 # Unseal Vault server
 vault operator unseal $unseal_key

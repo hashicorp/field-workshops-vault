@@ -8,7 +8,7 @@ grep -q "vault.*operator.*init.*-key-shares=1.*-key-threshold=1" /root/.bash_his
 
 grep -q "export.*VAULT_TOKEN" /root/.bash_history || fail-message "You haven't exported your VAULT_TOKEN yet."
 
-grep -q "export.*VAULT_TOKEN=" /root/.bash_profile || fail-message "You haven't exported your VAULT_TOKEN yet into your .bash_profile yet."
+grep -q "export.*VAULT_TOKEN=" /root/.profile || fail-message "You haven't exported your VAULT_TOKEN yet into your .profile yet."
 
 grep -q "vault.*operator.*unseal" /root/.bash_history || fail-message "You haven't unsealed your server with 'vault operator unseal' yet."
 
