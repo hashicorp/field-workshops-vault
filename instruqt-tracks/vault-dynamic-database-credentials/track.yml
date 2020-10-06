@@ -19,6 +19,7 @@ developers:
 - roger@hashicorp.com
 private: false
 published: true
+show_timer: true
 challenges:
 - slug: enable-database-secrets-engine
   id: z6ovrqxwopus
@@ -384,5 +385,4 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 1200
-checksum: "1654842727531567841"
-show_timer: true
+checksum: "424719379919914192"

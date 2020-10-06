@@ -19,6 +19,7 @@ developers:
 - roger@hashicorp.com
 private: false
 published: true
+show_timer: true
 challenges:
 - slug: enable-transit-engine
   id: rtt1nujqyebg
@@ -218,5 +219,4 @@ challenges:
     path: /home/vault/transit-app-example/backend/config.ini
   difficulty: basic
   timelimit: 1200
-checksum: "8779911304556039151"
-show_timer: true
+checksum: "7695319600678720990"

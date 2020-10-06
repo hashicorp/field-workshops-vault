@@ -21,6 +21,7 @@ developers:
 - neil@hashicorp.com
 private: false
 published: true
+show_timer: true
 challenges:
 - slug: enable-aws-auth-method
   id: ygi2fqclejkf
@@ -318,5 +319,4 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 300
-checksum: "3019046913436166430"
-show_timer: true
+checksum: "2732689614779432119"
