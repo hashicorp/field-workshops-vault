@@ -16,6 +16,7 @@ developers:
 - neil@hashicorp.com
 private: false
 published: true
+show_timer: true
 challenges:
 - slug: enable-aws-secrets-engine
   id: h1entlh9levm
@@ -305,5 +306,4 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 300
-checksum: "16843450083105064757"
-show_timer: true
+checksum: "15098889040589976040"
