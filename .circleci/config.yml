@@ -2,7 +2,7 @@ version: 2
 jobs:
   instruqt-validate:
     docker:
-      - image: ubuntu:latest
+      - image: docker.mirror.hashicorp.services/ubuntu:latest
     steps:
       - checkout
       - run:
@@ -30,7 +30,7 @@ jobs:
             done
   instruqt-test-vault-basics:
     docker:
-      - image: ubuntu:latest
+      - image: docker.mirror.hashicorp.services/ubuntu:latest
     steps:
       - checkout
       - run:
@@ -70,7 +70,7 @@ jobs:
             fi
   instruqt-test-vault-dynamic-database-credentials:
     docker:
-      - image: ubuntu:latest
+      - image: docker.mirror.hashicorp.services/ubuntu:latest
     steps:
       - checkout
       - run:
@@ -110,7 +110,7 @@ jobs:
             fi
   instruqt-test-vault-dynamic-secrets-aws:
     docker:
-      - image: ubuntu:latest
+      - image: docker.mirror.hashicorp.services/ubuntu:latest
     steps:
       - checkout
       - run:
@@ -150,7 +150,7 @@ jobs:
             fi
   instruqt-test-vault-aws-auth-method:
     docker:
-      - image: ubuntu:latest
+      - image: docker.mirror.hashicorp.services/ubuntu:latest
     steps:
       - checkout
       - run:
@@ -190,7 +190,7 @@ jobs:
             fi
   instruqt-test-vault-encryption-as-a-service:
     docker:
-      - image: ubuntu:latest
+      - image: docker.mirror.hashicorp.services/ubuntu:latest
     steps:
       - checkout
       - run:
