@@ -15,6 +15,18 @@ The Instruqt tracks include terminal tabs that can be used to execute Vault CLI 
 
 All instructors and TAs from HashiCorp should be sure to register themselves with Instruqt and then post a message in our Slack channel, #proj-instruqt, asking to be added to the HashiCorp organization within Instruqt. This is important even if the tracks are public since only members of the HashiCorp organization can see the useful "Skip to Challenge" button on challenges of tracks within this organization.
 
+### Scheduling your workshop
+Please add all workshops, both public and private, to the shared instruqt-workshops Google calendar as follows:
+
+1. Create a new event on the instruqt-workshops calendar and set the name to the name of your workshop which could match a name being used by Field Marketing if it is public or the name of a specific customer and a product if it is private.
+2. Set the begin and end times of the event to the begin and end times of your workshop.
+3. Include the following information in the description:
+    1. The name of the host (probably yourself) after "Host:"
+    2. The names of presenters after "Presenters:"
+    3. A list of tracks that your workshop will use after "Tracks:", listing the URL of each track on its own line.
+
+Before saving the event, be sure to set the calendar as "instruqt-workshops" instead of your own personal calendar.
+
 ### Email Invitation
 Here is some boilerplate text you can use or customize when inviting or announcing your workshop:
 
