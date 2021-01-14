@@ -235,37 +235,37 @@ workflows:
       - instruqt-validate:
           filters:
             branches:
-              only: master
+              only: main
       - instruqt-test-vault-basics:
           requires:
             - instruqt-validate
           filters:
             branches:
-              only: master
+              only: main
       - instruqt-test-vault-dynamic-database-credentials:
           requires:
             - instruqt-validate
           filters:
             branches:
-              only: master
+              only: main
       - instruqt-test-vault-dynamic-secrets-aws:
           requires:
             - instruqt-validate
           filters:
             branches:
-              only: master
+              only: main
       - instruqt-test-vault-aws-auth-method:
           requires:
             - instruqt-validate
           filters:
             branches:
-              only: master
+              only: main
       - instruqt-test-vault-encryption-as-a-service:
           requires:
             - instruqt-validate
           filters:
             branches:
-              only: master
+              only: main
   nightly-build:
     triggers:
       - schedule:
@@ -273,7 +273,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
     jobs:
       - instruqt-validate
       - instruqt-test-vault-basics:
