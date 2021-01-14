@@ -50,3 +50,13 @@ The instructor guides for these workshops should be created as Markdown files an
 
 ## Labs (Instruqt Tracks)
 The labs for these workshops should be created using [Instruqt Tracks](https://instruqt.com/hashicorp).  Each track should be placed in its own directory directly underneath the [instruqt-tracks](./instruqt-tracks) directory. Doing this allows each track to be used by multiple workshops within this repository.
+
+We currently have 3 standard Instruqt tracks for the Vault Workshop:
+* https://play.instruqt.com/hashicorp/tracks/vault-basics
+* https://play.instruqt.com/hashicorp/tracks/vault-dynamic-database-credentials
+* https://play.instruqt.com/hashicorp/tracks/vault-encryption-as-a-service
+
+There are also 3 optional tracks:
+* https://play.instruqt.com/hashicorp/tracks/vault-aws-dynamic-secrets
+* https://play.instruqt.com/hashicorp/tracks/vault-aws-auth-method
+* https://play.instruqt.com/hashicorp/tracks/vault-ssh-secret-engine
