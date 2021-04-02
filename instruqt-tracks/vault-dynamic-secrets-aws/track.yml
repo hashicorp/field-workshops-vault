@@ -15,7 +15,7 @@ owner: hashicorp
 developers:
 - neil@hashicorp.com
 - roger@hashicorp.com
-private: false
+private: true
 published: true
 show_timer: true
 challenges:
@@ -307,4 +307,4 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 300
-checksum: "9253370638236288941"
+checksum: "558886741303255226"
