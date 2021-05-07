@@ -9,7 +9,7 @@ count: false
 ![:scale 15%](https://hashicorp.github.io/field-workshops-assets/assets/logos/logo_vault.png)
 
 ???
-This workshop introduces students to the open-source version of Vault.
+This workshop introduces students to Vault.
 
 It is cloud agnostic.
 
