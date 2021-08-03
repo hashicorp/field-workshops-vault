@@ -1,0 +1,376 @@
+slug: vault-advanced-data-protection-with-tokenization
+id: pm1e6okdgbx3
+version: 0.0.1
+type: track
+title: Vault ADP with Tokenization
+teaser: Leverage Vault's Transform Secret Engine (Tokenization) for protecting customer
+  PII data.
+description: |-
+  The Vault Transform Secret Engine provides the ability to tokenize sensitive data for storing outside of Vault.
+
+  When encrypting sensitive data, preservation of the original data format or length may be required to meet certain industry standards such as HIPAA or PCI.
+  To fulfill this requirement, the transform secrets engine can perform format preserving encryption (FPE).
+
+  However, there are organizations that care more about the irreversibility of the tokenized data and not so much about preserving the original data format.
+  Therefore, the transform secrets engine's FPE transformation may not meet the governance, risk and compliance (GRC) strategy they are looking for due to the use of reversible cryptography to perform FPE.
+
+  In this lab, you will use the Transform secret engine with an example Golang application and external Postgres database.
+icon: https://storage.googleapis.com/instruqt-frontend/assets/hashicorp/tracks/vault.png
+tags:
+- vault
+- adp
+- tokenization
+owner: hashicorp
+developers:
+- aklaas@hashicorp.com
+private: false
+published: true
+challenges:
+- slug: enable-the-transform-secret-engine
+  id: lz6iiyy29zf0
+  type: challenge
+  title: Enable the Transform (Tokenization) secret engine
+  teaser: In this first challenge, we will enable and configure Vault's Transform
+    secret engine with data tokenization.
+  notes:
+  - type: text
+    contents: |-
+      Secrets engines are Vault plugins that store, generate, tokenize, or encrypt data.
+      The Transform secrets engine functions as Vault's Encryption-as-a-Service and Tokenization solution.
+      The secret engine supports tokenization, format preserving encryption, and data masking transformations.
+      To learn more, see https://www.vaultproject.io/docs/secrets/transform/tokenization.
+
+      This lab usually takes 3-5 minutes to spin up.
+
+      ![Tokenization](https://github.com/Andrew-Klaas/instruqt-tokenization-lab/raw/main/assets/images/tokenization_overview.png)
+  assignment: |-
+    The Transform secret engine allows Vault to tokenize data before storing to external storage.
+
+    In this track, you will use the Transform secrets engine with a Golang web app that talks to a PostgreSQL server.
+    Both of these run on Kubernetes and are deployed via helm. There is also a Vault server running on Kubernetes whose root token is set to `root`.
+
+    Vault can be viewed in the "Vault-ui" tab.
+    The Golang web app can be viewed in the "Web App" tab.
+    Our application code is shown in the "Golang App Code" tabs. These will be reviewed in a later challenge.
+
+    All secrets engines must be enabled before they can be used. Check which secrets engines are currently enabled on the "Vault CLI" tab.
+    ```
+    vault secrets list
+    ```
+    Note that the Transform secrets engine is not enabled. Please enable it.
+    ```
+    vault secrets enable transform
+    ```
+    Other lines of busines could create their own instances of the Transform engine.
+  tabs:
+  - title: Terminal
+    type: terminal
+    hostname: kubernetes
+  - title: Golang App Code - init
+    type: code
+    hostname: kubernetes
+    path: /root/vault-go-demo-tokenization/config/db.go
+  - title: Golang App Code - tokenization
+    type: code
+    hostname: kubernetes
+    path: /root/vault-go-demo-tokenization/users/handlers.go
+  - title: Web App
+    type: service
+    hostname: kubernetes
+    path: /
+    port: 9090
+  - title: Vault-ui
+    type: service
+    hostname: kubernetes
+    path: /
+    port: 8200
+  difficulty: basic
+  timelimit: 10000
+- slug: test-the-web-app
+  id: 4av0scyuvoyj
+  type: challenge
+  title: Test the web app
+  teaser: Determine how our application works and what data to tokenize
+  notes:
+  - type: text
+    contents: In this challenge, we will test our current web app to determine what
+      customer PII data needs to be tokenized for compliance.
+  assignment: |-
+    The web app can be viewed on the "Web App" tab. You may want to click the icon in the upper right corner of the tabs area to hide the assignment window so that you can see the entire UI of the web app. Click it again to display the assignment window.
+    The web app has two sections:
+    1. Records: This displays what a real user would see after any data has been decoded (de-tokenized).
+    1. Database View: This displays raw records from the database. If any items are tokenized in the database, they will not be decoded. (i.e. you will NOT see plaintext, this is our goal at the end of the lab!)
+    In its initial state, no records have been tokenized by Vault. So, you will essentially see the same data in both views. (The headers and order of the columns are different.) Go ahead and confirm that.
+    The web app was already started by the track's first challenge.
+
+    Click the "Add Record" button and add a new record with some fake data. Then check that the new record is not tokenized in the Database View.
+
+    In order to meet PCI compliance, our organization needs to ensure that all customer SSNs are tokenized. In the following steps, we will configure Vault and show how to modify our code.
+  tabs:
+  - title: Terminal
+    type: terminal
+    hostname: kubernetes
+  - title: Golang App Code - init
+    type: code
+    hostname: kubernetes
+    path: /root/vault-go-demo-tokenization/config/db.go
+  - title: Golang App Code - tokenization
+    type: code
+    hostname: kubernetes
+    path: /root/vault-go-demo-tokenization/users/handlers.go
+  - title: Web App
+    type: service
+    hostname: kubernetes
+    path: /
+    port: 9090
+  - title: Vault-ui
+    type: service
+    hostname: kubernetes
+    path: /
+    port: 8200
+  difficulty: basic
+  timelimit: 10000
+- slug: configure-the-transform-secret-engine
+  id: hzyumbmovnyy
+  type: challenge
+  title: Configure the Transform (Tokenization) secret engine
+  teaser: Specify a role and transformation to Tokenize user SSNs.
+  notes:
+  - type: text
+    contents: In this challenge, we will configure the Transform secret engine for
+      use with our application.
+  assignment: |-
+    First, create a role in Vault for our application. Roles are used by Vault ACLs to restrict access to the underlying transformations. (See below for an example).
+    ```
+    vault write transform/role/vault_go_demo transformations=ssn
+    ```
+    The transformation from above "ssn" now needs to be configured to leverage tokenization (instead of format preserving encryption).
+    We also specify a time-to-live "TTL" of the token, and the allowed role from above "vault_go_demo". At the end of the TTL, the tokenized data will be deleted.
+    More configuration options are listed here: https://www.vaultproject.io/api/secret/transform.
+    ```
+    vault write transform/transformations/tokenization/ssn \
+      allowed_roles=vault_go_demo \
+      max_ttl=24h
+    ```
+    Now, encode a test value.
+    ```
+    vault write transform/encode/vault_go_demo \
+      transformation=ssn \
+      value="123-45-6789"
+    ```
+    A tokenized value should be returned.
+    The token is stored encrypted along side the provided plaintext within Vault or an external postgres database.
+    https://learn.hashicorp.com/tutorials/vault/tokenization#setup-external-token-storage
+
+    Decode the token
+    ```
+    vault write transform/decode/vault_go_demo \
+      transformation=ssn value=<encoded_value_from_above>
+    ```
+    Vault ACL policies can restrict which users and applications have access to this secret engine.
+    They can be read about here: https://www.vaultproject.io/docs/concepts/policies.
+    As an example, we could give a user or application access to our secret engine role with this policy:
+    ```
+    path "transform/encode/vault_go_demo" {
+      capabilities = [ "update" ]
+    }
+    path "transform/decode/vault_go_demo" {
+      capabilities = [ "update" ]
+    }
+    ```
+    Next, we will review how to modify our golang code to leverage Vault.
+  tabs:
+  - title: Terminal
+    type: terminal
+    hostname: kubernetes
+  - title: Golang App Code - init
+    type: code
+    hostname: kubernetes
+    path: /root/vault-go-demo-tokenization/config/db.go
+  - title: Golang App Code - tokenization
+    type: code
+    hostname: kubernetes
+    path: /root/vault-go-demo-tokenization/users/handlers.go
+  - title: Web App
+    type: service
+    hostname: kubernetes
+    path: /
+    port: 9090
+  - title: Vault-ui
+    type: service
+    hostname: kubernetes
+    path: /
+    port: 8200
+  difficulty: basic
+  timelimit: 10000
+- slug: review-app-integration
+  id: 2ms5atm2xpxx
+  type: challenge
+  title: Review our application code
+  teaser: Leverage native libraries to integrate with HashiCorp Vault
+  notes:
+  - type: text
+    contents: |-
+      In this challenge, we will review the application code we used to integrate with the Vault.
+
+      To learn more about Vault native libraries see the following link: https://www.vaultproject.io/api/libraries.
+  assignment: |-
+    NOTE: This challenge is optional for educational purpose only. You may skip below if you choose.
+
+    We will be leveraging the official Go Vault client: https://github.com/hashicorp/vault/tree/master/api.
+
+    First, open up the code editor tab called "Golang App Code - init".
+
+    NOTE: Make sure to click the file name on the left to open up the editor.
+
+    In this file, we perform a few steps to login to Vault and pull dynamic database credentials.
+    For more legacy applications, we also provide the Vault Agent which can template a token or credential to a file.
+    Vault Agent: https://www.vaultproject.io/docs/agent.
+
+    On line 42 we pull the Kubernetes service account JWT token from the pod filesystem. This will be used to login to Vault.
+    To learn more about Kubernetes authentication in Vault see the following: https://www.vaultproject.io/docs/auth/kubernetes.
+    ```
+    buf, err := ioutil.ReadFile(tokenPath)
+    if err != nil {
+      log.Fatal(err)
+    }
+    jwt := string(buf)
+    fmt.Printf("K8s Service Account JWT: %v", jwt)
+    config := map[string]interface{}{
+      "jwt":  jwt,
+      "role": K8sAuthRole,
+    }
+    ```
+    (Line 55) Next, we use our Vault client "Vclient" to write to the Vault login path using the above configuration (JWT and Role).
+
+    Once authenticated and authorized, Vault returns a token.
+    ```
+    //Login
+    secret, err1 := Vclient.Logical().Write(K8sAuthPath, config)
+    if err1 != nil {
+      log.Fatal(err)
+    }
+    Vclient.SetToken(secret.Auth.ClientToken)
+    ```
+    On line 62, we next pull database credentials from Vault in order to connect to PostgreSQL. In this setup, we are using dynamic secrets.
+    Dynamic Secrets are just-in-time credentials that are unique and short-lived for every application instance or pod.
+    Read more about dynamic secrets here: https://www.vaultproject.io/docs/secrets/databases/postgresql.
+    ```
+    //Pull dynamic database credentials
+    data, err := Vclient.Logical().Read("database/creds/vault_go_demo")
+    if err != nil {
+      log.Fatal(err)
+    }
+    username := data.Data["username"]
+    password := data.Data["password"]
+    ```
+
+    Next, open up the code editor tab called "Golang App Code - tokenization".
+
+    NOTE: Make sure to click the file name on the left to open up the editor.
+
+    On line 127 in the "AddRecord" function, we added the following line to tokenize the customer record's SSN before writing to Postgres.
+    ```
+    response, err := config.Vclient.Logical().Write("transform/encode/vault_go_demo", data)
+    if err != nil {
+      log.Fatal(err)
+    }
+    encval := response.Data["encoded_value"].(string)
+    ```
+    Last, we need to detokenize the SSN pulled from the database so we can view as plaintext.
+    Within the "Records" function (Line 58) we add the following:
+    ```
+    response, err := config.Vclient.Logical().Write("transform/decode/vault_go_demo", data)
+    if err != nil {
+      log.Fatal(err)
+    }
+    decval := response.Data["decoded_value"].(string)
+    ssn := decval
+    ```
+    With our code additions made, we can finally launch our updated application and test tokenization.
+  tabs:
+  - title: Terminal
+    type: terminal
+    hostname: kubernetes
+  - title: Golang App Code - init
+    type: code
+    hostname: kubernetes
+    path: /root/vault-go-demo-tokenization/config/db.go
+  - title: Golang App Code - tokenization
+    type: code
+    hostname: kubernetes
+    path: /root/vault-go-demo-tokenization/users/handlers.go
+  - title: Web App
+    type: service
+    hostname: kubernetes
+    path: /
+    port: 9090
+  - title: Vault-ui
+    type: service
+    hostname: kubernetes
+    path: /
+    port: 8200
+  difficulty: basic
+  timelimit: 10000
+- slug: launch-the-updated-app
+  id: xymeoyrbezvl
+  type: challenge
+  title: Launch the updated application
+  teaser: Deploy the updated app to securely tokenizen customer SSNs (PII data).
+  notes:
+  - type: text
+    contents: |-
+      We will now deploy our updated application to use following tokenization workflow.
+
+      ![Tokenization Workflow](https://github.com/Andrew-Klaas/instruqt-tokenization-lab/raw/main/assets/images/tokenization_workflow.png)
+  assignment: |-
+    Our application is ready for prime time!
+
+    Delete the old application.
+    ```
+    kubectl delete -f /root/vault_go_demo_non_tokenization/
+    ```
+    Deploy the updated application
+    ```
+    kubectl apply -f /root/vault_go_demo/
+    kubectl wait --timeout=180s --for=condition=Ready $(kubectl get pods --selector=app=vault-go-demo -o name)
+    sleep 5s
+    ```
+    This may take a minute. You can check if the new pods are ready via "kubectl get pods"
+    ```
+    kubectl get pods
+    ```
+    Go back to the web app, add another record, and then look at the record in the Database View. Verify that the SSN is now tokenized.
+
+    Congratulations!
+
+    You have now ensured that customer PII/PAN data is protected and access to the associated plaintext is only available to properly authenticated and authorized applications.
+
+    Further reading: Although it was out of scope for this lab, we also integrated our application with dynamic database secrets.
+    These ensure that credentials are just-in-time, short-lived, and unique.
+    https://learn.hashicorp.com/tutorials/vault/database-secrets.
+  tabs:
+  - title: Terminal
+    type: terminal
+    hostname: kubernetes
+  - title: Golang App Code - init
+    type: code
+    hostname: kubernetes
+    path: /root/vault-go-demo-tokenization/config/db.go
+  - title: Golang App Code - tokenization
+    type: code
+    hostname: kubernetes
+    path: /root/vault-go-demo-tokenization/users/handlers.go
+  - title: Web App
+    type: service
+    hostname: kubernetes
+    path: /
+    port: 9090
+  - title: Vault-ui
+    type: service
+    hostname: kubernetes
+    path: /
+    port: 8200
+  difficulty: basic
+  timelimit: 10000
+checksum: "17173373442206031881"

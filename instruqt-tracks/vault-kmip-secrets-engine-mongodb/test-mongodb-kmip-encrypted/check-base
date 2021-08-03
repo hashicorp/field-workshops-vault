@@ -1,0 +1,8 @@
+#!/bin/bash 
+
+#Enable bash history
+HISTFILE=/root/.bash_history
+set -o history
+
+grep -q "mongo" /root/.bash_history || fail-message "You haven't written a value to mongo yet."
+grep -q "cat.*var/lib/mongodb/collection-7*" /root/.bash_history || fail-message "You haven't verified the file is encrypted yet"

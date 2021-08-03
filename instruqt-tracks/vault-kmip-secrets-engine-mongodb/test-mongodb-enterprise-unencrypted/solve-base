@@ -1,0 +1,11 @@
+#!/bin/bash 
+
+#Enable bash history
+HISTFILE=/root/.bash_history
+set -o history
+
+pkill -9 mongod
+rm -rf /var/lib/mongodb/*
+rm -rf /var/log/mongodb/*
+
+exit 0

@@ -1,0 +1,16 @@
+#!/bin/bash 
+
+#Enable bash history
+HISTFILE=/root/.bash_history
+set -o history
+set -e
+
+if [ ! -f /root/client.pem ]; then
+    fail-message "No file was found at /root/client.pem"
+    exit 1
+fi
+
+if [ ! -f /root/ca.pem ]; then
+    fail-message "No file was found at /root/ca.pem"
+    exit 1
+fi

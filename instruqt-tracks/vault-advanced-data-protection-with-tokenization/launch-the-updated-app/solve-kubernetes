@@ -1,0 +1,8 @@
+#!/bin/bash 
+
+#Enable bash history
+HISTFILE=/root/.bash_history
+set -o history
+/usr/bin/kubectl delete -f /root/vault_go_demo_non_tokenization/
+/usr/bin/kubectl apply -f /root/vault_go_demo/
+exit 0

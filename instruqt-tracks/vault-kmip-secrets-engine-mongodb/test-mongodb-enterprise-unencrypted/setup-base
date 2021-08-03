@@ -1,0 +1,34 @@
+#!/bin/bash
+
+set -e
+set -v
+
+until [ -f /opt/instruqt/bootstrap/host-bootstrap-completed ]
+do
+    sleep 1
+done
+echo "source /usr/share/bash-completion/bash_completion" >> /root/.bashrc
+
+apt update -y
+apt install -y gnupg
+wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
+echo "deb [ arch=amd64,arm64,s390x ] http://repo.mongodb.com/apt/ubuntu bionic/mongodb-enterprise/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-enterprise.list
+apt update -y
+apt install -y mongodb-enterprise
+
+###########
+# Install Vault Client
+###########
+wget -q https://releases.hashicorp.com/vault/1.7.2+ent/vault_1.7.2+ent_linux_amd64.zip
+unzip vault_1.7.2+ent_linux_amd64.zip
+mv vault /usr/local/bin/vault
+chmod +x /usr/local/bin/vault
+rm -f vault_1.7.2+ent_linux_amd64.zip
+
+###########
+# Set up Vault credentials
+###########
+echo "export VAULT_ADDR=http://127.0.0.1:8200" >> /root/.bashrc
+echo "export VAULT_TOKEN=root" >> /root/.bashrc
+
+exit 0

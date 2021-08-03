@@ -1,0 +1,6 @@
+version: "2"
+virtualmachines:
+- name: base
+  image: instruqt-hashicorp/ubuntu-base
+  shell: /bin/bash
+  machine_type: n1-standard-2
