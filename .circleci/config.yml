@@ -268,7 +268,7 @@ jobs:
               echo "Instruqt track test failed three times."
               exit 1
             fi
-  instruqt-test-vault-advanced-data-protection-with-tokenization
+  instruqt-test-vault-advanced-data-protection-with-tokenization:
     docker:
       - image: docker.mirror.hashicorp.services/ubuntu:latest
     steps:
@@ -346,13 +346,13 @@ workflows:
           filters:
             branches:
               only: main
-      - instruqt-test-vault-kmip-secrets-engine-mongodb
+      - instruqt-test-vault-kmip-secrets-engine-mongodb:
           requires:
             - instruqt-validate
           filters:
             branches:
               only: main
-      - instruqt-test-vault-advanced-data-protection-with-tokenization
+      - instruqt-test-vault-advanced-data-protection-with-tokenization:
           requires:
             - instruqt-validate
           filters:
@@ -383,9 +383,9 @@ workflows:
       - instruqt-test-vault-encryption-as-a-service:
           requires:
             - instruqt-validate
-      - instruqt-test-vault-kmip-secrets-engine-mongodb
+      - instruqt-test-vault-kmip-secrets-engine-mongodb:
           requires:
             - instruqt-validate
-      - instruqt-test-vault-advanced-data-protection-with-tokenization
+      - instruqt-test-vault-advanced-data-protection-with-tokenization:
           requires:
             - instruqt-validate
