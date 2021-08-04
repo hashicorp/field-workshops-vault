@@ -45,7 +45,7 @@ name: prerequisites
       - The Vault binary
       - Client-Server model
   - Vault Authentication Methods (High-level understanding)
-  - Vault Secret Engines (High-level understanding)
+  - Vault Secrets Engines (High-level understanding)
 
 ???
 
@@ -67,8 +67,8 @@ name: environment
 * This workshop uses the following tracks
   1. Vault Basics Review
   1. Vault Dynamic Database Credentials
-  1. Vault Transform and Transit Secrets Engines (Appl Level Encryption)
-  1. (Optional) Vault Transform-Tokenization Secret Engine 
+  1. Vault Transform and Transit Secrets Engines (App-Level Encryption)
+  1. (Optional) Vault Transform-Tokenization Secrets Engine
   1. Vault KMIP Secrets Engine (Filesystem/Database Level Encryption)
 
 ???
@@ -89,11 +89,11 @@ class: shelf, no-footer
 ## Securing a datacenter was easy...
 
 * All unauthorized traffic or access could be restricted/blocked
-* Networks were trusted and apps and databases can interconnect with ease
+* Networks were trusted and apps and databases could interconnect with ease
 * Four walls and trusted network protected secrets and sensitive information
-* Resources were mostly static. Rules were based upon IP address, credentials were baked into source code or kept in a static file on disk
+* Resources were mostly static. Rules were based upon IP addresses, credentials were baked into source code or kept in a static file on disk
 
-##### But what happens when your apps and infrastructure extend to the multiple datacenters, cloud, or all the above?
+##### But what happens when your apps and infrastructure extend to multiple datacenters, cloud, or both?
 
 ???
 
@@ -112,7 +112,7 @@ With each new cloud, network topologies become more complex
 ---
 name: jit
 class: center, middle
-# Just in time access in a zero trust world
+# Just in Time Access in a Zero Trust World
 ![](images/slide10.png)
 
 ???
@@ -120,7 +120,7 @@ class: center, middle
 ---
 name: jit
 class: center, middle
-# Our Focus Today:
+# Our Focus Today
 ![](images/slide11.png)
 
 ???
@@ -128,7 +128,7 @@ class: center, middle
 ---
 # Applied Zero Trust
 Adopting a Zero Trust model requires technical capabilities that...
-* Never Trust, Always Verify: Every user or machine must authenticate and be explicitly authorized for access to credentials, APIs, VMs, databases, etc. 
+* Never Trust, Always Verify: Every user or machine must authenticate and be explicitly authorized for access to credentials, APIs, VMs, databases, etc.
 * Principle of Least Privilege: Every user or machine accesses only the resources it requires for a defined purpose and time period.
 * Assumed Breach: Continuously defend and encrypt critical PII and company data assuming that your network has been breached.
 
@@ -145,7 +145,7 @@ background-image: url(images/HashiCorp-Title-bkg.jpeg)
 # Problems with the Traditional Security Model
 - IP Address based rules
 - Hardcoded credentials with problems such as:
-  - Shared service accounts for apps and users 
+  - Shared service accounts for apps and users
   - Difficult to rotate, decommission, and determine who has access
   - Revoking compromised credentials can break entire application stacks
 
@@ -183,7 +183,7 @@ Replication
 # Chapter 1 Review
 ## What is HashiCorp Vault?
 * Vault is a Secrets Management System.
-* It is APi-drive and cloud agnostic.
+* It is API-driven and cloud agnostic.
 * It can be used in untrusted networks.
 * It can authenticate users and applications against many identity systems.
 * It supports just-in-time generation of short-lived secrets.
@@ -239,7 +239,7 @@ background-image: url(images/HashiCorp-Title-bkg.jpeg)
 class: middle, center
 # Vault Authentication Methods
 ![:scale 40%](images/slide27.png)
-Vault acts as an Identity Broker for the underlying platform or cloud.<br> 
+Vault acts as an Identity Broker for the underlying platform or cloud.<br>
 Use the right tool for the job to authenticate your clients!
 
 ---
@@ -275,7 +275,7 @@ background-image: url(images/HashiCorp-Title-bkg.jpeg)
 
 ---
 # Lab 1: Vault Basics
-In this lab you will cover some basics of Vault like the CLI, GUI, K/V Secret Engine, and Userpass Auth Method
+In this lab you will cover some basics of Vault like the CLI, GUI, K/V Secrets Engine, and Userpass Auth Method
 
 Lab Link: https://play.instruqt.com/hashicorp/tracks/vault-basics
 
@@ -316,7 +316,7 @@ Unique, short-lived, just-in-time credentials for each application instance
 * Vault’s Database Secrets Engine dynamically generates short-lived credentials for databases
 * It supports configuration of database connections and roles with different permissions and time-to-live (TTL) settings
 * Users or applications request credentials for a specific role from Vault
-* Vault manages the lifecycle of these credentials, automatically deleting them from the database when the TTl expires
+* Vault manages the lifecycle of these credentials, automatically deleting them from the database when the TTL expires
 * Auditing is now improved as each application instance has a unique credential
 
 ---
@@ -340,7 +340,7 @@ class: col-2
 # Dynamic Secrets Engine: Workflow
 1. Enable an instance of the database secrets engine
 1. Configure it with the correct Plugin and connection URL, using a service account created for Vault
-1. Create one or more roles with TTLS and SQL statements that specific required permissions. (Principle of least privilege)
+1. Create one or more roles with TTLs and SQL statements that specific required permissions. (Principle of least privilege)
 1. Applications and users can request credentials from Vault that are valid for the default TTL of the role, but can be renewed up to the max TTL
 1. Vault automatically deletes expired credentials from the database
 1. If credentials are compromised, administrators can revoke them immediately. (Break glass)
@@ -351,11 +351,11 @@ class: middle, center
 ![:scale 60%](images/slide41.png)
 
 ---
-# Other Dynamic Secret Engines
+# Other Dynamic Secrets Engines
 * Public Key Infrastructure / Venafi
 * SSH Keys
 * AWS/Azure/GCP/AliCloud API credentials
-* Active Directory / LDAP service accounts (Dynamic, check-in-check-out)
+* Active Directory / LDAP service accounts (Dynamic, check-in/check-out)
 * Consul Tokens
 * TFE Tokens
 
@@ -397,21 +397,21 @@ background-image: url(images/HashiCorp-Title-bkg.jpeg)
   * Fips 140-2 (140-3) Compliance
 
 ---
-# Data Breaches: The application layer
+# Data Breaches: The Application Layer
 * With cloud adoption, the traditional approach to securing customer data breaks down
-* Adversary’s are not typically breaking into a cloud datacenter and stealing physical hardware
+* Adversaries are not typically breaking into a cloud datacenter and stealing physical hardware
 * They are breaking into organizations via phishing attacks, exposed networks, and supply chain attacks
 * Once inside the network they are escalating credentials and gaining privileged access to databases and systems
 
 ---
 class: col-2
 # Compromised DBA Creds
-Breaches are commonly carried out via attackers who have gained escalated credentials. They were then able to bypass TDE as an example. CC numbers are exposed in plaintext
+Breaches are commonly carried out via attackers who have gained escalated credentials. They were then able to bypass TDE as an example. Credit card numbers are exposed in plaintext
 ![:scale 100%](images/slide49.png)
 
 ---
-# Solution: Transform Secret Engine
-1. Vault’s Transform And Transit Secret Engines function as an Encryption-as-a-Service
+# Solution: Transform Secrets Engine
+1. Vault’s Transform And Transit Secrets Engines function as an Encryption-as-a-Service
 1. Developers use Vault to encrypt and decrypt data outside of Vault
 .center[![:scale 70%](images/slide50.png)]
 
@@ -422,7 +422,7 @@ Breaches are commonly carried out via attackers who have gained escalated creden
 * It ensures approved ciphers and algorithms are used
 * It supported automated key rotation and re-wrapping
 * If an attacker manages to get access to the encrypted data, they will only see ciphertext that is useless without Vault.
-* The Transform Secret engine is Format Preserving. Thus, it does not require any changes to database structure
+* The Transform Secrets engine is Format Preserving. Thus, it does not require any changes to database structure
   * i.e. 16 digits CCNs are encrypted as 16 digit ciphertext
 
 ---
@@ -430,7 +430,7 @@ Breaches are commonly carried out via attackers who have gained escalated creden
 .center[![:scale 90%](images/slide50.png)]
 
 ---
-# Transit Secret Engine
+# Transit Secrets Engine
 .center[![:scale 90%](images/slide53.png)]
 
 ---
@@ -460,20 +460,20 @@ class: title, shelf, no-footer, fullbleed
 background-image: url(images/HashiCorp-Title-bkg.jpeg)
 
 # Lab 3:
-## Vault Transform & Transit Secret Engines
+## Vault Transform & Transit Secrets Engines
 
 ---
 # Lab Environment
-In this next Lab we’ll use a web application that leverages both the Transform & Transit Secret engines to encrypt and decrypt data
-* The “HashiCups” application will leverage Vault’s API to encrypt customer CCN’s before writing them to the backend database
-* This lab will also showcase data-masking as well
+In this next Lab we’ll use a web application that leverages both the Transform and Transit Secrets engines to encrypt and decrypt data
+* The “HashiCups” application will leverage Vault’s API to encrypt customer credit card numbers before writing them to the backend database
+* This lab will also showcase data-masking
 
 Lab Link: https://play.instruqt.com/hashicorp/tracks/adp-vault
 
 ---
 # Lab Environment Part 2 (Optional)
-In this optional lab, you can leverage a Golang application and the Transform Secret Engine to tokenize data.
-* The Golang application will leverage Vault’s API to tokenize customer SSN’s before writing them to the backend database
+In this optional lab, you can leverage a Golang application and the Transform Secrets Engine to tokenize data.
+* The Golang application will leverage Vault’s API to tokenize customer Social Security numbers before writing them to the backend database
 * This lab will also showcase application code modifications as well
 
 Lab Link: https://play.instruqt.com/hashicorp/tracks/vault-advanced-data-protection-with-tokenization
@@ -484,16 +484,16 @@ background-image: url(images/HashiCorp-Title-bkg.jpeg
 
 
 # Chapter 6:
-## The Vault KMIP Secret Engine
+## The Vault KMIP Secrets Engine
 
 ---
-# Data Breach: Filesystem / OS layer
+# Data Breach: Filesystem/OS layer
 * In this next scenario, an adversary has gained remote access to the underlying database host via SSH/RDP
 * They may not have Database credentials; however, they have the ability to inspect files on the host
 .center[![:scale 70%](images/slide58.png)]
 
 ---
-# Data Breach: Filesystem / OS layer
+# Data Breach: Filesystem/OS layer
 * To provide a defense-in-depth approach, Vault can also act as a KMIP (Key-Management-Interoperability-Protocol) Server
 * This enables Vault to act as a KMS server for several different hardware and OS level native encryption technologies
 * Some Applications include:
@@ -502,13 +502,13 @@ background-image: url(images/HashiCorp-Title-bkg.jpeg
   * Cryptographic offloads for FDE, volume encryption, secret management, etc
 
 ---
-# Data Breach: Filesystem / OS layer
+# Data Breach: Filesystem/OS layer
 * To provide a defense-in-depth approach, Vault can also act as a KMIP (Key-Management-Interoperability-Protocol) Server
 * This enables Vault to act as a KMS server for several different hardware and OS level native encryption technologies
 * Some Applications include:
   * Key creation, storage, management
   * Encrypt/decrypt
-  * Cryptographic offloads for FDE, volume encryption, secret management, etc
+  * Cryptographic offloads for FDE, volume encryption, secrets management, etc
 
 ---
 # Example (MongoDB):
@@ -524,7 +524,7 @@ Transparent Database Encryption (TDE): Automatically protect data in MySQL Mongo
 # Examples:
 Disk and Volume Protection: Protect volume data on physical (FDE) and virtual (VMDK) infrastructures on prem and in the cloud
 * NetApp Storage Encryption, NetApp Full Disk Encryption
-* Dell EMC Unity, Data Domain, Vmwax, etc.
+* Dell EMC Unity, Data Domain, VMAX, etc.
 * HPE Key Manager, Tape Storage
 
 ---
@@ -532,7 +532,7 @@ Disk and Volume Protection: Protect volume data on physical (FDE) and virtual (V
 Portable Key Management: Protect encryption keys for data including files, virtual machines, and more across on-prem and cloud infrastructures
 * IBM Filenet
 * Oracle Key Vault
-* **VMWare Vsphere**
+* **VMWare vSphere**
 * Cisco UCS
 * Rubrik
 * Brocade Encryption SAN
@@ -549,7 +549,7 @@ class: col-2
 class: title, shelf, no-footer, fullbleed
 background-image: url(images/HashiCorp-Title-bkg.jpeg)
 # Lab 4:
-## The Vault KMIP Secret Engine (MongoDB Encryption)
+## The Vault KMIP Secrets Engine (MongoDB Encryption)
 
 ---
 # Lab Environment
@@ -589,7 +589,7 @@ class: col-2
 ---
 class: col-2
 # Establish the connection  - 1/2
-.smaller[* The DB proxy sends the authorization request to its local agent 
+.smaller[* The DB proxy sends the authorization request to its local agent
 
 * The local agent authorizes the connection based on locally cached intention
 
@@ -618,7 +618,7 @@ Ephemeral Access Vision
 .center[![:scale 55%](images/slide72.png)]
 
 ---
-# Just-in-time Credentials (Roadmap)
+# Just-in-Time Credentials (Roadmap)
 .center[![:scale 65%](images/slide73.png)]
 
 ---
