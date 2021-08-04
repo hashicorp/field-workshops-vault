@@ -42,7 +42,7 @@ challenges:
 
       This lab usually takes 3-5 minutes to spin up.
 
-      ![Tokenization](https://github.com/Andrew-Klaas/instruqt-tokenization-lab/raw/main/assets/images/tokenization_overview.png)
+      ![Tokenization](https://github.com/field-workshops-vault/instruqt-tracks/vault-advanced-data-protection-with-tokenization/raw/main/assets/images/tokenization_overview.png)
   assignment: |-
     The Transform secret engine allows Vault to tokenize data before storing to external storage.
 
@@ -322,7 +322,7 @@ challenges:
     contents: |-
       We will now deploy our updated application to use following tokenization workflow.
 
-      ![Tokenization Workflow](https://github.com/Andrew-Klaas/instruqt-tokenization-lab/raw/main/assets/images/tokenization_workflow.png)
+      ![Tokenization Workflow](https://github.com/field-workshops-vault/instruqt-tracks/vault-advanced-data-protection-with-tokenization/raw/main/assets/images/tokenization_workflow.png)
   assignment: |-
     Our application is ready for prime time!
 
