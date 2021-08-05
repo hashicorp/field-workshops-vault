@@ -50,7 +50,7 @@ Topics covered in the workshop include:
 * Vault Policies
 * Dynamic Database Secrets
 * Encryption as a Service
-* Format preserving Encryption
+* Format Preserving Encryption
 * Tokenization
 * Filesystem & Database Encryption
 
@@ -94,7 +94,7 @@ https://play.instruqt.com/hashicorp/tracks/vault-dynamic-database-credentials
 Go through this track start to finish and make sure you understand all the challenges. This track covers Vault's database secrets engine.
 
 WARNING:
-You will need to create a custom invite for the following instruqt lab as it is private. See below for more details
+You will need to create a custom invite for the following instruqt lab as it is private. 
 https://play.instruqt.com/hashicorp/tracks/adp-vault
 
 Go through this track start to finish and make sure you understand all the challenges. This track covers Vault's encryption as a service capabilities as implemented in its Transit and Transform Secret Engines.
