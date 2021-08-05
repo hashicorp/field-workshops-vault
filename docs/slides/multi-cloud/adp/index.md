@@ -601,7 +601,7 @@ class: col-2
 class: title, shelf, no-footer, fullbleed
 background-image: url(images/HashiCorp-Title-bkg.jpeg)
 
-# Chapter 7:
+# Chapter 8:
 ## Boundary
 
 ---
