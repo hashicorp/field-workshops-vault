@@ -114,18 +114,16 @@ We recommend that you configure Instruqt pools for each Instruqt track used in t
 ### Timing
 The following schedule assumes you have a group of participants who are brand new to Vault. You should budget about four hours for this workshop including a short break. (But in virtual workshops, participants are expected to take breaks during the labs.)
 
-This is meant as a guideline, you can adjust as needed. If you prefer to alternate the slides of the "Interacting with Vault" chapter with the first 3 challenges of the "Vault Basics" track, you can do that.
-
-If you want to cover the optional AWS slides and Instruqt tracks, add 1 hour.
+If you are presenting to an intermediate or advanced group of Vault users, feel free to skip the first lab. 
 
 0:00 - 0:10 - Wait for attendees, make introductions<br>
-0:10 - 0:25 - Chapter 1: Vault Overview<br>
-0:25 - 0:35 - Chapter 2: Basic Operations<br>
-0:30 - 0:40 - Chapter 3: Vault Auth Methods & Static Secrets<br>
-0:40 - 1:15 - (Optional) Lab: Vault Basics (including break time), This lab can be skipped depending on the audience<br>
+0:10 - 0:20 - Chapter 1: Vault Overview<br>
+0:20 - 0:30 - Chapter 2: Basic Operations<br>
+0:30 - 0:45 - Chapter 3: Vault Auth Methods & Static Secrets<br>
+0:45 - 1:15 - Lab: Vault Basics (including break time)<br>
 1:15 - 1:25 - Chapter 4: Dynamic Secrets<br>
-1:25 - 1:50 - Lab: Dynamic MySQL Credentials<br>
-1:50 - 2:10 - Chapter 5: Encryption as a Service<br>
+1:25 - 1:55 - Lab: Dynamic MySQL Credentials (5 minute break)<br>
+2:00 - 2:10 - Chapter 5: Transform and Transit Secret Engines<br>
 2:10 - 2:40 - Lab: Transform and Transit Secret Engines<br>
 2:40 - 3:00 - Chapter 6: The Vault KMIP Secret Engine<br>
 3:00 - 3:30 - Lab: MongoDB Encryption via Vault's KMIP Secret Engine<br>
