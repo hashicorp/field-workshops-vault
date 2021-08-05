@@ -1,12 +1,5 @@
 # Advanced Data Protection - Instructor Guide
 
-### WARNING!
-You will need to create an invite for the following instruqt lab as it is private. See below for more details:
-
-[ADP-Vault Transform/Transit lab](https://play.instruqt.com/hashicorp/tracks/adp-vault)
-
-[Creating custom Instruqt invites](https://hashicorp.atlassian.net/wiki/spaces/SE/pages/511574174/Instruqt+and+Remark+Contributor+Guide#InstruqtandRemarkContributorGuide-CreatingInstruqtinvitestostudents)
-
 ### Overview
 
 This guide will prepare you to deliver a half-day [Avanced Data Protection focused Vault workshop](https://hashicorp.github.io/field-workshops-vault/slides/multi-cloud/adp). This workshop content is suitable for HashiCorp community members, prospects and customers. The workshop is a combination of lecture slides and hands-on Instruqt labs that introduce new users to some of Vault's enterprise features. This workshop focuses on open-source & enterprise features and is targeted for basic to intermediate users. The workshop may be presented in-person, over the web, or as a self-guided tutorial.
@@ -75,7 +68,7 @@ The slide deck for this training is written completely in [Markdown](https://gui
 https://github.com/hashicorp/field-workshops-vault/issues
 
 ### Hands-on Labs
-At certain points in the slide deck there are links to the lab exercises. [Instruqt](https://instruqt.com/hashicorp) is our lab platform. While all of the Vault workshop tracks are actually public, the slides use links to permanent Instruqt invitations that require users to register with Instruqt. We do this so that HashiCorp Field Marketing can collect the emails of users who start tracks during public or private workshops or on their own after following the links from the slides.
+At certain points in the slide deck there are links to the lab exercises. [Instruqt](https://instruqt.com/hashicorp) is our lab platform. While all of the Vault workshop tracks (except for https://play.instruqt.com/hashicorp/tracks/vault-advanced-data-protection-with-transform) are actually public, the slides use links to permanent Instruqt invitations that require users to register with Instruqt. We do this so that HashiCorp Field Marketing can collect the emails of users who start tracks during public or private workshops or on their own after following the links from the slides.
 
 Participants can register with Instruqt [here](https://play.instruqt.com/signup). Users only need to provide an email and a password. They can then login via email, Google, GitHub, and Twitter.=
 
@@ -93,17 +86,13 @@ https://play.instruqt.com/hashicorp/tracks/vault-dynamic-database-credentials
 
 Go through this track start to finish and make sure you understand all the challenges. This track covers Vault's database secrets engine.
 
-WARNING:
-You will need to create a custom invite for the following instruqt lab as it is private. 
-https://play.instruqt.com/hashicorp/tracks/adp-vault
-
 Go through this track start to finish and make sure you understand all the challenges. This track covers Vault's encryption as a service capabilities as implemented in its Transit and Transform Secret Engines.
 
 The following track is optional and focuses on Tokenization.
 
 https://play.instruqt.com/hashicorp/tracks/vault-advanced-data-protection-with-tokenization
 
-Go through this track start to finish and make sure you understand all teh challenges. This track covers Vault's KMIP secret engine. 
+Go through this track start to finish and make sure you understand all teh challenges. This track covers Vault's KMIP secret engine.
 
 https://play.instruqt.com/hashicorp/tracks/vault-kmip-secrets-engine-mongodb
 

@@ -65,7 +65,7 @@ name: environment
 * This workshop uses Instruqt for hand-on labs.
 * Instruqt labs are run in “tracks” that are divided into “challenges”
 * This workshop uses the following tracks
-  1. Vault Basics Review
+  1. Vault Basics
   1. Vault Dynamic Database Credentials
   1. Vault Transform and Transit Secrets Engines (App-Level Encryption)
   1. (Optional) Vault Transform-Tokenization Secrets Engine
@@ -277,7 +277,7 @@ background-image: url(images/HashiCorp-Title-bkg.jpeg)
 # Lab 1: Vault Basics
 In this lab you will cover some basics of Vault like the CLI, GUI, K/V Secrets Engine, and Userpass Auth Method
 
-Lab Link: https://play.instruqt.com/hashicorp/tracks/vault-basics
+Lab Link: [Vault Basics](https://play.instruqt.com/hashicorp/invite/qfwncq62zsxu)
 
 ---
 class: title, shelf, no-footer, fullbleed
@@ -370,7 +370,7 @@ background-image: url(images/HashiCorp-Title-bkg.jpeg)
 # Lab Environment
 In this lab we’ll use a MySQL database server that runs on the Vault Server
 
-Lab Link: https://play.instruqt.com/hashicorp/tracks/vault-dynamic-database-credentials
+Lab Link: [Vault Dynamic Database Credentials](https://play.instruqt.com/hashicorp/invite/sryhqfdm6sgx)
 
 ---
 # Configuration Steps for MySQL
@@ -468,7 +468,7 @@ In this next Lab we’ll use a web application that leverages both the Transform
 * The “HashiCups” application will leverage Vault’s API to encrypt customer credit card numbers before writing them to the backend database
 * This lab will also showcase data-masking
 
-Lab Link: https://play.instruqt.com/hashicorp/tracks/adp-vault
+Lab Link: [Advanced Data Protection with Transform](https://play.instruqt.com/hashicorp/invite/d4b7a8cxjvoe)
 
 ---
 # Lab Environment Part 2 (Optional)
@@ -476,7 +476,7 @@ In this optional lab, you can leverage a Golang application and the Transform Se
 * The Golang application will leverage Vault’s API to tokenize customer Social Security numbers before writing them to the backend database
 * This lab will also showcase application code modifications as well
 
-Lab Link: https://play.instruqt.com/hashicorp/tracks/vault-advanced-data-protection-with-tokenization
+Lab Link: [Vault ADP with Tokenization](https://play.instruqt.com/hashicorp/invite/fgbpoajlim0d)
 
 ---
 class: title, shelf, no-footer, fullbleed
@@ -557,7 +557,7 @@ In this next Lab we’ll leverage Vault to act as a KMIP key management server f
 * First we will look at how the data collections would look to an adversary that gains access to the host
 * We will then show how to protect against this threat vector with Vault’s KMIP integration
 
-Lab Link: https://play.instruqt.com/hashicorp/tracks/vault-kmip-secrets-engine-mongodb
+Lab Link: [Vault KMIP Secrets Engine for MongoDB Encryption](https://play.instruqt.com/hashicorp/invite/h9s9jpxnuuof)
 
 ---
 class: title, shelf, no-footer, fullbleed
