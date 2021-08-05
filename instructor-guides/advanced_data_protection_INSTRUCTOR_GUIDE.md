@@ -103,7 +103,7 @@ We recommend that you configure Instruqt pools for each Instruqt track used in t
 ### Timing
 The following schedule assumes you have a group of participants who are brand new to Vault. You should budget about four hours for this workshop including a short break. (But in virtual workshops, participants are expected to take breaks during the labs.)
 
-If you are presenting to an intermediate or advanced group of Vault users, feel free to skip the first lab. 
+If you are presenting to an intermediate or advanced group of Vault users, feel free to skip the first lab.
 
 0:00 - 0:10 - Wait for attendees, make introductions<br>
 0:10 - 0:20 - Chapter 1: Vault Overview<br>
