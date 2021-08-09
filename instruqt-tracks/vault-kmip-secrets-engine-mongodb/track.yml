@@ -2,8 +2,7 @@ slug: vault-kmip-secrets-engine-mongodb
 id: xthllyuyqvth
 type: track
 title: Vault KMIP Secrets Engine for MongoDB Encryption (ADP)
-teaser: Help implement the "Assumed Breach" principal of a Zero Trust methodology
-  by leveraging Vault’s KMIP Secret engine to encrypt all MongoDB Enterprise data.
+teaser: Help implement the "Assumed Breach" principal of a Zero Trust methodology by leveraging Vault’s KMIP Secret engine to encrypt all MongoDB Enterprise data.
 description: |-
   The KMIP secrets engine allows Vault to act as a Key Management Interoperability
   Protocol (KMIP) server provider and handle the lifecycle of its KMIP managed objects.
@@ -30,8 +29,7 @@ challenges:
   id: nrdgq9ypqrmz
   type: challenge
   title: Test MongoDB unecrypted
-  teaser: In this challenge you will see the impact of a breach with unencrypted database
-    files
+  teaser: In this challenge you will see the impact of a breach with unencrypted database files
   notes:
   - type: text
     contents: |-
@@ -114,8 +112,7 @@ challenges:
   id: ddcb7v41jmth
   type: challenge
   title: Configure the Vault KMIP Secrets Engine
-  teaser: In this challenge you will configure Vault's KMIP Secret Engine for external
-    KMIP object management.
+  teaser: In this challenge you will configure Vault's KMIP Secret Engine for external KMIP object management.
   notes:
   - type: text
     contents: |-
@@ -195,8 +192,7 @@ challenges:
   id: o1xeynppnjci
   type: challenge
   title: Test MongoDB Encryption via Vault KMIP
-  teaser: In this challenge you will see the impact of a breach with encrypted database
-    files
+  teaser: In this challenge you will see the impact of a breach with encrypted database files
   notes:
   - type: text
     contents: |-
@@ -282,4 +278,4 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 1200
-checksum: "8772599814337824246"
+checksum: "13138401360881778646"
