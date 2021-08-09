@@ -18,5 +18,4 @@ sleep 5s
 
 mongo --eval "db.examples.insertOne({name: \"sue\",age: 26})"
 
-
 exit 0
