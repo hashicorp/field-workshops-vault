@@ -5,6 +5,16 @@ HISTFILE=/root/.bash_history
 set -o history
 set -e
 
+mongod --dbpath /var/lib/mongodb \
+      --logpath /var/log/mongodb/mongo.log \
+      --enableEncryption \
+      --kmipServerName localhost \
+      --kmipPort 5696 \
+      --kmipServerCAFile ca.pem \
+      --kmipClientCertificateFile client.pem \
+      > mongod.log 2>&1 &
+
+mongo --eval "db.examples.insertOne({name: \"sue\",age: 26})"
 
 
 exit 0
