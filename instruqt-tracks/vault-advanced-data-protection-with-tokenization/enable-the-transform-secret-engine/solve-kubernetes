@@ -1,0 +1,13 @@
+#!/bin/bash 
+
+#Enable bash history
+HISTFILE=/root/.bash_history
+set -o history
+
+# List Vault Secrets
+vault secrets list
+
+# Enable the Transit secrets engine
+vault secrets enable transform
+
+exit 0

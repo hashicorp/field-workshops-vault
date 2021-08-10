@@ -1,0 +1,7 @@
+#!/bin/bash 
+
+#Enable bash history
+HISTFILE=/root/.bash_history
+set -o history
+
+mongo --eval "db.examples.find()" | grep -q "sue" || fail-message "A value has not been written to MongoDB yet."

@@ -1,0 +1,8 @@
+#!/bin/bash 
+
+set -e
+
+grep -q "kubectl.*delete.*-f.*/root/vault_go_demo_non_tokenization/" /root/.bash_history || fail-message "You haven't deleted the old app yet."
+grep -q "kubectl.*apply.*-f.*/root/vault_go_demo/" /root/.bash_history || fail-message "You haven't deployed the new app yet."
+
+exit 0

@@ -1,0 +1,9 @@
+#!/bin/bash 
+
+set -e
+
+grep -q "vault.*write.*transform/role/vault_go_demo" /root/.bash_history || fail-message "You haven't configured the role yet"
+
+grep -q "vault.*write.*transformations/tokenization/ssn" /root/.bash_history || fail-message "You haven't configured the transformation yet"
+
+exit 0

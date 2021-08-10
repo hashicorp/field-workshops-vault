@@ -1,0 +1,44 @@
+# Available parameters and their default values for the Vault chart.
+
+global:
+  enabled: true
+  tlsDisable: true
+
+injector:
+  enabled: false
+  replicas: 1
+
+server:
+  dev:
+    enabled: true
+    devRootToken: "root"
+
+  image:
+    repository: "hashicorp/vault-enterprise"
+    tag: "1.7.2_ent"
+    pullPolicy: IfNotPresent
+  ingress:
+    enabled: true
+    labels:
+      app: vault
+
+  service:
+    enabled: true
+    type: ClusterIP
+    # Port on which Vault server is listening
+    port: 8200
+    # Target port to which the service should be mapped to
+    targetPort: 8200
+
+ui:
+  enabled: true
+  serviceType: "LoadBalancer"
+  externalPort: 8200
+
+csi:
+  enabled: false
+  image:
+    repository: "hashicorp/vault-csi-provider"
+    tag: "0.2.0"
+    pullPolicy: IfNotPresent
+

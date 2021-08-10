@@ -1,0 +1,115 @@
+#!/bin/bash
+
+#fix path
+echo "export PATH=/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" >> /root/.bashrc
+echo "alias k='kubectl'" >> ~/.bashrc
+#k8s setup
+echo "Setting up K8s..."
+until [ -f /opt/instruqt/bootstrap/host-bootstrap-completed ]
+do
+    sleep 1
+done
+echo "source /usr/share/bash-completion/bash_completion" >> /root/.bashrc
+echo "complete -F __start_kubectl k" >> /root/.bashrc
+echo "export VAULT_ADDR=http://127.0.0.1:8200" >> /root/.bashrc
+/usr/bin/start.sh
+echo "K8s setup complete"
+
+
+curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add -
+add-apt-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+
+apt update -y
+apt install -y kubectl 
+apt install -y consul 
+apt install -y vault
+
+git clone git@github.com:hashicorp/field-workshops-vault.git
+cp -r field-workshops-vault /root
+cp -r /root/field-workshops-vault/instruqt-tracks/vault-advanced-data-protection-with-tokenization/assets/helm /root/
+cp -r /root/field-workshops-vault/instruqt-tracks/vault-advanced-data-protection-with-tokenization/assets/config /root/
+cp -r /root/field-workshops-vault/instruqt-tracks/vault-advanced-data-protection-with-tokenization/assets/vault_go_demo /root/
+cp -r /root/field-workshops-vault/instruqt-tracks/vault-advanced-data-protection-with-tokenization/assets/vault_go_demo_non_tokenization /root/
+
+/usr/local/bin/helm repo add stable https://charts.helm.sh/stable
+/usr/local/bin/helm repo add hashicorp https://helm.releases.hashicorp.com
+/usr/local/bin/helm repo add bitnami https://charts.bitnami.com/bitnami
+/usr/local/bin/helm repo update
+
+
+/usr/local/bin/helm install pq \
+  --set postgresqlPassword=password,postgresqlDatabase=vault_go_demo \
+    bitnami/postgresql 
+
+/usr/local/bin/helm install vault hashicorp/vault -f /root/helm/vault-values.yaml
+
+sleep 60s
+
+export VAULT_ADDR=http://127.0.0.1:8200
+/usr/bin/vault login root
+
+cat << EOF > transform-app-example.policy
+path "*" {
+    capabilities = ["read", "list", "create", "update", "delete"]
+}
+path "transform/*" {
+    capabilities = ["read", "list", "create", "update", "delete"]
+}
+EOF
+/usr/bin/vault policy write transform-app-example transform-app-example.policy
+
+/usr/bin/kubectl create serviceaccount vault-auth
+/usr/bin/kubectl apply --filename /root/config/vault-auth-service-account.yaml
+
+export VAULT_SA_NAME=$(/usr/bin/kubectl get sa vault-auth -o jsonpath="{.secrets[*]['name']}" | awk '{ print $1 }')
+export SA_JWT_TOKEN=$(/usr/bin/kubectl get secret $VAULT_SA_NAME -o jsonpath="{.data.token}" | base64 --decode; echo)
+export SA_CA_CRT=$(/usr/bin/kubectl get secret $VAULT_SA_NAME -o jsonpath="{.data['ca\.crt']}" | base64 --decode; echo)
+
+export VAULT_ADDR=http://127.0.0.1:8200
+export K8S_HOST="https://kubernetes.default.svc:443"
+/usr/bin/vault auth enable kubernetes
+
+/usr/bin/vault write auth/kubernetes/config \
+        token_reviewer_jwt="$SA_JWT_TOKEN" \
+        kubernetes_host="$K8S_HOST" \
+        kubernetes_ca_cert="$SA_CA_CRT"
+
+/usr/bin/vault write auth/kubernetes/role/example \
+        bound_service_account_names=vault-auth \
+        bound_service_account_namespaces=default \
+        policies=transform-app-example \
+        ttl=72h
+
+/usr/bin/vault write auth/kubernetes/role/vault_go_demo \
+        bound_service_account_names=vault-auth \
+        bound_service_account_namespaces=default \
+        policies=transform-app-example \
+        ttl=72h
+
+/usr/bin/vault secrets enable database
+
+/usr/bin/vault write database/config/my-postgresql-database \
+    plugin_name=postgresql-database-plugin \
+    allowed_roles="my-role, vault_go_demo" \
+    connection_url="postgresql://{{username}}:{{password}}@pq-postgresql-headless.default.svc:5432/vault_go_demo?sslmode=disable" \
+    username="postgres" \
+    password="password"
+
+/usr/bin/vault write database/roles/vault_go_demo \
+    db_name=my-postgresql-database \
+    creation_statements="CREATE ROLE \"{{name}}\" WITH LOGIN PASSWORD '{{password}}' VALID UNTIL '{{expiration}}'; \
+    ALTER USER \"{{name}}\" WITH SUPERUSER;" \
+    default_ttl="1h" \
+    max_ttl="24h"
+
+
+/usr/bin/kubectl apply -f /root/vault_go_demo_non_tokenization
+
+sleep 15s
+
+#/usr/bin/vault secrets enable transform
+#/usr/bin/vault write transform/role/vault_go_demo transformations=ssn
+# /usr/bin/vault write transform/transformations/tokenization/ssn \
+#    allowed_roles=vault_go_demo \
+#    max_ttl=24h
+#/usr/bin/kubectl apply -f /root/vault_go_demo

@@ -1,0 +1,44 @@
+#!/bin/bash -l
+#!/bin/bash 
+
+#Enable bash history
+HISTFILE=/root/.bash_history
+set -o history
+
+# Run Vault server
+#vault server -config=/vault/config/vault-config.hcl -log-level=debug > /vault/logs/vault.log 2>&1 &
+mkdir -p /vault/logs/
+touch /vault/logs/vault.log
+vault server -dev-root-token-id=root -dev -log-level=trace > /vault/logs/vault.log 2>&1 &
+
+# Sleep 5 seconds
+sleep 5s
+
+# Extract root token and unseal key from init.log
+token="root"
+
+# Write token to /root/token
+echo $token > /root/token
+
+# Export VAULT_TOKEN
+export VAULT_TOKEN=$token
+echo "export VAULT_TOKEN=$VAULT_TOKEN" >> /root/.profile
+
+vault secrets enable kmip
+
+vault write kmip/config listen_addrs=0.0.0.0:5696 \
+    tls_ca_key_type="rsa" \
+    tls_ca_key_bits=2048
+
+vault read -format json kmip/ca | jq -r .data.ca_pem > ca.pem
+vault write -f kmip/scope/hashicups
+vault write kmip/scope/hashicups/role/payments operation_all=true
+
+vault write -format=json \
+    kmip/scope/hashicups/role/payments/credential/generate \
+    format=pem > credential.json
+jq -r .data.certificate < credential.json > cert.pem
+jq -r .data.private_key < credential.json > key.pem
+cat cert.pem key.pem > client.pem
+
+exit 0

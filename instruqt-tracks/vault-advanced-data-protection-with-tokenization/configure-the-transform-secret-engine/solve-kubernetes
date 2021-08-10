@@ -1,0 +1,12 @@
+#!/bin/bash 
+
+#Enable bash history
+HISTFILE=/root/.bash_history
+set -o history
+
+vault write transform/role/vault_go_demo transformations=ssn
+vault write transform/transformations/tokenization/ssn \
+    allowed_roles=vault_go_demo \
+    max_ttl=24h
+
+exit 0

@@ -1,0 +1,7 @@
+#!/bin/bash 
+
+set -e
+
+grep -q "vault.*secrets.*enable.*transform" /root/.bash_history || fail-message "You haven't enabled the Transform secrets engine yet"
+
+exit 0

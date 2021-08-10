@@ -1,0 +1,6 @@
+version: "2"
+virtualmachines:
+- name: kubernetes
+  image: instruqt/k3s-v1-20-4
+  shell: /bin/bash
+  machine_type: n1-standard-2

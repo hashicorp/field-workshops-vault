@@ -1,0 +1,10 @@
+#!/bin/bash
+
+#Enable bash history
+HISTFILE=/root/.bash_history
+set -o history
+set -e
+
+grep -q "pkill.*-9.*mongod" /root/.bash_history || fail-message "You haven't killed the mongod process yet."
+grep -q "rm.*-rf.*/var/lib/mongodb" /root/.bash_history || fail-message "You haven't deleted all mongodb files yet."
+grep -q "rm.*-rf.*/var/log/mongodb" /root/.bash_history || fail-message "You haven't deleted all mongodb files yet."
