@@ -1,0 +1,30 @@
+#!/bin/bash
+
+set -e
+set -v
+
+until [ -f /opt/instruqt/bootstrap/host-bootstrap-completed ]
+do
+    sleep 1
+done
+echo "source /usr/share/bash-completion/bash_completion" >> /root/.bashrc
+
+apt-get update -y
+apt install awscli -y
+
+###########
+# Install Vault Client
+###########
+wget -q https://releases.hashicorp.com/vault/1.7.3+ent/vault_1.7.3+ent_linux_amd64.zip
+unzip vault_1.7.3+ent_linux_amd64.zip
+mv vault /usr/local/bin/vault
+chmod +x /usr/local/bin/vault
+rm -f vault_1.7.3+ent_linux_amd64.zip
+
+###########
+# Set up Vault credentials
+###########
+echo "export VAULT_ADDR=http://127.0.0.1:8200" >> /root/.bashrc
+echo "export VAULT_TOKEN=root" >> /root/.bashrc
+
+exit 

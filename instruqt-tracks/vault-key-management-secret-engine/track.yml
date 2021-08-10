@@ -1,0 +1,102 @@
+slug: vault-key-management-secret-engine
+id: 62hbijubcwqn
+type: track
+title: (WIP) Vault Key Management Secret Engine
+teaser: Maintain root of trust by securely generating, maintaining, and distributing Vault generated keys to AWS KMS.
+description: The Key Management secrets engine provides a consistent workflow for distribution and lifecycle management of cryptographic keys in various key management service (KMS) providers. It allows organizations to maintain centralized control of their keys in Vault while still taking advantage of cryptographic capabilities native to the KMS providers. (Encrypted S3 as an example)
+icon: https://storage.googleapis.com/instruqt-frontend/assets/hashicorp/tracks/vault.png
+tags:
+- Vault
+- ' AWS'
+- ' Encryption'
+- ADP
+owner: hashicorp
+developers:
+- aklaas@hashicorp.com
+private: true
+published: true
+challenges:
+- slug: enable-key-management-secret-engine
+  id: hwxvticiiddu
+  type: challenge
+  title: Enable the Key Management Secret Engine
+  teaser: Prepare Vault to generate encryption keys for AWS KMS.
+  notes:
+  - type: text
+    contents: Secrets engines are components which store, generate, or encrypt data.
+  assignment: |-
+    First, open the "Vault Server" tab and start Vault in Dev mode (The process will not exit).
+    ```
+    VAULT_UI=true vault server -dev-root-token-id=root -dev -log-level=trace
+    ```
+    Switch back to the "terminal" tab.
+
+
+    The AWS key management secrets engine generates keys for AWS KMS
+
+    All secrets engines must be enabled before they can be used. Take a look at
+    what secrets engines are currently enabled.
+
+    ```
+    vault secrets list
+    ```
+
+    Note that the key management secret engine is not enabled. You should enable it.
+
+    ```
+    vault secrets enable keymgmt
+    vault write -f keymgmt/key/example-key type="aes256-gcm96"
+    vault write -f keymgmt/key/example-key deletion_allowed="true"
+    vault write keymgmt/kms/example-kms \
+      provider="awskms" \
+      key_collection="us-west-1"
+    vault write keymgmt/kms/example-kms/key/example-key \
+      purpose="encrypt,decrypt" \
+      protection="hsm"
+    ```
+
+    list keys
+    ```
+    vault list /keymgmt/key
+    ```
+
+    Read the key (see more details)
+    ```
+    vault read keymgmt/key/example-key
+    ```
+    list the key with the AWS CLI.
+    ```
+    aws kms list-keys --region=us-west-1
+    ```
+
+    Rotate key.
+    ```
+    vault write -f keymgmt/key/example-key/rotate
+    ```
+
+    Now list keys again with the AWS CLI to reflect the newly created key.
+    ```
+    aws kms list-keys --region=us-west-1
+    ```
+
+    Delete the keys from AWS. Note: this will not remove them immediately. AWS retains them 30 days by defeault.
+    ```
+    vault delete keymgmt/kms/example-kms/key/example-key
+    vault delete keymgmt/key/example-key
+    ```
+
+    Congratulations!
+  tabs:
+  - title: Enable the AWS Secrets Engine
+    type: terminal
+    hostname: base
+  - title: Vault Server
+    type: terminal
+    hostname: base
+  - title: Vault UI
+    type: service
+    hostname: base
+    port: 8200
+  difficulty: basic
+  timelimit: 3000
+checksum: "12633460472236237578"
