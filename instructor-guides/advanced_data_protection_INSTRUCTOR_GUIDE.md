@@ -111,7 +111,7 @@ If you are presenting to an intermediate or advanced group of Vault users, feel 
 0:30 - 0:45 - Chapter 3: Vault Auth Methods & Static Secrets<br>
 0:45 - 1:15 - Lab: Vault Basics (including break time)<br>
 1:15 - 1:25 - Chapter 4: Dynamic Secrets<br>
-1:25 - 1:55 - Lab: Dynamic MySQL Credentials (5 minute break)<br>
+1:25 - 2:00 - Lab: Dynamic MySQL Credentials (5 minute break at end)<br>
 2:00 - 2:10 - Chapter 5: Transform and Transit Secret Engines<br>
 2:10 - 2:40 - Lab: Transform and Transit Secret Engines<br>
 2:40 - 3:00 - Chapter 6: The Vault KMIP Secret Engine<br>
