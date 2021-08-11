@@ -1,7 +1,7 @@
 slug: vault-key-management-secret-engine
 id: 62hbijubcwqn
 type: track
-title: (WIP) Vault Key Management Secret Engine
+title: Vault Key Management Secret Engine
 teaser: Maintain root of trust by securely generating, maintaining, and distributing Vault generated keys to AWS KMS.
 description: |-
   The Key Management secrets engine provides a consistent workflow for distribution and lifecycle management of cryptographic keys in various key management service (KMS) providers. It allows organizations to maintain centralized control of their keys in Vault while still taking advantage of cryptographic capabilities native to the KMS providers. (Encrypted S3 buckets as an example).
@@ -174,4 +174,4 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 900
-checksum: "12014274727723179176"
+checksum: "6680855789086798922"

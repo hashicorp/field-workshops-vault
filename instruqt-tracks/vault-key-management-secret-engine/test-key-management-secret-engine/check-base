@@ -4,9 +4,16 @@
 HISTFILE=/root/.bash_history
 set -o history
 
-grep -q "vault.*list.*keymgmt/key" /root/.bash_history || fail-message "You haven't listed the KMS Key yet."
-grep -q "vault.*write.*-f.*keymgmt/key/example-key/rotate" /root/.bash_history || fail-message "You haven't rotated the exampke key yet."
-grep -q "aws.*kms.*list-keys.*--region=us-west-1" /root/.bash_history || fail-message "You haven't check if your keys were created in AWS yet."
-grep -q "vault.*delete.*keymgmt/key/example-key" /root/.bash_history || fail-message "You haven't deleted your KMS key yet."
+example_key=$(vault list -format=json keymgmt/key | jq -r .[0])
+expected_key=""
+if [ ! "$example_key" = "$expected_key" ]; then
+    fail-message "You haven't deleted the KMS key."
+fi
 
+example_provider_key=$(vault list -format=json keymgmt/kms/example-kms/key/ | jq -r .[0])
+expected_provider_key=""
+if [ ! "$example_provider_key" = "$expected_provider_key" ]; then
+    fail-message "You haven't removed the key from the AWS provider."
+fi
 
+exit 0
