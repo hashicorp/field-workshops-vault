@@ -1,0 +1,6 @@
+#!/bin/bash 
+
+#Enable bash history
+HISTFILE=/root/.bash_history
+set -o history
+

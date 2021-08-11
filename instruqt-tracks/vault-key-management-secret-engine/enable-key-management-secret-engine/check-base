@@ -1,0 +1,12 @@
+#!/bin/bash 
+
+#Enable bash history
+HISTFILE=/root/.bash_history
+set -o history
+
+grep -q "vault.*secrets.*list" /root/.bash_history || fail-message "You haven't listed the Vault secrets engines yet."
+grep -q "vault.*secrets.*enable.*keymgmt" /root/.bash_history || fail-message "You haven't enabled the keymgmt secret engine yet."
+grep -q "vault.*write.*-f.*keymgmt/key/example-key.*type=\"aes256-gcm96\"" /root/.bash_history || fail-message "You haven't enabled created a key yet."
+
+grep -q "vault.*write.*keymgmt/kms/example-kms.*provider=\"awskms\".*key_collection=\"us-west-1\"" /root/.bash_history || fail-message "You haven't configured a provider yet."
+grep -q "vault.*write.*keymgmt/kms/example-kms/key/example-key.*purpose=\"encrypt,decrypt\".*protection=\"hsm\"" /root/.bash_history || fail-message "You haven't uploaded a key to AWS KMS yet."

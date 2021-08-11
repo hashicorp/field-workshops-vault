@@ -1,0 +1,14 @@
+#!/bin/bash 
+
+#Enable bash history
+HISTFILE=/root/.bash_history
+set -o history
+
+vault list /keymgmt/key
+vault read keymgmt/key/example-key
+vault list keymgmt/kms/example-kms/key/
+aws kms list-keys --region=us-west-1
+vault write -f keymgmt/key/example-key/rotate
+aws kms list-keys --region=us-west-1
+vault delete keymgmt/kms/example-kms/key/example-key
+vault delete keymgmt/key/example-key
