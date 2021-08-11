@@ -4,3 +4,9 @@
 HISTFILE=/root/.bash_history
 set -o history
 
+grep -q "vault.*list.*keymgmt/key" /root/.bash_history || fail-message "You haven't listed the KMS Key yet."
+grep -q "vault.*write.*-f.*keymgmt/key/example-key/rotate" /root/.bash_history || fail-message "You haven't rotated the exampke key yet."
+grep -q "aws.*kms.*list-keys.*--region=us-west-1" /root/.bash_history || fail-message "You haven't check if your keys were created in AWS yet."
+grep -q "vault.*delete.*keymgmt/key/example-key" /root/.bash_history || fail-message "You haven't deleted your KMS key yet."
+
+
