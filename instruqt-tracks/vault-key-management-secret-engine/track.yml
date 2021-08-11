@@ -3,7 +3,10 @@ id: 62hbijubcwqn
 type: track
 title: (WIP) Vault Key Management Secret Engine
 teaser: Maintain root of trust by securely generating, maintaining, and distributing Vault generated keys to AWS KMS.
-description: The Key Management secrets engine provides a consistent workflow for distribution and lifecycle management of cryptographic keys in various key management service (KMS) providers. It allows organizations to maintain centralized control of their keys in Vault while still taking advantage of cryptographic capabilities native to the KMS providers. (Encrypted S3 as an example)
+description: |-
+  The Key Management secrets engine provides a consistent workflow for distribution and lifecycle management of cryptographic keys in various key management service (KMS) providers. It allows organizations to maintain centralized control of their keys in Vault while still taking advantage of cryptographic capabilities native to the KMS providers. (Encrypted S3 buckets as an example).
+
+  This workflow is often called "Bring Your Own Key" or BYOK for short.
 icon: https://storage.googleapis.com/instruqt-frontend/assets/hashicorp/tracks/vault.png
 tags:
 - Vault
@@ -23,19 +26,30 @@ challenges:
   teaser: Prepare Vault to generate encryption keys for AWS KMS.
   notes:
   - type: text
-    contents: Secrets engines are components which store, generate, or encrypt data.
+    contents: |-
+      Enterprises need to maintain key material outside of the cloud provider’s KMS but make it available to Cloud Service Providers in order to use native services.
+
+      Organizations that are utilizing Vault to centrally store and tightly control access to tokens, passwords, certificates, and encryption keys along with protecting data in transit and at rest require Vault to provide key material to the cloud KMS’.
+      This allows them to satisfy their regulatory and/or security requirements.
+
+      In this challenge we will first configure Vault to create those keys and upload them to the cloud provider (AWS).
   assignment: |-
+    NOTE: you may need to wait another minute and refresh the page if your terminal shows "unauthorized".
+
     First, open the "Vault Server" tab and start Vault in Dev mode (The process will not exit).
     ```
     VAULT_UI=true vault server -dev-root-token-id=root -dev -log-level=trace
     ```
-    Switch back to the "terminal" tab.
 
+    IMPORANT: Switch back to the "terminal" tab....
 
-    The AWS key management secrets engine generates keys for AWS KMS
+    The AWS key management secret engine generates keys for AWS KMS.
 
-    All secrets engines must be enabled before they can be used. Take a look at
-    what secrets engines are currently enabled.
+    Documentation for the secret engine can be found here: https://www.vaultproject.io/docs/secrets/key-management.
+
+    API documentation can be found here: https://www.vaultproject.io/api-docs/secret/key-management
+
+    All secrets engines must be enabled before they can be used. View which secret engines are currently enabled.
 
     ```
     vault secrets list
@@ -45,49 +59,44 @@ challenges:
 
     ```
     vault secrets enable keymgmt
+    ```
+    Next, create an AES256 symmetrtic encryption key.
+    Key types & compatability are listed here: https://www.vaultproject.io/docs/secrets/key-management#compatibility
+
+    Also, enable deletion of the key for cleanup.
+    ```
     vault write -f keymgmt/key/example-key type="aes256-gcm96"
     vault write -f keymgmt/key/example-key deletion_allowed="true"
+    ```
+
+    Next, we will configure the AWS Key Management Provider.
+    Documentation specific to the AWS provider can be found here: https://www.vaultproject.io/docs/secrets/key-management/awskms
+
+    To configure the provider we specify a "key_collection" location (Our AWS region). The provider also requires appropriate IAM credentials to authenticate and access AWS KMS.
+    In this example, Vault uses the instance profile of our client virtual machine.
+
+    The IAM permissions required by Vault are documented here: https://www.vaultproject.io/docs/secrets/key-management/awskms#authentication
+
+    Provider configurations options are here: https://www.vaultproject.io/api/secret/key-management#create-update-kms-provider
+
+    More AWS specific configuration options are here: https://www.vaultproject.io/api-docs/secret/key-management/awskms
+
+    ```
     vault write keymgmt/kms/example-kms \
       provider="awskms" \
       key_collection="us-west-1"
+    ```
+
+    Upload the example-key we created earlier to AWS. The key will be protected via CloudHSM and used for encryption & decryption.
+    Keys are uploaded via the appropriate cloud's BYOK specification.
+    ```
     vault write keymgmt/kms/example-kms/key/example-key \
       purpose="encrypt,decrypt" \
       protection="hsm"
     ```
-
-    list keys
-    ```
-    vault list /keymgmt/key
-    ```
-
-    Read the key (see more details)
-    ```
-    vault read keymgmt/key/example-key
-    ```
-    list the key with the AWS CLI.
-    ```
-    aws kms list-keys --region=us-west-1
-    ```
-
-    Rotate key.
-    ```
-    vault write -f keymgmt/key/example-key/rotate
-    ```
-
-    Now list keys again with the AWS CLI to reflect the newly created key.
-    ```
-    aws kms list-keys --region=us-west-1
-    ```
-
-    Delete the keys from AWS. Note: this will not remove them immediately. AWS retains them 30 days by defeault.
-    ```
-    vault delete keymgmt/kms/example-kms/key/example-key
-    vault delete keymgmt/key/example-key
-    ```
-
-    Congratulations!
+    Great work. Move on to the next challenge to manage the lifecycle of our newly created key.
   tabs:
-  - title: Enable the AWS Secrets Engine
+  - title: Terminal
     type: terminal
     hostname: base
   - title: Vault Server
@@ -98,5 +107,71 @@ challenges:
     hostname: base
     port: 8200
   difficulty: basic
-  timelimit: 3000
-checksum: "12633460472236237578"
+  timelimit: 900
+- slug: test-key-management-secret-engine
+  id: x9s3o0tpynom
+  type: challenge
+  title: Test the Key Management Secret Engine
+  teaser: Test key operations in the Key Management secret engine
+  notes:
+  - type: text
+    contents: |-
+      Enterprises also need the ability to manage the key material’s life cycle from a centralized location without having to rely on the cloud providers.
+
+      Once the key material is available in the cloud KMS, users need to be able to manage the life cycle of the key by having the ability to revoke, rotate and update the key.
+
+      Vault provides endpoints for operators to manage the lifecycle of the key and maintain an audit log of all key operations.
+  assignment: |-
+    First, list our created keys.
+    ```
+    vault list /keymgmt/key
+    ```
+
+    Read the key to see more details such as version, algorithm type, and if deletion is allowed.
+    ```
+    vault read keymgmt/key/example-key
+    ```
+
+    List the Keys in the AWS Provider
+    ```
+    vault list keymgmt/kms/example-kms/key/
+
+    ```
+
+    Use the AWS CLI to check for our key directly with AWS.
+    ```
+    aws kms list-keys --region=us-west-1
+    ```
+
+    Now, rotate the key.
+    ```
+    vault write -f keymgmt/key/example-key/rotate
+    ```
+
+    List the keys again directly with AWS to verify the new key was created.
+    ```
+    aws kms list-keys --region=us-west-1
+    ```
+
+    Delete the keys from AWS. Note: this will not remove them immediately. AWS retains them 30 days by defeault.
+    ```
+    vault delete keymgmt/kms/example-kms/key/example-key
+    vault delete keymgmt/key/example-key
+    ```
+    Congratuations. You have now learned the basics of Vault's BYOK functionality for AWS. Vault also supports Azure BYOK as well.
+
+    To learn more about the Azure workflow, see the following guide: https://learn.hashicorp.com/tutorials/vault/key-management-secrets.
+  tabs:
+  - title: Terminal
+    type: terminal
+    hostname: base
+  - title: Vault Server
+    type: terminal
+    hostname: base
+  - title: Vault UI
+    type: service
+    hostname: base
+    port: 8200
+  difficulty: basic
+  timelimit: 900
+checksum: "10005829750381809652"
