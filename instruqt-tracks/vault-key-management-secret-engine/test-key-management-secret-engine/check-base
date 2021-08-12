@@ -4,6 +4,12 @@
 HISTFILE=/root/.bash_history
 set -o history
 
+key_rotation=$(aws kms list-keys --region=us-west-1 | jq -r .Keys[1])
+null_key="null"
+if [ "$key_rotation" = "$null_key" ]; then
+    fail-message "You haven't rotated the key."
+fi
+
 example_key=$(vault list -format=json keymgmt/key | jq -r .[0])
 expected_key=""
 if [ ! "$example_key" = "$expected_key" ]; then
