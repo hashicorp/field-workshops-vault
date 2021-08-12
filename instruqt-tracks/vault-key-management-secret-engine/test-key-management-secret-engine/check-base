@@ -15,5 +15,3 @@ expected_provider_key=""
 if [ ! "$example_provider_key" = "$expected_provider_key" ]; then
     fail-message "You haven't removed the key from the AWS provider."
 fi
-
-exit 0
