@@ -69,11 +69,11 @@ challenges:
     vault write -f keymgmt/key/example-key deletion_allowed="true"
     ```
 
-    Next, we will configure the AWS Key Management Provider.
+    Next, we will configure the AWS Key Management provider.
     Documentation specific to the AWS provider can be found here: https://www.vaultproject.io/docs/secrets/key-management/awskms
 
     To configure the provider we specify a "key_collection" location (Our AWS region). The provider also requires appropriate IAM credentials to authenticate and access AWS KMS.
-    In this example, Vault uses the instance profile of our client virtual machine.
+    In this example, Vault uses the instance profile of our client virtual machine. See the provider configuration link below to provide credentials with alternative methods. 
 
     The IAM permissions required by Vault are documented here: https://www.vaultproject.io/docs/secrets/key-management/awskms#authentication
 
@@ -148,7 +148,7 @@ challenges:
     vault write -f keymgmt/key/example-key/rotate
     ```
 
-    List the keys again directly with AWS to verify the new key was created.
+    List the keys again directly with AWS to verify the new key was created. You should see a key was added.
     ```
     aws kms list-keys --region=us-west-1
     ```
