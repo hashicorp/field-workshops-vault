@@ -1,0 +1,22 @@
+#!/bin/bash 
+
+#Enable bash history
+HISTFILE=/root/.bash_history
+set -o history
+
+mkdir -p /vault/logs/
+touch /vault/logs/vault.log
+vault server -dev-root-token-id=root -dev -log-level=trace > /vault/logs/vault.log 2>&1 &
+
+vault secrets list
+vault secrets enable keymgmt
+vault write -f keymgmt/key/example-key type="aes256-gcm96"
+vault write -f keymgmt/key/example-key deletion_allowed="true"
+vault write keymgmt/kms/example-kms \
+  provider="awskms" \
+  key_collection="us-west-1"
+vault write keymgmt/kms/example-kms/key/example-key \
+  purpose="encrypt,decrypt" \
+  protection="hsm"
+
+exit 0

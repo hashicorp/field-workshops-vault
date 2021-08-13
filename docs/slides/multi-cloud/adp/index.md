@@ -69,6 +69,7 @@ name: environment
   1. Vault Dynamic Database Credentials
   1. Vault Transform and Transit Secrets Engines (App-Level Encryption)
   1. (Optional) Vault Transform-Tokenization Secrets Engine
+  1. (Optional) Vault Key Management Secrets Engine
   1. Vault KMIP Secrets Engine (Filesystem/Database Level Encryption)
 
 ???
@@ -427,7 +428,7 @@ Breaches are commonly carried out via attackers who have gained escalated creden
 
 ---
 # Transform Data Masking
-.center[![:scale 90%](images/slide50.png)]
+.center[![:scale 90%](images/masking.png)]
 
 ---
 # Transit Secrets Engine
@@ -471,7 +472,7 @@ In this next Lab we’ll use a web application that leverages both the Transform
 Lab Link: [Advanced Data Protection with Transform](https://play.instruqt.com/hashicorp/invite/d4b7a8cxjvoe)
 
 ---
-# Lab Environment Part 2 (Optional)
+# Lab 3 Part 2 (Optional)
 In this optional lab, you can leverage a Golang application and the Transform Secrets Engine to tokenize data.
 * The Golang application will leverage Vault’s API to tokenize customer Social Security numbers before writing them to the backend database
 * This lab will also showcase application code modifications as well
@@ -538,12 +539,17 @@ Portable Key Management: Protect encryption keys for data including files, virtu
 * Brocade Encryption SAN
 
 ---
-class: col-2
 # Key Management Secrets Engine
-.smaller[* The Key Management secrets engine provides a consistent workflow for distribution and lifecycle management of cryptographic keys in various key management service (KMS) providers
+This engine provides a consistent workflow for distribution and lifecycle management of cryptographic keys in Key Management Service providers
+* Maintain control of keys while taking advantage of cryptographic capabilities native to the KMS providers.
+* Manage key lifecycle operations, such as creating, reading, updating, and rotating keys.
+* Multi-Cloud organizations can consolidate key management to one central tool.
+* Own an original copy of the key material for additional durability.
 
-* It allows organizations to maintain centralized control of their keys in Vault while still taking advantage of cryptographic capabilities native to the KMS providers]
-.center[![:scale 60%](images/slide62.png)]
+---
+# Example KMS workflow (Azure & AWS GA)
+Optional Lab: [Vault Key Management Secrets Engine](https://play.instruqt.com/hashicorp/invite/e3lpvto0tam1)
+.center[![:scale 100%](images/kms.png)]
 
 ---
 class: title, shelf, no-footer, fullbleed

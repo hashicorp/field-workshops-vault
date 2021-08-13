@@ -1,0 +1,28 @@
+#!/bin/sh -l
+
+set -e
+
+expected_type_at_keymgmt_path="keymgmt"
+type_at_keymgmt_path=$(vault secrets list -format=json | jq -r '.["keymgmt/"]["type"]')
+
+if [ ! "$expected_type_at_keymgmt_path" = "$type_at_keymgmt_path" ]; then
+    fail-message "You haven't enabled the keymgmt secret engine at the default path yet."
+fi
+
+example_key=$(vault list -format=json keymgmt/key | jq -r .[0])
+expected_key="example-key"
+if [ ! "$example_key" = "$expected_key" ]; then
+    fail-message "You haven't created the example KMS key."
+fi
+
+example_provider=$(vault list -format=json keymgmt/kms | jq -r .[0])
+expected_provider="example-kms"
+if [ ! "$example_provider" = "$expected_provider" ]; then
+    fail-message "You haven't created the provider yet."
+fi
+
+example_provider_key=$(vault list -format=json keymgmt/kms/example-kms/key/ | jq -r .[0])
+expected_provider_key="example-key"
+if [ ! "$example_provider_key" = "$expected_provider_key" ]; then
+    fail-message "You haven't uploaded your key to the provider yet."
+fi

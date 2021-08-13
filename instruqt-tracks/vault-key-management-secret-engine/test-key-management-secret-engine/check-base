@@ -1,0 +1,23 @@
+#!/bin/bash 
+
+#Enable bash history
+HISTFILE=/root/.bash_history
+set -o history
+
+key_rotation=$(aws kms list-keys --region=us-west-1 | jq -r .Keys[1])
+null_key="null"
+if [ "$key_rotation" = "$null_key" ]; then
+    fail-message "You haven't rotated the key."
+fi
+
+example_key=$(vault list -format=json keymgmt/key | jq -r .[0])
+expected_key=""
+if [ ! "$example_key" = "$expected_key" ]; then
+    fail-message "You haven't deleted the KMS key."
+fi
+
+example_provider_key=$(vault list -format=json keymgmt/kms/example-kms/key/ | jq -r .[0])
+expected_provider_key=""
+if [ ! "$example_provider_key" = "$expected_provider_key" ]; then
+    fail-message "You haven't removed the key from the AWS provider."
+fi

@@ -1,0 +1,30 @@
+version: "2"
+containers:
+- name: cloud-client
+  image: gcr.io/instruqt/cloud-client
+  shell: /bin/bash
+  ports:
+  - 80
+virtualmachines:
+- name: base
+  image: instruqt-hashicorp/ubuntu-base
+  shell: /bin/bash
+  environment:
+    SKIP_SETCAP: "true"
+    VAULT_ADDR: http://localhost:8200
+  machine_type: n1-standard-2
+aws_accounts:
+- name: vault-dynamic-secrets-aws
+  iam_policy: |
+    {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [ "kms:*" ],
+          "Resource": "*"
+        }
+      ]
+    }
+  managed_policies:
+  - arn:aws:iam::aws:policy/AWSKeyManagementServicePowerUser
