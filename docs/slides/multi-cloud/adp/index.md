@@ -427,7 +427,7 @@ Breaches are commonly carried out via attackers who have gained escalated creden
 
 ---
 # Transform Data Masking
-.center[![:scale 90%](images/slide50.png)]
+.center[![:scale 90%](images/masking.png)]
 
 ---
 # Transit Secrets Engine
@@ -538,12 +538,17 @@ Portable Key Management: Protect encryption keys for data including files, virtu
 * Brocade Encryption SAN
 
 ---
-class: col-2
 # Key Management Secrets Engine
-.smaller[* The Key Management secrets engine provides a consistent workflow for distribution and lifecycle management of cryptographic keys in various key management service (KMS) providers
+This engine provides a consistent workflow for distribution and lifecycle management of cryptographic keys in Key Management Service providers
+* Maintain control of keys while taking advantage of cryptographic capabilities native to the KMS providers.
+* Manage key lifecycle operations, such as creating, reading, updating, and rotating keys.
+* Multi-Cloud organizations can consolidate key management to one central tool.
+* Own an original copy of the key material for additional durability.
 
-* It allows organizations to maintain centralized control of their keys in Vault while still taking advantage of cryptographic capabilities native to the KMS providers]
-.center[![:scale 60%](images/slide62.png)]
+---
+# Example KMS workflow (Azure & AWS GA)
+Optional Lab: [Vault Key Management Secrets Engine](https://play.instruqt.com/hashicorp/tracks/vault-key-management-secret-engine)
+.center[![:scale 100%](images/kms.png)]
 
 ---
 class: title, shelf, no-footer, fullbleed
