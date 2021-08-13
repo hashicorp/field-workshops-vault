@@ -70,6 +70,7 @@ name: environment
   1. Vault Transform and Transit Secrets Engines (App-Level Encryption)
   1. (Optional) Vault Transform-Tokenization Secrets Engine
   1. Vault KMIP Secrets Engine (Filesystem/Database Level Encryption)
+  1. (Optional) Vault Key Management Secrets Engine
 
 ???
 
@@ -471,7 +472,7 @@ In this next Lab we’ll use a web application that leverages both the Transform
 Lab Link: [Advanced Data Protection with Transform](https://play.instruqt.com/hashicorp/invite/d4b7a8cxjvoe)
 
 ---
-# Lab Environment Part 2 (Optional)
+# Lab 3 Part 2 (Optional)
 In this optional lab, you can leverage a Golang application and the Transform Secrets Engine to tokenize data.
 * The Golang application will leverage Vault’s API to tokenize customer Social Security numbers before writing them to the backend database
 * This lab will also showcase application code modifications as well
@@ -547,7 +548,7 @@ This engine provides a consistent workflow for distribution and lifecycle manage
 
 ---
 # Example KMS workflow (Azure & AWS GA)
-Optional Lab: [Vault Key Management Secrets Engine](https://play.instruqt.com/hashicorp/tracks/vault-key-management-secret-engine)
+Optional Lab: [Vault Key Management Secrets Engine](https://play.instruqt.com/hashicorp/invite/e3lpvto0tam1)
 .center[![:scale 100%](images/kms.png)]
 
 ---
