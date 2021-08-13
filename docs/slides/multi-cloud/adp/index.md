@@ -69,8 +69,8 @@ name: environment
   1. Vault Dynamic Database Credentials
   1. Vault Transform and Transit Secrets Engines (App-Level Encryption)
   1. (Optional) Vault Transform-Tokenization Secrets Engine
-  1. Vault KMIP Secrets Engine (Filesystem/Database Level Encryption)
   1. (Optional) Vault Key Management Secrets Engine
+  1. Vault KMIP Secrets Engine (Filesystem/Database Level Encryption)
 
 ???
 
