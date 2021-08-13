@@ -96,6 +96,10 @@ Go through this track start to finish and make sure you understand all teh chall
 
 https://play.instruqt.com/hashicorp/tracks/vault-kmip-secrets-engine-mongodb
 
+OPTIONAL TRACK: You will need to generate an invite for the workshop. This track covers the Key Management Secret Engine for AWS.
+
+https://play.instruqt.com/hashicorp/tracks/vault-key-management-secret-engine
+
 
 ### Configuring the Instruqt Pools
 We recommend that you configure Instruqt pools for each Instruqt track used in this workshop 1 hour before you plan to use the track. Please see this Confluence [doc](https://hashicorp.atlassian.net/wiki/spaces/SE/pages/511574174/Instruqt+and+Remark+Contributor+Guide#InstruqtandRemarkContributorGuide-ConfiguringInstruqtPools) for instructions.
