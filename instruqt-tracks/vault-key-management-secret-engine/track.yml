@@ -1,7 +1,7 @@
 slug: vault-key-management-secret-engine
 id: 62hbijubcwqn
 type: track
-title: Vault Key Management Secret Engine
+title: Vault Key Management Secrets Engine
 teaser: Maintain root of trust by securely generating, maintaining, and distributing Vault generated keys to AWS KMS.
 description: |-
   The Key Management secrets engine provides a consistent workflow for distribution and lifecycle management of cryptographic keys in various key management service (KMS) providers. It allows organizations to maintain centralized control of their keys in Vault while still taking advantage of cryptographic capabilities native to the KMS providers. (Encrypted S3 buckets as an example).
@@ -22,7 +22,7 @@ challenges:
 - slug: enable-key-management-secret-engine
   id: hwxvticiiddu
   type: challenge
-  title: Enable the Key Management Secret Engine
+  title: Enable the Key Management Secrets Engine
   teaser: Prepare Vault to generate encryption keys for AWS KMS.
   notes:
   - type: text
@@ -43,19 +43,19 @@ challenges:
 
     IMPORANT: Switch back to the "terminal" tab....
 
-    The AWS key management secret engine generates keys for AWS KMS.
+    The AWS key management secrets engine generates keys for AWS KMS.
 
-    Documentation for the secret engine can be found here: https://www.vaultproject.io/docs/secrets/key-management.
+    Documentation for the secrets engine can be found here: https://www.vaultproject.io/docs/secrets/key-management.
 
     API documentation can be found here: https://www.vaultproject.io/api-docs/secret/key-management
 
-    All secrets engines must be enabled before they can be used. View which secret engines are currently enabled.
+    All secrets engines must be enabled before they can be used. View which secrets engines are currently enabled.
 
     ```
     vault secrets list
     ```
 
-    Note that the key management secret engine is not enabled. You should enable it.
+    Note that the key management secrets engine is not enabled. You should enable it.
 
     ```
     vault secrets enable keymgmt
@@ -111,8 +111,8 @@ challenges:
 - slug: test-key-management-secret-engine
   id: x9s3o0tpynom
   type: challenge
-  title: Test the Key Management Secret Engine
-  teaser: Test key operations in the Key Management secret engine
+  title: Test the Key Management Secrets Engine
+  teaser: Test key operations in the Key Management secrets engine
   notes:
   - type: text
     contents: |-
