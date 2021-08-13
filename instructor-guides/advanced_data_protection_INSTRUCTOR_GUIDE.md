@@ -96,7 +96,7 @@ Go through this track start to finish and make sure you understand all teh chall
 
 https://play.instruqt.com/hashicorp/tracks/vault-kmip-secrets-engine-mongodb
 
-OPTIONAL TRACK: You will need to generate an invite for the workshop. This track covers the Key Management Secret Engine for AWS.
+OPTIONAL TRACK: This track covers the Key Management Secret Engine for AWS.
 
 https://play.instruqt.com/hashicorp/tracks/vault-key-management-secret-engine
 
