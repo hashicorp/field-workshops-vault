@@ -73,7 +73,7 @@ challenges:
     Documentation specific to the AWS provider can be found here: https://www.vaultproject.io/docs/secrets/key-management/awskms
 
     To configure the provider we specify a "key_collection" location (Our AWS region). The provider also requires appropriate IAM credentials to authenticate and access AWS KMS.
-    In this example, Vault uses the instance profile of our client virtual machine. See the provider configuration link below to provide credentials with alternative methods. 
+    In this example, Vault uses the instance profile of our client virtual machine. See the provider configuration link below to provide credentials with alternative methods.
 
     The IAM permissions required by Vault are documented here: https://www.vaultproject.io/docs/secrets/key-management/awskms#authentication
 
@@ -174,4 +174,4 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 900
-checksum: "6289752986371111261"
+checksum: "12936979502396197866"
