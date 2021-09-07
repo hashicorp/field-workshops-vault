@@ -453,7 +453,7 @@ class: col-2
 
 ---
 # Transform vs. Transit vs. Tokenization
-.center[![:scale 60%](images/vs.png)]
+.center[![:scale 60%](images/ADP_matrix.png)]
 
 
 ---
