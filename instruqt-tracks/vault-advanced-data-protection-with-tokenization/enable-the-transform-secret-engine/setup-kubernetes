@@ -24,12 +24,14 @@ apt install -y kubectl
 apt install -y consul 
 apt install -y vault
 
-git clone git@github.com:hashicorp/field-workshops-vault.git
+git clone https://github.com/hashicorp/field-workshops-vault.git
 cp -r field-workshops-vault /root
 cp -r /root/field-workshops-vault/instruqt-tracks/vault-advanced-data-protection-with-tokenization/assets/helm /root/
 cp -r /root/field-workshops-vault/instruqt-tracks/vault-advanced-data-protection-with-tokenization/assets/config /root/
 cp -r /root/field-workshops-vault/instruqt-tracks/vault-advanced-data-protection-with-tokenization/assets/vault_go_demo /root/
 cp -r /root/field-workshops-vault/instruqt-tracks/vault-advanced-data-protection-with-tokenization/assets/vault_go_demo_non_tokenization /root/
+cp -r /root/field-workshops-vault/instruqt-tracks/vault-advanced-data-protection-with-tokenization/assets/app_code /root/
+
 
 /usr/local/bin/helm repo add stable https://charts.helm.sh/stable
 /usr/local/bin/helm repo add hashicorp https://helm.releases.hashicorp.com
