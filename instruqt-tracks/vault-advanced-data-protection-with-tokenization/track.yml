@@ -3,17 +3,17 @@ id: pm1e6okdgbx3
 version: 0.0.1
 type: track
 title: Vault ADP with Tokenization
-teaser: Leverage Vault's Transform Secret Engine (Tokenization) for protecting customer PII data.
+teaser: Leverage Vault's Transform Secrets Engine (Tokenization) for protecting customer PII data.
 description: |-
-  The Vault Transform Secret Engine provides the ability to tokenize sensitive data for storing outside of Vault.
+  The Vault Transform Secrets Engine provides the ability to tokenize sensitive data for storing outside of Vault.
 
   When encrypting sensitive data, preservation of the original data format or length may be required to meet certain industry standards such as HIPAA or PCI.
-  To fulfill this requirement, the transform secrets engine can perform format preserving encryption (FPE).
+  To fulfill this requirement, the Transform Secrets Engine can perform format preserving encryption (FPE).
 
   However, there are organizations that care more about the irreversibility of the tokenized data and not so much about preserving the original data format.
-  Therefore, the transform secrets engine's FPE transformation may not meet the governance, risk and compliance (GRC) strategy they are looking for due to the use of reversible cryptography to perform FPE.
+  Therefore, the Transform Secrets Engine's FPE transformation may not meet the governance, risk and compliance (GRC) strategy they are looking for due to the use of reversible cryptography to perform FPE.
 
-  In this lab, you will use the Transform secret engine with an example Golang application and external Postgres database.
+  In this lab, you will use the Transform Secrets Engine with an example Golang application and external Postgres database.
 icon: https://storage.googleapis.com/instruqt-frontend/assets/hashicorp/tracks/vault.png
 tags:
 - vault
@@ -22,29 +22,29 @@ tags:
 owner: hashicorp
 developers:
 - aklaas@hashicorp.com
-private: false
+private: true
 published: true
 challenges:
 - slug: enable-the-transform-secret-engine
   id: lz6iiyy29zf0
   type: challenge
-  title: Enable the Transform (Tokenization) secret engine
-  teaser: In this first challenge, we will enable and configure Vault's Transform secret engine with data tokenization.
+  title: Enable the Transform (Tokenization) Secrets Engine
+  teaser: In this first challenge, we will enable and configure Vault's Transform Secrets Engine with data tokenization.
   notes:
   - type: text
     contents: |-
       Secrets engines are Vault plugins that store, generate, tokenize, or encrypt data.
-      The Transform secrets engine functions as Vault's Encryption-as-a-Service and Tokenization solution.
-      The secret engine supports tokenization, format preserving encryption, and data masking transformations.
+      The Transform Secrets Engine functions as Vault's Encryption-as-a-Service and Tokenization solution.
+      The Secrets Engine supports tokenization, format preserving encryption, and data masking transformations.
       To learn more, see https://www.vaultproject.io/docs/secrets/transform/tokenization.
 
       This lab usually takes 3-5 minutes to spin up.
 
       ![Tokenization](https://github.com/hashicorp/field-workshops-vault/raw/main/instruqt-tracks/vault-advanced-data-protection-with-tokenization/assets/images/tokenization_overview.png)
   assignment: |-
-    The Transform secret engine allows Vault to tokenize data before storing to external storage.
+    The Transform Secrets Engine allows Vault to tokenize data before storing to external storage.
 
-    In this track, you will use the Transform secrets engine with a Golang web app that talks to a PostgreSQL server.
+    In this track, you will use the Transform Secrets Engine with a Golang web app that talks to a PostgreSQL server.
     Both of these run on Kubernetes and are deployed via helm. There is also a Vault server running on Kubernetes whose root token is set to `root`.
 
     Vault can be viewed in the "Vault-ui" tab.
@@ -55,7 +55,7 @@ challenges:
     ```
     vault secrets list
     ```
-    Note that the Transform secrets engine is not enabled. Please enable it.
+    Note that the Transform Secrets Engine is not enabled. Please enable it.
     ```
     vault secrets enable transform
     ```
@@ -114,11 +114,11 @@ challenges:
 - slug: configure-the-transform-secret-engine
   id: hzyumbmovnyy
   type: challenge
-  title: Configure the Transform (Tokenization) secret engine
+  title: Configure the Transform (Tokenization) Secrets Engine
   teaser: Specify a role and transformation to Tokenize user SSNs.
   notes:
   - type: text
-    contents: In this challenge, we will configure the Transform secret engine for use with our application.
+    contents: In this challenge, we will configure the Transform Secrets Engine for use with our application.
   assignment: |-
     First, create a role in Vault for our application. Roles are used by Vault ACLs to restrict access to the underlying transformations. (See below for an example).
     ```
@@ -147,9 +147,9 @@ challenges:
     vault write transform/decode/vault_go_demo \
       transformation=ssn value=<encoded_value_from_above>
     ```
-    Vault ACL policies can restrict which users and applications have access to this secret engine.
+    Vault ACL policies can restrict which users and applications have access to this Secrets Engine.
     They can be read about here: https://www.vaultproject.io/docs/concepts/policies.
-    As an example, we could give a user or application access to our secret engine role with this policy:
+    As an example, we could give a user or application access to our Secrets Engine role with this policy:
     ```
     path "transform/encode/vault_go_demo" {
       capabilities = [ "update" ]
@@ -337,4 +337,4 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 10000
-checksum: "13367141419167005437"
+checksum: "15911573798874290156"
