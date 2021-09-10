@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vault EaaS</title>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,300|Roboto:400,300' rel='stylesheet'>
+
+    <!-- LOCAL DEV -->
+    <!-- <link rel="stylesheet" href="../public/css/index.css"> -->
+    <!-- Golang server -->
+    <link rel="stylesheet" href="public/css/index.css">
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="180x180" href="public/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="public/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="public/favicon/favicon-16x16.png">
+    <link rel="manifest" href="public/favicon/site.webmanifest">
+    <link rel="mask-icon" href="public/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="public/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="public/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+</head>
+<body>
+
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="vault" viewBox="0 0 100 100">
+        <path d="M 6.437148,8.5231549 50.135287,91.436387 94.159126,8.5231549 Z M 55.29221,25.198155 h 5.089069 v 4.771616 H 55.29221 Z M 45.168355,44.43854 H 40.13357 v -4.848577 h 5.075498 z m 0,-7.208731 H 40.13357 v -4.848577 h 5.075498 z m 0,-7.20873 H 40.13357 v -4.848577 h 5.075498 z m 7.626818,21.639019 h -5.034785 v -4.861404 h 5.075498 z m 0,-7.221558 h -5.034785 v -4.848577 h 5.075498 z m 0,-7.208731 h -5.034785 v -4.848577 h 5.075498 z m 0,-7.20873 h -5.034785 v -4.848577 h 5.075498 z m 2.497037,2.360153 h 5.089069 v 4.79727 H 55.29221 Z m 0,12.006001 v -4.79727 h 5.075498 v 4.79727 z"/>
+    </symbol>
+</svg>
+
+<div id="atf">
+<header>
+    <div>
+        <svg class="idx-header-svg"><use xlink:href="#vault"></use></svg>
+    </div>
+    <ul class="dnav">
+        <li><a href="/home">Home</a></li>
+        <li><a href="/records">Records</a></li>
+        <li><a href="/dbview">Database View</a></li>
+        <li><a href="/dbusers">Database User View</a></li>
+    </ul>
+    <div id="rec-btns">    
+        <a class="add-btn" href="/addrecord">Add Record</a>
+        <a class="update-btn" href="/updaterecord">Update Record</a>
+    </div>
+</header>
+
+<div class="banner">
+    <h1>Protect Your Data!</h1>
+    <h3>Leveraging Vault's Universal KMS to secure critical customer PII data</h3>
+</div>
+
+<footer>
+    <h3>Vault Enterprise by HashiCorp</h3>
+    <p>Encryption as a Service using the transit secret engine</p>
+    {{$x := .Username}}
+    {{$y := .Password}}
+    <p class="dbcreds">This App's DB Username is: {{$x}}</p>
+    <p class="dbcreds">The DB password is: {{$y}}</p>
+</footer>
+</div>
+
+<article>
+
+<h1>Application Security</h1>
+<h2>Transit</h2>
+
+<p class="main-txt">The transit secrets engine handles cryptographic functions on data in-transit. Vault doesn't store the data sent to the secrets engine. It can also be viewed as "cryptography as a service" or "encryption as a service". The transit secrets engine can also sign and verify data; generate hashes and HMACs of data; and act as a source of random bytes.</p>
+<br>
+<p class="main-txt">The primary use case for transit is to encrypt data from applications while still storing that encrypted data in some primary data store. This relieves the burden of proper encryption/decryption from application developers and pushes the burden onto the operators of Vault.</p>
+
+<img src="public/images/transit.jpg" alt="">
+
+<h2>Format Preserving Encryption (Transform)</h2>
+<p class="main-txt">Vault Enterprise 1.4 with Advanced Data Protection module introduced the Transform secrets engine which handles secure data transformation and tokenization against the provided secrets. Transformation methods encompass NIST vetted cryptographic standards such as format-preserving encryption (FPE) via FF3-1 to encode your secrets while maintaining the data format and length. In addition, it can also be pseudonymous transformations of the data through other means, such as masking.</p>
+<br>
+<p class="main-txt">FPE is functionally simimar to the diagram above. However a format preserved encrypted value would be returned. In this case a different Credit Card number that is invalid.</p>
+<h2>Tokenization</h2>
+<p class="main-txt">When encrypting sensitive data, preservation of the original data format or length may be required to meet certain industry standards such as HIPAA or PCI. To fulfill this requirement, the transform secrets engine performs format preserving encryption (FPE).</p>
+<br>
+<p class="main-txt">However, there are organizations that care more about the irreversibility of the tokenized data and not so much about preserving the original data format. Therefore, the transform secrets engine's FPE transformation may not meet the governance, risk and compliance (GRC) strategy they are looking for due to the use of reversible cryptography to perform FPE.</p>
+
+<h2>Dynamic Secrets</h2>
+<p class="main-txt">A dynamic secret is generated on demand and is unique to a client, instead of a static secret, which is defined ahead of time and shared. Vault associates each dynamic secret with a lease and automatically destroys the credentials when the lease expires.</p>
+<br>
+<p class="main-txt">In this example, a client is requesting a database credential. Vault connects to the database with a private, root level credential and creates a new username and password. This new set of credentials are provided back to the client with a lease of 7 days. A week later, Vault will connect to the database with its privileged credentials and delete the newly created username.</p>
+
+<img src="public/images/dbcreds.jpg" alt="" id="dbcreds">
+
+<h2>Consul Service Mesh</h2>
+<p class="main-txt">Consul Connect provides service-to-service connection authorization and encryption using mutual Transport Layer Security (TLS). Applications can use sidecar proxies in a service mesh configuration to establish TLS connections for inbound and outbound connections without being aware of Connect at all. Applications may also natively integrate with Connect for optimal performance and security. Connect can help you secure your services and provide data about service-to-service communications.</p>
+<br>
+<p class="main-txt">Connect enables secure deployment best-practices with automatic service-to-service encryption, and identity-based authorization. Connect uses the registered service identity (rather than IP addresses) to enforce access control with intentions. This makes it easier to reason about access control and enables services to be rescheduled by orchestrators including Kubernetes and Nomad. Intention enforcement is network agnostic, so Connect works with physical networks, cloud networks, software-defined networks, cross-cloud, and more.</p>
+
+
+<img src="public/images/connect.jpg" alt="" id="connect">
+
+</article>
+
+</body>
+</html>

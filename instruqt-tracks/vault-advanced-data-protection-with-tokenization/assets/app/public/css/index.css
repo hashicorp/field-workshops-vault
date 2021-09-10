@@ -1,0 +1,161 @@
+html, body, header, nav, ul ,li, a, div, footer, h1, h3, p {
+    list-style: none;
+    padding: 0;
+    border: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}    
+
+#atf {
+    height: 100vh;
+}
+
+header {
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 3.0rem;
+    /* border: 3px solid black; */
+    /* position: fixed; */
+    /* top: 0; */
+}
+
+header div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.idx-header-svg {
+    height: 1.5rem;
+    width: 1.5rem;
+    padding-left: 2rem;
+    /* border: 3px solid red; */
+}
+
+.dnav {
+    /* flex-grow: 1; */
+    display: flex;
+    /* flex-direction: row; */
+    justify-content: space-around;
+    align-items: center;
+    width: 50%;
+    /* border: 3px solid blue; */
+}
+#rec-btns {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border: 3px solid yello;
+    flex-grow: 1;
+    padding: 0 2rem;
+    height: 100%;
+    /* border: 3px solid blue; */
+}
+.add-btn {
+    /* flex-grow: 1; */
+    padding: .2rem .5rem;
+    text-decoration: none;
+    background-color: rgb(51, 216, 51);
+    border-radius: 3px;
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: whitesmoke;
+    margin: 0 .5rem;
+}
+.update-btn {
+        /* flex-grow: 1; */
+        padding: .2rem .5rem;
+        text-decoration: none;
+        background-color: rgb(80, 80, 242);
+        border-radius: 3px;
+        /* border: 1px solid black; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: whitesmoke;
+        margin: 0 .5rem;
+}
+li {
+    /* width: 5rem; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: lightblue; */
+    /* border: 3px solid hotpink; */
+}
+.banner {
+    height: 70%;
+    background-color: lightgray;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-top: gray;
+    color: whitesmoke;
+    /* background */
+    background-image: url("../images/chicago-2.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-origin: border-box;
+    background-attachment: fixed; 
+}
+div h1, div h3 {
+    font-family: 'Roboto', sans-serif;
+}
+div h1 {
+    font-size: 2.5rem;
+}
+footer {
+    padding: 3rem; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.dbcreds {
+    font-weight: 500;
+    padding: 1.5rem;
+}
+li a {
+    text-decoration: none;
+    cursor: pointer;
+    padding: .4rem;
+    border-radius: 3px;
+}
+li a:hover {
+    background-color: rgba(235, 225, 225, 0.926);
+}
+
+article {
+    padding: 5rem 7rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* border: 5px solid black; */
+}
+p
+img {
+    width: 100vw;
+    height: auto;
+    /* border: 5px solid black; */
+}
+
+#connect {
+    height: 600px;
+    width: 800px;
+}
+
+#dbcreds {
+    height: 350px;
+    width: 800px;
+}
+.main-txt {
+    width: 70%;
+}

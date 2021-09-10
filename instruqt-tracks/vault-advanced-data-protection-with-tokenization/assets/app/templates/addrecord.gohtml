@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vault EaaS</title>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,300|Roboto:400,300' rel='stylesheet'>
+
+    <!-- LOCAL DEV -->
+    <link rel="stylesheet" href="../public/css/addrecord.css">
+    <!-- Golang server -->
+    <!-- <link rel="stylesheet" href="public/css/addrecord.css"> -->
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="180x180" href="public/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="public/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="public/favicon/favicon-16x16.png">
+    <link rel="manifest" href="public/favicon/site.webmanifest">
+    <link rel="mask-icon" href="public/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="public/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="public/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+</head>
+<body>
+
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="vault" viewBox="0 0 100 100">
+        <path d="M 6.437148,8.5231549 50.135287,91.436387 94.159126,8.5231549 Z M 55.29221,25.198155 h 5.089069 v 4.771616 H 55.29221 Z M 45.168355,44.43854 H 40.13357 v -4.848577 h 5.075498 z m 0,-7.208731 H 40.13357 v -4.848577 h 5.075498 z m 0,-7.20873 H 40.13357 v -4.848577 h 5.075498 z m 7.626818,21.639019 h -5.034785 v -4.861404 h 5.075498 z m 0,-7.221558 h -5.034785 v -4.848577 h 5.075498 z m 0,-7.208731 h -5.034785 v -4.848577 h 5.075498 z m 0,-7.20873 h -5.034785 v -4.848577 h 5.075498 z m 2.497037,2.360153 h 5.089069 v 4.79727 H 55.29221 Z m 0,12.006001 v -4.79727 h 5.075498 v 4.79727 z"/>
+    </symbol>
+</svg>
+
+<div id="atf">
+    <header>
+        <div>
+            <svg class="idx-header-svg"><use xlink:href="#vault"></use></svg>
+        </div>
+        <ul class="dnav">
+            <li><a href="/home">Home</a></li>
+            <li><a href="/records">Records</a></li>
+            <li><a href="/dbview">Database View</a></li>
+            <li><a href="/dbusers">Database User View</a></li>
+        </ul>
+        <div id="rec-btns">    
+            <a class="add-btn" href="/addrecord">Add Record</a>
+            <a class="update-btn" href="/updaterecord">Update Record</a>
+        </div>
+    </header>
+
+    <div class="banner">
+        <h1>Add User</h1>
+        <form action="/addrecord" method="post">
+            <div>
+                <label for="first">First Name</label>
+                <input type="text" id="first" name="first">
+            </div>
+
+            <div>
+                <label for="last">Last Name</label>
+                <input type="text" id="last" name="last">
+            </div>
+
+            <div>
+                <label for="birthday">Birthday</label>
+                <input type="date" id="birthday" name="birthday">
+            </div>
+
+            <div>
+                <label for="ssn">Social Security Number</label>
+                <input type="text" id="ssn" name="ssn" value="">
+            </div>
+
+            <div>
+                <label for="address">Address</label>
+                <input type="text" id="address" name="address">
+            </div>
+
+            <div>
+                <label for="salary">Salary</label>
+                <input type="number" id="salary" name="salary" value="0.00">
+            </div>
+
+            <div id="inputs">
+                <input type="submit" id="submit" name="submit">
+
+                <a href="/" class="cancel-btn">Cancel</a>
+            </div>
+
+        </form>
+    </div>
+
+    <footer>
+        <h3>Vault Enterprise by HashiCorp</h3>
+        <p>Encryption as a Service using the transit secret engine</p>
+    </footer>
+
+</div>
+   
+
+</body>
+</html>

@@ -3,8 +3,7 @@ id: pm1e6okdgbx3
 version: 0.0.1
 type: track
 title: Vault ADP with Tokenization
-teaser: Leverage Vault's Transform Secret Engine (Tokenization) for protecting customer
-  PII data.
+teaser: Leverage Vault's Transform Secret Engine (Tokenization) for protecting customer PII data.
 description: |-
   The Vault Transform Secret Engine provides the ability to tokenize sensitive data for storing outside of Vault.
 
@@ -30,8 +29,7 @@ challenges:
   id: lz6iiyy29zf0
   type: challenge
   title: Enable the Transform (Tokenization) secret engine
-  teaser: In this first challenge, we will enable and configure Vault's Transform
-    secret engine with data tokenization.
+  teaser: In this first challenge, we will enable and configure Vault's Transform secret engine with data tokenization.
   notes:
   - type: text
     contents: |-
@@ -66,14 +64,6 @@ challenges:
   - title: Terminal
     type: terminal
     hostname: kubernetes
-  - title: Golang App Code - init
-    type: code
-    hostname: kubernetes
-    path: /root/vault-go-demo-tokenization/config/db.go
-  - title: Golang App Code - tokenization
-    type: code
-    hostname: kubernetes
-    path: /root/vault-go-demo-tokenization/users/handlers.go
   - title: Web App
     type: service
     hostname: kubernetes
@@ -93,8 +83,7 @@ challenges:
   teaser: Determine how our application works and what data to tokenize
   notes:
   - type: text
-    contents: In this challenge, we will test our current web app to determine what
-      customer PII data needs to be tokenized for compliance.
+    contents: In this challenge, we will test our current web app to determine what customer PII data needs to be tokenized for compliance.
   assignment: |-
     The web app can be viewed on the "Web App" tab. You may want to click the icon in the upper right corner of the tabs area to hide the assignment window so that you can see the entire UI of the web app. Click it again to display the assignment window.
     The web app has two sections:
@@ -110,14 +99,6 @@ challenges:
   - title: Terminal
     type: terminal
     hostname: kubernetes
-  - title: Golang App Code - init
-    type: code
-    hostname: kubernetes
-    path: /root/vault-go-demo-tokenization/config/db.go
-  - title: Golang App Code - tokenization
-    type: code
-    hostname: kubernetes
-    path: /root/vault-go-demo-tokenization/users/handlers.go
   - title: Web App
     type: service
     hostname: kubernetes
@@ -137,8 +118,7 @@ challenges:
   teaser: Specify a role and transformation to Tokenize user SSNs.
   notes:
   - type: text
-    contents: In this challenge, we will configure the Transform secret engine for
-      use with our application.
+    contents: In this challenge, we will configure the Transform secret engine for use with our application.
   assignment: |-
     First, create a role in Vault for our application. Roles are used by Vault ACLs to restrict access to the underlying transformations. (See below for an example).
     ```
@@ -183,14 +163,6 @@ challenges:
   - title: Terminal
     type: terminal
     hostname: kubernetes
-  - title: Golang App Code - init
-    type: code
-    hostname: kubernetes
-    path: /root/vault-go-demo-tokenization/config/db.go
-  - title: Golang App Code - tokenization
-    type: code
-    hostname: kubernetes
-    path: /root/vault-go-demo-tokenization/users/handlers.go
   - title: Web App
     type: service
     hostname: kubernetes
@@ -295,11 +267,11 @@ challenges:
   - title: Golang App Code - init
     type: code
     hostname: kubernetes
-    path: /root/vault-go-demo-tokenization/config/db.go
+    path: /root/app/config/db.go
   - title: Golang App Code - tokenization
     type: code
     hostname: kubernetes
-    path: /root/vault-go-demo-tokenization/users/handlers.go
+    path: /root/app/users/handlers.go
   - title: Web App
     type: service
     hostname: kubernetes
@@ -353,14 +325,6 @@ challenges:
   - title: Terminal
     type: terminal
     hostname: kubernetes
-  - title: Golang App Code - init
-    type: code
-    hostname: kubernetes
-    path: /root/vault-go-demo-tokenization/config/db.go
-  - title: Golang App Code - tokenization
-    type: code
-    hostname: kubernetes
-    path: /root/vault-go-demo-tokenization/users/handlers.go
   - title: Web App
     type: service
     hostname: kubernetes
@@ -373,4 +337,4 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 10000
-checksum: "17173373442206031881"
+checksum: "10711033238269318706"
