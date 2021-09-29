@@ -68,7 +68,7 @@ The slide deck for this training is written completely in [Markdown](https://gui
 https://github.com/hashicorp/field-workshops-vault/issues
 
 ### Hands-on Labs
-At certain points in the slide deck there are links to the lab exercises. [Instruqt](https://instruqt.com/hashicorp) is our lab platform. While all of the Vault workshop tracks (except for https://play.instruqt.com/hashicorp/tracks/vault-advanced-data-protection-with-transform) are actually public, the slides use links to permanent Instruqt invitations that require users to register with Instruqt. We do this so that HashiCorp Field Marketing can collect the emails of users who start tracks during public or private workshops or on their own after following the links from the slides.
+At certain points in the slide deck there are slides about the lab exercises. [Instruqt](https://instruqt.com/hashicorp) is our lab platform. The slides used to have links to permanent Instruqt invitations, but these have been removed. You must now create and share invites with your students for each workshop as described below.
 
 Participants can register with Instruqt [here](https://play.instruqt.com/signup). Users only need to provide an email and a password. They can then login via email, Google, GitHub, and Twitter.=
 
@@ -100,6 +100,16 @@ OPTIONAL TRACK: This track covers the Key Management Secret Engine for AWS.
 
 https://play.instruqt.com/hashicorp/tracks/vault-key-management-secret-engine
 
+#### Creating Instruqt Invites
+Once you've gotten an invite to the HashiCorp organization you can create temporary invite links for your students:
+
+1. Click on the **Invites** link at the top of the page.
+2. Click on the **New+** button to create a new invite.
+3. Create a descriptive title for internal use. Example: "Atlanta Vault ADP Workshop"
+4. Select the tracks you want to make available.
+5. Set the invite to expire in a month or two.
+6. Make the track available to your user for at least a week.
+7. Do not enable **Allow Anonymous** setting if you want to be able to track users progress and emails.
 
 ### Configuring the Instruqt Pools
 We recommend that you configure Instruqt pools for each Instruqt track used in this workshop 1 hour before you plan to use the track. Please see this Confluence [doc](https://hashicorp.atlassian.net/wiki/spaces/SE/pages/511574174/Instruqt+and+Remark+Contributor+Guide#InstruqtandRemarkContributorGuide-ConfiguringInstruqtPools) for instructions.

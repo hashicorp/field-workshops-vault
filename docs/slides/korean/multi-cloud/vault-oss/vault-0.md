@@ -68,9 +68,9 @@ name: instruqt-tracks
 * 이 워크샵은 [Instruqt](https://instruqt.com)으로 준비되었으며, 실습 과정을 포함합니다.
 * "challenges" 로 구분된 "tracks"에서 Instruqt 실습을 수행합니다.
 * 이번 워크샵에서 사용하는 실습과정은 다음과 같습니다. :
-    1. [Vault Basics](https://play.instruqt.com/hashicorp/invite/qfwncq62zsxu)
-    1. [Vault Dynamic Database Credentials](https://play.instruqt.com/hashicorp/invite/sryhqfdm6sgx)
-    1. [Vault Encryption as a Service](https://play.instruqt.com/hashicorp/invite/qleasfx1dszc)
+    1. **Vault Basics**
+    1. **Vault Dynamic Database Credentials**
+    1. **Vault Encryption as a Service]**
 * 1-6 챕터는 첫번째 실습과정에서 진행됩니다.
 * 7 챕터는 두번째 실습과정에서 진행됩니다.
 * 8 챕터는 세번째 과정에서 진행됩니다.

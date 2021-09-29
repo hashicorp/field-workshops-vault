@@ -18,6 +18,7 @@ name: getting-started-with-instruqt
 * If you've never used Instruqt before, start with this [tutorial](https://play.instruqt.com/instruqt/tracks/getting-started-with-instruqt).
 * Otherwise, you can skip to the next slide.
 * This "Vault Basics" lab covers concepts introduced in chapters 2-6.
+* Your instructor will provide links to the tracks.
 
 ???
 * We'll be using the Instruqt platform for labs in this workshop.
@@ -27,7 +28,7 @@ name: getting-started-with-instruqt
 name: lab-vault-basics-challenge-1
 # 👩‍💻 Challenge 1: The Vault CLI
 * In this lab, you'll run some of the Vault CLI commands.
-* You'll do this in the first challenge, "The Vault CLI", of the [Vault Basics](https://play.instruqt.com/hashicorp/invite/qfwncq62zsxu) Instruqt track.
+* You'll do this in the first challenge, "The Vault CLI", of the **Vault Basics** Instruqt track using the link provided by your instructor.
 
 ???
 * Now, you can try running some Vault CLI commands yourself in the first challenge of our first Instruqt track in this workshop.

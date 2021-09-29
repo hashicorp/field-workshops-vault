@@ -87,7 +87,7 @@ name: vault-kv-engine
 * So, you'll need to enable it yourself.
 
 ???
-* We already used Vault's Key/Value (KV) engine in the second challenge of the "Vault Basics" Instruqt track that had been automatically enabled for the "Dev" mode server.
+* We will use Vault's Key/Value (KV) engine in the second challenge of the "Vault Basics" Instruqt track that will be automatically enabled for the "Dev" mode server.
 * But we'll need to mount it ourselves for the "Prod" mode server.
 
 ---

@@ -17,7 +17,7 @@ tags:
 owner: hashicorp
 developers:
 - roger@hashicorp.com
-private: false
+private: true
 published: true
 show_timer: true
 challenges:
@@ -27,6 +27,16 @@ challenges:
   title: Enable the Transit Secrets Engine
   teaser: |
     Enable the Transit secrets engine on the Vault server to enable Vault's Encryption-as-a-Service.
+  notes:
+  - type: text
+    contents: |-
+      Secrets engines are Vault plugins that store, generate, or encrypt data.
+
+      Vault's Transit secrets engine functions as Vault's Encryption-as-a-Service, encrypting and decrypting data stored outside of Vault.
+
+      In this track, you'll see how the Transit engine can encrypt and decrypt data stored in a MySQL database.
+
+      To learn more, see https://www.vaultproject.io/docs/secrets/transit/.
   assignment: |-
     The Transit secrets engine allows Vault to function as an encryption-as-a-service.
 
@@ -45,16 +55,6 @@ challenges:
     ```
 
     Other lines of busines could create their own instances of the Transit engine.
-  notes:
-  - type: text
-    contents: |-
-      Secrets engines are Vault plugins that store, generate, or encrypt data.
-
-      Vault's Transit secrets engine functions as Vault's Encryption-as-a-Service, encrypting and decrypting data stored outside of Vault.
-
-      In this track, you'll see how the Transit engine can encrypt and decrypt data stored in a MySQL database.
-
-      To learn more, see https://www.vaultproject.io/docs/secrets/transit/.
   tabs:
   - title: Vault CLI
     type: terminal
@@ -75,6 +75,13 @@ challenges:
   title: Create a Key for the Transit Secrets Engine
   teaser: |
     Create an encryption key for the Transit secrets engine on the Vault server so that it can encrypt and decrypt data stored outside of Vault.
+  notes:
+  - type: text
+    contents: |-
+      In this challenge, you will create an encryption key that the Transit engine you created in the previous challenge will use to encrypt and decrypt sensitive data in the MySQL database running on the Vault server.
+
+      To learn more about the types of encryption keys that the Transit engine supports, see:
+      https://www.vaultproject.io/docs/secrets/transit/#key-types
   assignment: |-
     In order to use the Transit secrets engine, you need to create at least one encryption key to use with it.
 
@@ -84,13 +91,6 @@ challenges:
     ```
 
     That was easy!
-  notes:
-  - type: text
-    contents: |-
-      In this challenge, you will create an encryption key that the Transit engine you created in the previous challenge will use to encrypt and decrypt sensitive data in the MySQL database running on the Vault server.
-
-      To learn more about the types of encryption keys that the Transit engine supports, see:
-      https://www.vaultproject.io/docs/secrets/transit/#key-types
   tabs:
   - title: Vault CLI
     type: terminal
@@ -111,6 +111,12 @@ challenges:
   title: Use the Web App Without Vault
   teaser: |
     Use the python web application without Vault. This will allow users to see sensitive data when looking at database rows.
+  notes:
+  - type: text
+    contents: |-
+      In this challenge, you will use the Python web application without Vault enabled.
+
+      You will add a record to the database and see that the data is not encrypted. The database user and password are hard-coded in a configuration file.
   assignment: |-
     The web app can be viewed on the "Web App" tab. You'll want to click the icon in the upper right corner of the tabs area to hide the assignment window so that you can see the entire UI of the web app. Click it again to display the assignment window.
 
@@ -128,12 +134,6 @@ challenges:
     Without Vault, the web app gets a username and password for talking to the MySQL database from a file "config.ini" in the directory /home/vault/transit-app-example/backend. Specifically, the "User" field specifies "root" as the database user while the "Password" field gives the original password for the root user, "sJ2w*8NX". In the next challenge, the web app will retrieve a username and password dynamically generated from Vault's Database secrets engine.
 
     In the next challenge, you'll enable Vault for the application and see the Transit engine in action.
-  notes:
-  - type: text
-    contents: |-
-      In this challenge, you will use the Python web application without Vault enabled.
-
-      You will add a record to the database and see that the data is not encrypted. The database user and password are hard-coded in a configuration file.
   tabs:
   - title: Vault CLI
     type: terminal
@@ -154,6 +154,14 @@ challenges:
   title: Use the Web App With Vault
   teaser: |
     Use the python web application with Vault. This will prevent users from seeing sensitive data when looking at new database rows.
+  notes:
+  - type: text
+    contents: |-
+      In this challenge, you will use the Python web application with Vault enabled. You will add a record to the database and see that the new data **is** encrypted.
+
+      As a bonus, you'll see that the web app is now logging into the MySQL database that stores its data with short-lived credentials retrieved from Vault's Database secrets engine. These credentials are dynamically generated on the fly when the app is started.
+
+      Finally, you'll use the Vault UI to rotate the Transit engine's "customer-key" encryption key. You'll see that the web app uses the new key for encrypting and decrypting new records but can still use the original key to decyrpt older records.
   assignment: |-
     In this challenge, you will stop the Python web app, edit its configuration file to use Vault, and see how new records are encrypted by Vault's Transit engine.
 
@@ -193,14 +201,6 @@ challenges:
     Go back to the web app, add another record, and then look at the record in the Database View. Verify that is is also encrypted.  Note that the first record you added after enabling Vault and the Transit engine has encrypted fields with encrypted values starting with "vault:v1" while the new record has fields with encrypted values starting with "vault:v2".
 
     Vault used the new version of the key to encrypt the new record. Someone with the old version of the key could not decrypt this new record.  But Vault can still decrypt the older record that was encrypted with the first version of the key. Finally, if desired, data encrypted with an older version of the key can be rewrapped with the newest version using the Transit engine's `rewrap` endpoint.
-  notes:
-  - type: text
-    contents: |-
-      In this challenge, you will use the Python web application with Vault enabled. You will add a record to the database and see that the new data **is** encrypted.
-
-      As a bonus, you'll see that the web app is now logging into the MySQL database that stores its data with short-lived credentials retrieved from Vault's Database secrets engine. These credentials are dynamically generated on the fly when the app is started.
-
-      Finally, you'll use the Vault UI to rotate the Transit engine's "customer-key" encryption key. You'll see that the web app uses the new key for encrypting and decrypting new records but can still use the original key to decyrpt older records.
   tabs:
   - title: Vault CLI
     type: terminal
@@ -219,4 +219,4 @@ challenges:
     path: /home/vault/transit-app-example/backend/config.ini
   difficulty: basic
   timelimit: 1200
-checksum: "7989254489339558106"
+checksum: "16822224126488059853"
