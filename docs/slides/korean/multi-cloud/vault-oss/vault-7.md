@@ -128,10 +128,11 @@ vault write -force lob_a/workshop/database/rotate-root/wsmysqldatabase
 name: rotating-root-credentials
 class: compact
 # MySQL에 대한 root credentials 교체
-#### 1. "root credentials"에 대한 참조에도 불구하고 데이터베이스의 실제 루트 사용자를 사용해서는 안됩니다. 대신 사용자를 만들고 자신의 암호를 변경할 수있는 충분한 권한이있는 별도의 사용자를 만듭니다. `GRANT ALL PRIVILEGES on *.* to 'hashicorp'@'%' with grant option;`
+1. "root credentials"에 대한 참조에도 불구하고 데이터베이스의 실제 루트 사용자를 사용해서는 안됩니다. 대신 사용자를 만들고 자신의 암호를 변경할 수있는 충분한 권한이있는 별도의 사용자를 만듭니다. `GRANT ALL PRIVILEGES on *.* to 'hashicorp'@'%' with grant option;`
 
-#### 2. 제공하는 실제 사용자 이름은 호스트` '%'`용이어야합니다. 따라서` 'hashicorp'@'localhost'` 대신`'hashicorp'@'%'`와 같은 사용자를 만듭니다.
-#### 3. 사용자 호스트로` '%'`를 사용하지 않으려면`<database>/config/<connection>`경로에 쓸 때`root_rotation_statements`를 지정할 수 있습니다. 예를 들어이를` "ALTER USER '{{username}}'@'localhost'IDENTIFIED BY '{{password}}';"`로 설정할 수 있습니다.
+2. 제공하는 실제 사용자 이름은 호스트` '%'`용이어야합니다. 따라서` 'hashicorp'@'localhost'` 대신`'hashicorp'@'%'`와 같은 사용자를 만듭니다.
+
+3. 사용자 호스트로` '%'`를 사용하지 않으려면`<database>/config/<connection>`경로에 쓸 때`root_rotation_statements`를 지정할 수 있습니다. 예를 들어이를` "ALTER USER '{{username}}'@'localhost'IDENTIFIED BY '{{password}}';"`로 설정할 수 있습니다.
 
 ???
 * We want to give some advice about rotating root credentials for the database secrets engine when using MySQL.
@@ -210,8 +211,7 @@ name: lab-database-challenge-1
 * 지침 :
    * "Vault Dynamic Database Credentials"트랙의 "Enable the Database Secrets Engine"챌린지를 클릭하십시오.
    * 그런 다음 녹색 "시작"버튼을 클릭합니다.
-   * 도전 지침을 따르십시오.
-   * 완료되면 녹색 "확인"버튼을 클릭합니다.
+   * 도전 지침을 따르고, 완료되면 녹색 "확인"버튼을 클릭합니다.
 
 ???
 * Instruct the students to do the "Enable the Database Secrets Engine" challenge of the "Vault Dynamic Database Credentials" track.

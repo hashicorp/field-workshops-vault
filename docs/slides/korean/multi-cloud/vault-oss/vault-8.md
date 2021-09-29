@@ -171,7 +171,8 @@ name: lab-database-challenge-3
    * 그런 다음 녹색 "시작"버튼을 클릭합니다.
    * 도전 지침을 따르십시오.
    * 완료되면 녹색 "확인"버튼을 클릭합니다.
-* ???
+
+???
 
 * Instruct the students to do the "Use the Web App Without Vault" challenge of the "Vault Encryption as a Service" track.
 * This challenge has them use the web application without Vault.
