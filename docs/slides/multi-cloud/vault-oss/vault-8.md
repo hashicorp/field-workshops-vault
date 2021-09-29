@@ -135,7 +135,7 @@ name: encryption-key-rotation
 name: lab-transit-challenge-1
 # 👩‍💻 Challenge 1: Enable the Transit Engine
 * In this lab challenge, you'll enable the Transit engine.
-* You'll do this in the [Vault Encryption as a Service](https://play.instruqt.com/hashicorp/invite/qleasfx1dszc) Instruqt track.
+* You'll do this in the **Vault Encryption as a Service** Instruqt track using the link provided by your instructor.
 * Instructions:
   * Click the "Enable the Transit Secrets Engine" challenge of the "Vault Encryption as a Service" track.
   * Then click the green "Start" button.

@@ -137,7 +137,7 @@ name: encryption-key-rotation
 name: lab-transit-challenge-1
 # 👩‍💻 Challenge 1: Enable the Transit Engine
 * 이 실습 챌린지에서는 Transit Engine을 활성화합니다.
-* [Vault Encryption as a Service](https://play.instruqt.com/hashicorp/invite/qleasfx1dszc) Instruqt 트랙에서이 작업을 수행합니다.
+* **Vault Encryption as a Service** Instruqt 트랙에서이 작업을 수행합니다.
 * 지침 :
    * "Vault Encryption as a Service"트랙의 "Enable the Transit Secrets Engine"챌린지를 클릭합니다.
    * 그런 다음 녹색 "시작"버튼을 클릭합니다.

@@ -206,7 +206,7 @@ name: lab-database-challenge-1
 # 👩‍💻 Challenge 1: Enable the Engine
 * 이 실습 과제에서는 MySQL 용 데이터베이스 엔진을 활성화하고 루트 자격 증명을 교체합니다.
 
-* [Vault Dynamic Database Credentials](https://play.instruqt.com/hashicorp/invite/sryhqfdm6sgx) Instruqt 트랙에서이 작업을 수행합니다.
+* **Vault Dynamic Database Credentials** Instruqt 트랙에서이 작업을 수행합니다.
 * 지침 :
    * "Vault Dynamic Database Credentials"트랙의 "Enable the Database Secrets Engine"챌린지를 클릭하십시오.
    * 그런 다음 녹색 "시작"버튼을 클릭합니다.

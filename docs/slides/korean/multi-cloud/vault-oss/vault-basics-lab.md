@@ -26,7 +26,7 @@ name: getting-started-with-instruqt
 name: lab-vault-basics-challenge-1
 # 👩‍💻 Challenge 1: The Vault CLI
 * 이 실습에서는 일부 Vault CLI 명령을 실행합니다.
-* [Vault Basics](https://play.instruqt.com/hashicorp/invite/qfwncq62zsxu) Instruqt 트랙의 첫 번째 도전 인 "Vault CLI"에서이 작업을 수행합니다.
+* **Vault Basics** Instruqt 트랙의 첫 번째 도전 인 "Vault CLI"에서이 작업을 수행합니다.
 
 ???
 * Now, you can try running some Vault CLI commands yourself in the first challenge of our first Instruqt track in this workshop.

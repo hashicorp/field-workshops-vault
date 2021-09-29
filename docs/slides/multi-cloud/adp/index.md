@@ -71,6 +71,7 @@ name: environment
   1. (Optional) Vault Transform-Tokenization Secrets Engine
   1. (Optional) Vault Key Management Secrets Engine
   1. Vault KMIP Secrets Engine (Filesystem/Database Level Encryption)
+* Your instructor will provide the URLs for the tracks.
 
 ???
 
@@ -278,7 +279,9 @@ background-image: url(images/HashiCorp-Title-bkg.jpeg)
 # Lab 1: Vault Basics
 In this lab you will cover some basics of Vault like the CLI, GUI, K/V Secrets Engine, and Userpass Auth Method
 
-Lab Link: [Vault Basics](https://play.instruqt.com/hashicorp/invite/qfwncq62zsxu)
+Lab: **Vault Basics**
+
+Your instructor will provide the URL for the track.
 
 ---
 class: title, shelf, no-footer, fullbleed
@@ -371,7 +374,9 @@ background-image: url(images/HashiCorp-Title-bkg.jpeg)
 # Lab Environment
 In this lab we’ll use a MySQL database server that runs on the Vault Server
 
-Lab Link: [Vault Dynamic Database Credentials](https://play.instruqt.com/hashicorp/invite/sryhqfdm6sgx)
+Lab: **Vault Dynamic Database Credentials**
+
+Your instructor will provide the URL for the track.
 
 ---
 # Configuration Steps for MySQL
@@ -469,7 +474,9 @@ In this next Lab we’ll use a web application that leverages both the Transform
 * The “HashiCups” application will leverage Vault’s API to encrypt customer credit card numbers before writing them to the backend database
 * This lab will also showcase data-masking
 
-Lab Link: [Advanced Data Protection with Transform](https://play.instruqt.com/hashicorp/invite/d4b7a8cxjvoe)
+Lab: **Advanced Data Protection with Transform**
+
+Your instructor will provide the URL for the track.
 
 ---
 # Lab 3 Part 2 (Optional)
@@ -477,7 +484,9 @@ In this optional lab, you can leverage a Golang application and the Transform Se
 * The Golang application will leverage Vault’s API to tokenize customer Social Security numbers before writing them to the backend database
 * This lab will also showcase application code modifications as well
 
-Lab Link: [Vault ADP with Tokenization](https://play.instruqt.com/hashicorp/invite/fgbpoajlim0d)
+Lab: **Vault ADP with Tokenization**
+
+Your instructor will provide the URL for the track.
 
 ---
 class: title, shelf, no-footer, fullbleed
@@ -548,8 +557,10 @@ This engine provides a consistent workflow for distribution and lifecycle manage
 
 ---
 # Example KMS workflow (Azure & AWS GA)
-Optional Lab: [Vault Key Management Secrets Engine](https://play.instruqt.com/hashicorp/invite/e3lpvto0tam1)
+Optional Lab: **Vault Key Management Secrets Engine**
 .center[![:scale 100%](images/kms.png)]
+
+Your instructor will provide the URL for the track.
 
 ---
 class: title, shelf, no-footer, fullbleed
@@ -563,7 +574,9 @@ In this next Lab we’ll leverage Vault to act as a KMIP key management server f
 * First we will look at how the data collections would look to an adversary that gains access to the host
 * We will then show how to protect against this threat vector with Vault’s KMIP integration
 
-Lab Link: [Vault KMIP Secrets Engine for MongoDB Encryption](https://play.instruqt.com/hashicorp/invite/h9s9jpxnuuof)
+Lab: **Vault KMIP Secrets Engine for MongoDB Encryption**
+
+Your instructor will provide the URL for the track.
 
 ---
 class: title, shelf, no-footer, fullbleed

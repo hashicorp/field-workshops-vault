@@ -103,10 +103,12 @@ authentication workflow and each can solve different use cases.
 ---
 name: lab-aws-auth-method-for-vault
 # 🔬 Lab: AWS Auth Method for Vault
-This lab uses the Instruqt track, [AWS Auth Method for Vault](https://play.instruqt.com/hashicorp/invite/bict3hvtfqx1).
+This lab uses the Instruqt track, **AWS Auth Method for Vault**.
+
+Your instructor will provide the URL for the track.
 
 #### Lab Summary:
-- Enable the AWS Auth Method
-- Configure the AWS IAM Auth Method
-- Log In Using the AWS IAM Auth Method
-- Log Out of Vault
+- Enabled the AWS Auth Method
+- Configured the AWS IAM Auth Method
+- Logged In Using the AWS IAM Auth Method
+- Logged Out of Vault
