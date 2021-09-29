@@ -24,6 +24,16 @@ name: getting-started-with-instruqt
 * Don't worry if you've never used it before: there is an easy tutorial that you can run through in 5-10 minutes.
 
 ---
+name: lab-vault-basics-challenge-1
+# 👩‍💻 Challenge 1: The Vault CLI
+* In this lab, you'll run some of the Vault CLI commands.
+* You'll do this in the first challenge, "The Vault CLI", of the [Vault Basics](https://play.instruqt.com/hashicorp/invite/qfwncq62zsxu) Instruqt track.
+
+???
+* Now, you can try running some Vault CLI commands yourself in the first challenge of our first Instruqt track in this workshop.
+* This lab covers concepts introduced in chapters 2-6.
+
+---
 name:lab-vault-basics-challenge-1-instructions
 # 👩‍💻 Challenge 1: Instructions
 * Start the "Vault Basics" track by clicking the purple "Start" button on the "Vault CLI" challenge of the track.
@@ -39,17 +49,6 @@ name:lab-vault-basics-challenge-1-instructions
 * Students can also click the green "Check" button to get reminders of what they should do next.
 
 ---
-name: lab-vault-basics-challenge-1
-# 👩‍💻 Challenge 1: The Vault CLI
-* In this lab, you'll run some of the Vault CLI commands.
-* You'll do this in the first challenge, "The Vault CLI", of the [Vault Basics](https://play.instruqt.com/hashicorp/invite/qfwncq62zsxu) Instruqt track.
-
-???
-* Now, you can try running some Vault CLI commands yourself in the first challenge of our first Instruqt track in this workshop.
-* This lab covers concepts introduced in chapters 2-6.
-
----
-
 name: lab-vault-basics-challenge-2
 # 👩‍💻 Challenge 2: Run a Vault "Dev" Server
 * In this lab, you'll run your first Vault server in "Dev" mode.
