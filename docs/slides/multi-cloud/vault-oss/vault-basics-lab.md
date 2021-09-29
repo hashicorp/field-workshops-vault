@@ -22,6 +22,7 @@ name: getting-started-with-instruqt
 ???
 * We'll be using the Instruqt platform for labs in this workshop.
 * Don't worry if you've never used it before: there is an easy tutorial that you can run through in 5-10 minutes.
+
 ---
 name: lab-vault-basics-challenge-1
 # 👩‍💻 Challenge 1: The Vault CLI

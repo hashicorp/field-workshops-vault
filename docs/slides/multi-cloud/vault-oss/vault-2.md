@@ -102,7 +102,7 @@ name: Vault-UI
 * In order to use the Vault UI, you must sign in.
 * Vault supports multiple authentication methods.
 * A new Vault server will only have the Token auth method enabled.
-* In the challenge you just completed, you used the Token auth method and specified "root" as the token.
+* In the challenge you will soon complete, you use the Token auth method and specify "root" as the token.
 
 ???
 
