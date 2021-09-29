@@ -82,7 +82,7 @@ name: vault-kv-engine
 * Vault's KV secrets engine actually has 2 versions:
   * KV v1 (without versioning)
   * KV v2 (with versioning)
-* In the second lab challenge, we used the instance of the KV v2 engine that is automatically enabled for "Dev" mode Vault servers.
+* In the second lab challenge, we will use the instance of the KV v2 engine that is automatically enabled for "Dev" mode Vault servers.
 * Vault does not enable any instances of the KV secrets engine for "Prod" mode servers.
 * So, you'll need to enable it yourself.
 
@@ -127,7 +127,7 @@ name: chapter-4-review-answers
 * What is the difference between the two versions of the KV secrets engine?
   * KV V2 supports versioning of secrets.
 * Can an old version of a KV v2 secret be retrieved?
-  * Yes. You did this in Vault UI in the challenge.
+  * Yes. You will do this in Vault UI in the challenge.
 
 ???
 * Here are the answers to the review questions.
