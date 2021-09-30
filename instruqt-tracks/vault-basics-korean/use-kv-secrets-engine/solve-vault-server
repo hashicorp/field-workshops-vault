@@ -1,0 +1,24 @@
+#!/bin/bash -l
+
+#Enable bash history
+HISTFILE=/root/.bash_history
+set -o history
+
+# Get the root token from /root/token
+#export VAULT_TOKEN=$(cat /root/token)
+
+# Sleep
+sleep 10
+
+# List Vault secrets engines
+# We do this since trying to mount the KV engine right away
+# causes the Vault server in the Docker container to crash.
+vault secrets list
+
+# Mount the KV v2 secrets engine
+vault secrets enable -version=2 kv
+
+# Write a secret
+vault kv put kv/a-secret value=1234
+
+exit 0

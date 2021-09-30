@@ -1,0 +1,15 @@
+#!/bin/bash -l
+
+set -e
+
+grep -q "vault.*server.*-config=/vault/config/vault-config.hcl" /root/.bash_history || fail-message "You haven't run your Vault server yet."
+
+grep -q "vault.*operator.*init.*-key-shares=1.*-key-threshold=1" /root/.bash_history || fail-message "You haven't run initialized your server with 'vault operator init -key-shares=1 -key-threshold=1' yet."
+
+grep -q "export.*VAULT_TOKEN" /root/.bash_history || fail-message "You haven't exported your VAULT_TOKEN yet."
+
+grep -q "export.*VAULT_TOKEN=" /root/.profile || fail-message "You haven't exported your VAULT_TOKEN yet into your .profile yet."
+
+grep -q "vault.*operator.*unseal" /root/.bash_history || fail-message "You haven't unsealed your server with 'vault operator unseal' yet."
+
+exit 0

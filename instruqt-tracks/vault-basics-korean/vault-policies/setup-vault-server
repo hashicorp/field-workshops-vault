@@ -1,0 +1,49 @@
+#!/bin/bash -l
+
+set -e
+
+mkdir /vault/policies
+
+# Write user-1-policy.hcl
+cat <<-EOF > /vault/policies/user-1-policy.hcl
+path "kv/data/<user>/*" {
+  capabilities = ["create", "update", "read", "delete"]
+}
+path "kv/delete/<user>/*" {
+  capabilities = ["update"]
+}
+path "kv/metadata/<user>/*" {
+  capabilities = ["list", "read", "delete"]
+}
+path "kv/destroy/<user>/*" {
+  capabilities = ["update"]
+}
+
+# Additional access for UI
+path "kv/metadata" {
+  capabilities = ["list"]
+}
+EOF
+
+# Write user-2-policy.hcl
+cat <<-EOF > /vault/policies/user-2-policy.hcl
+path "kv/data/<user>/*" {
+  capabilities = ["create", "update", "read", "delete"]
+}
+path "kv/delete/<user>/*" {
+  capabilities = ["update"]
+}
+path "kv/metadata/<user>/*" {
+  capabilities = ["list", "read", "delete"]
+}
+path "kv/destroy/<user>/*" {
+  capabilities = ["update"]
+}
+
+# Additional access for UI
+path "kv/metadata" {
+  capabilities = ["list"]
+}
+EOF
+
+exit 0

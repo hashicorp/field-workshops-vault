@@ -1,0 +1,9 @@
+#!/bin/bash -l
+
+set -e
+
+grep -q "curl.*http://localhost:8200/v1/sys/health" /root/.bash_history || fail-message "You haven't checked your server's health with Vault's HTTP API yet."
+
+grep -q 'curl.*--header.*"X-Vault-Token:.*root".*http://localhost:8200/v1/secret/data/my-first-secret' /root/.bash_history || fail-message "You haven't checked read your age with Vault's HTTP API yet."
+
+exit 0

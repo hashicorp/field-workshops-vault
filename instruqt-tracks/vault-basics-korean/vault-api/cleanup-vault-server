@@ -1,0 +1,10 @@
+#!/bin/bash -l
+
+set -e
+
+# Find the PID of the Vault server and kill it
+ps -ef | grep vault > processes.txt
+vault_pid=$(sed -n 1p processes.txt | cut -d' ' -f3)
+kill -9 $vault_pid
+
+exit 0

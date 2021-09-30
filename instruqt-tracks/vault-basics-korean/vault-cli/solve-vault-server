@@ -1,0 +1,14 @@
+#!/bin/bash -l
+
+#Enable bash history
+HISTFILE=/root/.bash_history
+set -o history
+
+# Get Vault version
+vault version
+
+# Get help
+vault secrets -h
+vault read -h
+
+exit 0

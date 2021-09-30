@@ -1,0 +1,9 @@
+#!/bin/bash -l
+
+set -e
+
+grep -q "vault.*secrets.*enable.*-version=2.*kv" /root/.bash_history || fail-message "You haven't enabled the KV v2 secrets engine yet."
+
+grep -q "vault.*kv.*put.*kv" /root/.bash_history || fail-message "You haven't written a secret to the KV v2 secrets engine yet."
+
+exit 0

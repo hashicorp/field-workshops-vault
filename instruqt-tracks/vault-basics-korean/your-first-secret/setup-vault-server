@@ -1,0 +1,11 @@
+#!/bin/bash -l
+
+set -e
+
+# Install curl
+apk add curl
+
+# Install jq
+apk add jq
+
+exit 0
