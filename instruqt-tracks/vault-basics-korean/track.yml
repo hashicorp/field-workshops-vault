@@ -9,7 +9,7 @@ description: |-
   Vault는 Active Directory, LDAP, Kubernetes, CloudFoundry 및 클라우드 플랫폼과 같은 신뢰할 수있는 계정 정보를 이용하여, 인증받고 시크릿에 대한 액세스를 제어합니다. Vault는 사용자와 응용 프로그램이 시크릿에 대한 액세스가 허용되는 미세한 접근 제어를 가능하게합니다.
 
   이 트랙에서는 볼트 CLI에서 시작하여 볼트 개발 서버를 실행하고 볼트 프로덕션 서버를 실행하는 것, KV 비밀 엔진 및 사용자 패스 인증 방법을 활성화하고 볼트 정책을 사용하여 서로 다른 사용자가 액세스할 수 있는 시크릿에 대한 제한을 수행하는 Vault 오픈 소스 버전을 소개합니다.
-icon: ""
+icon: https://storage.googleapis.com/instruqt-frontend/assets/hashicorp/tracks/vault.png
 tags:
 - vault
 - basic
@@ -449,4 +449,4 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 900
-checksum: "5093836364726265962"
+checksum: "5755708950870893048"
