@@ -1,0 +1,11 @@
+#!/bin/bash -l
+
+set -e
+
+grep -q "vault.*version" /root/.bash_history || fail-message "You haven't run 'vault version' yet."
+
+grep -q "vault.*secrets.*-h" /root/.bash_history || grep -q "vault secrets -help" /root/.bash_history || grep -q "vault.*secrets.*--help" /root/.bash_history || fail-message "You haven't run 'vault secrets -h' yet."
+
+grep -q "vault.*read.*-h" /root/.bash_history || grep -q "vault read -help" /root/.bash_history || grep -q "vault.*read.*--help" /root/.bash_history || fail-message "You haven't run 'vault read -h' yet."
+
+exit 0

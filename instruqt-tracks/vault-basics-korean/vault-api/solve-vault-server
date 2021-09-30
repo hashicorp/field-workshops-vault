@@ -1,0 +1,13 @@
+#!/bin/bash -l
+
+#Enable bash history
+HISTFILE=/root/.bash_history
+set -o history
+
+# Check server health with Vault's HTTP API
+curl http://localhost:8200/v1/sys/health | jq
+
+# Read the secret with Vault's HTTP API
+curl --header "X-Vault-Token: root" http://localhost:8200/v1/secret/data/my-first-secret | jq
+
+exit 0

@@ -1,0 +1,17 @@
+#!/bin/bash -l
+
+set -e
+
+grep -q "vault.*auth.*enable.*userpass" /root/.bash_history || fail-message "You haven't enabled the userpass auth method yet."
+
+grep -q "vault.*write.*auth/userpass/users" /root/.bash_history || fail-message "You haven't created a user yet."
+
+grep -q "vault.*login.*-method=userpass" /root/.bash_history || fail-message "You haven't logged in yet."
+
+grep -q "unset.*VAULT_TOKEN" /root/.bash_history || fail-message "You haven't unset the VAULT_TOKEN environment variable yet."
+
+grep -q "vault.*token.*lookup" /root/.bash_history || fail-message "You haven't looked up your token yet."
+
+grep -q "vault.*kv.*get.*kv/a-secret" /root/.bash_history || fail-message "You haven't tried to read the kv/a-secret secret with your token yet."
+
+exit 0

@@ -1,0 +1,29 @@
+#!/bin/bash -l
+
+#Enable bash history
+HISTFILE=/root/.bash_history
+set -o history
+
+# Get the root token from /root/token
+#export VAULT_TOKEN=$(cat /root/token)
+
+# Create a second user
+vault write auth/userpass/users/mary password=marry
+
+# Edit the policy files
+sed -i 's/<user>/harry/g' /vault/policies/user-1-policy.hcl
+sed -i 's/<user>/mary/g' /vault/policies/user-2-policy.hcl
+
+# Add the policies to Vault
+vault policy write harry /vault/policies/user-1-policy.hcl
+vault policy write mary /vault/policies/user-2-policy.hcl
+
+# Update the policies of the users
+vault write auth/userpass/users/harry/policies policies=harry
+vault write auth/userpass/users/mary/policies policies=mary
+
+# Write secrets for both users
+vault kv put kv/harry/age age=35
+vault kv put kv/mary/age age=33
+
+exit 0

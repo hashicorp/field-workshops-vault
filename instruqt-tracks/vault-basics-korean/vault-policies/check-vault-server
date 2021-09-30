@@ -1,0 +1,11 @@
+#!/bin/bash -l
+
+set -e
+
+grep -q "vault.*policy.*write.*/vault/policies/user-1-policy.hcl" /root/.bash_history || fail-message "You haven't added the first user policy yet."
+
+grep -q "vault.*policy.*write.*/vault/policies/user-2-policy.hcl" /root/.bash_history || fail-message "You haven't added the second user policy yet."
+
+grep -q "vault.*write.*auth/userpass/users/.*/policies.*policies=.*" /root/.bash_history || fail-message "You haven't updated the policies for your users yet."
+
+exit 0

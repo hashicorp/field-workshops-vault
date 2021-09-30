@@ -1,0 +1,28 @@
+#!/bin/bash -l
+
+#Enable bash history
+HISTFILE=/root/.bash_history
+set -o history
+
+# Get the root token from /root/token
+# export VAULT_TOKEN=$(cat /root/token)
+
+# Mount the userpass auth method
+vault auth enable userpass
+
+# Create a user
+vault write auth/userpass/users/harry password=hairy
+
+# Login
+vault login -method=userpass username=harry password=hairy
+
+# Unset VAULT_TOKEN
+unset VAULT_TOKEN
+
+# Lookup the token
+vault token lookup
+
+# Try to read the secret
+vault kv get kv/a-secret
+
+exit 0

@@ -1,0 +1,12 @@
+#!/bin/bash -l
+
+set -e
+
+grep -q "vault.*server.*-dev.*-dev-listen-address=0.0.0.0:8200.*-dev-root-token-id=root" /root/.bash_history || fail-message "You haven't run your Vault Dev server yet."
+
+vault kv get secret/my-first-secret
+if [ $? -ne 0 ]; then
+   fail-message "You did not yet write the 'my-first-secret' secret."
+fi
+
+exit 0

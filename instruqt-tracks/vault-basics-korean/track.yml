@@ -1,0 +1,452 @@
+slug: vault-basics-korean
+id: ythp7dsm7p2q
+type: track
+title: Vault 기초(한글)
+teaser: Vault 서버를 설정하고 실행하여 시크릿을 관리하는 방법을 학습.
+description: |-
+  Vault는 시크릿을 안전하게 액세스하기 위한 도구입니다. 시크릿은 API 키, 암호 또는 인증서와 같이 액세스를 제어하기 위해 사용되는 것입니다. Vault는 모든 시크릿에 통합된 인터페이스를 제공하고 세밀한 액세스 제어를 제공하고 상세한 감사 로그를 기록합니다.
+
+  Vault는 Active Directory, LDAP, Kubernetes, CloudFoundry 및 클라우드 플랫폼과 같은 신뢰할 수있는 계정 정보를 이용하여, 인증받고 시크릿에 대한 액세스를 제어합니다. Vault는 사용자와 응용 프로그램이 시크릿에 대한 액세스가 허용되는 미세한 접근 제어를 가능하게합니다.
+
+  이 트랙에서는 볼트 CLI에서 시작하여 볼트 개발 서버를 실행하고 볼트 프로덕션 서버를 실행하는 것, KV 비밀 엔진 및 사용자 패스 인증 방법을 활성화하고 볼트 정책을 사용하여 서로 다른 사용자가 액세스할 수 있는 시크릿에 대한 제한을 수행하는 Vault 오픈 소스 버전을 소개합니다.
+icon: ""
+tags:
+- vault
+- basic
+- korean
+owner: hashicorp
+developers:
+- jsp@hashicorp.com
+- roger@hashicorp.com
+private: false
+published: true
+show_timer: true
+challenges:
+- slug: vault-cli
+  id: mmm70rckgmgh
+  type: challenge
+  title: The Vault CLI
+  teaser: 볼트 명령줄 인터페이스(CLI)를 실행합니다.
+  notes:
+  - type: text
+    contents: |-
+      볼트 오픈 소스는 랩톱 또는 가상 워크 스테이션에서 다운로드하여 실행할 수있는 명령 줄 응용 프로그램입니다.
+
+      Go로 작성되었으며 macOS, Windows, Linux 및 기타 운영 체제에서 실행됩니다.
+
+      여기에서 항상 최신 버전의 볼트를 다운로드할 수 있습니다:
+      https://www.vaultproject.io/downloads/
+  - type: text
+    contents: |-
+      노트북이나 워크스테이션에 볼트를 쉽게 설치할 수 있습니다. zip 파일을 다운로드하고 압축을 푼 다음 경로 어딘가에 놓기만 하면 됩니다.
+
+      단계별 지침은 다음 튜토리얼을 참조하십시오:
+      https://learn.hashicorp.com/vault/getting-started/install
+
+      사용자가 다운로드하거나 설치할 필요가 없도록 Instrumentqt 랩 환경의 도커 컨테이너에서 볼트가 실행됩니다.
+  assignment: |-
+    Vault 명령 행 인터페이스 (CLI)를 사용하면 Vault 서버와 상호 작용할 수 있습니다.
+
+    몇 가지 기본 Vault 명령어를 왼쪽의 "Vault CLI"탭에서 실행하겠습니다.
+
+    컴퓨터에서 실행 중인 볼트 버전 확인:
+    ```
+    vault version
+    ```
+
+    볼트 CLI 명령 목록 보기:
+    ```
+    vault
+    ```
+
+    "vault secrets" 명령에 대한 도움말 보기:
+    ```
+    vault secrets -h
+    ```
+    "-h"대신 "-help" 및 "--help"플래그를 사용할 수도 있습니다.
+
+    "vault read"명령에 대한 도움말 보기:
+    ```
+    vault read -h
+    ```
+    다시 위로 스크롤하여 볼트에서 시크릿를 읽는 방법을 확인하십시오.
+  tabs:
+  - title: Vault CLI
+    type: terminal
+    hostname: vault-server
+  difficulty: basic
+  timelimit: 600
+- slug: your-first-secret
+  id: zffaenyxdfya
+  type: challenge
+  title: Your First Secret
+  teaser: Vault Dev 서버를 실행하고 시크릿 만들기.
+  notes:
+  - type: text
+    contents: |-
+      이번 실습과정에서는 첫 번째 볼트 서버를 "dev" 모드로 실행하고 볼트 서버에 첫 번째 시크릿을 작성합니다.
+
+      Vault의 "dev" 모드 설정에 대한 자세한 내용은 다음 링크를 참고하세요 : https://www.vaultproject.io/docs/concepts/dev-server/
+
+      VAULT가 "dev"모드에서 자동으로 생성하는 기본 KV v2 시크릿 엔진을 사용합니다. 변경되지 않는 정적 시크릿을 여러 버전으로 저장하는 데 사용됩니다.
+
+      KV v2 시크릿 엔진에 대한 내용은 다음 링크를 참고하세요 : https://www.vaultproject.io/docs/secrets/kv/kv-v2/
+  assignment: |-
+    이번 실습과정에 사용할 세 개의 탭이 있습니다: Vault CLI, Vault Dev Server, and Vault UI.
+
+    Vault server는 "dev" 또는 "production" 모드로 동작할수 있습니다. "vault server" CLI 명령어를 실행하여 확인할 수 있습니다. :
+
+    "Vault CLI" 탭을 선택하고, 다음 명령어 실행 :
+    ```
+    vault server -h
+    ```
+    위로 스크롤하여 두 모드에 대한 정보를 확인합니다.
+
+    "Vault Dev Server" 탭 선택
+
+    Vault를  Dev Server mode로 기동. 가장 간단한 명령어는 "vault server -dev" 이지만, 최초 root 토큰을 "root"로 설정하고, 모든 IP 주소를 바인딩하기 위해 다음과 같이 변경. 다음 명령어를 실행:
+    ```
+    vault server -dev -dev-listen-address=0.0.0.0:8200 -dev-root-token-id=root
+    ```
+
+    "Vault UI" 탭을 선택.
+
+    Vault UI에서 `Method`는`Token`, `Token` 값은 `root`를 사용하여 로그인.
+
+    "Vault CLI" 탭을 선택.
+
+    볼트 개발 서버가 자동으로 마운트한 KV v2 시크릿 엔진에 시크릿 생성:<br>
+    ```
+    vault kv put secret/my-first-secret age=<age>
+    ```
+    <age\>는 여러분의 나이를 입력하세요.
+
+    또는, Vault UI에서 "Secrets" 탭에서 "secret/" KV v2 시크릿 엔진을 선택하고 , "Create secret +" 버튼을 클릭, "my-first-secret"를 path로, "age"를 시크릿의 첫 번째 키, 그리고 여러분의 나이를 해당하는 값(value)로 지정하고, "Save" 버튼을 눌러 저장하는 방식으로 시크릿을 생성할 수 있습니다.
+
+    Vault UI에서, "secret/" KV v2 시크릿 엔진을 선택하고, "my-first-secret" 시크릿을 선택하고, 눈모양 아이콘을 클릭하면 저장된 나이값을 확인할 수 있습니다.
+
+    나이값을 수정하고자 하면, Vault UI에서 "Create new version +" 버튼을 클릭하거나, Vault CLI 명령어 "vault kv put" 를 이용할 수 있습니다.
+  tabs:
+  - title: Vault CLI
+    type: terminal
+    hostname: vault-server
+  - title: Vault Dev Server
+    type: terminal
+    hostname: vault-server
+  - title: Vault UI
+    type: service
+    hostname: vault-server
+    port: 8200
+  difficulty: basic
+  timelimit: 600
+- slug: vault-api
+  id: f1p5psimddg9
+  type: challenge
+  title: The Vault API
+  teaser: Vault HTTP API 사용하기
+  notes:
+  - type: text
+    contents: |-
+      이번 실습 과정에서는 이전 과정에서 기동된 Vault 서버의 상태를 확인하기 위하여 Vault HTTP API를 사용하게 됩니다.
+
+      "my-first-secret" 시크릿에 저장된 나이값을 읽을 때도, Vault HTTP API를 사용하게 됩니다.
+
+      Vault HTTP API에 대한 상세한 내용은 다음 링크를 참고하세요. : https://www.vaultproject.io/api-docs/index/
+  assignment: |-
+    이번 실습 과정에서는 Vault HTTP API를 이용하게 됩니다.
+
+    "Vault CLI" 탭에서 다음 명령어를 실행하여, Vault 서버 상태를 확인합니다. :
+    ```
+    curl http://localhost:8200/v1/sys/health | jq
+    ```
+
+    그러면 서버가 초기화 및 잠금 해제되었음을 나타내는 적절한 형식의 JSON 문서가 반환됩니다.
+
+    이제, "my-first-secret" 시크릿을 다음 명령어를 사용하여 조회합니다. (명령어는 한 줄입니다.!):
+    ```
+    curl --header "X-Vault-Token: root" http://localhost:8200/v1/secret/data/my-first-secret | jq
+    ```
+
+    이렇게 하면 사용자의 나이와 버전을 포함한 시크릿에 대한 메타데이터를 보여주는 JSON 문서가 반환됩니다.
+  tabs:
+  - title: Vault CLI
+    type: terminal
+    hostname: vault-server
+  difficulty: basic
+  timelimit: 600
+- slug: run-a-vault-server
+  id: mnbioq9k7py8
+  type: challenge
+  title: Run a Production Server
+  teaser: Vault server Production 모드 `:` 설정, 기동, 초기화 및 잠금 해제
+  notes:
+  - type: text
+    contents: |-
+      이번 실습 과정에서는 Vault server를 "production" 모드로 기동하여, 초기화 및 잠금 해제를 수행합니다. 서버는 시작하기 전에 편집하는 파일에서 구성을 가져옵니다.
+
+      Vault 서버 구성에 대한 상세한 내용은 다음 링크를 참고하세요. : https://www.vaultproject.io/docs/configuration/
+
+      Vault 서버 초기화에 대한 상세한 내용은 다음 링크를 참고하세요. : https://www.vaultproject.io/docs/commands/operator/init/
+
+      Vault 서버 잠금 및 잠금 해제에 대한 상세한 내용은 다음 링크를 참고하세요. : https://www.vaultproject.io/docs/concepts/seal/
+  - type: text
+    contents: |-
+      이번 실습 과젱어스는 Vault CLI를 사용하여 Vault 서버 초기화 및 잠금 해제를 수행하게 됩니다.
+
+      하지만, 이 과정은 Vault UI상에서도 가능합니다.
+  assignment: |-
+    Production Vault 서버를 실행합니다.
+
+    프로덕션 볼트 서버는 구성 파일에서 해당 구성을 가져옵니다. vault-config.hcl 구성 파일을 "Vault Configuration" 탭에서 확인할 수 있습니다.
+
+    "Vault Server" 탭에서, 구성 파일을 사용하여 Vault server를 시작합니다. :
+    ```
+    vault server -config=/vault/config/vault-config.hcl
+    ```
+
+    해당 탭이 이제 볼트 서버를 실행 중이므로, "Vault CLI" 탭에서 나머지 CLI 명령어를 실행합니다.
+
+    하나의 잠금 해제 키를 사용하도록 설정하여 새 서버 초기화
+    ```
+    vault operator init -key-shares=1 -key-threshold=1
+    ```
+
+    그러면 잠금 해제 키(Unseal key)와 초기 루트 토큰이 반환됩니다. <strong>실습 과정에서 사용할 수 있도록 별도로 보관하십시오.</strong>
+
+    일반적으로 Vault 명령어를 사용하기 위해 "VAULT_TOKEN" 환경 변수 설정이 필요합니다. "init" 명령어 수행 결과로 생성된 초기 루트 토큰을 사용합니다. <br>
+    ```
+    export VAULT_TOKEN=<root_token>
+    ```
+    <root_token\>은 반드시 초기화 과정에서 생성된 root_token값으로 지정하세요!
+
+    실습 시 편의를 위해 다음을 ".profile" 파일에 추가합니다. :
+    ```
+    echo "export VAULT_TOKEN=$VAULT_TOKEN" >> /root/.profile
+    ```
+
+    다음과정으로 Vault server를 잠금 해제(unseal)합니다. "init" 명령어 수행 결과로 생성된 잠금 해제키(unseal key)을 사용합니다.:
+    ```
+    vault operator unseal
+    ```
+    명령어 수행 결과,  "Initialized"는 "true", "Sealed" 는 "false"로 서버의 상태값이 출력됩니다.
+
+    Vault 서버의 상테를 확인하고자 할 때는 `vault status` 명령어를 실행합니다. "Sealed" 값이 "true" 확인되면, `vault operator unseal` 명령어를 다시 수행합니다.
+
+    잠금 해제되고 나면, Vault UI상에서 생성된 루트 토큰으로 로그인할 수 있습니다. 문제가 발생하였담녀, 이전에 실행한 명령어의 결과를 다시 한 번 확인합니다.
+
+    <strong> 루트 토큰과 잠금 해제 키를 저장하는 것을 잊지 마세요! </strong>
+  tabs:
+  - title: Vault Configuration
+    type: code
+    hostname: vault-server
+    path: /vault/config/vault-config.hcl
+  - title: Vault CLI
+    type: terminal
+    hostname: vault-server
+  - title: Vault Server
+    type: terminal
+    hostname: vault-server
+  - title: Vault UI
+    type: service
+    hostname: vault-server
+    port: 8200
+  difficulty: basic
+  timelimit: 900
+- slug: use-kv-secrets-engine
+  id: ctbw3rfzsqub
+  type: challenge
+  title: Use the KV V2 Secrets Engine
+  teaser: KV v2 시크릿 엔진 구성 및 사용
+  notes:
+  - type: text
+    contents: |-
+      이번 실습 과정에서는 이전 과정에서 구성하고 동작 중인 Production Vault 서버에 KV v2 시크릿 엔진을 활성화하고 사용하게 됩니다
+
+      또한 시크릿을 작성하고 볼트 UI에서 값을 변경한 다음 KV v2 시크릿 엔진이 여러 버전의 시크릿을 유지하므로 원래 값을 계속 검사할 수 있는지 확인합니다.
+  - type: text
+    contents: |-
+      Vault 시크릿 엔진에 대한 상세한 내용은 다음 링크를 참고하세요. : https://www.vaultproject.io/docs/secrets/
+
+      Vault K/V 시크릿 엔진에 대한 상세한 내용은 다음 링크를 참고하세요. : https://www.vaultproject.io/docs/secrets/kv/  이 엔진의 버전 2를 사용하여 여러 버전의 시크릿을 유지할 수 있습니다.
+
+      `vault secrets enable` 명령어에 대한 상세한 내용은 다음 링크를 참고하세요. : https://www.vaultproject.io/docs/commands/secrets/enable/
+  assignment: |-
+    Vault production server는 기동 중이므로 (백그라운드에서 기동 중), 시크릿 엔진을 마운트하고 시크릿을 작성할 수 있습니다.
+
+    이 실습과정의 환경 설정 스크립트는 ".profile"파일에 이미 루트 토큰 설정해 두었습니다.
+
+    먼저, KV v2 시크릿 엔진을 기본 경로(default path), "kv"로 마운트합니다.:
+    ```
+    vault secrets enable -version=2 kv
+    ```
+
+    다음, 새로 생성된 시크릿엔진에 시크릿 만들기:
+    ```
+    vault kv put kv/a-secret value=1234
+    ```
+    1234 대신에 여러분만의 비밀 번호를 자유롭게 지정하세요.
+
+    루트 토큰을 사용하여 볼트 UI에 로그인, "kv" 시크릿 엔진의 "a-secret" 시크릿에 명령어로 설정한 값이 저장되었는지 눈모양 아이콘을 클릭하여 확인합니다.
+
+    UI상에서 "Create new version +" 버튼을 클릭하여 "....."으로 표시된 필드에 새로운 값을 입력하고, "Save" 버튼을 눌러 변경할 수 있습니다. 변경 내용을 확인하려면 눈모양 아이콘을 클릭합니다.
+
+    Vault UI에서, 시크릿의 History 메뉴 선택, "Version 1" 선택, 눈모양 아이콘을 클릭하여 원래 값을 확인 할 수 있습니다.
+  tabs:
+  - title: Vault CLI
+    type: terminal
+    hostname: vault-server
+  - title: Vault UI
+    type: service
+    hostname: vault-server
+    port: 8200
+  difficulty: basic
+  timelimit: 900
+- slug: use-userpass-auth
+  id: 8m8hd5qmi1j6
+  type: challenge
+  title: Use the Userpass Auth Method
+  teaser: 사용자 이름/비밀번호(userpass) 인증 구성 및 사용
+  notes:
+  - type: text
+    contents: |-
+      Vault Production server를 기동하여, KV v2 시크릿 엔진를 활성화하고, 사용해보았습니다. 이제 사용자 인증에 대해 알아보겠습니다.
+
+      이번 실습 과정에서는 Vault에서 사용자를 인증하는 방식 중, Vault에서 관리되는 사용자 이름과 비밀번호를 이용하여 사용자를 인증하는 방법을 알려드립니다.
+
+      더불어, 사용자 또는 애플리케이션 별로 서로 다른 시트릿에 접근하도록 Vault 정책에 대해 실습합니다. Vault 정책은 기본적으로 "deny by default"입니다. 즉, 하나 이상의 정책을 통해 명시적으로 부여된 권한이 있는 경우에 해당 토큰을 사용하여 시크릿을 읽거나 변경 가능함을 의미합니다.
+  - type: text
+    contents: |-
+      Vault 인증 방법에 대한 상세한 내용은 다음 링크를 참고하세요. : https://www.vaultproject.io/docs/auth/
+
+      Vault가 제공하는 사용자명/비밀번호 인증 방법에 대한 상세한 내용은 다음 링크를 참고하세요. : https://www.vaultproject.io/docs/auth/userpass/
+  assignment: |-
+    Vault Production server를 기동하여, KV v2 시크릿 엔진를 활성화하고, 사용해보았습니다. 이제 사용자 인증에 대해 알아보겠습니다.
+
+    이 실습과정의 환경 설정 스크립트는 ".profile"파일에 이미 루트 토큰 설정해 두었습니다.
+
+    먼저, 사용자 이름/비밀번호 인증 방법을 활성화합니다. :
+    ```
+    vault auth enable userpass
+    ```
+
+    다음으로, 정책 설정없는 Vault 사용자로 자기 자신을 추가합니다.
+    ```
+    vault write auth/userpass/users/<name> password=<pwd>
+    ```
+    이 때, 꺾쇠괄호없이 <name\> 과 <pwd\>는 실제 사용자 이름과 비밀번호로 변경하여 실행합니다.
+
+    Vault UI를 사용하여 Userpass 인증 방법을 선택하고,사용자 이름과 비밀번호를 입력 후 로그인할 수 있습니다.
+
+    Vault CLI를 사용하여 로그인할 수 도 있습니다.:
+    ```
+    vault login -method=userpass username=<name> password=<pwd>
+    ```
+
+    두 가지 방식으로 로그인하게 되면, Vault 서버에게 제공되는 기본정책 (기능이 제약됨)이 토큰에 부여됩니다. 노란색 경고 메시지는 현재 작업 환경의 환경 변수로  `VAULT_TOKEN`이 설정되었음을 의미합니다. 이런 경우, 환경 변수 설정을 해제하거나, 새로운 토큰값으로 설정 가능합니다.  설정을 해제하겠습니다. :
+    ```
+    unset VAULT_TOKEN
+    ```
+
+    새로운 토큰이 사용되는지 확인하기 위해 다음 명령어를 실행합니다. :
+    ```
+    vault token lookup
+    ```
+
+    이제 현재 토큰의 display_name 이 "userpass-<name\>"형태로  <name\> 값은 조금 전 설정한 사용자 이름이, 부여된 정책은 기본 정책("default" policy)아 출력됩니다.
+
+    이전 실습 과정에서 생성된 KV v2 시크릿 엔진의 시크릿을 읽어 보겠습니다.:
+    ```
+    vault kv get kv/a-secret
+    ```
+    시크릿을 읽을 수 있는 권한이 부여되지 않은 상태라서 에러 메시지가 출력됩니다. 이것이 Vault의 "deny by default" 정책으로 , 하나 이상의 정책을 통해 명시적으로 부여된 권한이 있는 경우에 해당 토큰을 사용하여 시크릿을 읽거나 변경 가능함을 의미합니다.
+
+    다음 실습 과정에서는 사용자 이름에 시크릿을 읽고 쓸 수 있는 정책을 추가합니다.
+  tabs:
+  - title: Vault CLI
+    type: terminal
+    hostname: vault-server
+  - title: Vault UI
+    type: service
+    hostname: vault-server
+    port: 8200
+  difficulty: basic
+  timelimit: 900
+- slug: vault-policies
+  id: fxpfkyyth0dp
+  type: challenge
+  title: Use Vault Policies
+  teaser: Vault 정책을 사용하여 사용자에게 시크릿 접근 권한 부여하기.
+  notes:
+  - type: text
+    contents: |-
+      이번 실습 과정에서는 Vault 내의 서로 다른 시크릿에 접근할 수 있도로 두 명의 사용자을 위한 정책을 정의합니다.
+
+      Vault 정책에 대한 상세한 내용은 다음 링크를 참고하세요. : https://www.vaultproject.io/docs/concepts/policies/
+  assignment: |-
+    이제 사용자 패스 인증 방법이 구성되었으므로, 정책을 추가하여 서로 다른 사용자에게 서로 다른 시크릿에 대한 액세스 권한을 부여할 수 있습니다.
+
+    이 실습과정의 환경 설정 스크립트는 ".profile"파일에 이미 루트 토큰 설정해 두었습니다.
+
+    사용자 패스 인증 방법과 함께 사용할 사용자 이름을 이미 만들었습니다. 이제 다른 사용자 이름과 암호를 선택하여 이전에 사용한 것과 동일한 명령으로 두 번째 사용자를 생성합니다.:
+    ```
+    vault write auth/userpass/users/<name> password=<pwd>
+    ```
+
+    다음으로, "Vault Policies" 탭에서 정책을 수정합니다.: user-1-policy.hcl 과 user-2-policy.hcl. user-1-policy.hcl에서는 , 모든 <user\> 를 여러분의 사용자명으로 변경합니다. user-2-policy.hcl에서는, 모든 <user\> 를 조금 전 생성한 사용자 이름으로 변경합니다.
+
+    파일 위의 디스크 아이콘을 클릭하여 두 파일을 저장합니다. (각 파일에 대해 각각 수행합니다.)
+
+    그런 다음 볼트 서버에 정책을 추가합니다.:
+    ```
+    vault policy write <user_1> /vault/policies/user-1-policy.hcl
+    vault policy write <user_2> /vault/policies/user-2-policy.hcl
+    ```
+    <user_1\> 과 <user_2\> 는 이미 만들어진 사용자 명으로 변경합니다.
+
+    이제 사용자에게 할당된 정책을 업데이트하여 새 정책을 사용자에게 할당할 수 있습니다. :
+    ```
+    vault write auth/userpass/users/<user_1>/policies policies=<user_1>
+    vault write auth/userpass/users/<user_2>/policies policies=<user_2>
+    ```
+    <user_1\> 과 <user_2\> 는 이미 만들어진 사용자 명으로 변경합니다.
+
+    이제 Vault UI에 로그인하여 서로 다른 사용자별로 어떻게 적용되었는지 확인합니다.
+
+    자신으로 로그인하십시오 (처음 만든 사용자). 로그인 방법은 "Username"을 사용합니다.
+
+    kv secrets 엔진을 클릭합니다. 이전에 만든 "a-secret"라는 시크릿이 보입니다. 히지만 선택하게 되면 "Not Authorized" 라는 메시지가 출력됩니다.
+
+    "kv"를 선택하여 이전화면으로 이동합니다.
+
+    "Create secret +" 버튼을 클릭, <user\>/age를 경로(path)로 입력, 화면 상의 "Version data" 섹션에서 "age"를 키로 입력, 여러분의 나이를 입력값으로 키와 연결시킵니다. 반드시 <user\>는 현재 로그인한 사용자 명으로 변경합니다. 마지막으로 "Save" 버튼을 클릭합니다. 이 작업을 수행 할 수 있어야 합니다.
+
+    로그아웃 후 두 번째 사용자로 다시 로그인. 첫 번째 사용자의 시크릿에 액세스해 보십시오.  접근이 불가능합니다.
+
+    이제 두번째 사용자로 로그인하는 동안 시크릿을 만들기 위해 위의 단계를 반복 수행합니다. specifying the second user's name for <user\> in the path. 이 작업을 수행할 수 있습니다.
+
+    Vault CLI을 통해 어떻게 동작하는 지 확인할 수 있습니다. 먼저 다음 명령어를 수행하여 토큰 설정을 해제합니다. : `unset VAULT_TOKEN`.  다음 명령어를 사용하여 서로 다른 사용자로 로그인합니다. : `vault login -method=userpass username=<user> password=<pwd>`. 이제 다음 명령어를 실행합니다. :
+    ```
+    vault kv get kv/<user>/age
+    vault kv put kv/<user>/weight weight=150
+    ```
+
+    <user\>값이 로그인한 사용자와 일치하는 경우에는 수행할 수 있지만 그렇지 않은 경우 실패하게 됩니다.
+
+    결론은 볼트가 각 사용자의 비밀을 다른 사용자로부터 보호하는 것입니다.
+
+    <strong>이번 실습 과정을 완료하셨습니다. 축하드립니다!</strong>
+  tabs:
+  - title: Vault Policies
+    type: code
+    hostname: vault-server
+    path: /vault/policies/
+  - title: Vault CLI
+    type: terminal
+    hostname: vault-server
+  - title: Vault UI
+    type: service
+    hostname: vault-server
+    port: 8200
+  difficulty: basic
+  timelimit: 900
+checksum: "5093836364726265962"
