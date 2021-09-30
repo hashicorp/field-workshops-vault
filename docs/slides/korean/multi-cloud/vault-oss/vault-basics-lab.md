@@ -57,8 +57,8 @@ name: lab-vault-basics-challenge-2
    * 그런 다음 녹색 "시작"버튼을 클릭합니다.
    * 도전 지침을 따르십시오.
    * 완료되면 녹색 "확인"버튼을 클릭합니다.
-* ???
 
+???
 * Instruct the students to do the "Your First Secret" challenge of the "Vault Basics" track.
 * This challenge has them run a Dev server, write a secret to the KV v2 secrets engine that was automatically enabled, and use the Vault UI.
 

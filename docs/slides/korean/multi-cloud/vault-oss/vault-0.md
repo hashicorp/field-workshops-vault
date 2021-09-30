@@ -70,7 +70,8 @@ name: instruqt-tracks
 * 이번 워크샵에서 사용하는 실습과정은 다음과 같습니다. :
     1. **Vault Basics**
     1. **Vault Dynamic Database Credentials**
-    1. **Vault Encryption as a Service]**
+    1. **Vault Encryption as a Service**
 * 1-6 챕터는 첫번째 실습과정에서 진행됩니다.
 * 7 챕터는 두번째 실습과정에서 진행됩니다.
 * 8 챕터는 세번째 과정에서 진행됩니다.
+**워크샵을 진행하는 강사로부터 실습 링크를 받게 됩니다.**
