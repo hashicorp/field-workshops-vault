@@ -1,5 +1,6 @@
 slug: vault-basics
 id: likpqjspv5pp
+version: 1.8.3
 type: track
 title: Vault Basics
 teaser: Learn how to setup and run a Vault server and manage its secrets.
@@ -39,7 +40,7 @@ challenges:
       Installing Vault on your laptop or workstation is easy. You simply download the zip file, unpack it, and place it somewhere in your PATH.
 
       Check out this tutorial for step-by-step instructions:
-      https://learn.hashicorp.com/vault/getting-started/install
+      https://learn.hashicorp.com/tutorials/vault/getting-started-install
 
       We've launched Vault in a Docker container in your Instruqt lab environment so that you don't need to download or install it.
   assignment: |-
@@ -147,7 +148,7 @@ challenges:
 
       You will also use the Vault HTTP API to read your age from your "my-first-secret" secret.
 
-      See https://www.vaultproject.io/api-docs/index/ for more on the Vault HTTP API.
+      See https://www.vaultproject.io/api-docs/ for more on the Vault HTTP API.
   assignment: |-
     In this challenge, you will use the Vault HTTP API.
 
@@ -431,4 +432,5 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 900
-checksum: "11758291419114857693"
+checksum: "10671294877937963932"
+_: ""

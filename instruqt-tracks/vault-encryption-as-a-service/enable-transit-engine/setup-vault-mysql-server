@@ -178,6 +178,10 @@ if __name__ == '__main__':
     logging.error("There was an error starting the server: {}".format(e))
 EOF
 
+# Fix Vault icon
+sed -i 's/https:\/\/s3\.amazonaws\.com\/hashicorp-marketing-web-assets\/brand\/Vault_VerticalLogo_FullColor\.B1xPC0pSax\.svg/https:\/\/storage\.googleapis\.com\/instruqt-frontend\/assets\/hashicorp\/tracks\/vault\.png/' /home/vault/transit-app-example/backend/templates/base.html
+sed -i 's/112/60/' /home/vault/transit-app-example/backend/templates/base.html
+
 # Start the python web app
 cd /home/vault/transit-app-example/backend
 python3 app.py &>/dev/null &

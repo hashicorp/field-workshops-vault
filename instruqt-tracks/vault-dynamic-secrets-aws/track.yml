@@ -1,5 +1,6 @@
 slug: vault-aws-dynamic-secrets
 id: avjxhl9qqgau
+version: 1.8.3
 type: track
 title: AWS Dynamic Secrets with Vault
 teaser: Generate AWS credentials dynamically based on IAM policies.
@@ -24,6 +25,13 @@ challenges:
   type: challenge
   title: Enable the AWS Secrets Engine
   teaser: Prepare Vault to generate dynamic credentials for AWS.
+  notes:
+  - type: text
+    contents: |-
+      Secrets engines are components which store, generate, or encrypt data. Secrets engines
+      are incredibly flexible, so it is easiest to think about them in terms of their function.
+      Secrets engines are provided some set of data, they take some action on that data, and
+      they return a result.
   assignment: |-
     The AWS secrets engine generates AWS access credentials dynamically based on
     IAM policies. This generally makes working with AWS IAM easier, since it does
@@ -71,13 +79,6 @@ challenges:
 
     If you open up the Vault UI tab and use this token, you can log into the UI and
     take a look around.
-  notes:
-  - type: text
-    contents: |-
-      Secrets engines are components which store, generate, or encrypt data. Secrets engines
-      are incredibly flexible, so it is easiest to think about them in terms of their function.
-      Secrets engines are provided some set of data, they take some action on that data, and
-      they return a result.
   tabs:
   - title: Enable the AWS Secrets Engine
     type: terminal
@@ -93,6 +94,15 @@ challenges:
   type: challenge
   title: Configure the AWS Secrets Engine
   teaser: Prepare Vault to generate dynamic AWS credentials.
+  notes:
+  - type: text
+    contents: |-
+      Most secrets engines must be configured in advance before they can perform their
+      functions. Vault supports three different types of credentials to retrieve from AWS.
+
+      This track focuses on the [`iam_user`](https://www.vaultproject.io/docs/secrets/aws/#iam_user)
+      method, however, you can read more about the
+      [other options](https://www.vaultproject.io/docs/secrets/aws/).
   assignment: |-
     After enabling the AWS secrets engine, you must configure it to authenticate and
     communicate with AWS. You have been provided AWS credentials, so no need to use
@@ -155,15 +165,6 @@ challenges:
     }
     EOF
     ```
-  notes:
-  - type: text
-    contents: |-
-      Most secrets engines must be configured in advance before they can perform their
-      functions. Vault supports three different types of credentials to retrieve from AWS.
-
-      This track focuses on the [`iam_user`](https://www.vaultproject.io/docs/secrets/aws/#iam_user)
-      method, however, you can read more about the
-      [other options](https://www.vaultproject.io/docs/secrets/aws/).
   tabs:
   - title: Configure the AWS Secrets Engine
     type: terminal
@@ -179,6 +180,12 @@ challenges:
   type: challenge
   title: Generate AWS Credentials
   teaser: Generate AWS access key pairs on the fly.
+  notes:
+  - type: text
+    contents: |-
+      Dynamic secrets are generated when they are accessed. Dynamic secrets do not
+      exist until they are read, so there is no risk of someone stealing them or
+      another client using the same secrets.
   assignment: |-
     In the last challenge you told Vault "when I ask for a credential for `my-role`,
     create it and attach the IAM policy `{ "Version": "2012..." }`"".
@@ -223,12 +230,6 @@ challenges:
     ```
     vault list sys/leases/lookup/aws/creds/my-role
     ```
-  notes:
-  - type: text
-    contents: |-
-      Dynamic secrets are generated when they are accessed. Dynamic secrets do not
-      exist until they are read, so there is no risk of someone stealing them or
-      another client using the same secrets.
   tabs:
   - title: Generate AWS Credentials
     type: terminal
@@ -244,6 +245,11 @@ challenges:
   type: challenge
   title: Revoke AWS Credentials
   teaser: Revoke the dynamically generated AWS access key pairs.
+  notes:
+  - type: text
+    contents: |-
+      Because Vault has built-in revocation mechanisms, dynamic secrets can be
+      revoked immediately after use, minimizing the amount of time the secret existed.
   assignment: |-
     Vault will automatically revoke this credential after 30 minutes as we configured,
     but perhaps you want to revoke it early. Once the secret is revoked, the access keys
@@ -292,11 +298,6 @@ challenges:
     With such easy dynamic creation and revocation, you can hopefully begin
     to see how easy it is to work with dynamic secrets and ensure they only
     exist for the duration that they are needed.
-  notes:
-  - type: text
-    contents: |-
-      Because Vault has built-in revocation mechanisms, dynamic secrets can be
-      revoked immediately after use, minimizing the amount of time the secret existed.
   tabs:
   - title: Revoke AWS Credentials
     type: terminal
@@ -307,4 +308,5 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 300
-checksum: "558886741303255226"
+checksum: "17227856681745187198"
+_: ""
