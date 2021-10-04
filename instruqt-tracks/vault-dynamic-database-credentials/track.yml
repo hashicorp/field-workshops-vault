@@ -1,6 +1,6 @@
 slug: vault-dynamic-database-credentials
 id: hbtxgbf9n1nt
-version: 0.0.1
+version: 1.8.3
 type: track
 title: Vault Dynamic Database Credentials
 teaser: |
@@ -347,7 +347,7 @@ challenges:
     issue_time      2019-12-12T17:49:41.267656019Z
     last_renewal    <nil>
     renewable       true
-    ttl             4m31s
+    ttl             1m45s
     ```
 
     The `ttl` will tell you the remaining time to live of the lease and the credentials. When the lease expires, Vault will delete the credentials from MySQL.
@@ -385,4 +385,5 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 1200
-checksum: "9681375624736018115"
+checksum: "2947793928319853135"
+_: ""

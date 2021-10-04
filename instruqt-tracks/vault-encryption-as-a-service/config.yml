@@ -1,7 +1,7 @@
 version: "2"
 virtualmachines:
 - name: vault-mysql-server
-  image: instruqt-hashicorp/vault-1-6-2-with-mysql-and-python-web-app
+  image: instruqt-hashicorp/vault-1-8-3-with-mysql-and-python-web-app
   shell: /bin/bash -l
   environment:
     MYSQL_ENDPOINT: localhost:3306

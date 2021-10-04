@@ -1,7 +1,7 @@
 version: "2"
 containers:
 - name: vault-server
-  image: vault:1.6.2
+  image: vault:1.8.3
   cmd: version
   shell: /bin/sh -l
   ports:

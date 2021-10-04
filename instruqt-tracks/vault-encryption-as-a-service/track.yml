@@ -1,6 +1,6 @@
 slug: vault-encryption-as-a-service
 id: ykk2vp8iivzq
-version: 0.0.1
+version: 1.8.3
 type: track
 title: Vault Encryption as a Service
 teaser: |
@@ -118,7 +118,7 @@ challenges:
 
       You will add a record to the database and see that the data is not encrypted. The database user and password are hard-coded in a configuration file.
   assignment: |-
-    The web app can be viewed on the "Web App" tab. You'll want to click the icon in the upper right corner of the tabs area to hide the assignment window so that you can see the entire UI of the web app. Click it again to display the assignment window.
+    The web app can be viewed on the "Web App" tab. You might want to make your browser window wider or click the `>` icon above the assignment to hide the assignment so that you can see the entire UI of the web app. Click the `<` icon to redisplay the assignment window.
 
     The web app has two sections:
 
@@ -180,7 +180,7 @@ challenges:
 
     1. Change the first line of the "\[VAULT\]" section that has `Enabled = False` to `Enabled = True`.
     2. Change the next line that has `DynamicDBCreds = False` to `DynamicDBCreds = True`.
-    3. Then save the "config.ini" file.
+    3. Then save the "config.ini" file by clicking the disk icon above the file.
 
     <br>
     You should now restart the web app in the background with the following commands:
@@ -194,7 +194,7 @@ challenges:
 
     Note that the log will show a message like "using dynamic credentials from Vault: v-token-workshop-a-LcIkgRzHwTF2m with password A1a-U9QfaBp6hQaynvJy". This shows that the web app got dynamic, short-lived credentials from Vault's Database secrets engine. It then uses these to login to the MySQL server.
 
-    Return to the "Web App" tab and add another record. (Remember to click Instruqt's assignment toggle icon to hide the assignment so that you can see the "Add Record" button.) Then check that sensitive fields of the new record is encrypted in the Database View. In particular, the birth_date, social_security_number, address, and salary fields are all encrypted for the new record.
+    Return to the "Web App" tab and add another record. (Expand the width of your browser window or click Instruqt's `>` icon to hide the assignment if the "Add Record" button is not visible.) Then check that sensitive fields of the new record are encrypted in the Database View. In particular, the birth_date, social_security_number, address, and salary fields are all encrypted for the new record.
 
     Next, login to the Vault UI with token `root` and click on the "lob_a/workshop/transit" secrets engine on the Secrets tab of the Vault UI. Then click on the "customer-key" key. Then select the "Versions" tab. Rotate the key by clicking the "Rotate encryption key" button and confirming that you really want to rotate it by clicking "Rotate". You will now see two versions of the key.
 
@@ -219,4 +219,5 @@ challenges:
     path: /home/vault/transit-app-example/backend/config.ini
   difficulty: basic
   timelimit: 1200
-checksum: "16822224126488059853"
+checksum: "4149712714341855778"
+_: ""
