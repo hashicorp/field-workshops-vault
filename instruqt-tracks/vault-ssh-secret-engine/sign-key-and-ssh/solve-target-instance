@@ -1,0 +1,16 @@
+#!/bin/bash -l
+
+# Enable bash history
+HISTFILE=/root/.bash_history
+set -o history
+
+# Save Vault's public key as trusted-user-ca-keys.pem
+curl -o /etc/ssh/trusted-user-ca-keys.pem http://base:8200/v1/ssh/public_key
+
+# Add the patch where the public key contents are stored to the SSH configuration file as the TrustedUserCAKeys option.
+echo "TrustedUserCAKeys /etc/ssh/trusted-user-ca-keys.pem" >> /etc/ssh/sshd_config
+
+# Restart SSH service to pick up the change
+sudo systemctl restart sshd
+
+exit 0

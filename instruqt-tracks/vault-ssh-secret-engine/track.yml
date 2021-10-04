@@ -1,0 +1,256 @@
+slug: vault-ssh-secret-engine
+id: tkpmtwbzl1d8
+type: track
+title: Vault SSH Secret Engine
+teaser: Leverage Vault to secure SSH access to machines
+description: |-
+  The Vault SSH secrets engine provides secure authentication and authorization for access to machines via the SSH protocol. The Vault SSH secrets engine helps manage access to machine infrastructure, providing several ways to issue SSH credentials.
+  This track walks you through setting up Vault SSH access in two ways:
+  * [Signed SSH Certificates](https://www.vaultproject.io/docs/secrets/ssh/signed-ssh-certificates)
+  * [One-time SSH Passwords](https://www.vaultproject.io/docs/secrets/ssh/one-time-ssh-passwords)
+icon: https://storage.googleapis.com/instruqt-frontend/assets/hashicorp/tracks/vault.png
+tags:
+- vault
+- ssh
+- secrets
+owner: hashicorp
+developers:
+- rcassidy@hashicorp.com
+private: true
+published: true
+challenges:
+- slug: enable-the-ssh-engine
+  id: obuxyjg1aufq
+  type: challenge
+  title: Enable the SSH Engine
+  teaser: Enable Vault's SSH secrets engine for signing keys.
+  notes:
+  - type: text
+    contents: In this challenge we will enable Vault's SSH engine for signing keys. The signed SSH certificates option is the simplest and most powerful in terms of setup complexity and in terms of being platform agnostic. By leveraging Vault's CA capabilities and functionality built into OpenSSH, clients can SSH into target hosts using their own local SSH keys.
+  assignment: |-
+    First we need to enable the SSH secrets engine within Vault. Vault is already deployed and your token is configured as an environment variable.
+
+    Use this command to enable the SSH secrets engine:
+    ```
+    vault secrets enable ssh
+    ```
+    Once enabled you can configure Vault with a CA for signing client keys using the /config/ca endpoint
+    ```
+    vault write ssh/config/ca generate_signing_key=true
+    ```
+    Then we will create a named Vault role for signing client keys
+    ```
+    vault write ssh/roles/my-role -<<"EOH"
+    {
+      "allow_user_certificates": true,
+      "allowed_users": "*",
+      "allowed_extensions": "permit-pty,permit-port-forwarding",
+      "default_extensions": [
+        {
+          "permit-pty": ""
+        }
+      ],
+      "key_type": "ca",
+      "default_user": "ubuntu",
+      "ttl": "30m0s"
+    }
+    EOH
+    ```
+    You can see we're defining a few parameters within the role. You can see a full list of available parameters and their descriptions here - https://www.vaultproject.io/api/secret/ssh#parameters-2
+
+    Great! You've set everything up that you need to use the SSH secrets engine. Now lets configure a machine to trust Vault as a CA and see if we can successfully SSH into it.
+  tabs:
+  - title: Terminal 1
+    type: terminal
+    hostname: base
+  - title: Vault UI
+    type: service
+    hostname: base
+    path: /ui
+    port: 8200
+  difficulty: basic
+  timelimit: 600
+- slug: sign-key-and-ssh
+  id: lijvfy6qcihz
+  type: challenge
+  title: Sign Key with SSH Engine and SSH to Target
+  teaser: Use the SSH secrets engine set up in the previous challenge to sign a key and SSH to a target machine.
+  notes:
+  - type: text
+    contents: |-
+      In this challenge we will use the SSH secrets engine we set up in the previous
+      step to sign a user's public key and use that signed public key to SSH into a target machine.
+
+      ![Vault SSH Certificate Signing Workflow](https://storage.googleapis.com/instruqt-hashicorp-tracks/vault/ssh_cert_flow.png)
+  assignment: |-
+    First, navigate to the **"Target Instance"** terminal. This is the machine we will be using Vault to SSH into.
+
+    Once there, use the following command to save Vault's public key as trusted-user-ca-keys.pem
+    ```
+    curl -o /etc/ssh/trusted-user-ca-keys.pem http://base:8200/v1/ssh/public_key
+    ```
+    As you can see, Vault does not require a token to interact with this endpoint. These steps are often automated using configuration management tools.
+
+    Next we will add the path where the public key contents are stored to the SSH configuration file as the TrustedUserCAKeys option.
+    ```
+    echo "TrustedUserCAKeys /etc/ssh/trusted-user-ca-keys.pem" >> /etc/ssh/sshd_config
+    ```
+    Lastly on this terminal, lets restart the SSH service so it can pick up the change
+    ```
+    sudo systemctl restart sshd
+    ```
+    Now that we're finished setting up the "Target Instance", let's try to use Vault to gain access.
+
+    ## **SWITCH TO 'TERMINAL 1' TAB**
+
+    In the **"Terminal 1"** tab, enter the following to generate a SSH keypair
+    ```
+    ssh-keygen -t rsa -f vault -N "" -C "user@example.com"
+    ```
+    Now let's use Vault to sign the public key we just made and save it as signed-cert.pub
+    ```
+    vault write -field=signed_key ssh/sign/my-role \
+        public_key=@vault.pub > signed-cert.pub
+    ```
+    Then change the permissions for signed-cert.pub we just created
+    ```
+    chmod 400 signed-cert.pub
+    ```
+    And, lastly SSH into the host machine using the signed key
+    ```
+    ssh -o StrictHostKeyChecking=no -i signed-cert.pub -i vault ubuntu@target-instance
+    ```
+    Great! You now successfully used Vault to get a local SSH key signed that allowed you to SSH into a target machine. Let now set up and test a one-time password SSH workflow.
+  tabs:
+  - title: Target Instance
+    type: terminal
+    hostname: target-instance
+  - title: Terminal 1
+    type: terminal
+    hostname: base
+  - title: Vault UI
+    type: service
+    hostname: base
+    path: /ui
+    port: 8200
+  difficulty: basic
+  timelimit: 1200
+- slug: enable-ssh-otp
+  id: x8513xvybjnc
+  type: challenge
+  title: Add a One Time Password Role
+  teaser: Create a role for using the one-time password SSH method.
+  notes:
+  - type: text
+    contents: |-
+      In this challenge we will create a role for using the one-time password
+      SSH method. The One-Time SSH Password (OTP) SSH secrets engine type allows a Vault server to issue a One-Time Password every time a client wants to SSH into a remote host using a helper command on the remote host to perform verification.
+  assignment: |-
+    In order to leverage Vault's One-Time Password SSH functionality we will need to create a SSH role with a key_type of otp. Since we already enabled the SSH engine on the default path, we can create this role on the existing path.
+
+    Use this command to create a role named **otp_key_role** with **key_type** set to otp
+    ```
+    vault write ssh/roles/otp_key_role key_type=otp \
+      default_user=ubuntu \
+      cidr_list=0.0.0.0/0
+    ```
+    You can also do things like setting TTLs for the OTPs, restrict the allowed users, add a list of allowed domains and more. You can see the full list of available parameters here - https://www.vaultproject.io/api/secret/ssh#parameters-2
+
+    That's it! Now we need to install the Vault-SSH-Helper on any target machines and you're ready to use Vault's OTP for SSH access.
+  tabs:
+  - title: Terminal 1
+    type: terminal
+    hostname: base
+  - title: Vault UI
+    type: service
+    hostname: base
+    path: /ui
+    port: 8200
+  difficulty: basic
+  timelimit: 600
+- slug: vault-ssh-helper
+  id: ffkfududtitz
+  type: challenge
+  title: Install vault-ssh-helper and SSH to Target
+  teaser: Install vault-ssh-helper on the remote host and SSH into the remote host.
+  notes:
+  - type: text
+    contents: |-
+      In this challenge we will install vault-ssh-helper on the remote host
+      and SSH into the remote host using a one-time password generated by Vault.
+
+      ![Vault SSH OTP Workflow](https://storage.googleapis.com/instruqt-hashicorp-tracks/vault/ssh_otp_flow.png)
+  assignment: |-
+    First, navigate to the **"Target Instance"** terminal. There you will download the Vault-SSH-Helper which will make a call back to Vault to verify the OTPs being used and mark them as being used in Vault so they are no longer valid.
+
+    Use this command in the **"Target Instance"** terminal to download and unzip the vault-ssh-helper
+    ```
+    wget https://releases.hashicorp.com/vault-ssh-helper/0.2.0/vault-ssh-helper_0.2.0_linux_amd64.zip && sudo unzip -q vault-ssh-helper_0.2.0_linux_amd64.zip -d /usr/local/bin
+    ```
+    Then set the vault-ssh-helper binary to executable
+    ```
+    sudo chmod 0755 /usr/local/bin/vault-ssh-helper
+    ```
+    Set the user and group of vault-ssh-helper to root.
+    ```
+    sudo chown root:root /usr/local/bin/vault-ssh-helper
+    ```
+    Create a directory to store the configuration file.
+    ```
+    sudo mkdir /etc/vault-ssh-helper.d/
+    ```
+    Create the configuration file /etc/vault-ssh-helper.d/config.hcl.
+    ```
+    sudo tee /etc/vault-ssh-helper.d/config.hcl <<EOF
+    vault_addr = "http://base:8200"
+    tls_skip_verify = true
+    ssh_mount_point = "ssh"
+    allowed_roles = "*"
+    EOF
+    ```
+    You can see all of the configuration options for the vault-ssh-helper here - https://github.com/hashicorp/vault-ssh-helper
+
+    Then disable common-auth.
+    ```
+    sudo sed -i 's/@include common-auth/# @include common-auth/' /etc/pam.d/sshd
+    ```
+    Add authentication verification through the vault-ssh-helper.
+    ```
+    echo -e "\nauth requisite pam_exec.so quiet expose_authtok log=/var/log/vault-ssh.log /usr/local/bin/vault-ssh-helper -dev -config=/etc/vault-ssh-helper.d/config.hcl
+    auth optional pam_unix.so not_set_pass use_first_pass nodelay" | sudo tee -a /etc/pam.d/sshd
+    ```
+    Enable ChallengeResponseAuthentication.
+    ```
+    sudo sed -i 's/ChallengeResponseAuthentication no/ChallengeResponseAuthentication yes/' /etc/ssh/sshd_config
+    ```
+    Restart the SSHD service.
+    ```
+    sudo systemctl restart sshd
+    ```
+
+    ## **SWITCH TO 'TERMINAL 1' TAB**
+
+    Now that the target machine is ready to start accepting SSH OTP logins, navigate to the **"Terminal 1"** tab.
+
+    With a single command you can create a new OTP and SSH into the remote host using sshpass.
+    ```
+    vault ssh -role otp_key_role -mode otp -strict-host-key-checking=no ubuntu@target-instance
+    ```
+
+    Congratulations! You've now completed the Vault SSH Secrets Engine guide. Now go try it out in your enviornment and let us know how it goes!
+  tabs:
+  - title: Target Instance
+    type: terminal
+    hostname: target-instance
+  - title: Terminal 1
+    type: terminal
+    hostname: base
+  - title: Vault UI
+    type: service
+    hostname: base
+    path: /ui
+    port: 8200
+  difficulty: basic
+  timelimit: 1200
+checksum: "15607773902534503145"
+_: ""

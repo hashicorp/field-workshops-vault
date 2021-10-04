@@ -1,0 +1,11 @@
+#!/bin/bash -l
+
+set -e
+
+grep -q "curl.*-o.*/etc/ssh/trusted-user-ca-keys.pem.*http://base:8200/v1/ssh/public_key" /root/.bash_history || fail-message "You haven't saved Vault's public key as trusted-user-ca-keys.pem."
+
+grep -q "echo" /root/.bash_history || fail-message "You haven't added the patch where the public key contents are stored to the SSH configuration file as the TrustedUserCAKeys option."
+
+grep -q "sudo.*systemctl.*restart.*sshd" /root/.bash_history || fail-message "You haven't Create a named Vault role for signing client keys."
+
+exit 0

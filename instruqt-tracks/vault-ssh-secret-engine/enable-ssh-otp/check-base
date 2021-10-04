@@ -1,0 +1,7 @@
+#!/bin/bash -l
+
+set -e
+
+grep -q "vault.*write.*ssh/roles/otp_key_role.*key_type=otp" /root/.bash_history || fail-message "You haven't created a role named otp_key_role with key_type set to otp."
+
+exit 0
