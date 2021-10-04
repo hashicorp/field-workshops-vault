@@ -435,6 +435,6 @@ workflows:
       - instruqt-test-vault-advanced-data-protection-with-tokenization:
           requires:
             - instruqt-validate
-      - instruqt-test-vault-secrets-engine:
+      - instruqt-test-vault-ssh-secrets-engine:
           requires:
             - instruqt-validate
