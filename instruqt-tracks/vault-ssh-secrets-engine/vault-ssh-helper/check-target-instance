@@ -1,0 +1,13 @@
+#!/bin/bash -l
+
+set -e
+
+grep -q "wget.*https://releases.hashicorp.com/vault-ssh-helper/0.2.0/vault-ssh-helper_0.2.0_linux_amd64" /root/.bash_history || fail-message "You haven't downloaded the SSH keypair."
+
+grep -q "sudo.*unzip.*-q.*vault-ssh-helper_0.2.0_linux_amd64.zip.*-d.*/usr/local/bin" /root/.bash_history || fail-message "You haven't Unzipped the vault-ssh-helper in /usr/local/bin."
+
+grep -q "sudo.*chmod.*0755.*/usr/local/bin/vault-ssh-helper" /root/.bash_history || fail-message "Set vault-ssh-helper to executable."
+
+grep -q "sudo.*systemctl.*restart.*sshd" /root/.bash_history || fail-message "You haven't restarted the SSHD service."
+
+exit 0

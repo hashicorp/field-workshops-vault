@@ -1,0 +1,12 @@
+#!/bin/bash -l
+
+# Enable bash history
+HISTFILE=/root/.bash_history
+set -o history
+
+# Create a role named otp_key_role with key_type set to otp.
+vault write ssh/roles/otp_key_role key_type=otp \
+    default_user=ubuntu \
+    cidr_list=0.0.0.0/0
+
+exit 0

@@ -1,0 +1,10 @@
+#!/bin/bash -l
+
+# Enable bash history
+HISTFILE=/root/.bash_history
+set -o history
+
+# Create a new OTP and SSH into the remote host using sshpass.
+vault ssh -role otp_key_role -mode otp -strict-host-key-checking=no ubuntu@target-instance
+
+exit 0

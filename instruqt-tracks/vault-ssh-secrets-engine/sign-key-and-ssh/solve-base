@@ -1,0 +1,20 @@
+#!/bin/bash -l
+
+# Enable bash history
+HISTFILE=/root/.bash_history
+set -o history
+
+# Generate an SSH keypair
+ssh-keygen -t rsa -f vault -N "" -C "user@example.com"
+
+# Save the resulting signed public key to disk
+vault write -field=signed_key ssh/sign/my-role \
+    public_key=@vault.pub > signed-cert.pub
+
+# Change permissions for signed-cert.pub
+chmod 400 signed-cert.pub
+
+# SSH into the host machine using the signed key
+ssh -o StrictHostKeyChecking=no -i signed-cert.pub -i vault ubuntu@target-instance
+
+exit 0

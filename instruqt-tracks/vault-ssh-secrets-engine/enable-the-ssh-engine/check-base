@@ -1,0 +1,11 @@
+#!/bin/bash -l
+
+set -e
+
+grep -q "vault.*secrets.*enable.*ssh" /root/.bash_history || fail-message "You haven't enabled the SSH engine on the default path."
+
+grep -q "vault.*write.*ssh/config/ca.*generate_signing_key=true" /root/.bash_history || fail-message "You haven't configure Vault with a CA for signing client keys using the /config/ca endpoint."
+
+grep -q "vault.*write.*ssh/roles/my-role" /root/.bash_history || fail-message "You haven't Create a named Vault role for signing client keys."
+
+exit 0

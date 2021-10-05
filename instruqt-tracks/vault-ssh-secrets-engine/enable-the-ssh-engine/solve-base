@@ -1,0 +1,30 @@
+#!/bin/bash -l
+
+# Enable bash history
+HISTFILE=/root/.bash_history
+set -o history
+
+# Enable the SSH secrets engine
+vault secrets enable ssh
+
+# Configure Vault with a CA for signing client keys using the /config/ca endpoint
+vault write ssh/config/ca generate_signing_key=true
+
+# Create a named Vault role for signing client keys
+vault write ssh/roles/my-role -<<"EOH"
+{
+  "allow_user_certificates": true,
+  "allowed_users": "*",
+  "allowed_extensions": "permit-pty,permit-port-forwarding",
+  "default_extensions": [
+    {
+      "permit-pty": ""
+    }
+  ],
+  "key_type": "ca",
+  "default_user": "ubuntu",
+  "ttl": "30m0s"
+}
+EOH
+
+exit 0

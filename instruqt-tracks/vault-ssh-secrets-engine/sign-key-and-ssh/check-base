@@ -1,0 +1,11 @@
+#!/bin/bash -l
+
+set -e
+
+grep -q "ssh-keygen.*-t.*rsa.*-f.*vault.*-N" /root/.bash_history || fail-message "You haven't generated an SSH keypair."
+
+grep -q "vault.*write.*-field=signed_key.*ssh/sign/my-role" /root/.bash_history || fail-message "You haven't saved the resulting signed public key to disk."
+
+grep -q "chmod.*400.*signed-cert.pub" /root/.bash_history || fail-message "You haven't changed permissions for signed-cert.pub."
+
+exit 0
