@@ -416,9 +416,16 @@ Breaches are commonly carried out via attackers who have gained escalated creden
 ![:scale 100%](images/slide49.png)
 
 ---
-# Solution: Transform Secrets Engine
+# Solution 1:Transit Secrets Engine
+.center[![:scale 90%](images/slide53.png)]
+
+---
+# Example with Encryption Enabled
+.center[![:scale 90%](images/Transit_enabled.png)]
+---
+# Solution 2: Transform Secrets Engine
 1. Vault’s Transform And Transit Secrets Engines function as an Encryption-as-a-Service
-1. Developers use Vault to encrypt and decrypt data outside of Vault
+2. Developers use Vault to encrypt and decrypt data outside of Vault
 .center[![:scale 70%](images/slide50.png)]
 
 ---
@@ -434,14 +441,6 @@ Breaches are commonly carried out via attackers who have gained escalated creden
 ---
 # Transform Data Masking
 .center[![:scale 90%](images/masking.png)]
-
----
-# Transit Secrets Engine
-.center[![:scale 90%](images/slide53.png)]
-
----
-# Example with Encryption Enabled
-.center[![:scale 90%](images/Transit_enabled.png)]
 
 ---
 class: col-2
