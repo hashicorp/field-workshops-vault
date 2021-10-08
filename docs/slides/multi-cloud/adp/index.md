@@ -416,10 +416,25 @@ Breaches are commonly carried out via attackers who have gained escalated creden
 ![:scale 100%](images/slide49.png)
 
 ---
-# Solution: Transform Secrets Engine
-1. Vault’s Transform And Transit Secrets Engines function as an Encryption-as-a-Service
-1. Developers use Vault to encrypt and decrypt data outside of Vault
-.center[![:scale 70%](images/slide50.png)]
+# Vault's Solutions
+1. Vault’s Transform And Transit Secrets Engines provide Encryption-as-a-Service
+2. Developers use Vault to encrypt and decrypt data outside of Vault
+
+---
+# Solution 1:Transit Secrets Engine
+.center[![:scale 90%](images/slide53.png)]
+
+---
+# Example with Encryption Enabled
+.center[![:scale 90%](images/Transit_enabled.png)]
+
+---
+# Solution 2: Transform Secrets Engine
+.center[![:scale 90%](images/slide50.png)]
+
+---
+# Transform Data Masking
+.center[![:scale 90%](images/masking.png)]
 
 ---
 # Transform (& Transit) Engine Benefits:
@@ -430,18 +445,6 @@ Breaches are commonly carried out via attackers who have gained escalated creden
 * If an attacker manages to get access to the encrypted data, they will only see ciphertext that is useless without Vault.
 * The Transform Secrets engine is Format Preserving. Thus, it does not require any changes to database structure
   * i.e. 16 digits CCNs are encrypted as 16 digit ciphertext
-
----
-# Transform Data Masking
-.center[![:scale 90%](images/masking.png)]
-
----
-# Transit Secrets Engine
-.center[![:scale 90%](images/slide53.png)]
-
----
-# Example with Encryption Enabled
-.center[![:scale 90%](images/Transit_enabled.png)]
 
 ---
 class: col-2
