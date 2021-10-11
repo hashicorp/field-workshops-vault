@@ -23,6 +23,18 @@ layout: true
 ---
 name: Vault-Transit-Engine
 
+.center[![:scale 100%](images/adobe.png)]
+
+???
+* Adobe has been running Vault Enterprise in production for two years and now the platform services over 130 teams.
+* Adobe cloud services used by 67% of the Fortune 50. For example, have you ever:
+* Gotten access to HBO?
+* Streamed the Superbowl on a mobile device?
+...well you’ve used one of the Adobe 23 products that Vault helps keep secure.
+
+---
+name: Vault-Transit-Engine
+
 # Vault Transit Engine - Encryption as a Service
 .center[![:scale 80%](images/vault-eaas.webp)]
 
@@ -31,21 +43,25 @@ name: Vault-Transit-Engine
 
 ???
 * Let's talk about Vault's Encryption-as-a-Service, the Transit secrets engine.
+* The Challenge is: All application data should be encrypted, but deploying a cryptography and key management infrastructure is expensive, hard to develop against, and not cloud or multi-datacenter friendly
+* One of the solutions for that chalange is Vault EaaS. You can use it's centralized key management to simplify encrypting data in transit and at rest across clouds and data centers
 * It provides an encryption API & service that are secure, accessible and easy to implement.
 * Instead of forcing developers to learn cryptography, we present them with a familiar API that can be used to encrypt and decrypt data that is stored outside of Vault.
 
 ---
 name: transit-engine-benefits
 # Transit Engine Benefits
+.center[![:scale 80%](images/eaas_example.png)]
 
 * Vault's Transit Engine provides developers a well-architected EaaS API so that they don't have to become encryption or cryptography experts.
 * It provides centralized key management.
 * It ensures that only approved ciphers and algorithms are used.
-* It supports automated key rotation and re-wrapping.
-* If an attacker manages to get access to the encrypted data, they will only see ciphertext that is useless without Vault.
 
 ???
-* There are seveal benefits of using the Transit engine.
+* Why would you want to do this?:
+* you want to store encrypted data in your application’s primary data store.
+* you don’t want to be bothered with the details of implementing encryption algorithms.
+* you want stuff, like key rolling, authentication and auditing out-of-the-box.
 
 ---
 name: Vault-Transit-Engine-1
@@ -58,10 +74,10 @@ name: Vault-Transit-Engine-1
 * We'll then run it with Vault enabled and see that new records are encrypted.
 
 ???
-* Discuss the web app we will be using in this chapter's lab.
-* Point out that it will use the same MySQL database from chapter 7.
-* Point out that it will get its MySQL credentials from the Database secrets engine students set up in chapter 7.
-* Indicate that we will first run without Vault and then with it.
+* Let me walk you through the steps you will do during the lab. 
+* We will use the same MySQL database from chapter 7.
+* We will get its MySQL credentials from the Database secrets engine you set up in chapter 7.
+* we will first run without Vault and then with it.
 
 ---
 name: web-app-screenshot
@@ -71,14 +87,14 @@ name: web-app-screenshot
 .center[![:scale 70%](images/transit_app.png)]
 
 ???
-* Show the screenshot of the web app.
+* That you what you will see once you start the lab.
 
 ---
 name: web-app-views
 # The Web App's Views
 ###There are two main sections in the application.
 1. **Records View**
-  * The Records View displays records in plain text, showing what a logged in user would see after any encrypted data is decrypted.
+  * The Records View displays records in plain text, showing what a logged-in user would see after any encrypted data is decrypted.
 
 1. **Database View**
   * The Database View displays the raw records in the database, showing what SQL commands would return:
@@ -100,8 +116,8 @@ name: Vault-Transit-Engine-6
 .center[![:scale 60%](images/add_user.png)]
 
 ???
-* Describe the Add User screen that students will use to add new records to the database.
-* Point out again that when Vault is enabled, the records will be encrypted in the database.
+* By Adding  new records to the database.
+* Beccause Vault is not enabled, the data will be stored as plain text.
 
 ---
 name: database-record-without-vault
@@ -132,66 +148,6 @@ name: encryption-key-rotation
 * Data can also be re-encrypted using the `rewrap` endpoint.
 
 ---
-name: lab-transit-challenge-1
-# 👩‍💻 Challenge 1: Enable the Transit Engine
-* In this lab challenge, you'll enable the Transit engine.
-* You'll do this in the **Vault Encryption as a Service** Instruqt track using the link provided by your instructor.
-* Instructions:
-  * Click the "Enable the Transit Secrets Engine" challenge of the "Vault Encryption as a Service" track.
-  * Then click the green "Start" button.
-  * Follow the challenge's instructions.
-  * Click the green "Check" button when finished.
-
-???
-* Instruct the students to do the "Enable the Transit Secrets Engine" challenge of the "Vault Encryption as a Service" track.
-* This challenge has them enable the Transit secrets engine on the path "lob_a/workshop/transit".
-
----
-name: lab-database-challenge-2
-# 👩‍💻 Challenge 2: Create an Encryption Key
-* In this lab, you'll create an encryption key for use with the Transit engine you enabled in the previous challenge.
-* Instructions:
-  * If the track does not do it for you, click the "Create a Key for the Transit Secrets Engine" challenge of the "Vault Encryption as a Service" track.
-  * Then click the green "Start" button.
-  * Follow the challenge's instructions.
-  * Click the green "Check" button when finished.
-
-???
-* Instruct the students to do the "Create a Key for the Transit Secrets Engine" challenge of the "Vault Encryption as a Service" track.
-* This challenge has them create an encryption key for use with the Transit engine they enabled in the previous challenge.
-
----
-name: lab-database-challenge-3
-# 👩‍💻 Challenge 3: Use the Web App Without Vault
-* In this lab, you'll use the web application without Vault.
-* Instructions:
-  * If the track does not do it for you, click the "Use the Web App Without Vault" challenge of the "Vault Encryption as a Service" track.
-  * Then click the green "Start" button.
-  * Follow the challenge's instructions.
-  * Click the green "Check" button when finished.
-
-???
-* Instruct the students to do the "Use the Web App Without Vault" challenge of the "Vault Encryption as a Service" track.
-* This challenge has them use the web application without Vault.
-* Point out that the new record they add during this challenge will nto be encrypted.
-
----
-name: lab-database-challenge-4
-# 👩‍💻 Challenge 4: Use the Web App With Vault
-* In this lab, you'll use the web application with Vault.
-* You'll also rotate the encryption key.
-* Instructions:
-  * If the track does not do it for you, click the "Use the Web App With Vault" challenge of the "Vault Encryption as a Service" track.
-  * Then click the green "Start" button.
-  * Follow the challenge's instructions.
-  * Click the green "Check" button when finished.
-
-???
-* Instruct the students to do the "Use the Web App With Vault" challenge of the "Vault Encryption as a Service" track.
-* This challenge has them use the web application with Vault.
-* Point out that the new record they add will have sensitive fields encrypted by Vault's Transit engine.
-
----
 name: chapter-8-review-questions
 # 📝 Chapter 8 Review
 * What is the main advantage of using Vault's Transit secrets engine?
@@ -200,7 +156,11 @@ name: chapter-8-review-questions
 * Is it possible to tell which version of an encryption key was used?
 
 ???
-* Let's review what we learned in this chapter.
+* Developers can encrypt data without being experts in cryptography.
+* Wherever developers want, but outside of Vault
+* Yes
+* Yes. The version is indicated by `v1`, `v2`, etc.
+
 
 ---
 name: chapter-8-review-answers
@@ -216,6 +176,11 @@ name: chapter-8-review-answers
 
 ???
 * Here are the answers to the review questions.
+
+---
+name: conclusion
+# Vault OSS vs Enterprise!
+.center[![:scale 50%](images/ent.png)]
 
 ---
 name: conclusion

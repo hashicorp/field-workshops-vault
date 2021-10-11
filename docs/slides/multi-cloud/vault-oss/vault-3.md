@@ -78,6 +78,7 @@ name: unsealing-vault
 
 ???
 * Describe Vault's `unseal` command.
+* Unsealing is the process of obtaining the plaintext master key necessary to read the decryption key to decrypt the data, allowing access to the Vault.
 
 ---
 name: vault-status-command
@@ -101,7 +102,9 @@ name: chapter-3-review-questions
 * What Vault command has to be run each time a Vault server is started?
 
 ???
-* Let's review what we learned in this chapter.
+* A configuration file
+* `vault operator init`
+* `vault operator unseal`
 
 ---
 name: chapter-3-review-answers

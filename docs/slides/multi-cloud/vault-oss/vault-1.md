@@ -21,10 +21,7 @@ name: hashiCorp-vault-overview
   * You can also use Vault to generate dynamic short-lived credentials, or encrypt application data on the fly.
 
 ???
-This is meant as a high level overview.  For detailed descriptions or instructions please see the docs, API guide, or learning site:
-* https://www.vaultproject.io/docs/
-* https://www.vaultproject.io/api/
-* https://learn.hashicorp.com/vault/
+It's generally not a good idea to rely entirely on your own engineering team for something so critical as protecting data. Businesses don't write their own operating systems, or continuous integration systems, or source control tools. They outsource those capabilities to specialized tools. Why should secrets management be any different? What should we use to protect secrets? HashiCorp Vault is the solution that provides secrets management and encryption capabilities.  In this workshop, I'm going to demonstrate the core concepts of Vault, and how it solves the problems related to secrets management, how Vault can be used to protect data, and how to integrate Vault into a systems infrastructure, thereby, enhancing security and protecting secrets. 
 
 ---
 name: the-old-way
@@ -34,8 +31,12 @@ layout: false
 .center[Also known as the "Castle and Moat" method.]
 
 ???
-* This picture shows the traditional castle and moat security model.
+* This picture shows the traditional castle and moat security model. In the traditional security world, we assumed high trust internal networks, which resulted in a hard shell and soft interior. With the modern “zero trust” approach, we work to harden the inside as well. This requires that applications be explicitly authenticated, authorized to fetch secrets and perform sensitive operations, and tightly audited.
 
+### The Traditional Security Model
+* Traditional security models were built upon the idea of perimeter based security.
+* There would be a firewall, and inside that firewall it was assumed one was safe.
+* Resources such as databases were mostly static.  As such rules were based upon IP address, credentials were baked into source code or kept in a static file on disk.
 ---
 layout: true
 
@@ -45,26 +46,19 @@ layout: true
 ]
 
 ---
-name: traditional-security-models
-# The Traditional Security Model
-* Traditional security models were built upon the idea of perimeter based security.
-* There would be a firewall, and inside that firewall it was assumed one was safe.
-* Resources such as databases were mostly static.  As such rules were based upon IP address, credentials were baked into source code or kept in a static file on disk.
+name: problems-with-traditional-security-models
+# The Traditional Security Model - Example
+.center[![:scale 65%](images/casino.png)]
 
 ???
-This slide discusses the traditional security model
-
----
-name: problems-with-traditional-security-models
-# Problems with the Traditional Security Model
+* The attackers used a fish-tank thermometer to get a foothold in the network, and got an access to high-roller database which information was compromised.
+Problems with the Traditional Security Model
 * IP Address based rules
 * Hardcoded credentials with problems such as:
   * Shared service accounts for apps and users
   * Difficult to rotate, decommission, and determine who has access
   * Revoking compromised credentials could break
 
-???
-* This slide describes some of the problems with the traditional security model.
 ---
 name: the-new-way
 layout: false
@@ -75,7 +69,7 @@ layout: false
 ???
 * These are Mongolian Yurts or "Ger" as they are called locally. Instead of a castle with walls and a drawbridge, a fixed fortress that has an inside and an outside, these people move from place to place, bringing their houses with them.
 
-* And if you don't think the Nomadic way can be an effective security posture, think about this for a moment. The Mongol military tactics and organization enabled the Genghis Khan to conquer nearly all of continental Asia, the Middle East and parts of eastern Europe. Mongol warriors would typically bring three or four horses with them, so they could rotate through the horses and go farther. Mongol army units could move up to 100 miles a day, which was unheard of in the 13th century. They were faster, more adaptable, and more resilient than all their enemies.
+* And if you don't think the Nomadic way can be an effective security posture, think about this for a moment. The Mongol military conquered nearly all of continental Asia, the Middle East and parts of eastern Europe.They were faster, more adaptable, and more resilient than all their enemies.
 
 ---
 name: identity-based-security-1
@@ -85,6 +79,7 @@ name: identity-based-security-1
 ]
 
 ???
+* Vault eliminates secret sprawl. What is secret sprawl? Secrtes ended up being in source, config, vcs. Imagine Alex...
 * Here we see that Vault has multiple means of authenticating users and applications with its Auth Methods.
 * Vault can manage many types of secrets and excels at generating short-lived, dynmamic secrets.
 * Vault's ACL policies are associated with tokens that users and applications use to access secrets after authenticating.
@@ -98,20 +93,25 @@ layout: true
 - Copyright © 2021 HashiCorp
 - ![:scale 100%](https://hashicorp.github.io/field-workshops-assets/assets/logos/HashiCorp_Icon_Black.svg)
 ]
+---
+name: identity-based-security-2
+# Identity Based Security
+.center[![:scale 100%](images/alex_before.png)]
+
+???
+* For example, let's say Alex is running an application in a Kubernetes container on Google Cloud that gets deployed from GitHub, connects to a database in Azure, and replicates to AWS.
 
 ---
 name: identity-based-security-2
 # Identity Based Security
+.center[![:scale 100%](images/alex_flow.png)]
 
-Vault was designed to address the security needs of modern applications.  It differs from the traditional approach by using:
-
+???
+* Alex can integrate his different cloud identities into an "Alex" entity and centrally create policies granting and restricting access to secrets for the different components to connect securely to one another, all within one workflow and API.
 * Identity based rules allowing security to stretch across network perimeters
 * Dynamic, short lived credentials that are rotated frequently
 * Individual accounts to maintain provenance (tie action back to entity)
 * Credentials and Entities that can easily be invalidated
-
-???
-* This slide discusses how Vault is designed for modern applications.
 
 ---
 name: secrets-engines
@@ -128,7 +128,7 @@ layout: false
 ---
 name: vault-reference-architecture-1
 # Vault Architecture Internals
-.center[![:scale 75%](images/vault_arch.png)]
+.center[![:scale 75%](images/vault_arch1.png)]
 .center[[HashiCorp Vault Internals Architecture](https://www.vaultproject.io/docs/internals/architecture/)
 ]
 
@@ -149,15 +149,16 @@ name: vault-reference-architecture-2
 ---
 name: vault-reference-architecture-3
 # Vault Architecture - Multi-Region
-.center[![:scale 70%](images/vault-ref-arch-replication.png)]
+.center[![:scale 90%](images/vault-ref-arch-replication.png)]
 .center[[Vault Enterprise Replication](https://www.vaultproject.io/docs/enterprise/replication/)
 ]
 
 ???
 * Vault Enterprise supports replication between clusters across regions and data centers.
-* It supports Disaster Recovery and Performance replication.
+* DR cluster is provisioned and maintained in each data center or cloud region where Vault services applications to provide continuous operations if the primary cluster fails. 
+* In performance replication, secondaries keep track of their own tokens and leases but share the underlying configuration, policies, and supporting secrets (K/V values, encryption keys for transit, etc).That is being used for horizontal scale.
 * These can be used together.
-* Click the link to learn more about Vault's replication.
+
 
 ---
 layout: true

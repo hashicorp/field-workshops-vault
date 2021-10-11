@@ -97,35 +97,16 @@ name: vault-dev-server
 * Warn students to never store real secrets on a Dev server.
 
 ---
-name: Vault-UI
-# The Vault UI
-* In order to use the Vault UI, you must sign in.
-* Vault supports multiple authentication methods.
-* A new Vault server will only have the Token auth method enabled.
-* In the challenge you will soon complete, you use the Token auth method and specify "root" as the token.
-
-???
-
-* Let's talk about the Vault UI a bit, including ways of signing into it.
-* While you used the token "root" in the last challenge, you'll be running a Vault server in "Prod"  mode in the rest of the track and will have to use the token generated when you initialize that server in the next challenge.
----
 name: signing-into-the-vault-ui
 # Signing into the Vault UI
 .center[![:scale 70%](images/vault_login_page.png)]
 
 ???
 * This slide shows a screenshot of the login dialog for the Vault server.
-
----
-name: welcome-to-vault
-# The "Welcome to Vault" Tour
-.center[![:scale 60%](images/take_a_tour.png)]
-* When you first login to Vault, you can take a tour.
-
-???
-* Explain the "Welcome to Vault" tour.
-* Explain how to get rid of it.
-* Point out that they can restart the tour with the "Restart guide" menu under their user icon in the upper right corner of the UI.
+* In order to use the Vault UI, you must sign in.
+* Vault supports multiple authentication methods.
+* A new Vault server will only have the Token auth method enabled.
+* In the challenge you will soon complete, you use the Token auth method and specify "root" as the token.
 
 ---
 name: vault-api-1
@@ -139,7 +120,8 @@ Command:
 curl http://localhost:8200/v1/sys/health | jq
 ```
 ???
-* Let's talk about the Vault HTTP API
+* Let's talk about the Vault HTTP API.
+The Vault HTTP API gives you full access to Vault via HTTP. Every aspect of Vault can be controlled via this API. The Vault CLI uses the HTTP API to access Vault.
 
 ---
 name: vault-api-2
@@ -183,7 +165,9 @@ name: chapter-2-review-questions
 * What are the two Vault server modes?
 
 ???
-* Let's review what we learned in this chapter.
+* CLI, API, UI
+* `-h`, `-help`, and `--help`
+* Dev and Prod
 
 ---
 name: chapter-2-review-answers

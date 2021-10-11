@@ -21,14 +21,12 @@ layout: true
 ]
 
 ---
-name: vault-policies
-# Vault Policies
-* Vault Policies restrict the secrets users and applications have access to.
-* Vault follows the practice of least privilege, *denying* access by default.
-* Vault administrators must explicity grant users and applications access to specific paths with policy statements.
-* In addition to specifying paths, policies also specify a set of capabilities for those paths.
-* Policies are written in HashiCorp Configuration Language (HCL).
+#Identity Based Security
+.center[![:scale 90%](images/identity-triangle.png)]
 
+???
+* as a recap, we have covered kv, auth, 
+* Everything in Vault is path based, and policies are no exception. Policies provide a declarative way to grant or forbid access to certain paths and operations in Vault. 
 ---
 name: vault-policy-example
 # A Vault Policy Example
@@ -42,6 +40,13 @@ path "auth/token/lookup-self" {
 * Note that this policy does not allow tokens to change their own properties.
 ???
 * This policy allows tokens to look up their own properties
+
+???
+* Vault Policies restrict the secrets users and applications have access to.
+* Vault follows the practice of least privilege, *denying* access by default.
+* Vault administrators must explicity grant users and applications access to specific paths with policy statements.
+* In addition to specifying paths, policies also specify a set of capabilities for those paths.
+* Policies are written in HashiCorp Configuration Language (HCL).
 
 ---
 name: vault-policy-paths-capabilities
@@ -94,7 +99,9 @@ name: chapter-6-review-questions
 * What CLI command can be used to add a policy to Vault?
 
 ???
-* Let's review what we learned in this chapter.
+* No
+* `create`, `read`, `update`, `delete`, and `list`
+* `vault policy write`
 
 ---
 name: chapter-6-review-answers
@@ -109,3 +116,14 @@ name: chapter-6-review-answers
 
 ???
 * Here are the answers to the review questions.
+
+---
+name: vault-basics-lab
+class: title, shelf, no-footer, fullbleed
+background-image: url(https://hashicorp.github.io/field-workshops-assets/assets/bkgs/HashiCorp-Title-bkg.jpeg)
+count: false
+
+# Vault Basics Lab 4-7 
+
+![:scale 15%](https://hashicorp.github.io/field-workshops-assets/assets/logos/logo_vault.png)
+

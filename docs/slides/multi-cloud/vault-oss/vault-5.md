@@ -72,21 +72,14 @@ name:vault-auth-methods-2
 ---
 name: enabling-auth-methods
 # Enabling Authentication Methods
+.center[![:scale 70%](images/aws_auth.png)]
 
-* Most Vault auth methods need to be explicitly enabled.
-* This is done with the `vault auth enable` command.
-* Each auth method has a default path.
-* Alternate paths can be specified to enable multiple instances:<br> `vault auth enable -path=aws-east aws`
-* Custom paths must be specified in CLI commands and API calls:<br>
-`vault write aws-east/config/root`<br>
-instead of<br>
-`vault write aws/config/root`
+* This is done with the `vault auth enable aws` command.
 
 ???
-
-* Talk about enabling auth methods.
-* Talk about default and custom paths
-* Explain the examples
+* Most Vault auth methods need to be explicitly enabled.
+* Each auth method has a default path.
+* With the ec2 method, AWS is treated as a Trusted Third Party and cryptographically signed dynamic metadata information that uniquely represents each EC2 instance is used for authentication. This metadata information is automatically supplied by AWS to all EC2 instances.
 
 ---
 name: userpass-0
@@ -107,7 +100,9 @@ name: chapter-5-review-questions
 * Can a user that is not assigned any policies other than the default policy access any secrets?
 
 ???
-* Let's review what we learned in this chapter.
+* Users and applications
+* Vault
+* No
 
 ---
 name: chapter-5-review-answers

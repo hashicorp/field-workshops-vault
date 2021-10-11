@@ -11,7 +11,9 @@ count: false
 ???
 
 * Chapter 4 introduces Vault secrets engines
-* It focuses on the KV v2 engine.
+* So far we have covered Vault Overview, Vault
+* How to interact with vault
+* Running a Production Vault Server
 
 ---
 layout: true
@@ -29,10 +31,11 @@ name: vault-secrets-engines-1
 .center[Vault includes many different secrets engines.]
 
 ???
-* Use this screenshot from the Vault UI to talk about Vault's many secrets engines but note that the next slide lists them too.
-* Some are for storing static secrets.
-* Others can dynamically generate secrets such as database and cloud credentials.
-* There is even one called "Transit" that provides encryption as a service.
+* Secrets engines are components which store, generate, or encrypt data. Secrets engines are incredibly flexible, so it is easiest to think about them in terms of their function. Secrets engines are provided some set of data, they take some action on that data, and they return a result.
+* As an example, The AWS secrets engine generates AWS access credentials dynamically based on IAM policies. This generally makes working with AWS IAM easier, since it does not involve clicking in the web UI.
+* Or The PKI secrets engine generates dynamic X.509 certificates. With this secrets engine, services can get certificates without going through the usual manual process of generating a private key and Certificate Signing Request.
+* Vault Dynamic Database Credentials
+Generate dynamic credentials for a MySQL database from Vault.
 
 ---
 name:vault-secrets-engines-2
@@ -50,47 +53,28 @@ name:vault-secrets-engines-2
 Spend some time pointing out what some of these do:
 * KV - Used to manage generic, static secrets. KV v2 supports versioning.
 * PKI - Used to generate dynamic X.509 certificates
-* SSH - Take all the pain and drudgery out of securing your SSH infrastructure. Vault can provide key signing services that make securing SSH a snap.
-* TOTP - The TOTP tool allows Vault to either act as a code-generating device for MFA logins or to provide TOTP server capabilities for MFA infrastructure.
-* Databases - Generate dynamic, short-lived database credentials.
+* SSH -  supports Signed SSH Certificates and One-time SSH Passwords
+* Databases - Generate dynamic, short-lived database credentials. In one of our labs later you will generate dynamic credentials for a MySQL database from Vault.
 * Cloud credentials engines - Generate dynamic, short-lived cloud credentials for major clouds.
-* Active Directory - Vault can rotate AD passwords.
+* Active Directory - Passwords are rotated based on preset TTLs and can have a length configured to meet your needs.
 * Transit - Implement's Vault's encryption-as-a-service. Provides an API that can handle all your encryption and decryption needs, based on policy, so that you don't have to manage a complicated key infrastructure.
 
 ---
 name: enabling-secrets-engines
 # Enabling Secrets Engines
 
+.center[![:scale 60%](images/secret_path.png)]
+
 * Most Vault secrets engines need to be explicitly enabled.
 * This is done with the `vault secrets enable` command.
-* Each secrets engine has a default path.
-* Alternate paths can be specified to enable multiple instances:<br> `vault secrets enable -path=aws-east aws`
-* Custom paths must be specified in CLI commands and API calls:<br>
-`vault write aws-east/config/root`<br>
-instead of<br>
-`vault write aws/config/root`
+
 
 ???
-
-* Talk about enabling secrets engines.
-* Talk about default and custom paths
-* Explain the examples
+* As you can see, each secrets engine has a default path.
+* As an example of a well-architected K/V structure, shows a segment of a K/V store that was designed with a specific infrastructure team in mind. Remember that every K/V structure can differ depending on the needs of different teams and applications reading secrets from or writing secrets to Vault.
 
 ---
-name: vault-kv-engine
-# Vault's KV Secrets Engine
-* Vault's KV secrets engine actually has 2 versions:
-  * KV v1 (without versioning)
-  * KV v2 (with versioning)
-* In the second lab challenge, we will use the instance of the KV v2 engine that is automatically enabled for "Dev" mode Vault servers.
-* Vault does not enable any instances of the KV secrets engine for "Prod" mode servers.
-* So, you'll need to enable it yourself.
 
-???
-* We will use Vault's Key/Value (KV) engine in the second challenge of the "Vault Basics" Instruqt track that will be automatically enabled for the "Dev" mode server.
-* But we'll need to mount it ourselves for the "Prod" mode server.
-
----
 name: vault-kv-commands
 # KV Secrets Engine Commands
 * Use this command to mount an instance of the KV v2 secrets engine on the default path `kv`:<br>
@@ -104,7 +88,7 @@ name: vault-kv-commands
 
 ???
 
-* Describe how to mount an instance of the KV v2 secrets engine.
+* Run the version 2 of KV secrets engine which can retain a configurable number of secret versions. V1 does not allow virsioning.
 * Describe the various `vault kv` subcommands.
 
 ---
@@ -116,7 +100,9 @@ name: chapter-4-review-questions
 * Can an old version of a KV v2 secret be retrieved?
 
 ???
-* Let's review what we learned in this chapter.
+* Add the `-path=<path>` option and use `<path>`
+* KV V2 supports versioning of secrets.
+* 
 
 ---
 name: chapter-4-review-answers
@@ -130,4 +116,4 @@ name: chapter-4-review-answers
   * Yes. You will do this in Vault UI in the challenge.
 
 ???
-* Here are the answers to the review questions.
+* Start the lab from 1 to 4th chalenge

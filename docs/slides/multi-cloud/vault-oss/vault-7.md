@@ -10,7 +10,7 @@ count: false
 
 ???
 
-* Chapter 7 introduces Vault's Database secrets engine which can dynamically generate short-lived credentials for various databases.
+* Chapter 7 introduces Vault's Database secrets engine which can dynamically generate short-lived credentials for various databases. But, just before jumping into another Vault capability, let's step back and see who and for what perposes uses Vault.
 
 ---
 layout: true
@@ -21,19 +21,24 @@ layout: true
 ]
 
 ---
+name: vault-auth-methods
+
+.center[![:scale 80%](images/starbucks.jpeg)]
+
+???
+* Starbucks builds secret and identity management capabilities for 100k+ retail edge devices with HashiCorp Vault. 
+* In one of our latest overviews, Starbucks stated that short-lived, dynamic secrets are much easier to manage in a system like Vault. They simplify automation and remove a ton of operational overhead and risk.
+
+---
 name: dynamic-database-secrets
 # Dynamic Secrets: Protecting Databases
 
-* Database credentials are normally long-lived.
-* Vault's Database Secrets Engine dynamically generates short-lived credentials for databases.
-* It supports configuration of database connections and roles with different permissions and time to live (TTL) settings.
-* Users or applications request credentials for a specific role from Vault.
-* Vault manages the lifecycle of these credentials, automatically deleting them from the database when the TTL expires.
+.center[![:scale 100%](images/dynamic_creds.png)]
 
 ???
-* Vault's Database secrets engine supports dynamic generation of short-lived credentials (usernames and passwords) for databases.
-* This avoids storing long-lived or permanent credentials on app servers that can easily be compromised.
-* Short-lived credentials are much more secure since ex-employees and others are very unlikely to know the current values.
+* Vault's Database secrets engine supports dynamic generation of short-lived credentials (usernames and passwords) for databases. So you do not need to keep track and manage long lived credentials
+* By adopting this strategy, applications no longer need to hardcode a generic, long-lived service account to access the database. Each application or node can now generate on-demand credentials (username and password) when access is needed, and Vault revokes those credentials at the end of the TTL.
+
 
 ---
 name: database-engine-plugins
@@ -51,47 +56,6 @@ name: database-engine-plugins
 ???
 * The database secrets engine has out-of-the-box plugins for many databases.
 * Custom plugins can also be built.
-
----
-name: database-engine-workflow
-# Database Secrets Engine Workflow
-1. Enable an instance of the database secrets engine.
-1. Configure it with the correct plugin and connection URL, using a service account created for Vault.
-1. Create one or more roles with TTLs and SQL statements that specify required permissions.
-1. Applications and users can request credentials from Vault that are valid for the default TTL of the role, but can be renewed up to the max TTL.
-1. Vault automatically deletes expired credentials.
-1. If credentials are compromised, you can revoke them immediately.
-
-???
-* This slide lays out the basic workflow used for all of the Datbase secrets engine plugins.
-* All of the plugins work the same basic way.
-* A service account with permissions to manage users on the database server is required by each connection.
-* User creation and revocation SQL statements are specified for roles to determine the permissions og generated users within various databases.
-* Multiple connections and roles can be created for a single secrets engine instance to support connecting to multiple database servers with different levels of access.
-* The TTL settings can be tuned to suit your needs.
-
----
-name: sample-web-app
-# Lab Environment for Chapters 7 and 8
-
-* In the labs for chapters 7 and 8, we'll use a MySQL database server that runs on the Vault server.
-* We will also use a Python web application that stores its data in the MySQL database, but not until chapter 8.
-* In the next few slides, we outline many of the steps you will do in the lab.
-
-???
-* Discuss the lab environment.
-
----
-name: mysql-configuration-steps
-# Configuration Steps for MySQL
-1. Enable the database secrets engine on some path.
-1. Configure it with the MySQL plugin, connection URL, username, password, and allowed roles.
-1. Rotate the "root credentials": Vault modifies the password given in step 2 so that no humans know it anymore.
-1. Create roles that can create new credentials that are valid for a specific period of time.
-
-???
-* These are the basic steps for configuring the mysql plugin with Vault's database secrets engine.
-* The username and password set on the config path must already exist and have permission to manage users.
 
 ---
 name: mysql-config-connection
@@ -121,17 +85,6 @@ vault write -force lob_a/workshop/database/rotate-root/wsmysqldatabase
     * The initial username and password
     * The roles that can be used with this connection
 * We then rotated the password for the "root" user so that only Vault knows it.
-
----
-name: rotating-root-credentials
-class: compact
-# Rotating the Root Credentials for MySQL
-#### 1. You should **not** use the actual root user of the database (despite the reference to "root credentials"); instead, create a separate user with sufficient privileges to create users and to change its own password. This can be done by running `GRANT ALL PRIVILEGES on *.* to 'hashicorp'@'%' with grant option;` for the user.
-#### 2. The actual username you provide should be for host `'%'`. So, create a user like `'hashicorp'@'%'` rather than `'hashicorp'@'localhost'`.
-#### 3. If you don't want to use `'%'` as the host for the user, you can specify `root_rotation_statements` when writing to the path `<database>/config/<connection>`; for instance, you could set this to `"ALTER USER '{{username}}'@'localhost' IDENTIFIED BY '{{password}}';"`.
-
-???
-* We want to give some advice about rotating root credentials for the database secrets engine when using MySQL.
 
 ---
 class:compact
@@ -199,68 +152,6 @@ vault write sys/leases/lookup lease_id="<lease_id>"
 * It is also possible to determine the remaining lifetime of credentials.
 
 ---
-name: lab-database-challenge-1
-# 👩‍💻 Challenge 1: Enable the Engine
-* In this lab challenge, you'll enable the database engine for MySQL and rotate its root credentials.
-* You'll do this in the **Vault Dynamic Database Credentials** Instruqt track using the link provided by your instructor.
-* Instructions:
-  * Click the "Enable the Database Secrets Engine" challenge of the "Vault Dynamic Database Credentials" track.
-  * Then click the green "Start" button.
-  * Follow the challenge's instructions.
-  * Click the green "Check" button when finished.
-
-???
-* Instruct the students to do the "Enable the Database Secrets Engine" challenge of the "Vault Dynamic Database Credentials" track.
-* This challenge has them enable the Database secrets engine on the path "lob_a/workshop/database" and rotate the root credentials for it.
-
----
-name: lab-database-challenge-2
-# 👩‍💻 Challenge 2: Configure the Engine
-* In this lab, you'll configure a connection and two roles for the database.
-* Instructions:
-  * If the track does not do it for you, click the "Configure the Database Secrets Engine" challenge of the "Vault Dynamic Database Credentials" track.
-  * Then click the green "Start" button.
-  * Follow the challenge's instructions.
-  * Click the green "Check" button when finished.
-
-???
-* Instruct the students to do the "Configure the Database Secrets Engine" challenge of the "Vault Dynamic Database Credentials" track.
-* This challenge has them configure a connection and two roles for the engine they created in the previous challenge.
-* One role will have an initial TTL of 1 hour with a maximum TTL of 24 hours.
-* The other will have an initial TTL of 3 minutes with a maximum TTL of 6 minutes.
-
----
-name: lab-database-challenge-3
-# 👩‍💻 Challenge 3: Generate Credentials
-* In this lab, you'll generate and use credentials against both roles that you configured in the previous challenge.
-* Instructions:
-  * If the track does not do it for you, click the "Generate and Use Dynamic Database Credentials" challenge of the "Vault Dynamic Database Credentials" track.
-  * Then click the green "Start" button.
-  * Follow the challenge's instructions.
-  * Click the green "Check" button when finished.
-
-???
-* Instruct the students to do the "Generate and Use Dynamic Database Credentials" challenge of the "Vault Dynamic Database Credentials" track.
-* This challenge has them generate short-lived credentials for the MySQL database.
-* They will use the `mysql` utility to connect to the database with those credentials.
-* They will see that the credentials are deleted after 3 minutes and that logging into MySQL with them is blocked.
-
----
-name: lab-database-challenge-4
-# 👩‍💻 Challenge 4: Renew and Revoke Credentials
-* In this lab, you'll renew and revoke credentials generated by the database secrets engine.
-* Instructions:
-  * If the track does not do it for you, click the "Renew and Revoke Database Credentials" challenge of the "Vault Dynamic Database Credentials" track.
-  * Then click the green "Start" button.
-  * Follow the challenge's instructions.
-  * Click the green "Check" button when finished.
-
-???
-* Instruct the students to do the "Renew and Revoke Database Credentials" challenge of the "Vault Dynamic Database Credentials" track.
-* This challenge has them extend the liftime of generated credentials with Vault's `sys/leases/renew` endpoint.
-* They will also revoke credentials with Vault's `sys/leases/revoke` endpoint.
-
----
 name: chapter-7-review-questions
 # 📝 Chapter 7 Review
 * What is the main advantage of using Vault's database secrets engine?
@@ -269,7 +160,11 @@ name: chapter-7-review-questions
 * Can more than one role be used against a single connection?
 
 ???
-* Let's review what we learned in this chapter.
+* The credentials are short-lived and less likely to be compromised.
+* Vault deletes them from the database server.
+* No.  Custom plugins can be written.
+* Yes. This allows different apps to get credentials with different TTLs.
+
 
 ---
 name: chapter-7-review-answers
