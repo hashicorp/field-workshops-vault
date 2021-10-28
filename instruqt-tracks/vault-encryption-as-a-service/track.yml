@@ -169,12 +169,12 @@ challenges:
 
     You first need to determine the process ID (PID) of the running web app and stop it. The PID of the web app can be found by running this command:
     ```
-    ps -ef | grep app.py
+    ps -ef | grep app.py | grep -v grep
     ```
 
     It can then be stopped by running this command against the first process ID you see for the running application:<br>
     `kill -9 <PID>`<br>
-    Be sure to pick the PID from the line with the command, `python3 app.py`, rather than the line with the command, `grep --color=auto app.py`.
+    Be sure to pick the PID from the line with the command, `python3 app.py`.
 
     Now, you should edit the "config.ini" file on the "Config File" tab, doing the following:
 
