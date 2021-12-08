@@ -7,7 +7,7 @@ description: |-
   The Key Management secrets engine provides a consistent workflow for distribution and lifecycle management of cryptographic keys in various key management service (KMS) providers. It allows organizations to maintain centralized control of their keys in Vault while still taking advantage of cryptographic capabilities native to the KMS providers. (Encrypted S3 buckets as an example).
 
   This workflow is often called "Bring Your Own Key" or BYOK for short.
-icon: https://storage.googleapis.com/instruqt-frontend/assets/hashicorp/tracks/vault.png
+icon: https://storage.googleapis.com/instruqt-hashicorp-tracks/logo/vault.png
 tags:
 - Vault
 - ' AWS'

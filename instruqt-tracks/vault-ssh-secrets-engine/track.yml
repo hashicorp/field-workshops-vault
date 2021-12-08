@@ -8,7 +8,7 @@ description: |-
   This track walks you through setting up Vault SSH access in two ways:
   * [Signed SSH Certificates](https://www.vaultproject.io/docs/secrets/ssh/signed-ssh-certificates)
   * [One-time SSH Passwords](https://www.vaultproject.io/docs/secrets/ssh/one-time-ssh-passwords)
-icon: https://storage.googleapis.com/instruqt-frontend/assets/hashicorp/tracks/vault.png
+icon: https://storage.googleapis.com/instruqt-hashicorp-tracks/logo/vault.png
 tags:
 - vault
 - ssh

@@ -9,7 +9,7 @@ description: |-
   The Vault Transit secrets engine allows Vault to function as an encryption-as-a-service, encrypting and decrypting data stored outside of Vault.
 
   In this track, you will use the Transit secrets engine with a Python web app and a MySQL database. The latter is the same database used in the track, [Vault Dynamic Database Credentials](https://instruqt.com/hashicorp/tracks/vault-dynamic-database-credentials), but this track can be used independently of that one since its setup script configures Vault's Database secrets engine against the database.
-icon: https://storage.googleapis.com/instruqt-frontend/assets/hashicorp/tracks/vault.png
+icon: https://storage.googleapis.com/instruqt-hashicorp-tracks/logo/vault.png
 tags:
 - vault
 - secrets
