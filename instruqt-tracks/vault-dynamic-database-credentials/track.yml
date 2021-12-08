@@ -9,7 +9,7 @@ description: |-
   The Vault Database secrets engine lets you generate dynamic, time-bound credentials for many different databases.
 
   In this track, you will do this for a MySQL database that is running on the same server as the Vault server itself.
-icon: https://storage.googleapis.com/instruqt-frontend/assets/hashicorp/tracks/vault.png
+icon: https://storage.googleapis.com/instruqt-hashicorp-tracks/logo/vault.png
 tags:
 - vault
 - database

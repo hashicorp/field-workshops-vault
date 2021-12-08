@@ -14,7 +14,7 @@ description: |-
   Therefore, the Transform Secrets Engine's FPE transformation may not meet the governance, risk and compliance (GRC) strategy they are looking for due to the use of reversible cryptography to perform FPE.
 
   In this lab, you will use the Transform Secrets Engine with an example Golang application and external Postgres database.
-icon: https://storage.googleapis.com/instruqt-frontend/assets/hashicorp/tracks/vault.png
+icon: https://storage.googleapis.com/instruqt-hashicorp-tracks/logo/vault.png
 tags:
 - vault
 - adp

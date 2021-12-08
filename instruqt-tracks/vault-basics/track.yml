@@ -10,7 +10,7 @@ description: |-
   Vault tightly controls access to secrets by authenticating against trusted sources of identity such as Active Directory, LDAP, Kubernetes, CloudFoundry, and cloud platforms. Vault enables fine grained authorization of which users and applications are permitted access to secrets.
 
   This track will introduce you to the open source version of Vault, starting with the Vault CLI and running a Vault dev server and moving on to running a Vault production server, enabling the KV secrets engine and Userpass auth method, and using Vault policies to restrict which secrets different users can access.
-icon: https://storage.googleapis.com/instruqt-frontend/assets/hashicorp/tracks/vault.png
+icon: https://storage.googleapis.com/instruqt-hashicorp-tracks/logo/vault.png
 tags:
 - vault
 - basics
