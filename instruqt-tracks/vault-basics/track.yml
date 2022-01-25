@@ -1,6 +1,6 @@
 slug: vault-basics
 id: likpqjspv5pp
-version: 1.8.3
+version: 1.9.2
 type: track
 title: Vault Basics
 teaser: Learn how to setup and run a Vault server and manage its secrets.
@@ -432,5 +432,4 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 900
-checksum: "10671294877937963932"
-_: ""
+checksum: "13552750911339021265"

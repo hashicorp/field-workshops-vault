@@ -1,6 +1,6 @@
 slug: vault-aws-dynamic-secrets
 id: avjxhl9qqgau
-version: 1.8.3
+version: 1.9.2
 type: track
 title: AWS Dynamic Secrets with Vault
 teaser: Generate AWS credentials dynamically based on IAM policies.
@@ -308,5 +308,4 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 300
-checksum: "17227856681745187198"
-_: ""
+checksum: "6452054047122448242"
