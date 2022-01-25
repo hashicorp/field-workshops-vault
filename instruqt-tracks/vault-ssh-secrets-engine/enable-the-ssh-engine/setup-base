@@ -9,7 +9,7 @@ sudo apt install sshpass
 ###########
 # Set Vault Version
 ###########
-vault_version="1.8.3"
+vault_version="1.9.2"
 
 ###########
 # Install Vault Client

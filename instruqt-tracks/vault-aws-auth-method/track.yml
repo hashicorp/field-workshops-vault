@@ -1,6 +1,6 @@
 slug: vault-aws-auth-method
 id: fe9wq4sopgrc
-version: 1.8.3
+version: 1.9.2
 type: track
 title: AWS Auth Method for Vault
 teaser: Authenticate to Vault using the AWS Auth Method for IAM.
@@ -92,7 +92,8 @@ challenges:
   id: 4fnz9dgdhnfd
   type: challenge
   title: Configure the AWS IAM Auth Method
-  teaser: Configures the credentials required to perform successful API calls to AWS from Vault.
+  teaser: Configures the credentials required to perform successful API calls to AWS
+    from Vault.
   notes:
   - type: text
     contents: |-
@@ -195,7 +196,8 @@ challenges:
   id: cgaexaj1xjpe
   type: challenge
   title: Log In Using the AWS IAM Auth Method
-  teaser: Generate a signed AWS API request that will validate against AWS and log you into Vault.
+  teaser: Generate a signed AWS API request that will validate against AWS and log
+    you into Vault.
   notes:
   - type: text
     contents: |-
@@ -319,5 +321,4 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 300
-checksum: "2139607513904076653"
-_: ""
+checksum: "2414010682247345749"

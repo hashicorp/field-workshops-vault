@@ -1,5 +1,6 @@
 slug: vault-ssh-secret-engine
 id: tkpmtwbzl1d8
+version: 1.9.2
 type: track
 title: Vault SSH Secret Engine
 teaser: Leverage Vault to secure SSH access to machines
@@ -16,6 +17,7 @@ tags:
 owner: hashicorp
 developers:
 - rcassidy@hashicorp.com
+- roger@hashicorp.com
 private: true
 published: true
 challenges:
@@ -26,7 +28,11 @@ challenges:
   teaser: Enable Vault's SSH secrets engine for signing keys.
   notes:
   - type: text
-    contents: In this challenge we will enable Vault's SSH engine for signing keys. The signed SSH certificates option is the simplest and most powerful in terms of setup complexity and in terms of being platform agnostic. By leveraging Vault's CA capabilities and functionality built into OpenSSH, clients can SSH into target hosts using their own local SSH keys.
+    contents: In this challenge we will enable Vault's SSH engine for signing keys.
+      The signed SSH certificates option is the simplest and most powerful in terms
+      of setup complexity and in terms of being platform agnostic. By leveraging Vault's
+      CA capabilities and functionality built into OpenSSH, clients can SSH into target
+      hosts using their own local SSH keys.
   assignment: |-
     First we need to enable the SSH secrets engine within Vault. Vault is already deployed and your token is configured as an environment variable.
 
@@ -74,7 +80,8 @@ challenges:
   id: lijvfy6qcihz
   type: challenge
   title: Sign Key with SSH Engine and SSH to Target
-  teaser: Use the SSH secrets engine set up in the previous challenge to sign a key and SSH to a target machine.
+  teaser: Use the SSH secrets engine set up in the previous challenge to sign a key
+    and SSH to a target machine.
   notes:
   - type: text
     contents: |-
@@ -252,5 +259,4 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 1200
-checksum: "15607773902534503145"
-_: ""
+checksum: "10378879311439320648"

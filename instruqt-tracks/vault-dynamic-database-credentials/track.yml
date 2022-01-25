@@ -1,6 +1,6 @@
 slug: vault-dynamic-database-credentials
 id: hbtxgbf9n1nt
-version: 1.8.3
+version: 1.9.2
 type: track
 title: Vault Dynamic Database Credentials
 teaser: |
@@ -385,5 +385,4 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 1200
-checksum: "2947793928319853135"
-_: ""
+checksum: "14731397102684341420"
