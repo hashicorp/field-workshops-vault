@@ -41,9 +41,9 @@ rm -rf /root/field-workshops-vault/
 
 /usr/local/bin/helm install pq \
   --set auth.database=vault_go_demo,auth.postgresPassword=MySecretPassW0rd \
-    bitnami/postgresql 
+    bitnami/postgresql --version 11.0.2
 
-/usr/local/bin/helm install vault hashicorp/vault -f /root/helm/vault-values.yaml
+/usr/local/bin/helm install vault hashicorp/vault -f /root/helm/vault-values.yaml --version 0.19.0
 
 sleep 60s
 
