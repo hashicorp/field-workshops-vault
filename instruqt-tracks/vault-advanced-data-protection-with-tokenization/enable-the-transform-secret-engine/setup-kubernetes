@@ -43,6 +43,8 @@ rm -rf /root/field-workshops-vault/
   --set auth.database=vault_go_demo,auth.postgresPassword=MySecretPassW0rd \
     bitnami/postgresql --version 11.0.2
 
+kubectl wait --timeout=180s --for=condition=Ready $(kubectl get pod pq-postgresql-0 -o name)
+
 /usr/local/bin/helm install vault hashicorp/vault -f /root/helm/vault-values.yaml --version 0.19.0
 
 sleep 60s
