@@ -1,5 +1,5 @@
 slug: vault-advanced-data-protection-with-tokenization
-id: pm1e6okdgbx3
+id: psrddm4vkhco
 version: 0.0.1
 type: track
 title: Vault ADP with Tokenization
@@ -26,10 +26,11 @@ private: true
 published: true
 challenges:
 - slug: enable-the-transform-secret-engine
-  id: lz6iiyy29zf0
+  id: s55awj2sawb5
   type: challenge
   title: Enable the Transform (Tokenization) Secrets Engine
-  teaser: In this first challenge, we will enable and configure Vault's Transform Secrets Engine with data tokenization.
+  teaser: In this first challenge, we will enable and configure Vault's Transform
+    Secrets Engine with data tokenization.
   notes:
   - type: text
     contents: |-
@@ -77,13 +78,14 @@ challenges:
   difficulty: basic
   timelimit: 10000
 - slug: test-the-web-app
-  id: 4av0scyuvoyj
+  id: lod4msccjxwj
   type: challenge
   title: Test the web app
   teaser: Determine how our application works and what data to tokenize
   notes:
   - type: text
-    contents: In this challenge, we will test our current web app to determine what customer PII data needs to be tokenized for compliance.
+    contents: In this challenge, we will test our current web app to determine what
+      customer PII data needs to be tokenized for compliance.
   assignment: |-
     The web app can be viewed on the "Web App" tab. You may want to click the icon in the upper right corner of the tabs area to hide the assignment window so that you can see the entire UI of the web app. Click it again to display the assignment window.
     The web app has two sections:
@@ -112,13 +114,14 @@ challenges:
   difficulty: basic
   timelimit: 10000
 - slug: configure-the-transform-secret-engine
-  id: hzyumbmovnyy
+  id: d0nnhpyhy98o
   type: challenge
   title: Configure the Transform (Tokenization) Secrets Engine
   teaser: Specify a role and transformation to Tokenize user SSNs.
   notes:
   - type: text
-    contents: In this challenge, we will configure the Transform Secrets Engine for use with our application.
+    contents: In this challenge, we will configure the Transform Secrets Engine for
+      use with our application.
   assignment: |-
     First, create a role in Vault for our application. Roles are used by Vault ACLs to restrict access to the underlying transformations. (See below for an example).
     ```
@@ -176,7 +179,7 @@ challenges:
   difficulty: basic
   timelimit: 10000
 - slug: review-app-integration
-  id: 2ms5atm2xpxx
+  id: 12zzmndu4uxi
   type: challenge
   title: Review our application code
   teaser: Leverage native libraries to integrate with HashiCorp Vault
@@ -285,7 +288,7 @@ challenges:
   difficulty: basic
   timelimit: 10000
 - slug: launch-the-updated-app
-  id: xymeoyrbezvl
+  id: 7flull31fntx
   type: challenge
   title: Launch the updated application
   teaser: Deploy the updated app to securely tokenizen customer SSNs (PII data).
@@ -337,4 +340,4 @@ challenges:
     port: 8200
   difficulty: basic
   timelimit: 10000
-checksum: "15911573798874290156"
+checksum: "348999978444852678"
