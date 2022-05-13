@@ -90,7 +90,7 @@ Go through this track start to finish and make sure you understand all the chall
 
 The following track is optional and focuses on Tokenization.
 
-https://play.instruqt.com/hashicorp/tracks/vault-advanced-data-protection-with-tokenization
+https://play.instruqt.com/hashicorp/tracks/vault-advanced-data-protection-with-transform
 
 Go through this track start to finish and make sure you understand all teh challenges. This track covers Vault's KMIP secret engine.
 
