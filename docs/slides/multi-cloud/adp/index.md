@@ -25,7 +25,7 @@ protection capabilities to enable the Zero Trust security model.
 layout: true
 
 .footer[
-- Copyright © 2021 HashiCorp
+- Copyright © 2022 HashiCorp
 - ![:scale 100%](images/HashiCorp_Icon_Black.svg)
 ]
 
@@ -275,12 +275,15 @@ background-image: url(images/HashiCorp-Title-bkg.jpeg)
 # Chapter 2:
 ## Basic Operations
 
+???
+Chapter 2 focuses on interacting with Vault
+
 ---
 # Interacting with Vault
 Vault provides several mechanisms for interacting with it:
-* The Vault CLI
-* The Vault GUI
-* The Vault API
+* The Vault [CLI](https://www.vaultproject.io/docs/commands/index.html)
+* The Vault [GUI](https://learn.hashicorp.com/vault/getting-started/ui)
+* The Vault [API](https://www.vaultproject.io/api-docs/index/)
 
 ---
 # Basic Vault CLI Commands
@@ -291,6 +294,12 @@ Vault provides several mechanisms for interacting with it:
 * **`vault write`** is used to write secrets to Vault<br><br>
 The **`-h`**, **`-help`**, **`--help`** flags can be added to get help for any Vault CLI command
 
+???
+
+* We're going to be using the CLI in our hands-on portions, so some useful
+commands to know:
+* (go through each of these)
+
 ---
 # Running a Production Vault Server
 Running a Vault server in “Prod” mode involves multiple steps
@@ -299,6 +308,20 @@ Running a Vault server in “Prod” mode involves multiple steps
 * Initialize the server to get unseal keys and an initial root token
 * Unseal the Vault server with the unseal keys
 
+???
+
+* You can run a local Vault in Dev mode, for quick testing
+* To run a Vault server in production mode
+  * You define all your configuration in config files
+  * You run the command `vault server`
+  * A brand new Vault with nothing inside it needs to be initialized, that is we
+  tell it to create a new master encryption key, some unseal key shards that can
+  be combined to derive that encryption key, and a root token with full admin
+  access to do the initial setup
+  * Vault starts in what we call a sealed state, which just means that it does
+  not know the encryption key, so we need to provide some of those unseal key
+  shards
+
 ---
 # Initializing Vault Clusters
 * Recall that a Vault cluster runs multiple Vault servers
@@ -306,6 +329,21 @@ Running a Vault server in “Prod” mode involves multiple steps
 * This is done with the **`vault operator init`** command
 * The number of key shares and the key threshold can be specified with the **`key-shares`** and **`key-threshold`** CLI options
 * The command returns the unseal keys and initial root token for the cluster
+
+???
+
+* A cluster of Vault servers has many Vault servers
+* We only need to initialize the cluster itself once
+* You run the `vault operator init` command against one of the servers
+* This has some parameters you can specify to define how many key shares you
+want to generate, and how many of them need to be combined to derive the
+encryption key. The idea is you would give one of these to various people, so
+you need several people to come together to unseal Vault.
+* Once you run this command, it'll give you that initial root token, as well as
+all the unseal key shards. This is obviously not ideal, as then one person knows
+all of these, so you also have options when intializing to specify PGP keys to
+encrypt these with. In this way, you guarantee that only one person can access
+each unseal key share.
 
 ---
 class: title, shelf, no-footer, fullbleed
