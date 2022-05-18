@@ -86,6 +86,8 @@ https://play.instruqt.com/hashicorp/tracks/vault-dynamic-database-credentials
 
 Go through this track start to finish and make sure you understand all the challenges. This track covers Vault's database secrets engine.
 
+https://play.instruqt.com/hashicorp/tracks/vault-advanced-data-protection-with-transform
+
 Go through this track start to finish and make sure you understand all the challenges. This track covers Vault's encryption as a service capabilities as implemented in its Transit and Transform Secret Engines.
 
 The following track is optional and focuses on Tokenization.
