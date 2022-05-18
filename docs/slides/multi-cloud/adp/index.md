@@ -18,6 +18,9 @@ background-image: url(images/HashiCorp-Title-bkg.jpeg)
 
 ???
 
+This workshop introduces students to Vault and some of its more advanced data
+protection capabilities to enable the Zero Trust security model.
+
 ---
 layout: true
 
@@ -25,6 +28,18 @@ layout: true
 - Copyright © 2021 HashiCorp
 - ![:scale 100%](images/HashiCorp_Icon_Black.svg)
 ]
+
+---
+name: Link-to-Slide-Deck
+# The Slide Deck
+<br><br>
+### Follow along on your own computer at this link:
+
+https://hashicorp.github.io/field-workshops-vault/slides/multi-cloud/adp
+
+???
+
+The link to this slide deck
 
 ---
 name: intros
@@ -35,6 +50,8 @@ name: intros
 * Secrets Management Experience
 
 ???
+
+* Use this slide to introduce yourself, give a little bit of your background story, then go around the room and have all your participants introduce themselves.
 
 ---
 name: prerequisites
@@ -49,6 +66,9 @@ name: prerequisites
 
 ???
 
+* This workshop assumes some basic familiarity with Vault, but we will explain
+everything as we go so don't worry too much
+
 ---
 name: table of contents
 # Table of Contents
@@ -58,6 +78,8 @@ name: table of contents
 * Filesystem/Database/Hardware Encryption as a Service
 
 ???
+
+* We're going to be covering the following topics...
 
 ---
 name: environment
@@ -74,6 +96,10 @@ name: environment
 * Your instructor will provide the URLs for the tracks.
 
 ???
+
+* We'll have some hands-on exercises to go through
+* Ask if everyone has the Instruqt invite links, and send out new invites if
+needed
 
 ---
 name: prologue
@@ -99,6 +125,9 @@ class: shelf, no-footer
 
 ???
 
+* Traditional security models were built on the idea of perimter based security
+* (go through each point on the slide)
+
 ---
 name: securing
 class: col-2
@@ -111,6 +140,11 @@ With each new cloud, network topologies become more complex
 
 ???
 
+* Moving to the multi-cloud or hybrid environments means that fixed perimeter no
+longer exists
+* Networks are more complicated, and with access configured via APIs, it doesn't
+take much to accidentally grant access to the wrong people
+
 ---
 name: jit
 class: center, middle
@@ -118,6 +152,11 @@ class: center, middle
 ![](images/slide10.png)
 
 ???
+
+* Rather than relying on fixed attributes like IP addresses, we need some form
+of Identity-based access, where we verify something's identity before letting it
+access things
+* Four parts to that (go over those on slide)
 
 ---
 name: jit
@@ -127,12 +166,20 @@ class: center, middle
 
 ???
 
+* We are mostly going to be focusing on that first problem today, how we can
+identify machines, and grant access to secrets and other means of data protection
+
 ---
 # Applied Zero Trust
 Adopting a Zero Trust model requires technical capabilities that...
 * Never Trust, Always Verify: Every user or machine must authenticate and be explicitly authorized for access to credentials, APIs, VMs, databases, etc.
 * Principle of Least Privilege: Every user or machine accesses only the resources it requires for a defined purpose and time period.
 * Assumed Breach: Continuously defend and encrypt critical PII and company data assuming that your network has been breached.
+
+???
+
+* We'll be discussing that in the context of of Zero Trust
+* (go over points on slide)
 
 ---
 class: title, shelf, no-footer, fullbleed
@@ -143,6 +190,8 @@ background-image: url(images/HashiCorp-Title-bkg.jpeg)
 
 ???
 
+Chapter 1 introduces Vault
+
 ---
 # Problems with the Traditional Security Model
 - IP Address based rules
@@ -151,6 +200,12 @@ background-image: url(images/HashiCorp-Title-bkg.jpeg)
   - Difficult to rotate, decommission, and determine who has access
   - Revoking compromised credentials can break entire application stacks
 
+???
+
+* Earlier we discussed the traditional perimeter-based security model. Here are
+some problems with it:
+* (go over each of these points)
+
 ---
 class: center, middle
 # Identity Based Security
@@ -158,6 +213,11 @@ class: center, middle
 **[Identity Based Security and Low Trust Networks](https://www.hashicorp.com/identity-based-security-and-low-trust-networks)**
 
 ???
+* Here we see that Vault has multiple means of authenticating users and applications with its Auth Methods.
+* Vault can manage many types of secrets and excels at generating short-lived, dynmamic secrets.
+* Vault's ACL policies are associated with tokens that users and applications use to access secrets after authenticating.
+* Tokens can only read/write secrets that its policies allow.
+* Click on the link to read a white paper about identity-based security in low trust networks.
 
 ---
 # Identity Based Security
@@ -169,17 +229,30 @@ Vault was designed to address the security needs of modern applications. It diff
   * Ties all actions back to identity
 * Credentials and Entities can be easily invalidated to reduce blast radius
 
+???
+* This slide discusses how Vault is designed for modern applications.
+* Mapping that onto the principles of zero trust... (go over each point)
+
 ---
 class: middle, center
 # Vault Architecture - High Availability
 Integrated Raft Storage
 ![:scale 90%](images/slide18.png)
 
+???
+* Vault allows multiple servers to be combined in a highly available cluster within a single cloud region or physical data center.
+* In this way, if a availability zone goes down, you still have a quorum of Vault servers available to handle requests
+
 ---
 class: middle, center
 # Vault Architecture - Multi-Region
 Replication
 ![:scale 65%](images/slide19.png)
+
+???
+* Vault Enterprise supports replication between clusters across regions and data centers.
+* It supports Disaster Recovery and Performance replication.
+* These can be used together.
 
 ---
 # Chapter 1 Review
@@ -190,6 +263,10 @@ Replication
 * It can authenticate users and applications against many identity systems.
 * It supports just-in-time generation of short-lived secrets.
 * It runs in highly available clusters that can be replicated across regions.
+
+???
+
+* To review... (go through points on slide)
 
 ---
 class: title, shelf, no-footer, fullbleed
