@@ -21,6 +21,8 @@ background-image: url(images/HashiCorp-Title-bkg.jpeg)
 This workshop introduces students to Vault and some of its more advanced data
 protection capabilities to enable the Zero Trust security model.
 
+We will also touch on Consul and Boundary, and where they fit into the Zero Trust model
+
 ---
 layout: true
 
