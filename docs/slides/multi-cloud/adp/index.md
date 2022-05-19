@@ -352,6 +352,10 @@ background-image: url(images/HashiCorp-Title-bkg.jpeg)
 # Chapter 3:
 ## Vault Auth Methods and Static Secrets
 
+???
+
+Chapter 3 focuses on Vault authentication methods and secrets
+
 ---
 class: middle, center
 # Vault Authentication Methods
@@ -359,11 +363,22 @@ class: middle, center
 Vault acts as an Identity Broker for the underlying platform or cloud.<br>
 Use the right tool for the job to authenticate your clients!
 
+???
+* Auth methods are how your users and apps and users verify their identity.
+* In the same way you might present some kind of valid ID at the hotel check-in desk, users and apps provide some kind of credential or token to authenticate.
+* You can enable multiple auth methods and multiple instances of the same auth method.
+
 ---
 class: middle, center
 # Vault Secrets Engines
 ![:scale 50%](images/slide28.png)
 Vault includes many different Secrets Engines
+
+???
+* Use this screenshot from the Vault UI to talk about Vault's many secrets engines but note that the next slide lists them too.
+* Some are for storing static secrets.
+* Others can dynamically generate secrets such as database and cloud credentials.
+* There is even one called "Transit" that provides encryption as a service.
 
 ---
 # KV Secrets Engine Commands
@@ -376,6 +391,11 @@ Vault includes many different Secrets Engines
   * `vault kv delete` deletes a secret at a specified path
 * Other `vault kv` subcommands operate on versions of KV v2 secrets
 
+???
+
+* Describe how to mount an instance of the KV v2 secrets engine.
+* Describe the various `vault kv` subcommands.
+
 ---
 class: title, shelf, no-footer, fullbleed
 background-image: url(images/HashiCorp-Title-bkg.jpeg)
@@ -383,12 +403,19 @@ background-image: url(images/HashiCorp-Title-bkg.jpeg)
 # Lab 1:
 ## Vault Basics
 
+???
+These slides introduce the Vault Basics track.
+
 ---
 # Doing Labs with Instruqt
 * Instruqt is the platform used for HashiCorp's workshops
 * Instruqt labs are run in “tracks” that are divided into “challenges”
 * If you’ve never used Instruqt before, start with this **[tutorial](https://play.instruqt.com/instruqt/tracks/getting-started-with-instruqt)**
 * Otherwise, you can skip to the next slide
+
+???
+* We'll be using the Instruqt platform for labs in this workshop.
+* Don't worry if you've never used it before: there is an easy tutorial that you can run through in 5-10 minutes.
 
 ---
 # Lab 1: Vault Basics
@@ -398,12 +425,19 @@ Lab: **Vault Basics**
 
 Your instructor will provide the URL for the track.
 
+???
+* Now, you can try running some Vault CLI commands yourself in the first challenge of our first Instruqt track in this workshop.
+
 ---
 class: title, shelf, no-footer, fullbleed
 background-image: url(images/HashiCorp-Title-bkg.jpeg)
 
 # Chapter 4:
 ## Dynamic Secrets
+
+???
+
+* This chapter introduces Vault's Database secrets engine which can dynamically generate short-lived credentials for various databases.
 
 ---
 class: title-slide, center
@@ -417,17 +451,46 @@ class: middle, center
 Administrators obtained static, long-lived credentials and manually configured applications
 ![:scale 100%](images/slide35.png)
 
+???
+
+* Traditionally, credentials needed by applications were static
+* An admin user, for example a DBA, would create a new user on the database then
+hand that password over to the application developer
+* The dev would then configure their application with these static credentials
+
 ---
 class: middle, center
 # Static Secret Management - Scaling
 You shouldn’t share AD credentials with your teammates, so why do so with machines and services?
 ![:scale 60%](images/slide36.png)
 
+???
+
+* If you have 100 different machines, then using the static method means your
+DBA now needs to generate 100 different users and passwords, and your dev needs
+to configure each application instance individually
+* Practically, that wouldn't happen, because it's time consuming so all these
+application instances would use a shared password
+* Let's think about some of the challenges with that
+ * What happens if we need to rotate this password? Well now we've got 100 apps
+ we need to update with the new password
+ * So we don't rotate them very often, because it's effort to update everywhere
+ * If you're lucky, this is a planned rotation. If you're unlucky, this password
+ could have been compromised in a breach
+
 ---
 class: middle, center
 # Dynamic Secrets in Action
 Unique, short-lived, just-in-time credentials for each application instance
 ![:scale 80%](images/slide37.png)
+
+???
+
+* With dynamic secrets, you can have one secret per application, which is
+short-lived
+* So if an individual instance is breached, the other 99 are unaffected
+* And any credentials which are compromised are only valid for a short period of
+time
 
 ---
 # Dynamic Secrets: Protecting Databases
@@ -437,6 +500,11 @@ Unique, short-lived, just-in-time credentials for each application instance
 * Users or applications request credentials for a specific role from Vault
 * Vault manages the lifecycle of these credentials, automatically deleting them from the database when the TTL expires
 * Auditing is now improved as each application instance has a unique credential
+
+???
+* As an example, Vault's Database secrets engine supports dynamic generation of short-lived credentials (usernames and passwords) for databases.
+* This avoids storing long-lived or permanent credentials on app servers that can easily be compromised.
+* Short-lived credentials are much more secure since ex-employees and others are very unlikely to know the current values.
 
 ---
 class: col-2
@@ -455,6 +523,10 @@ class: col-2
 * And more (New plugins are always being added!)
 <div>
 
+???
+* The database secrets engine has out-of-the-box plugins for many databases.
+* Custom plugins can also be built.
+
 ---
 # Dynamic Secrets Engine: Workflow
 1. Enable an instance of the database secrets engine
@@ -464,10 +536,26 @@ class: col-2
 1. Vault automatically deletes expired credentials from the database
 1. If credentials are compromised, administrators can revoke them immediately. (Break glass)
 
+???
+* This slide lays out the basic workflow used for all of the Datbase secrets engine plugins.
+* All of the plugins work the same basic way.
+* A service account with permissions to manage users on the database server is required by each connection.
+* User creation and revocation SQL statements are specified for roles to determine the permissions og generated users within various databases.
+* Multiple connections and roles can be created for a single secrets engine instance to support connecting to multiple database servers with different levels of access.
+* The TTL settings can be tuned to suit your needs.
+
 ---
 class: middle, center
 # Dynamic Secrets Engine: Workflow
 ![:scale 60%](images/slide41.png)
+
+???
+
+* To make use of this, you define a role in Vault, which determines how new
+database users or roles are created. This example has a MySQL statement
+* When reading from Vault, Vault will run that command on the database, then
+return the credentials to the user, along with a lease which defines how long
+those credentials are valid for
 
 ---
 # Other Dynamic Secrets Engines
@@ -477,6 +565,11 @@ class: middle, center
 * Active Directory / LDAP service accounts (Dynamic, check-in/check-out)
 * Consul Tokens
 * TFE Tokens
+
+???
+
+* Vault can also generate other types of dynamic secrets
+* (go through examples)
 
 ---
 class: title, shelf, no-footer, fullbleed
@@ -493,6 +586,9 @@ Lab: **Vault Dynamic Database Credentials**
 
 Your instructor will provide the URL for the track.
 
+???
+* Discuss the lab environment.
+
 ---
 # Configuration Steps for MySQL
 1. Enable the database secrets engine on some path in Vault
@@ -500,12 +596,20 @@ Your instructor will provide the URL for the track.
 1. Rotate the “root credentials”: Vault modifies the password given in step 2 so that no humans know it anymore
 1. Create roles that can create new credentials that are valid for a specific period of time
 
+???
+* These are the basic steps for configuring the mysql plugin with Vault's database secrets engine.
+* The username and password set on the config path must already exist and have permission to manage users.
+
 ---
 class: title, shelf, no-footer, fullbleed
 background-image: url(images/HashiCorp-Title-bkg.jpeg)
 
 # Chapter 5:
 ## Encryption as a Service
+
+???
+
+* This chapter introduces Vault's Transit and Transform secrets engines which function as Vault's Encryption-as-a-Service (EaaS).
 
 ---
 # Applied Zero Trust
@@ -517,6 +621,17 @@ background-image: url(images/HashiCorp-Title-bkg.jpeg)
   * Consolidated workflows for hardware (KMIP) encryption solutions
   * Fips 140-2 (140-3) Compliance
 
+???
+
+* Thinking back to what we're trying to acheive here with Zero Trust
+ * We want to assume that we've already been breached
+ * And therefore, we need to make sure critical data is protected
+ * Ponemon Institute estimates an average of 191 days before a breach is even
+ detected
+* So organizations want to ensure all critical data is encrypted, Key Management
+Systems are available everywhere in a hybrid cloud, hardware encryption is
+available, and compliance is ensured where needed
+
 ---
 # Data Breaches: The Application Layer
 * With cloud adoption, the traditional approach to securing customer data breaks down
@@ -524,32 +639,80 @@ background-image: url(images/HashiCorp-Title-bkg.jpeg)
 * They are breaking into organizations via phishing attacks, exposed networks, and supply chain attacks
 * Once inside the network they are escalating credentials and gaining privileged access to databases and systems
 
+???
+
+* With a traditional on-prem datacenter, you'd be worried about securing your
+perimeter and preventing people from stealing the physical hardware
+* These days, that's not what's going on. Threat models have changed, and we're
+dealing with phishing attacks, exposed networks, supply chain attacks, and other
+ways of breaking into a network.
+* Once inside, they find ways of pivoting from their initial vulnerability and
+figuring out ways to elevate permissions, maybe gaining access to privilidged
+databases and other systems.
+
 ---
 class: col-2
 # Compromised DBA Creds
 Breaches are commonly carried out via attackers who have gained escalated credentials. They were then able to bypass TDE as an example. Credit card numbers are exposed in plaintext
 ![:scale 100%](images/slide49.png)
 
+???
+
+* Once the attackers are in, they can bypass things like Transparent Data
+Encryption, and now all these credit card numbers are available in plaintext
+* Let's go shopping!
+
 ---
 # Vault's Solutions
 1. Vault’s Transform And Transit Secrets Engines provide Encryption-as-a-Service
 2. Developers use Vault to encrypt and decrypt data outside of Vault
 
+???
+
+* So we want to be assuming that people are already snooping around in our DBs
+* With Vault's Encryption as a Service capabilities, applications can encrypt
+data before it's stored outside of Vault
+
 ---
 # Solution 1:Transit Secrets Engine
 .center[![:scale 90%](images/slide53.png)]
+
+???
+* There are two means of doing this, the first of which is the Transit secrets engine.
+* It provides an encryption API & service that are secure, accessible and easy to implement.
+* Instead of forcing developers to learn cryptography, we present them with a familiar API that can be used to encrypt and decrypt data that is stored outside of Vault.
 
 ---
 # Example with Encryption Enabled
 .center[![:scale 90%](images/Transit_enabled.png)]
 
+???
+
+* If an attacker manages to get access to the encrypted data, they will only see ciphertext that is useless without Vault.
+
+
+
 ---
 # Solution 2: Transform Secrets Engine
 .center[![:scale 90%](images/slide50.png)]
 
+???
+
+* The transform allows for more advanced encryption methods, for example
+Format Preserving Encryption.
+* In this example, we pass in a credit card number, and we get back something
+which still looks like a credit card number. That can then be stored in a DB
+or external system without any change to the schema
+
 ---
 # Transform Data Masking
 .center[![:scale 90%](images/masking.png)]
+
+???
+
+* For cases where some people need access to some of the data, but not all of it
+masking is available. As an example, this helps in cases where you need to show
+somebody the last 4 digits of a credit card number
 
 ---
 # Transform (& Transit) Engine Benefits:
@@ -561,6 +724,14 @@ Breaches are commonly carried out via attackers who have gained escalated creden
 * The Transform Secrets engine is Format Preserving. Thus, it does not require any changes to database structure
   * i.e. 16 digits CCNs are encrypted as 16 digit ciphertext
 
+???
+
+* Vault's Transit and Transform Engines provides developers a well-architected EaaS API so that they don't have to become encryption or cryptography experts.
+* It provides centralized key management, with standard APIs
+* It ensures that only approved ciphers and algorithms are used.
+* It supports automated key rotation and re-wrapping.
+* And with both, any attackers in your DB will only see cyphertext
+
 ---
 class: col-2
 # Tokenization
@@ -570,13 +741,36 @@ class: col-2
 ]
 .center[![:scale 50%](images/tokenization_high_level.png)]
 
+???
+
+* There are other use-cases where it's not important to be able to decrypt the
+database, but you still need to be able to store sensitive data
+* This is where the Tokenization comes in
+* This allows you to store sensitive data in a way that is not directly
+reversible. As in, it's not cyphertext that can be decrypted, and it's not
+a hash that can be brute forced.
+* Tokenized data has metadata that can be queried so you can identify what it is
+and what it's for without needing to view the original sensitive data
+
 ---
 # Tokenization (Diagram)
 .center[![:scale 90%](images/tokenization_workflow.png)]
 
+???
+
+* As an example:
+ * We send a credit card number to Vault, it is stored securely within Vault
+ and a token is returned in reference to it
+ * This token is then what you store in the database
+
 ---
 # Transform vs. Transit vs. Tokenization
 .center[![:scale 60%](images/ADP_matrix.png)]
+
+???
+
+* Which of these methods you use depends on your use-case
+* (go through features)
 
 
 ---
@@ -595,6 +789,10 @@ In this next Lab we’ll use a web application that leverages both the Transform
 Lab: **Advanced Data Protection with Transform**
 
 Your instructor will provide the URL for the track.
+
+???
+* Discuss the web app we will be using in this chapter's lab.
+* Indicate that we will first run without Vault and then with it.
 
 ---
 # Lab 3 Part 2 (Optional)
