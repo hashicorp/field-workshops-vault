@@ -87,7 +87,7 @@ challenges:
     hostname: vault-server
     port: 8200
   difficulty: basic
-  timelimit: 300
+  timelimit: 1000
 - slug: configure-aws-auth-method
   id: 4fnz9dgdhnfd
   type: challenge
@@ -191,7 +191,7 @@ challenges:
     hostname: vault-server
     port: 8200
   difficulty: basic
-  timelimit: 300
+  timelimit: 1000
 - slug: login-aws-auth-method
   id: cgaexaj1xjpe
   type: challenge
@@ -261,7 +261,7 @@ challenges:
     hostname: vault-server
     port: 8200
   difficulty: basic
-  timelimit: 300
+  timelimit: 1000
 - slug: logout-aws-auth-method
   id: 6xmfvpxd2gmd
   type: challenge
@@ -320,5 +320,5 @@ challenges:
     hostname: vault-server
     port: 8200
   difficulty: basic
-  timelimit: 300
+  timelimit: 1000
 checksum: "2414010682247345749"
