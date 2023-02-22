@@ -272,7 +272,7 @@ background-image: url(images/HashiCorp-Title-bkg.jpeg)
 # Doing Labs with Instruqt
 * Instruqt is the platform used for HashiCorp's workshops
 * Instruqt labs are run in “tracks” that are divided into “challenges”
-* If you’ve never used Instruqt before, start with this **[tutorial](https://play.instruqt.com/instruqt/tracks/getting-started-with-instruqt)**
+* If you’ve never used Instruqt before, start with this **[tutorial](https://docs.instruqt.com/)**
 * Otherwise, you can skip to the next slide
 
 ---
