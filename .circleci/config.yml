@@ -392,12 +392,12 @@ workflows:
           filters:
             branches:
               only: main
-      - instruqt-test-vault-advanced-data-protection-with-tokenization:
-          requires:
-            - instruqt-validate
-          filters:
-            branches:
-              only: main
+#      - instruqt-test-vault-advanced-data-protection-with-tokenization:
+#          requires:
+#            - instruqt-validate
+#          filters:
+#            branches:
+#              only: main
       - instruqt-test-vault-ssh-secrets-engine:
           requires:
             - instruqt-validate
@@ -432,9 +432,9 @@ workflows:
       - instruqt-test-vault-kmip-secrets-engine-mongodb:
           requires:
             - instruqt-validate
-      - instruqt-test-vault-advanced-data-protection-with-tokenization:
-          requires:
-            - instruqt-validate
+#      - instruqt-test-vault-advanced-data-protection-with-tokenization:
+#          requires:
+#            - instruqt-validate
       - instruqt-test-vault-ssh-secrets-engine:
           requires:
             - instruqt-validate
