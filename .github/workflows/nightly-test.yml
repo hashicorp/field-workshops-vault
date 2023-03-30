@@ -1,6 +1,6 @@
 # Copyright (c) HashiCorp, Inc.
 # SPDX-License-Identifier: MPL-2.0
-name: hashicorp/field-workshops-terraform/nightly-test
+name: hashicorp/field-workshops-vault/nightly-test
 on:
   workflow_dispatch:
   schedule:

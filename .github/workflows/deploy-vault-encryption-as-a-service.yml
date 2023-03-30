@@ -1,6 +1,6 @@
 # Copyright (c) HashiCorp, Inc.
 # SPDX-License-Identifier: MPL-2.0
-name: hashicorp/field-workshops-terraform/deploy-vault-encryption-as-a-service
+name: hashicorp/field-workshops-vault/deploy-vault-encryption-as-a-service
 on:
   workflow_dispatch:
   push:
