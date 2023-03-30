@@ -12,7 +12,7 @@ jobs:
     container:
       image: docker.mirror.hashicorp.services/ubuntu:latest
     steps:
-    - uses: actions/checkout@v3.5.0
+    - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3.5.0
     - name: Run Instruqt Validate
       run: |-
         VERSION=$INSTRUQT_VERSION
@@ -42,7 +42,7 @@ jobs:
     needs:
     - instruqt-validate
     steps:
-    - uses: actions/checkout@v3.5.0
+    - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3.5.0
     - name: Run Instruqt Test
       run: |-
         VERSION=$INSTRUQT_VERSION
@@ -84,7 +84,7 @@ jobs:
     needs:
     - instruqt-validate
     steps:
-    - uses: actions/checkout@v3.5.0
+    - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3.5.0
     - name: Run Instruqt Test
       run: |-
         VERSION=$INSTRUQT_VERSION
@@ -126,7 +126,7 @@ jobs:
     needs:
     - instruqt-validate
     steps:
-    - uses: actions/checkout@v3.5.0
+    - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3.5.0
     - name: Run Instruqt Test
       run: |-
         VERSION=$INSTRUQT_VERSION
@@ -168,7 +168,7 @@ jobs:
     needs:
     - instruqt-validate
     steps:
-    - uses: actions/checkout@v3.5.0
+    - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3.5.0
     - name: Run Instruqt Test
       run: |-
         VERSION=$INSTRUQT_VERSION
@@ -210,7 +210,7 @@ jobs:
     needs:
     - instruqt-validate
     steps:
-    - uses: actions/checkout@v3.5.0
+    - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3.5.0
     - name: Run Instruqt Test
       run: |-
         VERSION=$INSTRUQT_VERSION
@@ -252,7 +252,7 @@ jobs:
     needs:
     - instruqt-validate
     steps:
-    - uses: actions/checkout@v3.5.0
+    - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3.5.0
     - name: Run Instruqt Test
       run: |-
         VERSION=$INSTRUQT_VERSION
@@ -294,7 +294,7 @@ jobs:
     needs:
     - instruqt-validate
     steps:
-    - uses: actions/checkout@v3.5.0
+    - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3.5.0
     - name: Run Instruqt Test
       run: |-
         VERSION=$INSTRUQT_VERSION
