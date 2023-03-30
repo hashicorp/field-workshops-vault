@@ -2,7 +2,7 @@ name: hashicorp/field-workshops-vault/build-and-deploy
 on:
   push:
     branches:
-    - main
+      - main
 env:
   INSTRUQT_TOKEN: xxxxxxx
   INSTRUQT_VERSION: xxxxxxx
@@ -13,327 +13,329 @@ jobs:
     container:
       image: docker.mirror.hashicorp.services/ubuntu:latest
     steps:
-    - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3.5.0
-    - name: Run Instruqt Validate
-      run: |-
-        VERSION=$INSTRUQT_VERSION
-        apt -y update
-        apt -y install wget unzip
-        wget https://github.com/instruqt/cli/releases/download/${VERSION}/instruqt-linux-${VERSION}.zip -O /tmp/instruqt.zip
-        cd /tmp
-        unzip instruqt.zip
-        cp instruqt /usr/local/bin/instruqt
-        chmod +x /usr/local/bin/instruqt
-        echo "yes" | instruqt version
-        RETVAL=$?
-        if [[ $RETVAL -ne 0 ]]; then
-          echo "Instruqt is not installed correctly."
-          exit 1
-        else
-          echo "Instruqt is installed and updated to most recent version."
-        fi
-        echo "Running instruqt track validate..."
-        for dir in $(ls -d /root/project/instruqt-tracks/*); do
-          cd $dir && instruqt track validate
-        done
+      - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3.5.0
+      - name: Run Instruqt Validate
+        run: |-
+          VERSION=$INSTRUQT_VERSION
+          apt -y update
+          apt -y install wget unzip
+          wget https://github.com/instruqt/cli/releases/download/${VERSION}/instruqt-linux-${VERSION}.zip -O /tmp/instruqt.zip
+          cd /tmp
+          unzip instruqt.zip
+          cp instruqt /usr/local/bin/instruqt
+          chmod +x /usr/local/bin/instruqt
+          echo "yes" | instruqt version
+          RETVAL=$?
+          if [[ $RETVAL -ne 0 ]]; then
+            echo "Instruqt is not installed correctly."
+            exit 1
+          else
+            echo "Instruqt is installed and updated to most recent version."
+          fi
+          echo "Running instruqt track validate..."
+          for dir in $(ls -d /root/project/instruqt-tracks/*); do
+            cd $dir && instruqt track validate
+          done
   instruqt-test-vault-basics:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     container:
       image: docker.mirror.hashicorp.services/ubuntu:latest
     needs:
-    - instruqt-validate
+      - instruqt-validate
     steps:
-    - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3.5.0
-    - name: Run Instruqt Test
-      run: |-
-        VERSION=$INSTRUQT_VERSION
-        apt -y update
-        apt -y install wget unzip
-        wget https://github.com/instruqt/cli/releases/download/${VERSION}/instruqt-linux-${VERSION}.zip -O /tmp/instruqt.zip
-        cd /tmp
-        unzip instruqt.zip
-        cp instruqt /usr/local/bin/instruqt
-        chmod +x /usr/local/bin/instruqt
-        echo "yes" | instruqt version
-        RETVAL=$?
-        if [[ $RETVAL -ne 0 ]]; then
-          echo "Instruqt is not installed correctly."
-          exit 1
-        else
-          echo "Instruqt is installed and updated to most recent version."
-        fi
-        cd /root/project/instruqt-tracks/vault-basics
-        echo "Running instruqt track push..."
-        instruqt track push --force
-        echo "Running instruqt track test..."
-        # Retry instruqt track test up to 3 times
-        n=0
-        until [ $n -ge 3 ]
-        do
-          instruqt track test --skip-fail-check && break
-          n=$[$n+1]
-          sleep 60
-        done
-        if [ $n -ge 3 ]; then
-          echo "Instruqt track test failed three times."
-          exit 1
-        fi
+      - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3.5.0
+      - name: Run Instruqt Test
+        run: |-
+          VERSION=$INSTRUQT_VERSION
+          apt -y update
+          apt -y install wget unzip
+          wget https://github.com/instruqt/cli/releases/download/${VERSION}/instruqt-linux-${VERSION}.zip -O /tmp/instruqt.zip
+          cd /tmp
+          unzip instruqt.zip
+          cp instruqt /usr/local/bin/instruqt
+          chmod +x /usr/local/bin/instruqt
+          echo "yes" | instruqt version
+          RETVAL=$?
+          if [[ $RETVAL -ne 0 ]]; then
+            echo "Instruqt is not installed correctly."
+            exit 1
+          else
+            echo "Instruqt is installed and updated to most recent version."
+          fi
+          cd /root/project/instruqt-tracks/vault-basics
+          echo "Running instruqt track push..."
+          instruqt track push --force
+          echo "Running instruqt track test..."
+          # Retry instruqt track test up to 3 times
+          n=0
+          until [ $n -ge 3 ]
+          do
+            instruqt track test --skip-fail-check && break
+            n=$[$n+1]
+            sleep 60
+          done
+          if [ $n -ge 3 ]; then
+            echo "Instruqt track test failed three times."
+            exit 1
+          fi
   instruqt-test-vault-dynamic-database-credentials:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     container:
       image: docker.mirror.hashicorp.services/ubuntu:latest
     needs:
-    - instruqt-validate
+      - instruqt-validate
     steps:
-    - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3.5.0
-    - name: Run Instruqt Test
-      run: |-
-        VERSION=$INSTRUQT_VERSION
-        apt -y update
-        apt -y install wget unzip
-        wget https://github.com/instruqt/cli/releases/download/${VERSION}/instruqt-linux-${VERSION}.zip -O /tmp/instruqt.zip
-        cd /tmp
-        unzip instruqt.zip
-        cp instruqt /usr/local/bin/instruqt
-        chmod +x /usr/local/bin/instruqt
-        echo "yes" | instruqt version
-        RETVAL=$?
-        if [[ $RETVAL -ne 0 ]]; then
-          echo "Instruqt is not installed correctly."
-          exit 1
-        else
-          echo "Instruqt is installed and updated to most recent version."
-        fi
-        cd /root/project/instruqt-tracks/vault-dynamic-database-credentials
-        echo "Running instruqt track push..."
-        instruqt track push --force
-        echo "Running instruqt track test..."
-        # Retry instruqt track test up to 3 times
-        n=0
-        until [ $n -ge 3 ]
-        do
-          instruqt track test --skip-fail-check && break
-          n=$[$n+1]
-          sleep 60
-        done
-        if [ $n -ge 3 ]; then
-          echo "Instruqt track test failed three times."
-          exit 1
-        fi
+      - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3.5.0
+      - name: Run Instruqt Test
+        run: |-
+          VERSION=$INSTRUQT_VERSION
+          apt -y update
+          apt -y install wget unzip
+          wget https://github.com/instruqt/cli/releases/download/${VERSION}/instruqt-linux-${VERSION}.zip -O /tmp/instruqt.zip
+          cd /tmp
+          unzip instruqt.zip
+          cp instruqt /usr/local/bin/instruqt
+          chmod +x /usr/local/bin/instruqt
+          echo "yes" | instruqt version
+          RETVAL=$?
+          if [[ $RETVAL -ne 0 ]]; then
+            echo "Instruqt is not installed correctly."
+            exit 1
+          else
+            echo "Instruqt is installed and updated to most recent version."
+          fi
+          cd /root/project/instruqt-tracks/vault-dynamic-database-credentials
+          echo "Running instruqt track push..."
+          instruqt track push --force
+          echo "Running instruqt track test..."
+          # Retry instruqt track test up to 3 times
+          n=0
+          until [ $n -ge 3 ]
+          do
+            instruqt track test --skip-fail-check && break
+            n=$[$n+1]
+            sleep 60
+          done
+          if [ $n -ge 3 ]; then
+            echo "Instruqt track test failed three times."
+            exit 1
+          fi
   instruqt-test-vault-dynamic-secrets-aws:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     container:
       image: docker.mirror.hashicorp.services/ubuntu:latest
     needs:
-    - instruqt-validate
+      - instruqt-validate
     steps:
-    - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3.5.0
-    - name: Run Instruqt Test
-      run: |-
-        VERSION=$INSTRUQT_VERSION
-        apt -y update
-        apt -y install wget unzip
-        wget https://github.com/instruqt/cli/releases/download/${VERSION}/instruqt-linux-${VERSION}.zip -O /tmp/instruqt.zip
-        cd /tmp
-        unzip instruqt.zip
-        cp instruqt /usr/local/bin/instruqt
-        chmod +x /usr/local/bin/instruqt
-        echo "yes" | instruqt version
-        RETVAL=$?
-        if [[ $RETVAL -ne 0 ]]; then
-          echo "Instruqt is not installed correctly."
-          exit 1
-        else
-          echo "Instruqt is installed and updated to most recent version."
-        fi
-        cd /root/project/instruqt-tracks/vault-dynamic-secrets-aws
-        echo "Running instruqt track push..."
-        instruqt track push --force
-        echo "Running instruqt track test..."
-        # Retry instruqt track test up to 3 times
-        n=0
-        until [ $n -ge 3 ]
-        do
-          instruqt track test --skip-fail-check && break
-          n=$[$n+1]
-          sleep 60
-        done
-        if [ $n -ge 3 ]; then
-          echo "Instruqt track test failed three times."
-          exit 1
-        fi
+      - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3.5.0
+      - name: Run Instruqt Test
+        run: |-
+          VERSION=$INSTRUQT_VERSION
+          apt -y update
+          apt -y install wget unzip
+          wget https://github.com/instruqt/cli/releases/download/${VERSION}/instruqt-linux-${VERSION}.zip -O /tmp/instruqt.zip
+          cd /tmp
+          unzip instruqt.zip
+          cp instruqt /usr/local/bin/instruqt
+          chmod +x /usr/local/bin/instruqt
+          echo "yes" | instruqt version
+          RETVAL=$?
+          if [[ $RETVAL -ne 0 ]]; then
+            echo "Instruqt is not installed correctly."
+            exit 1
+          else
+            echo "Instruqt is installed and updated to most recent version."
+          fi
+          cd /root/project/instruqt-tracks/vault-dynamic-secrets-aws
+          echo "Running instruqt track push..."
+          instruqt track push --force
+          echo "Running instruqt track test..."
+          # Retry instruqt track test up to 3 times
+          n=0
+          until [ $n -ge 3 ]
+          do
+            instruqt track test --skip-fail-check && break
+            n=$[$n+1]
+            sleep 60
+          done
+          if [ $n -ge 3 ]; then
+            echo "Instruqt track test failed three times."
+            exit 1
+          fi
   instruqt-test-vault-aws-auth-method:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     container:
       image: docker.mirror.hashicorp.services/ubuntu:latest
     needs:
-    - instruqt-validate
+      - instruqt-validate
     steps:
-    - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3.5.0
-    - name: Run Instruqt Test
-      run: |-
-        VERSION=$INSTRUQT_VERSION
-        apt -y update
-        apt -y install wget unzip
-        wget https://github.com/instruqt/cli/releases/download/${VERSION}/instruqt-linux-${VERSION}.zip -O /tmp/instruqt.zip
-        cd /tmp
-        unzip instruqt.zip
-        cp instruqt /usr/local/bin/instruqt
-        chmod +x /usr/local/bin/instruqt
-        echo "yes" | instruqt version
-        RETVAL=$?
-        if [[ $RETVAL -ne 0 ]]; then
-          echo "Instruqt is not installed correctly."
-          exit 1
-        else
-          echo "Instruqt is installed and updated to most recent version."
-        fi
-        cd /root/project/instruqt-tracks/vault-aws-auth-method
-        echo "Running instruqt track push..."
-        instruqt track push --force
-        echo "Running instruqt track test..."
-        # Retry instruqt track test up to 3 times
-        n=0
-        until [ $n -ge 3 ]
-        do
-          instruqt track test --skip-fail-check && break
-          n=$[$n+1]
-          sleep 60
-        done
-        if [ $n -ge 3 ]; then
-          echo "Instruqt track test failed three times."
-          exit 1
-        fi
+      - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3.5.0
+      - name: Run Instruqt Test
+        run: |-
+          VERSION=$INSTRUQT_VERSION
+          apt -y update
+          apt -y install wget unzip
+          wget https://github.com/instruqt/cli/releases/download/${VERSION}/instruqt-linux-${VERSION}.zip -O /tmp/instruqt.zip
+          cd /tmp
+          unzip instruqt.zip
+          cp instruqt /usr/local/bin/instruqt
+          chmod +x /usr/local/bin/instruqt
+          echo "yes" | instruqt version
+          RETVAL=$?
+          if [[ $RETVAL -ne 0 ]]; then
+            echo "Instruqt is not installed correctly."
+            exit 1
+          else
+            echo "Instruqt is installed and updated to most recent version."
+          fi
+          cd /root/project/instruqt-tracks/vault-aws-auth-method
+          echo "Running instruqt track push..."
+          instruqt track push --force
+          echo "Running instruqt track test..."
+          # Retry instruqt track test up to 3 times
+          n=0
+          until [ $n -ge 3 ]
+          do
+            instruqt track test --skip-fail-check && break
+            n=$[$n+1]
+            sleep 60
+          done
+          if [ $n -ge 3 ]; then
+            echo "Instruqt track test failed three times."
+            exit 1
+          fi
   instruqt-test-vault-encryption-as-a-service:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     container:
       image: docker.mirror.hashicorp.services/ubuntu:latest
     needs:
-    - instruqt-validate
+      - instruqt-validate
     steps:
-    - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3.5.0
-    - name: Run Instruqt Test
-      run: |-
-        VERSION=$INSTRUQT_VERSION
-        apt -y update
-        apt -y install wget unzip
-        wget https://github.com/instruqt/cli/releases/download/${VERSION}/instruqt-linux-${VERSION}.zip -O /tmp/instruqt.zip
-        cd /tmp
-        unzip instruqt.zip
-        cp instruqt /usr/local/bin/instruqt
-        chmod +x /usr/local/bin/instruqt
-        echo "yes" | instruqt version
-        RETVAL=$?
-        if [[ $RETVAL -ne 0 ]]; then
-          echo "Instruqt is not installed correctly."
-          exit 1
-        else
-          echo "Instruqt is installed and updated to most recent version."
-        fi
-        cd /root/project/instruqt-tracks/vault-encryption-as-a-service
-        echo "Running instruqt track push..."
-        instruqt track push --force
-        echo "Running instruqt track test..."
-        # Retry instruqt track test up to 3 times
-        n=0
-        until [ $n -ge 3 ]
-        do
-          instruqt track test --skip-fail-check && break
-          n=$[$n+1]
-          sleep 60
-        done
-        if [ $n -ge 3 ]; then
-          echo "Instruqt track test failed three times."
-          exit 1
-        fi
+      - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3.5.0
+      - name: Run Instruqt Test
+        run: |-
+          VERSION=$INSTRUQT_VERSION
+          apt -y update
+          apt -y install wget unzip
+          wget https://github.com/instruqt/cli/releases/download/${VERSION}/instruqt-linux-${VERSION}.zip -O /tmp/instruqt.zip
+          cd /tmp
+          unzip instruqt.zip
+          cp instruqt /usr/local/bin/instruqt
+          chmod +x /usr/local/bin/instruqt
+          echo "yes" | instruqt version
+          RETVAL=$?
+          if [[ $RETVAL -ne 0 ]]; then
+            echo "Instruqt is not installed correctly."
+            exit 1
+          else
+            echo "Instruqt is installed and updated to most recent version."
+          fi
+          cd /root/project/instruqt-tracks/vault-encryption-as-a-service
+          echo "Running instruqt track push..."
+          instruqt track push --force
+          echo "Running instruqt track test..."
+          # Retry instruqt track test up to 3 times
+          n=0
+          until [ $n -ge 3 ]
+          do
+            instruqt track test --skip-fail-check && break
+            n=$[$n+1]
+            sleep 60
+          done
+          if [ $n -ge 3 ]; then
+            echo "Instruqt track test failed three times."
+            exit 1
+          fi
   instruqt-test-vault-kmip-secrets-engine-mongodb:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     container:
       image: docker.mirror.hashicorp.services/ubuntu:latest
     needs:
-    - instruqt-validate
+      - instruqt-validate
     steps:
-    - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3.5.0
-    - name: Run Instruqt Test
-      run: |-
-        VERSION=$INSTRUQT_VERSION
-        apt -y update
-        apt -y install wget unzip
-        wget https://github.com/instruqt/cli/releases/download/${VERSION}/instruqt-linux-${VERSION}.zip -O /tmp/instruqt.zip
-        cd /tmp
-        unzip instruqt.zip
-        cp instruqt /usr/local/bin/instruqt
-        chmod +x /usr/local/bin/instruqt
-        echo "yes" | instruqt version
-        RETVAL=$?
-        if [[ $RETVAL -ne 0 ]]; then
-          echo "Instruqt is not installed correctly."
-          exit 1
-        else
-          echo "Instruqt is installed and updated to most recent version."
-        fi
-        cd /root/project/instruqt-tracks/vault-kmip-secrets-engine-mongodb
-        echo "Running instruqt track push..."
-        instruqt track push --force
-        echo "Running instruqt track test..."
-        # Retry instruqt track test up to 3 times
-        n=0
-        until [ $n -ge 3 ]
-        do
-          instruqt track test --skip-fail-check && break
-          n=$[$n+1]
-          sleep 60
-        done
-        if [ $n -ge 3 ]; then
-          echo "Instruqt track test failed three times."
-          exit 1
-        fi
+      - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3.5.0
+      - name: Run Instruqt Test
+        run: |-
+          VERSION=$INSTRUQT_VERSION
+          apt -y update
+          apt -y install wget unzip
+          wget https://github.com/instruqt/cli/releases/download/${VERSION}/instruqt-linux-${VERSION}.zip -O /tmp/instruqt.zip
+          cd /tmp
+          unzip instruqt.zip
+          cp instruqt /usr/local/bin/instruqt
+          chmod +x /usr/local/bin/instruqt
+          echo "yes" | instruqt version
+          RETVAL=$?
+          if [[ $RETVAL -ne 0 ]]; then
+            echo "Instruqt is not installed correctly."
+            exit 1
+          else
+            echo "Instruqt is installed and updated to most recent version."
+          fi
+          cd /root/project/instruqt-tracks/vault-kmip-secrets-engine-mongodb
+          echo "Running instruqt track push..."
+          instruqt track push --force
+          echo "Running instruqt track test..."
+          # Retry instruqt track test up to 3 times
+          n=0
+          until [ $n -ge 3 ]
+          do
+            instruqt track test --skip-fail-check && break
+            n=$[$n+1]
+            sleep 60
+          done
+          if [ $n -ge 3 ]; then
+            echo "Instruqt track test failed three times."
+            exit 1
+          fi
   instruqt-test-vault-ssh-secrets-engine:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     container:
       image: docker.mirror.hashicorp.services/ubuntu:latest
     needs:
-    - instruqt-validate
+      - instruqt-validate
     steps:
-    - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3.5.0
-    - name: Run Instruqt Test
-      run: |-
-        VERSION=$INSTRUQT_VERSION
-        apt -y update
-        apt -y install wget unzip
-        wget https://github.com/instruqt/cli/releases/download/${VERSION}/instruqt-linux-${VERSION}.zip -O /tmp/instruqt.zip
-        cd /tmp
-        unzip instruqt.zip
-        cp instruqt /usr/local/bin/instruqt
-        chmod +x /usr/local/bin/instruqt
-        echo "yes" | instruqt version
-        RETVAL=$?
-        if [[ $RETVAL -ne 0 ]]; then
-          echo "Instruqt is not installed correctly."
-          exit 1
-        else
-          echo "Instruqt is installed and updated to most recent version."
-        fi
-        cd /root/project/instruqt-tracks/vault-ssh-secrets-engine
-        echo "Running instruqt track push..."
-        instruqt track push --force
-        echo "Running instruqt track test..."
-        # Retry instruqt track test up to 3 times
-        n=0
-        until [ $n -ge 3 ]
-        do
-          instruqt track test --skip-fail-check && break
-          n=$[$n+1]
-          sleep 60
-        done
-        if [ $n -ge 3 ]; then
-          echo "Instruqt track test failed three times."
-          exit 1
-        fi
+      - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3.5.0
+      - name: Run Instruqt Test
+        run: |-
+          VERSION=$INSTRUQT_VERSION
+          apt -y update
+          apt -y install wget unzip
+          wget https://github.com/instruqt/cli/releases/download/${VERSION}/instruqt-linux-${VERSION}.zip -O /tmp/instruqt.zip
+          cd /tmp
+          unzip instruqt.zip
+          cp instruqt /usr/local/bin/instruqt
+          chmod +x /usr/local/bin/instruqt
+          echo "yes" | instruqt version
+          RETVAL=$?
+          if [[ $RETVAL -ne 0 ]]; then
+            echo "Instruqt is not installed correctly."
+            exit 1
+          else
+            echo "Instruqt is installed and updated to most recent version."
+          fi
+          cd /root/project/instruqt-tracks/vault-ssh-secrets-engine
+          echo "Running instruqt track push..."
+          instruqt track push --force
+          echo "Running instruqt track test..."
+          # Retry instruqt track test up to 3 times
+          n=0
+          until [ $n -ge 3 ]
+          do
+            instruqt track test --skip-fail-check && break
+            n=$[$n+1]
+            sleep 60
+          done
+          if [ $n -ge 3 ]; then
+            echo "Instruqt track test failed three times."
+            exit 1
+          fi
+permissions:
+  contents: read
