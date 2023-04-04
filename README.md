@@ -1,5 +1,4 @@
 # HashiCorp Vault Field Workshops
-[![CircleCI](https://circleci.com/gh/hashicorp/field-workshops-vault.svg?style=svg)](https://circleci.com/gh/hashicorp/field-workshops-vault)
 
 All HashiCorp field workshops focused on Vault should be placed in this repository. Similar field workshop repositories exist for these HashiCorp solutions:
 * [field-workshops-consul](https://github.com/hashicorp/field-workshops-consul)
