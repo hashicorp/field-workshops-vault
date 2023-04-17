@@ -1,3 +1,6 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
 slug: vault-ssh-secret-engine
 id: tkpmtwbzl1d8
 version: 1.9.2
