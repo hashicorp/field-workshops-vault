@@ -1,3 +1,6 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
 slug: vault-aws-auth-method
 id: fe9wq4sopgrc
 version: 1.9.2
