@@ -59,7 +59,6 @@ jobs:
         cat<<"EOF" >> job-state.json
         ${{ toJSON(github) }}
         EOF
-        cat job-state.json
     - name: Build Message
       id: build-message
       shell: python

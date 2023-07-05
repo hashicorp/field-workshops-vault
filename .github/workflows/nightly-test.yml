@@ -80,7 +80,6 @@ jobs:
           cat<<"EOF" >> job-state.json
           ${{ toJSON(needs) }}
           EOF
-          cat job-state.json
       - name: Build Message
         id: build-message
         shell: python
