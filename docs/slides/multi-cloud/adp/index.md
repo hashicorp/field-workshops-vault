@@ -640,7 +640,7 @@ Ephemeral Access Vision
 .center[![:scale 55%](images/slide72.png)]
 
 ---
-# Just-in-Time Credentials (Roadmap)
+# Just-in-Time Credentials 
 .center[![:scale 65%](images/slide73.png)]
 
 ---
