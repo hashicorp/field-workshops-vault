@@ -10,7 +10,7 @@ containers:
   - 80
 virtualmachines:
 - name: base
-  image: instruqt-hashicorp/ubuntu-2204-base
+  image: instruqt-hashicorp/ubuntu-2004-base
   shell: /bin/bash
   environment:
     SKIP_SETCAP: "true"

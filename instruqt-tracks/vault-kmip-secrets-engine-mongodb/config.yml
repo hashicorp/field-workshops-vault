@@ -4,6 +4,6 @@
 version: "2"
 virtualmachines:
 - name: base
-  image: instruqt-hashicorp/ubuntu-2204-base
+  image: instruqt-hashicorp/ubuntu-2004-base
   shell: /bin/bash
   machine_type: n1-standard-2
