@@ -15,7 +15,7 @@ name: getting-started-with-instruqt
 # Doing Labs with Instruqt
 * [Instruqt](https://instruqt.com/) is the platform used for HashiCorp workshops.
 * Instruqt labs are run in "tracks" that are divided into "challenges".
-* If you've never used Instruqt before, start with this [tutorial](https://play.instruqt.com/instruqt/tracks/getting-started-with-instruqt).
+* If you've never used Instruqt before, start with this [tutorial](https://play.instruqt.com/embed/instruqt/tracks/getting-started-with-instruqt?token=em_dw5tjnqsditbcdps&show_challenges=true).
 * Otherwise, you can skip to the next slide.
 * This "Vault Basics" lab covers concepts introduced in chapters 2-6.
 * Your instructor will provide links to the tracks.

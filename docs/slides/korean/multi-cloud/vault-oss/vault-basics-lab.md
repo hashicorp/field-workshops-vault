@@ -15,7 +15,7 @@ name: getting-started-with-instruqt
 # Instruqt로 실습하기
 * [Instruqt](https://instruqt.com/)은 HashiCorp 워크숍에 사용되는 플랫폼입니다.
 * Instruqt 랩은 "challenges"으로 구분 된 "tracks"에서 실행됩니다.
-* 이전에 Instruqt를 사용한 적이 없다면이 [튜토리얼](https://play.instruqt.com/instruqt/tracks/getting-started-with-instruqt)으로 시작하세요.
+* 이전에 Instruqt를 사용한 적이 없다면이 [튜토리얼](https://play.instruqt.com/embed/instruqt/tracks/getting-started-with-instruqt?token=em_dw5tjnqsditbcdps&show_challenges=true)으로 시작하세요.
 * 그렇지 않으면 다음 슬라이드로 건너 뛸 수 있습니다.
 * 이 "Vault Basic"실습에서는 2-6 장에 소개 된 개념을 다룹니다.
 
