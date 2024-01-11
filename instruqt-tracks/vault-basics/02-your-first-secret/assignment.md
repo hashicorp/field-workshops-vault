@@ -52,7 +52,9 @@ Log into the Vault UI with `Method` set to `Token` and `Token` set to `root`.
 Select the "Vault CLI" tab.
 
 Write a secret to the KV v2 secrets engine that the Vault dev server automatically mounted:<br>
-`vault kv put secret/my-first-secret age=<age>`<br>
+```
+vault kv put secret/my-first-secret age=<age>
+```
 where <age\> is your age.
 
 Alternatively, you could create this secret in the Vault UI by selecting the "secret/" KV v2 secrets engine on the "Secrets" tab, clicking the "Create secret +" button, specifying "my-first-secret" as the path, "age" as the secret's first key, and your age as the corresponding value, and then finally clicking the "Save" button.
