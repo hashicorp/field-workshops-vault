@@ -1,11 +1,13 @@
 ---
 slug: configure-the-transform-secret-engine
+id: bvyaakyyuwst
 type: challenge
 title: Configure the Transform (Tokenization) Secrets Engine
 teaser: Specify a role and transformation to Tokenize user SSNs.
 notes:
 - type: text
-  contents: In this challenge, we will configure the Transform Secrets Engine for use with our application.
+  contents: In this challenge, we will configure the Transform Secrets Engine for
+    use with our application.
 tabs:
 - title: Terminal
   type: terminal
