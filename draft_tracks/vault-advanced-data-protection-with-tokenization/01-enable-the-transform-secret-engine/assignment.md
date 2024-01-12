@@ -1,10 +1,8 @@
 ---
 slug: enable-the-transform-secret-engine
-id: khxde7vllvvw
 type: challenge
 title: Enable the Transform (Tokenization) Secrets Engine
-teaser: In this first challenge, we will enable and configure Vault's Transform Secrets
-  Engine with data tokenization.
+teaser: In this first challenge, we will enable and configure Vault's Transform Secrets Engine with data tokenization.
 notes:
 - type: text
   contents: |-

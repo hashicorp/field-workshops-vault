@@ -1,6 +1,5 @@
 ---
 slug: review-app-integration
-id: bk9nympphw2w
 type: challenge
 title: Review our application code
 teaser: Leverage native libraries to integrate with HashiCorp Vault

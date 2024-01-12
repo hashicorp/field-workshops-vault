@@ -1,6 +1,5 @@
 ---
 slug: launch-the-updated-app
-id: y3vi26vknb8y
 type: challenge
 title: Launch the updated application
 teaser: Deploy the updated app to securely tokenizen customer SSNs (PII data).

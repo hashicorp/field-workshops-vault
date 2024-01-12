@@ -1,9 +1,11 @@
-slug: dev-vault-advanced-data-protection-with-tokenization
-id: xyoxoq61r4je
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
+slug: vault-advanced-data-protection-with-tokenization
 version: 0.0.1
-title: Dev - Vault ADP with Tokenization
-teaser: Leverage Vault's Transform Secrets Engine (Tokenization) for protecting customer
-  PII data.
+type: track
+title: Vault ADP with Tokenization
+teaser: Leverage Vault's Transform Secrets Engine (Tokenization) for protecting customer PII data.
 description: |-
   The Vault Transform Secrets Engine provides the ability to tokenize sensitive data for storing outside of Vault.
 
@@ -19,14 +21,8 @@ tags:
 - vault
 - adp
 - tokenization
-owner: hashicorp-field-ops
+owner: hashicorp
 developers:
 - aklaas@hashicorp.com
-- syed.quadri@hashicorp.com
-lab_config:
-  overlay: false
-  width: 33
-  position: right
-  feedback_recap_enabled: true
-  loadingMessages: true
-checksum: "6554908481588315275"
+private: true
+published: false

@@ -1,13 +1,11 @@
 ---
 slug: test-the-web-app
-id: qjplatkjkn34
 type: challenge
 title: Test the web app
 teaser: Determine how our application works and what data to tokenize
 notes:
 - type: text
-  contents: In this challenge, we will test our current web app to determine what
-    customer PII data needs to be tokenized for compliance.
+  contents: In this challenge, we will test our current web app to determine what customer PII data needs to be tokenized for compliance.
 tabs:
 - title: Terminal
   type: terminal
