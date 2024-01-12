@@ -1,7 +1,4 @@
-# Copyright (c) HashiCorp, Inc.
-# SPDX-License-Identifier: MPL-2.0
-
-version: "2"
+version: "3"
 containers:
 - name: vault-server
   image: vault:1.9.2
