@@ -1,3 +1,6 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
 slug: vault-kmip-secrets-engine-mongodb
 title: Vault KMIP Secrets Engine for MongoDB Encryption (ADP)
 teaser: Help implement the "Assumed Breach" principal of a Zero Trust methodology
