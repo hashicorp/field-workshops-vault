@@ -52,11 +52,9 @@ jobs:
     needs:
       - vault-basics
       - vault-dynamic-database-credentials
-      - vault-dynamic-secrets-aws
       - vault-aws-auth-method
       - vault-encryption-as-a-service
       - vault-kmip-secrets-engine-mongodb
-      - vault-ssh-secrets-engine
     if: ${{ always() }}   # Always run after needs, even if they failed, so we can notify
     runs-on: ubuntu-latest
     permissions: {}
