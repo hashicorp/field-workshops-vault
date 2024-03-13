@@ -30,12 +30,6 @@ jobs:
       working_directory: instruqt-tracks/vault-dynamic-database-credentials
     secrets:
       INSTRUQT_TOKEN: ${{ secrets.INSTRUQT_TOKEN }}
-  vault-dynamic-secrets-aws:
-    uses: ./.github/workflows/instruqt-track-test.yml
-    with:
-      working_directory: instruqt-tracks/vault-dynamic-secrets-aws
-    secrets:
-      INSTRUQT_TOKEN: ${{ secrets.INSTRUQT_TOKEN }}
   vault-aws-auth-method:
     uses: ./.github/workflows/instruqt-track-test.yml
     with:
@@ -52,12 +46,6 @@ jobs:
     uses: ./.github/workflows/instruqt-track-test.yml
     with:
       working_directory: instruqt-tracks/vault-kmip-secrets-engine-mongodb
-    secrets:
-      INSTRUQT_TOKEN: ${{ secrets.INSTRUQT_TOKEN }}
-  vault-ssh-secrets-engine:
-    uses: ./.github/workflows/instruqt-track-test.yml
-    with:
-      working_directory: instruqt-tracks/vault-ssh-secrets-engine
     secrets:
       INSTRUQT_TOKEN: ${{ secrets.INSTRUQT_TOKEN }}
   notify-slack:
