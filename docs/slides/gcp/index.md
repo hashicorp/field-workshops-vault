@@ -25,7 +25,7 @@ name: vault-workshops-slides
 # Vault GCP Workshop Slides
 ### This directory contains slides for Vault workshops intended for use with GCP.
 ### Workshops for each cloud are organized by type:
-  1. Vault OSS
+  1. Vault Community Edition
   1. Vault Enterprise
 
 ???

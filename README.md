@@ -10,7 +10,7 @@ Additionally, field workshops focused on more than one HashiCorp solution can be
 
 ## Slides
 The only current workshop is Introduction to Vault with these slides:
-https://hashicorp.github.io/field-workshops-vault/slides/multi-cloud/vault-oss/#1
+https://hashicorp.github.io/field-workshops-vault/slides/multi-cloud/vault-community/#1
 
 The slides for these workshops should be created using [Remark](https://remarkjs.com) and should be placed under the [docs/slides](./docs/slides) directory. This directory is organized by cloud and then by workshop.  If a workshop targets a single cloud, its slides should be placed in a directory under that cloud's directory ([aws](./docs/slides/aws), [azure](./docs/slides/azure), or [gcp](./docs/slides/gcp)). If a workshop can be used with multiple clouds, its slides should be placed in a directory under the [multi-cloud](./docs/slides/multi-cloud) directory.
 
@@ -36,11 +36,11 @@ When creating slides for a new workshop, you will need to do the following:
       ]
     ```
 
-Whether you create a single-part or multi-part slide show, users will be able to access all of your slides with a URL like https://hashicorp.github.io/field-workshops-vault/slides/aws/vault-oss/index.html, but they can leave off `index.html`.
+Whether you create a single-part or multi-part slide show, users will be able to access all of your slides with a URL like https://hashicorp.github.io/field-workshops-vault/slides/aws/vault-community/index.html, but they can leave off `index.html`.
 
 If you create a multi-part slide show, users will also be able to access each part of your slide show separately at URLs like these:
-* https://hashicorp.github.io/field-workshops-vault/slides/aws/vault-oss/vault-1.html
-* https://hashicorp.github.io/field-workshops-vault/slides/aws/vault-oss/vault-2.html
+* https://hashicorp.github.io/field-workshops-vault/slides/aws/vault-community/vault-1.html
+* https://hashicorp.github.io/field-workshops-vault/slides/aws/vault-community/vault-2.html
 
 Each workshop should give the full link (or links) to that workshop's slides in one of its first few slides.
 

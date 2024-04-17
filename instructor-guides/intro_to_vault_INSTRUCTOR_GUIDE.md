@@ -1,6 +1,6 @@
 # Introduction to Vault - Instructor Guide
 
-This guide will prepare you to deliver a half-day [Introduction to Vault Workshop](https://hashicorp.github.io/field-workshops-vault/slides/multi-cloud/vault-oss). This workshop content is suitable for HashiCorp community members, prospects and customers. The workshop is a combination of lecture slides and hands-on Instruqt labs that introduce new users to some of Vault's features. This workshop focuses on open-source features and is targeted toward new users. The workshop may be presented in-person, over the web, or as a self-guided tutorial.
+This guide will prepare you to deliver a half-day [Introduction to Vault Workshop](https://hashicorp.github.io/field-workshops-vault/slides/multi-cloud/vault-community). This workshop content is suitable for HashiCorp community members, prospects and customers. The workshop is a combination of lecture slides and hands-on Instruqt labs that introduce new users to some of Vault's features. This workshop focuses on Community Edition features and is targeted toward new users. The workshop may be presented in-person, over the web, or as a self-guided tutorial.
 
 The workshop alternates between lectures with accompanying slides and hands-on lab exercises. New concepts that are introduced in the slides are reinforced in the labs. Participants will learn both the theory and practice of Vault. As an instructor you should be well familiar with the slide deck and the Instruqt tracks used in the workshop. Go through the course and make sure you understand all of the major concepts and lab exercises.
 
@@ -55,10 +55,10 @@ The only prerequisites for this workshop are a web browser and willingness to le
 ### Markdown Slide Deck
 The slide deck for this training is published here:
 
-#### https://hashicorp.github.io/field-workshops-vault/slides/multi-cloud/vault-oss
+#### https://hashicorp.github.io/field-workshops-vault/slides/multi-cloud/vault-community
 
 The optional extension for AWS are here:
-#### https://hashicorp.github.io/field-workshops-vault/slides/aws/vault-oss
+#### https://hashicorp.github.io/field-workshops-vault/slides/aws/vault-community
 
 #### Navigation
 Use the arrow keys (up/down or left/right) to navigate back and forth between slides.

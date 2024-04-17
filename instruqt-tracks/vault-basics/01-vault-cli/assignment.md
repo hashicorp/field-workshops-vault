@@ -7,7 +7,7 @@ teaser: Run the Vault Command Line Interface (CLI).
 notes:
 - type: text
   contents: |-
-    Vault open source is a command line application that you can download and run from your laptop or virtual workstation.
+    Vault Community Edition is a command line application that you can download and run from your laptop or virtual workstation.
 
     It is written in Go and runs on macOS, Windows, Linux and other operating systems.
 
