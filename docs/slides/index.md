@@ -35,7 +35,7 @@ name: vault-workshops-slides
 ### This directory contains slides for Vault workshops.
 * They are organized by cloud.
 * Workshops for each cloud are organized by type:
-  1. Vault OSS
+  1. Vault Community Edition
   1. Vault Enterprise
 
 ???
@@ -55,7 +55,7 @@ You can also indent one kind of list under another as done in this slide.  To ma
 name:workshop-slides
 # Viewing Workshop Slides
 #### You can view workshop slides with URLs like this:
-* https://hashicorp.github.io/field-workshops-vault/slides/multi-cloud/vault-oss/index.html
+* https://hashicorp.github.io/field-workshops-vault/slides/multi-cloud/vault-community/index.html
 * https://hashicorp.github.io/field-workshops-vault/slides/multi-cloud/vault-enterprise/index.html
 
 ???

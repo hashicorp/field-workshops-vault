@@ -2,7 +2,7 @@
 
 ### Overview
 
-This guide will prepare you to deliver a half-day [Avanced Data Protection focused Vault workshop](https://hashicorp.github.io/field-workshops-vault/slides/multi-cloud/adp). This workshop content is suitable for HashiCorp community members, prospects and customers. The workshop is a combination of lecture slides and hands-on Instruqt labs that introduce new users to some of Vault's enterprise features. This workshop focuses on open-source & enterprise features and is targeted for basic to intermediate users. The workshop may be presented in-person, over the web, or as a self-guided tutorial.
+This guide will prepare you to deliver a half-day [Avanced Data Protection focused Vault workshop](https://hashicorp.github.io/field-workshops-vault/slides/multi-cloud/adp). This workshop content is suitable for HashiCorp community members, prospects and customers. The workshop is a combination of lecture slides and hands-on Instruqt labs that introduce new users to some of Vault's enterprise features. This workshop focuses on community edition & enterprise features and is targeted for basic to intermediate users. The workshop may be presented in-person, over the web, or as a self-guided tutorial.
 
 The workshop alternates between lectures with accompanying slides and hands-on lab exercises. New concepts that are introduced in the slides are reinforced in the labs. Participants will learn both the theory and practice of Vault. As an instructor you should be well familiar with the slide deck and the Instruqt tracks used in the workshop. Go through the course and make sure you understand all of the major concepts and lab exercises.
 
