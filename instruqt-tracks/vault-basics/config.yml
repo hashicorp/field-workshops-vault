@@ -4,7 +4,7 @@
 version: "3"
 containers:
 - name: vault-server
-  image: vault:1.9.2
+  image: hashicorp/vault:1.16.0
   cmd: version
   shell: /bin/sh -l
   ports:
