@@ -3,10 +3,10 @@
 set -e
 
 # Install curl
-apk add curl
+# apk add curl
 
 # Install jq
-apk add jq
+# apk add jq
 
 # Write vault-config.hcl
 cat <<-EOF > /vault/config/vault-config.hcl

@@ -1,6 +1,6 @@
 #!/bin/bash -l
 
-set -e
+# set -e
 
 # Install curl
 apk add curl
