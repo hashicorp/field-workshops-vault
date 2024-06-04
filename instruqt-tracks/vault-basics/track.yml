@@ -20,8 +20,8 @@ developers:
 - syed.quadri@hashicorp.com
 - jenna.wong@hashicorp.com
 show_timer: true
-idle_timeout: 300
-timelimit: 120000
+idle_timeout: 3000
+timelimit: 14400
 lab_config:
   overlay: false
   width: 33
