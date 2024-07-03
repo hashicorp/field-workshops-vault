@@ -574,6 +574,12 @@ Your instructor will provide the URL for the track.
 class: title, shelf, no-footer, fullbleed
 background-image: url(images/HashiCorp-Title-bkg.jpeg)
 
+# Q&A
+
+---
+class: title, shelf, no-footer, fullbleed
+background-image: url(images/HashiCorp-Title-bkg.jpeg)
+
 # Epilogue
 
 ---
