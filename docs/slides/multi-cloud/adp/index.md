@@ -1,17 +1,6 @@
 name: field-workshops-assets-index
 class: title, shelf, no-footer, fullbleed
 background-image: url(images/HashiCorp-Title-bkg.jpeg)
-<div class="clearfix">
-  <div class="img-container">
-    <img src="images\Vault_VerticalLogo_ColorWhite_RGB.png" style="width:5%">
-  </div>
-  <div class="img-container">
-    <img src="images\Consul_VerticalLogo_ColorWhite_RGB.png" style="width:5%">
-  </div>
-  <div class="img-container">
-    <img src="images\Boundary_VerticalLogo_ColorWhite_RGB.png" style="width:5%">
-  </div>
-</div>
 
 # Zero Trust Security & Data Protection
 ## Trust Nothing. Authenticate and Authorize Everything.
@@ -22,7 +11,7 @@ background-image: url(images/HashiCorp-Title-bkg.jpeg)
 layout: true
 
 .footer[
-- Copyright © 2021 HashiCorp
+- Copyright © 2024 HashiCorp
 - ![:scale 100%](images/HashiCorp_Icon_Black.svg)
 ]
 
@@ -580,68 +569,6 @@ In this next Lab we’ll leverage Vault to act as a KMIP key management server f
 Lab: **Vault KMIP Secrets Engine for MongoDB Encryption**
 
 Your instructor will provide the URL for the track.
-
----
-class: title, shelf, no-footer, fullbleed
-background-image: url(images/HashiCorp-Title-bkg.jpeg)
-
-# Chapter 7:
-## Consul Service Mesh
-
----
-class: col-2, title, no-footer
-background-image: url(images/Consul_Wallpaper_Background-2.jpg)
-<span style="color:white;font-size:36pt;font-weight:bold">Service Networking Across Any Cloud</span>
-
-<span style="color:white;font-size:20pt">Automate network configurations, discover services, and enable secure connectivity across any cloud or runtime</span>
-Automate network configurations, discover services, and enable secure connectivity across any cloud or runtime.
-
-.center[![:scale 100%](images/slide66.png)]
-
----
-class: col-2
-# Establish the connection  - 1/2
-.smaller[* The proxy of the web service uses Consul service discovery APIs to request the location of the DB
-* The local agent returns the proxy’s IP address/Port of a healthy DB instance
-* The local agent also returns the URI for the expected identity of the service it is connected to
-* Proxies between web and database start TLS handshake to authenticate the identity]
-
-.center[![:scale 100%](images/slide67.png)]
-
----
-class: col-2
-# Establish the connection  - 1/2
-.smaller[* The DB proxy sends the authorization request to its local agent
-
-* The local agent authorizes the connection based on locally cached intention
-
-* Mutual TLS is established]
-
-.center[![:scale 100%](images/Consul_2.png)]
-
----
-class: title, shelf, no-footer, fullbleed
-background-image: url(images/HashiCorp-Title-bkg.jpeg)
-
-# Chapter 8:
-## Boundary
-
----
-# Traditional workflow for access
-.center[![:scale 90%](images/slide70.png)]
-
----
-# HashiCorp Boundary
-Ephemeral Access Vision
-.center[![:scale 70%](images/slide71.png)]
-
----
-# Access Model
-.center[![:scale 55%](images/slide72.png)]
-
----
-# Just-in-Time Credentials 
-.center[![:scale 65%](images/slide73.png)]
 
 ---
 class: title, shelf, no-footer, fullbleed
