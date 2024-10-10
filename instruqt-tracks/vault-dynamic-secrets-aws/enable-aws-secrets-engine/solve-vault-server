@@ -1,9 +1,0 @@
-#!/bin/sh -l
-
-# Enable the AWS secrets engine
-vault secrets enable aws
-
-# Set lease and lease_max
-vault write aws/config/lease lease=30m lease_max=30m
-
-exit 0
