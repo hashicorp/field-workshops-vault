@@ -1,9 +1,0 @@
-#!/bin/sh -l
-
-set -e
-
-# Generate AWS Credentials Twice (to match check script)
-vault read aws/creds/my-role
-vault read aws/creds/my-role
-
-exit 0
